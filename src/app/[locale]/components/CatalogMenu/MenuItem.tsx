@@ -17,7 +17,7 @@ export default function MenuItem({ item }: { item: catalogMenuItem }) {
                     <span className={'menu_item'}>{t(`${item.name}`)}</span>
                 </Link>
                 <svg
-                    className={'w-4 h-4 transition-transform duration-400 group-hover:rotate-180'}
+                    className={'w-5 h-5 transition-transform duration-400 group-hover:rotate-180'}
                     fill="currentColor"
                     viewBox="0 0 20 20"
                 >

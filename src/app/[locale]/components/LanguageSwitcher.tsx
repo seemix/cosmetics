@@ -31,7 +31,7 @@ export default function LanguageSwitcher() {
                 <button
                     key={code}
                     onClick={() => handleSwitch(code)}
-                    className={`px-1 py-1 text-md text-black font-medium transition cursor-pointer transition-colors 
+                    className={`px-1 py-1 text-md text-black cursor-pointer transition-colors 
                     duration-300 hover:text-[var(--main)] ${
                         currentLocale === code
                             ? 'border-b border-black'

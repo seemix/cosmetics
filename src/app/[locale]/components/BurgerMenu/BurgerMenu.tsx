@@ -19,12 +19,14 @@ export default function BurgerMenu({ open, setOpen }: ChildMenuProps) {
 
     return (
         <div
-            className={open ? 'fixed inset-0 z-50 flex items-center justify-center bg-black/50' : ''}
+            className={open ? 'fixed z-50 flex items-center justify-center bg-black/50' : ''}
             onClick={() => setOpen(false)}
         >
             <div
-                className={`z-6 fixed top-0 py-10 px-6 right-0 h-full w-full bg-background shadow-lg transform 
-                transition-transform duration-500 lg:hidden ${open ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`z-6 fixed inset-0 top-0 py-10 px-6 h-full w-[80%] bg-background shadow-lg
+                            transform transition-transform duration-500 lg:hidden
+                             ${open ? 'translate-x-0' : '-translate-x-full'}
+                          `}
             >
                 <button
                     className={'absolute right-5 top-4 hover:bg-background cursor-pointer'}
