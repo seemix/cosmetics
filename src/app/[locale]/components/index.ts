@@ -1,0 +1,9 @@
+export { default as BurgerMenu } from './BurgerMenu/BurgerMenu';
+export { default as CatalogMenu } from './CatalogMenu/CatalogMenu';
+export { default as MenuItem } from './CatalogMenu/MenuItem';
+export { default as HeadLinks } from './Header/HeadLinks';
+export { default as ModalWindow } from './ModalWindow/ModalWindow';
+export { default as Footer } from './Footer';
+export { default as Header } from './Header/Header';
+export { default as SearchBar } from './SearchBar';
+export { default as LanguageSwitcher } from './LanguageSwitcher';

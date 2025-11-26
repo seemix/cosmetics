@@ -1,0 +1,6 @@
+.card {
+    border: 1px solid #cccccc;
+}
+.card:hover {
+    border: 2px solid #dddddd;
+}

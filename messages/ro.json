@@ -1,0 +1,31 @@
+{
+  "Header": {
+    "search": "căutare",
+    "about": "despre noi",
+    "paymentAndDelivery": "plată și livrare",
+    "reviews": "recenzii",
+    "contacts": "contacte",
+    "catalog": "catalog",
+    "login": "Login"
+  },
+  "CatalogMenu": {
+    "hair": "Păr",
+    "beard": "Barbă",
+    "body": "Corp",
+    "brands": "Mărci"
+  },
+  "StaticPages": {
+    "Main": "Principală",
+    "About": "Despre noi",
+    "PaymentAndDelivery": "Plată și livrare",
+    "Contacts": "Contacte"
+
+  },
+  "HomePage": {
+    "title": "Salut",
+    "main": "acasă",
+    "catalog": "catalog",
+    "toCart": "în coș",
+    "about": "Go to the about page"
+  }
+}
