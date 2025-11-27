@@ -50,7 +50,7 @@ const Header = () => {
                                      onClick={() => setBurgerIsOpen(true)}/>
                     <div className={'justify-items-center lg:justify-items-start items-center'}>
                         <div className={'flex items-center'}>
-                            <Image className={'ml-5'} src={logo} alt={'logo'} width={90} height={90}/>
+                            <Image className={'ml-5'} src={logo} alt={'logo'} width={80} height={80}/>
                             <div className={'flex flex-col items-center'}>
                                 <h1 className={'text-xl md:text-2xl tracking-tight font-semibold sm:block'}>
                                     NEXT LEVEL
