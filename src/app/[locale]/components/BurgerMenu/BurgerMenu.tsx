@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import { IoCloseSharp } from 'react-icons/io5';
 import React, { Dispatch, SetStateAction } from 'react';
 
-import { headMenuData } from '@/app/[locale]/components/Header/headMenuData';
 import { catalogMenuData } from '@/app/[locale]/components/CatalogMenu/catalogMenuData';
 import Link from 'next/link';
 
@@ -13,7 +12,7 @@ type ChildMenuProps = {
     setOpen: Dispatch<SetStateAction<boolean>>;
 };
 export default function BurgerMenu({ open, setOpen }: ChildMenuProps) {
-    const t = useTranslations('StaticPages');
+    // const t = useTranslations('StaticPages');
     const tc = useTranslations('CatalogMenu');
 
 
@@ -45,14 +44,14 @@ export default function BurgerMenu({ open, setOpen }: ChildMenuProps) {
                                 </Link>
                             </li>)
                     }
-                    {
-                        headMenuData.map((item) =>
-                            <li key={item.name} className={'p-2'}>
-                                <Link href={item.link}
-                                      className={'block text-black w-full transition-colors duration-300 hover:text-[var(--main)]'}>
-                                    {t(`${item.name}`)}
-                                </Link></li>)
-                    }
+                    {/*{*/}
+                    {/*    headMenuData.map((item) =>*/}
+                    {/*        <li key={item.name} className={'p-2'}>*/}
+                    {/*            <Link href={item.link}*/}
+                    {/*                  className={'block text-black w-full transition-colors duration-300 hover:text-[var(--main)]'}>*/}
+                    {/*                {t(`${item.name}`)}*/}
+                    {/*            </Link></li>)*/}
+                    {/*}*/}
 
 
                 </ul>

@@ -11,9 +11,10 @@ export default function MenuItem({ item }: { item: catalogMenuItem }) {
     return (
         <div className={'relative group p-2'}>
             <button
-                className={'text-xl uppercase flex items-center cursor-pointer transition-colors duration-300 group-hover:text-[var(--main)]'}
+                className={`text-lg uppercase flex items-center cursor-pointer transition-colors duration-300 
+                            group-hover:text-[var(--main)]`}
             >
-                <Link href={item.link} className={'text-xl font-semibold tracking-[0.05em]'}>
+                <Link href={item.link} className={'text-lg font-semibold tracking-[0.05em]'}>
                     <span className={'menu_item'}>{t(`${item.name}`)}</span>
                 </Link>
                 <svg

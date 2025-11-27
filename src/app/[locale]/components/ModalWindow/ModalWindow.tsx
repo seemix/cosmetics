@@ -20,7 +20,8 @@ export default function Modal({ isOpen, onCloseAction, children, variant = 'cent
     }, [onCloseAction]);
 
     if (!isOpen) return null;
-    let classText = 'm-auto rounded-lg shadow-lg max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 animate-fade-in';
+    let classText =
+        'm-auto rounded-lg shadow-lg max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 animate-fade-in';
     if (variant === 'right') {
         classText = 'ml-auto h-full shadow-lg transition-transform duration-300 translate-x-0 animate-slide-in-right';
     }
