@@ -37,9 +37,7 @@ export default function LanguageSwitcher() {
                 px-1 py-1
 
                 bg-transparent text-black
-                border-b border-gray-400
-                focus:outline-none
-                focus:border-[var(--main)]
+
                 cursor-pointer
                 transition-colors
             "
@@ -48,7 +46,7 @@ export default function LanguageSwitcher() {
                 <option
                     key={code}
                     value={code}
-                    className="text-black text-sm sm:md"
+                    className="text-black text-sm"
                 >
                     {label}
                 </option>
