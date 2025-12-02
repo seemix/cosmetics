@@ -15,33 +15,44 @@ export default function LanguageSwitcher() {
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
-    const handleSwitch = (newLocale: string) => {
+    const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const newLocale = e.target.value;
+
         const segments = pathname.split('/');
         segments[1] = newLocale;
 
         const newPath = segments.join('/') || '/';
+
         startTransition(() => {
             router.replace(newPath);
         });
     };
 
     return (
-        <div className={'flex space-x-2'}>
+        <select
+            value={currentLocale}
+            onChange={handleChange}
+            disabled={isPending}
+            className="
+                px-1 py-1
+
+                bg-transparent text-black
+                border-b border-gray-400
+                focus:outline-none
+                focus:border-[var(--main)]
+                cursor-pointer
+                transition-colors
+            "
+        >
             {locales.map(({ code, label }) => (
-                <button
+                <option
                     key={code}
-                    onClick={() => handleSwitch(code)}
-                    className={`box-border px-1 py-1 text-sm text-black cursor-pointer transition-colors 
-                    duration-300 hover:text-[var(--main)] ${
-                        currentLocale === code
-                            ? 'border-b border-black'
-                            : 'border-b border-transparent'
-                    }`}
-                    disabled={isPending}
+                    value={code}
+                    className="text-black text-sm sm:md"
                 >
                     {label}
-                </button>
+                </option>
             ))}
-        </div>
+        </select>
     );
 }

@@ -37,9 +37,7 @@ body {
     color: var(--foreground);
     letter-spacing: .06em;
 }
-.menu_item {
-    /*font-family: var(--font-montserrat), serif;*/
-}
+
 @keyframes fade-in {
     from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }

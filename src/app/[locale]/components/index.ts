@@ -1,4 +1,5 @@
 export { default as BurgerMenu } from './BurgerMenu/BurgerMenu';
+export { default as Cart } from './Cart/CartWindow';
 export { default as CatalogMenu } from './CatalogMenu/CatalogMenu';
 export { default as MenuItem } from './CatalogMenu/MenuItem';
 export { default as HeadLinks } from './Header/HeadLinks';

@@ -1,42 +1,83 @@
 'use client';
 
-import { useEffect } from 'react';
+import React, { ReactNode } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IoCloseSharp } from 'react-icons/io5';
 
 interface ModalProps {
-    isOpen: boolean;
-    onCloseAction: () => void;
-    children: React.ReactNode;
-    variant?: 'center' | 'right';
+    open: boolean;
+    children: ReactNode | null;
+    appearance: 'left' | 'right' | 'zoom';
+    onClose: () => void;
 }
 
-export default function Modal({ isOpen, onCloseAction, children, variant = 'center' }: ModalProps) {
+export default function ModalWindow({
+                                        open,
+                                        children,
+                                        appearance,
+                                        onClose,
+                                    }: ModalProps) {
 
-    useEffect(() => {
-        const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') onCloseAction();
-        };
-        document.addEventListener('keydown', handleEsc);
-        return () => document.removeEventListener('keydown', handleEsc);
-    }, [onCloseAction]);
+    const variants = {
+        left: {
+            hidden: { x: '-100%' },
+            visible: { x: 0 },
+        },
+        right: {
+            hidden: { x: '100%' },
+            visible: { x: 0 },
+        },
+        zoom: {
+            hidden: { scale: .8, opacity: 0 },
+            visible: { scale: 1, opacity: 1 },
+        },
+    };
 
-    if (!isOpen) return null;
-    let classText =
-        'm-auto rounded-lg shadow-lg max-w-lg w-full mx-4 transform transition-all duration-300 scale-95 animate-fade-in';
-    if (variant === 'right') {
-        classText = 'ml-auto h-full shadow-lg transition-transform duration-300 translate-x-0 animate-slide-in-right';
-    }
     return (
-        <div
-            className={'fixed inset-0 z-50 bg-black/50 flex'}
-            onClick={onCloseAction}
-        >
-            <div
-                className={classText}
-                onClick={(e) => e.stopPropagation()}
-            >
-                {children}
-            </div>
-
-        </div>
+        <AnimatePresence>
+            {open && (
+                <>
+                    <motion.div
+                        onClick={onClose}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: .3 }}
+                        className={'fixed inset-0 bg-black/40 backdrop-blur-sm z-10'}
+                    />
+                    <motion.div
+                        onClick={onClose}
+                        initial={'hidden'}
+                        animate={'visible'}
+                        exit={'hidden'}
+                        variants={variants[appearance]}
+                        transition={{ type: 'tween', duration: .35, ease: 'easeInOut' }}
+                        className={`fixed inset-0 z-50 flex items-center ${
+                            appearance === 'left'
+                                ? 'justify-start'
+                                : appearance === 'right'
+                                    ? 'justify-end'
+                                    : 'justify-center'
+                        }`}
+                    >
+                        <motion.div
+                            className={'z-6 top-0 p-6 bg-background relative min-w-70'}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <div className={`flex mt-10 justify-between relative w-full 
+                                             ${appearance === 'left' ? 'justify-end' : 'justify-start'}`}>
+                                <button
+                                    className={`hover:bg-background cursor-pointer mt-5`}
+                                    onClick={onClose}
+                                >
+                                    <IoCloseSharp size={33} color={'black'}/>
+                                </button>
+                            </div>
+                            {children}
+                        </motion.div>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
     );
 }
