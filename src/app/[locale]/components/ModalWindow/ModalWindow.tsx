@@ -51,7 +51,7 @@ export default function ModalWindow({
                         animate={'visible'}
                         exit={'hidden'}
                         variants={variants[appearance]}
-                        transition={{ type: 'tween', duration: .35, ease: 'easeInOut' }}
+                        transition={{ type: 'tween', duration: .35, ease: 'easeInOut', delay: .1  }}
                         className={`fixed inset-0 z-50 flex items-center ${
                             appearance === 'left'
                                 ? 'justify-start'
@@ -62,7 +62,10 @@ export default function ModalWindow({
                     >
                         <motion.div
                             className={'z-6 p-6 h-dvh bg-background relative min-w-70'}
-                            onClick={(e) => e.stopPropagation()}
+                            onClick={(e:React.MouseEvent<HTMLDivElement>) => {
+                                if ((e.target as HTMLElement).dataset.bubble === 'true') return;
+                                e.stopPropagation();
+                            }}
                         >
                             <div className={`flex justify-between relative w-full h-5
                                              ${appearance === 'left' ? 'justify-end' : 'justify-start'}`}>
