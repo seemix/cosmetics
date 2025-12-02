@@ -61,13 +61,13 @@ export default function ModalWindow({
                         }`}
                     >
                         <motion.div
-                            className={'z-6 top-0 p-6 bg-background relative min-w-70'}
+                            className={'z-6 p-6 h-dvh bg-background relative min-w-70'}
                             onClick={(e) => e.stopPropagation()}
                         >
-                            <div className={`flex mt-10 justify-between relative w-full 
+                            <div className={`flex justify-between relative w-full h-5
                                              ${appearance === 'left' ? 'justify-end' : 'justify-start'}`}>
                                 <button
-                                    className={`hover:bg-background cursor-pointer mt-5`}
+                                    className={`hover:bg-background cursor-pointer`}
                                     onClick={onClose}
                                 >
                                     <IoCloseSharp size={33} color={'black'}/>

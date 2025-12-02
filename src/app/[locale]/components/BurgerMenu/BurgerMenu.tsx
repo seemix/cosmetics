@@ -3,9 +3,9 @@ import { CatalogMenu, HeadLinks } from '@/app/[locale]/components';
 export default function BurgerMenu() {
 
     return (
-        <div className={'min-h-screen pt-5'}>
+        <div className={'h-full pt-10'}>
             <HeadLinks/>
-            <CatalogMenu/>
+            <div className={'ml-5'}><CatalogMenu/></div>
         </div>
     );
 }

@@ -68,7 +68,7 @@ const Header = () => {
                     <LanguageSwitcher/>
                 </div>
             </div>
-            <div className={'bg-foreground w-full py-3 px-6 text-black flex justify-center items-center'}>
+            <div className={'bg-foreground w-full py-3 px-4 text-black flex justify-center items-center'}>
                 <div className={`grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto] md:grid-cols-[auto_1fr] 
                                 max-w-[1200px] w-full mx-auto`}>
 
@@ -83,20 +83,20 @@ const Header = () => {
 
 
                     <div className={'justify-items-center lg:justify-items-start items-center'}>
-                        <div className={'flex items-center'}>
-                            <Image className={'ml-5'} src={logo} alt={'logo'} width={80} height={80}/>
+                        <div className={'flex gap-1 items-center'}>
+                            <Image className={'ml-5 ml-5 w-18 lg:w-20 h-auto'} src={logo} alt={'logo'} />
                             <div className={'flex flex-col items-center'}>
-                                <h1 className={'text-xl md:text-2xl tracking-tight font-semibold sm:block'}>
+                                <h1 className={'sm:text-xs text-center text-xl md:text-2xl tracking-tight font-semibold sm:block'}>
                                     NEXT LEVEL
                                 </h1>
-                                <h2 className={'font-(family-name:--font-roboto) text-sm flex-none sm:flex'}>
+                                <h2 className={'text-center font-(family-name:--font-roboto) text-sm flex-none sm:flex'}>
                                     Barber supply
                                 </h2>
                             </div>
                         </div>
                     </div>
                     <div className={'flex h-full justify-end'}>
-                        <div className={'flex items-center justify-items-end gap-6 lg:gap-4'}>
+                        <div className={'flex items-center justify-items-end gap-4'}>
                             {/*<LanguageSwitcher/>*/}
                             <SearchBar/>
                             <Link href={'/login'}
