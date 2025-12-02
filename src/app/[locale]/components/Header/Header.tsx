@@ -40,6 +40,7 @@ const Header = () => {
             modalChildren: null,
             open: false
         }));
+        console.log('close modal');
     };
 
     return (
@@ -72,7 +73,7 @@ const Header = () => {
                 <div className={`grid gap-1 grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto] md:grid-cols-[auto_1fr] 
                                 max-w-[1200px] w-full mx-auto`}>
 
-                    <div className={'flex gap-4  sm:hidden'}>
+                    <div className={'flex gap-2 sm:hidden'}>
                         <RxHamburgerMenu size={35}
                                         className={'block sm:hidden cursor-pointer items-center h-full'}
                                         onClick={() => setModalState(state => ({
@@ -83,16 +84,14 @@ const Header = () => {
                                         }))}/>
                         <LanguageSwitcher/>
                     </div>
-
-
                     <div className={'justify-items-center lg:justify-items-start items-center'}>
                         <div className={'flex gap-1 items-center'}>
                             <Image className={'ml-5 ml-5 w-18 lg:w-20 h-auto'} src={logo} alt={'logo'} />
                             <div className={'flex flex-col items-center'}>
-                                <h1 className={'sm:text-xs text-center text-xl md:text-2xl tracking-tight font-semibold sm:block'}>
+                                <h1 className={'text-sm sm:text-base text-center text-xl md:text-2xl tracking-tight font-semibold sm:block'}>
                                     NEXT LEVEL
                                 </h1>
-                                <h2 className={'text-center font-(family-name:--font-roboto) text-sm flex-none sm:flex'}>
+                                <h2 className={'text-xs sm:text-sm text-center font-(family-name:--font-roboto) text-sm flex-none sm:flex'}>
                                     Barber supply
                                 </h2>
                             </div>
@@ -123,7 +122,9 @@ const Header = () => {
                 </div>
 
             </div>
-            <div className={'w-full bg-background hidden sm:block justify-items-center'}><CatalogMenu/></div>
+            <div className={'w-full bg-background hidden sm:block justify-items-center'}>
+                <CatalogMenu/>
+            </div>
         </header>
     );
 };
