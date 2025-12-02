@@ -77,7 +77,7 @@ const Header = () => {
                                      onClick={() => setModalState(state => ({
                                          ...state,
                                          appearance: 'left',
-                                         modalChildren: <BurgerMenu onCloseAction={onCloseModal}/>,
+                                         modalChildren: <BurgerMenu/>,
                                          open: true
                                      }))}/>
 
