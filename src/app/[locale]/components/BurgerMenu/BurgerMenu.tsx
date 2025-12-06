@@ -3,8 +3,8 @@ import { CatalogMenu, HeadLinks, SocialIcons } from '@/app/[locale]/components';
 export default function BurgerMenu() {
 
     return (
-        <div className={'h-full pt-10 grid grid-rows-[1fr_auto]'}>
-            <div>
+        <div className={'h-full p-5 grid grid-rows-[1fr_auto]'}>
+            <div className={'mt-5'}>
                 <HeadLinks/>
                 <div className={'ml-5'}><CatalogMenu/></div>
             </div>

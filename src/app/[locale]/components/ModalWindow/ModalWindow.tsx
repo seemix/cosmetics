@@ -51,7 +51,7 @@ export default function ModalWindow({
                         animate={'visible'}
                         exit={'hidden'}
                         variants={variants[appearance]}
-                        transition={{ type: 'tween', duration: .35, ease: 'easeInOut', delay: .1  }}
+                        transition={{ type: 'tween', duration: .35, ease: 'easeInOut', delay: .1 }}
                         className={`fixed inset-0 z-50 flex items-center ${
                             appearance === 'left'
                                 ? 'justify-start'
@@ -61,16 +61,16 @@ export default function ModalWindow({
                         }`}
                     >
                         <motion.div
-                            className={'z-6 p-6 h-dvh bg-background relative min-w-70'}
-                            onClick={(e:React.MouseEvent<HTMLDivElement>) => {
+                            className={`z-6 ${appearance !== 'zoom' ? 'h-dvh' : ''} bg-background relative min-w-70 max-w-120`}
+                            onClick={(e: React.MouseEvent<HTMLDivElement>) => {
                                 if ((e.target as HTMLElement).dataset.bubble === 'true') return;
                                 e.stopPropagation();
                             }}
                         >
                             <div className={`flex justify-between relative w-full h-5
-                                             ${appearance === 'left' ? 'justify-end' : 'justify-start'}`}>
+                                             ${appearance === 'right' ? 'justify-start' : 'justify-end'}`}>
                                 <button
-                                    className={`hover:bg-background cursor-pointer`}
+                                    className={`hover:bg-background cursor-pointer m-3`}
                                     onClick={onClose}
                                 >
                                     <IoCloseSharp size={33} color={'black'}/>

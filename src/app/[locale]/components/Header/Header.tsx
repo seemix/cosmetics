@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { PiShoppingCartSimple, PiUser } from 'react-icons/pi';
 
@@ -11,7 +10,7 @@ import {
     Cart,
     CatalogMenu,
     HeadLinks,
-    LanguageSwitcher,
+    LanguageSwitcher, LoginForm,
     ModalWindow,
     SearchBar, SocialIcons
 } from '@/app/[locale]/components';
@@ -54,17 +53,18 @@ const Header = () => {
                 <div className={`grid gap-1 grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto] md:grid-cols-[auto_1fr] 
                                 max-w-[1200px] w-full mx-auto`}>
 
-                    <div className={'flex gap-6 sm:hidden'}>
+                    <button className={'flex gap-6 sm:hidden'}
+                            onClick={() => setModalState(state => ({
+                                ...state,
+                                appearance: 'left',
+                                modalChildren: <BurgerMenu/>,
+                                open: true
+                            }))}>
                         <RxHamburgerMenu size={35}
                                          className={'block sm:hidden cursor-pointer items-center h-full'}
-                                         onClick={() => setModalState(state => ({
-                                             ...state,
-                                             appearance: 'left',
-                                             modalChildren: <BurgerMenu/>,
-                                             open: true
-                                         }))}/>
+                        />
                         <LanguageSwitcher/>
-                    </div>
+                    </button>
                     <div className={'justify-items-center lg:justify-items-start items-center'}>
                         <div className={'flex gap-1 items-center'}>
                             <Image className={'ml-5 ml-5 w-18 lg:w-20 h-auto'} src={logo} alt={'logo'}/>
@@ -83,11 +83,16 @@ const Header = () => {
                     <div className={'flex h-full justify-end'}>
                         <div className={'flex items-center justify-items-end gap-5'}>
                             <SearchBar/>
-                            <Link href={'/login'}
-                                  className={`flex items-center justify-center gap-4 transition-colors duration-300 
-                                        hover:text-[var(--main)]`}>
+                            <button onClick={() => setModalState(state => ({
+                                ...state,
+                                appearance: 'zoom',
+                                modalChildren: <LoginForm/>,
+                                open: true
+                            }))}
+                                    className={`flex items-center justify-center gap-4 transition-colors duration-300 
+                                        hover:text-[var(--main)] cursor-pointer`}>
                                 <PiUser size={29}/>
-                            </Link>
+                            </button>
                             <button className={'cursor-pointer z-6'} onClick={() => {
                                 setModalState(state => ({
                                     ...state,
@@ -102,10 +107,11 @@ const Header = () => {
                             </button>
                         </div>
                     </div>
+                    {/*<CatalogMenu/>                    */}
                 </div>
             </div>
             <div className={'w-full bg-background hidden sm:block justify-items-center'}>
-                <CatalogMenu/>
+                {/*cm*/}<CatalogMenu/>
             </div>
         </header>
     );
