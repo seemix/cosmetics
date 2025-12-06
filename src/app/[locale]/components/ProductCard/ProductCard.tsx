@@ -29,19 +29,14 @@ type Props = {
 const formatPrice = (value: number) =>
     new Intl.NumberFormat('md-MD', { style: 'currency', currency: 'MDL' }).format(value);
 
-export default function ProductCard({ product, onAddToCart, className = '' }: Props) {
+export default function ProductCard({ product }: Props) {
     const {
         id,
         name,
         slug,
-        category,
         image,
         alt = 'product image',
         price,
-        oldPrice,
-        rating = 0,
-        reviews = 0,
-        badge,
         brand
     } = product;
 
