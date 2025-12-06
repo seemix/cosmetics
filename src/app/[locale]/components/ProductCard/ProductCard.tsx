@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import { PiShoppingCartSimple } from 'react-icons/pi';
 
 export type Product = {
@@ -27,7 +26,9 @@ type Props = {
 };
 
 const formatPrice = (value: number) =>
-    new Intl.NumberFormat('md-MD', { style: 'currency', currency: 'MDL' }).format(value);
+    new Intl.NumberFormat('md-MD', { style: 'currency', currency: 'MDL' }).format(
+        value,
+    );
 
 export default function ProductCard({ product }: Props) {
     const {
@@ -37,7 +38,7 @@ export default function ProductCard({ product }: Props) {
         image,
         alt = 'product image',
         price,
-        brand
+        brand,
     } = product;
 
     return (
@@ -47,15 +48,22 @@ export default function ProductCard({ product }: Props) {
             </div>
             <div className={'p-4 flex flex-col gap-2'}>
                 <p className={'text-xs uppercase'}>{brand}</p>
-                <Link href={`/catalog/${slug}`} className={'text-black text'}>{name}</Link>
+                <Link href={`/catalog/${slug}`} className={'text-black text'}>
+                    {name}
+                </Link>
                 <p className={'text-sm text-gray-500'}>Код товара: {'005' + id}</p>
                 <div className={'flex justify-end w-full'}>
-                    <p className={'text-black font-gray-500 font-bold text-xl'}>{formatPrice(price)}</p>
+                    <p className={'text-black font-gray-500 font-bold text-xl'}>
+                        {formatPrice(price)}
+                    </p>
                 </div>
                 <button
+                    type={'button'}
+                    aria-label={'add-to-cart'}
                     className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
                                  hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
-                                 font-(family-name:--font-roboto)`}>
+                                 font-(family-name:--font-roboto)`}
+                >
                     Добавить в корзину
                     <PiShoppingCartSimple size={23}/>
                 </button>

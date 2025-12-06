@@ -1,6 +1,6 @@
 .card {
-    border: 1px solid #cccccc;
+	border: 1px solid #cccccc;
 }
 .card:hover {
-    border: 2px solid #dddddd;
+	border: 2px solid #dddddd;
 }
