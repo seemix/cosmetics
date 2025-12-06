@@ -56,28 +56,30 @@ const Header = () => {
                 }
             >
                 <div
-                    className={`grid gap-1 grid-cols-[auto_1fr_auto] lg:grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_auto]                                
+                    className={`grid gap-1 grid-cols-[auto_1fr_auto] lg:grid-cols-[auto_auto_1fr_auto] md:grid-cols-[auto_auto_1fr_auto]                                
                                 max-w-[1200px] w-full mx-auto`}
                 >
-                    <button
-                        type={'button'}
-                        aria-label="Open-close Menu"
-                        className={'flex gap-6 md:hidden'}
-                        onClick={() =>
-                            setModalState((state) => ({
-                                ...state,
-                                appearance: 'left',
-                                modalChildren: <BurgerMenu/>,
-                                open: true,
-                            }))
-                        }
-                    >
-                        <RxHamburgerMenu
-                            size={35}
-                            className={'block md:hidden cursor-pointer items-center h-full'}
-                        />
-                        <LanguageSwitcher/>
-                    </button>
+                    <div className={'flex gap-4 items-center justify-center'}>
+                        <button
+                            type={'button'}
+                            aria-label="Open-close Menu"
+                            className={'flex gap-6 md:hidden'}
+                            onClick={() =>
+                                setModalState((state) => ({
+                                    ...state,
+                                    appearance: 'left',
+                                    modalChildren: <BurgerMenu/>,
+                                    open: true,
+                                }))
+                            }
+                        >
+                            <RxHamburgerMenu
+                                size={35}
+                                className={'block md:hidden cursor-pointer items-center h-full'}
+                            />
+                        </button>
+                        <div className={'sm:hidden'}><LanguageSwitcher/></div>
+                    </div>
                     <div
                         className={
                             'justify-items-center lg:justify-items-start items-center'
@@ -155,10 +157,7 @@ const Header = () => {
                     {/*<CatalogMenu/>                    */}
                 </div>
             </div>
-            <div
-                className={'w-full bg-background hidden sm:block justify-items-center'}
-            >
-                {/*/!*cm*!/<CatalogMenu/>*/}
+            <div className={'w-full bg-background hidden sm:block justify-items-center'}>
             </div>
         </header>
     );

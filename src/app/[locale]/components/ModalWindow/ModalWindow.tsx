@@ -78,10 +78,11 @@ export default function ModalWindow({
 								<button
                                     type={'button'}
                                     aria-label={'Close'}
-									className={`hover:bg-background cursor-pointer m-3`}
+									className={`cursor-pointer m-3 transition-colors duration-300 
+                                                 hover:text-[var(--main)]`}
 									onClick={onClose}
 								>
-									<IoCloseSharp size={33} color={"black"} />
+									<IoCloseSharp size={33} />
 								</button>
 							</div>
 							{children}

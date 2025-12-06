@@ -26,12 +26,12 @@ export default function CartWindow() {
 					<p className={"text-center"}>590 MDL</p>
 				</div>
 				<div className={"flex gap-2 items-center border-1 border-gray-400"}>
-					<button className={"rounded p-2 cursor-pointer text-lg"}>-</button>
+					<button className={"rounded p-2 cursor-pointer text-lg"} type={'button'}>-</button>
 					<p>222</p>
-					<button className={"rounded p-2 cursor-pointer text-lg"}>+</button>
+					<button className={"rounded p-2 cursor-pointer text-lg"} type={'button'}>+</button>
 				</div>
 				<div>
-					<button className={"cursor-pointer"}>
+					<button className={"cursor-pointer"} type={'button'}>
 						<MdDeleteOutline className={"w-8 sm:w-6 h-auto"} />
 					</button>
 				</div>
@@ -52,12 +52,12 @@ export default function CartWindow() {
 					<p className={"text-center"}>690 MDL</p>
 				</div>
 				<div className={"flex gap-2 items-center border-1 border-gray-400"}>
-					<button className={"rounded p-2 cursor-pointer text-lg"}>-</button>
+					<button className={"rounded p-2 cursor-pointer text-lg"} type={'button'}>-</button>
 					<p>110</p>
-					<button className={"rounded p-2 cursor-pointer text-lg"}>+</button>
+					<button className={"rounded p-2 cursor-pointer text-lg"} type={'button'}>+</button>
 				</div>
 				<div>
-					<button className={"cursor-pointer"}>
+					<button className={"cursor-pointer"} type={'button'}>
 						<MdDeleteOutline className={"w-8 sm:w-6 h-auto"} />
 					</button>
 				</div>
