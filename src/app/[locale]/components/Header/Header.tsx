@@ -56,7 +56,7 @@ const Header = () => {
                 }
             >
                 <div
-                    className={`grid gap-1 grid-cols-[auto_1fr_auto] lg:grid-cols-[auto_auto_1fr_auto] md:grid-cols-[auto_auto_1fr_auto]                                
+                    className={`grid gap-1 grid-cols-[auto_1fr_auto]  md:grid-cols-[auto_auto_1fr_auto]                                
                                 max-w-[1200px] w-full mx-auto`}
                 >
                     <div className={'flex gap-4 items-center justify-center'}>
@@ -93,7 +93,7 @@ const Header = () => {
                             />
                             <div className={'flex flex-col items-center'}>
                                 <h1
-                                    className={`hidden sm:block text-sm sm:text-base text-center lg:text-2xl 
+                                    className={`hidden sm:block text-sm sm:text-xl text-center lg:text-2xl 
                                                 tracking-tight font-semibold sm:block`}
                                 >
                                     NEXT LEVEL
