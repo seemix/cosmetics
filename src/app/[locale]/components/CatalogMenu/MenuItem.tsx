@@ -63,7 +63,7 @@ export default function MenuItem({
                             className="pl-4 pb-3 space-y-1 overflow-hidden"
                         >
                             {(item.children ?? []).map((child, i) => (
-                                <div key={i}>{child}</div>
+                                <div key={String(i)}>{child}</div>
                             ))}
                         </motion.div>
                     )}
@@ -77,12 +77,12 @@ export default function MenuItem({
                 onHoverStart={() => setOpenItem(item.name)}
                 onHoverEnd={() => setOpenItem(null)}
                 animate={{
-                    color: isOpen ? 'var(--main)' : '#000',
+                    color: isOpen ? 'var(--main)' : 'black',
                 }}
                 whileHover={{
                     color: 'var(--main)',
                 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: .25 }}
             >
                 <AnimatePresence>
                     {isOpen && (
@@ -96,7 +96,7 @@ export default function MenuItem({
                         >
                             {(item.children ?? []).map((child, i) => (
                                 <div
-                                    key={i}
+                                    key={String(i)}
                                     className={`px-4 py-2 hover:bg-gray-100 cursor-pointer 
                                                 text-black hover:text-[var(--main)] transition-colors duration-300`}
                                 >
