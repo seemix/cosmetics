@@ -54,14 +54,15 @@ export default function LoginForm() {
 						/>
 					</div>
 
-					<button
-						type={"submit"}
-						className={
-							"w-full bg-gray-900 text-white py-2.5 font-medium hover:bg-gray-800 transition cursor-pointer"
-						}
-					>
-						Вход
-					</button>
+                    <button
+                        type={'submit'}
+                        aria-label={'add-to-cart'}
+                        className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
+                                 hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
+                                 font-(family-name:--font-roboto) w-full`}
+                    >
+                        Вход
+                    </button>
 				</form>
 				{/*<p className="text-center text-sm text-gray-600 mt-4">*/}
 				{/*    Немає акаунта?*/}

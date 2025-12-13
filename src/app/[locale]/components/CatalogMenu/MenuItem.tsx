@@ -2,28 +2,25 @@
 
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { IMenuItem } from '@/app/[locale]/types/catalog-menu';
+import Link from 'next/link';
 
-type catalogMenuItem = {
-    name: string;
-    link: string;
-    children?: string[];
-};
 
 export default function MenuItem({
                                      item,
                                      openItem,
                                      setOpenItem,
                                  }: {
-    item: catalogMenuItem;
+    item: IMenuItem;
     openItem: string | null;
     setOpenItem: (key: string | null) => void;
 }) {
     const t = useTranslations('CatalogMenu');
 
-    const isOpen = openItem === item.name;
+    const isOpen = openItem === item.id;
 
     const toggle = () => {
-        setOpenItem(isOpen ? null : item.name);
+        setOpenItem(isOpen ? null : item.id);
     };
 
     return (
@@ -36,7 +33,7 @@ export default function MenuItem({
                     onClick={toggle}
                     className="flex cursor-pointer items-center justify-between py-3 w-full uppercase text-lg md:text-base font-semibold"
                 >
-                    <span>{t(item.name)}</span>
+                    <span>{item.title}</span>
 
                     <motion.svg
                         animate={{ rotate: isOpen ? 90 : 0 }}
@@ -60,11 +57,13 @@ export default function MenuItem({
                             animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
                             transition={{ duration: .35 }}
-                            className="pl-4 pb-3 space-y-1 overflow-hidden"
+                            className="pl-4 pb-3 space-y-6 overflow-hidden"
                         >
-                            {(item.children ?? []).map((child, i) => (
-                                <div key={String(i)}>{child}</div>
-                            ))}
+                            {item.sub?.length && item.sub.map(child =>
+                                <div key={child.id}>
+                                    <Link href={child.uri}>{child.title}</Link>
+                                </div>
+                            )}
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -74,7 +73,7 @@ export default function MenuItem({
             <motion.div
                 className={`hidden md:flex items-center gap-1 relative uppercase text-lg 
                             font-semibold tracking-[0.05em] cursor-pointer`}
-                onHoverStart={() => setOpenItem(item.name)}
+                onHoverStart={() => setOpenItem(item.id)}
                 onHoverEnd={() => setOpenItem(null)}
                 animate={{
                     color: isOpen ? 'var(--main)' : 'black',
@@ -92,15 +91,16 @@ export default function MenuItem({
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: .35 }}
-                            className="absolute left-0 top-full bg-white shadow w-40 py-2 z-[100]"
+                            className="absolute left-0 top-full bg-white shadow w-42 py-2 z-[70]"
                         >
-                            {(item.children ?? []).map((child, i) => (
+                            {(item.sub ?? []).map((child, i) => (
                                 <div
-                                    key={String(i)}
-                                    className={`px-4 py-2 hover:bg-gray-100 cursor-pointer 
+                                    key={child.id}
+                                    className={`px-4 py-2 hover:bg-gray-100 cursor-pointer text-base tracking-normal 
+                                                normal-case font-normal
                                                 text-black hover:text-[var(--main)] transition-colors duration-300`}
                                 >
-                                    {child}
+                                  <Link href={child.uri}>{child.title}</Link>
                                 </div>
                             ))}
                         </motion.div>
@@ -115,7 +115,7 @@ export default function MenuItem({
                     }}
                     transition={{ duration: .25 }}
                 >
-                    {t(item.name)}
+                    {item.title}
                 </motion.span>
 
                 {/* ICON */}

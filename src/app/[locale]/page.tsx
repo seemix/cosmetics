@@ -2,7 +2,8 @@ import Image from "next/image";
 import upperImage from "./assets/uppercut_.webp";
 
 export default async function Home() {
-	return (
+   // console.log(props.locale);
+    return (
 		<>
 			<Image
 				src={upperImage}

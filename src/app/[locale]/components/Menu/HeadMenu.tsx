@@ -1,19 +1,17 @@
-'use client';
-
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { headMenuData } from './headMenuData';
 
-import { headMenuData } from '@/app/[locale]/components/Header/headMenuData';
-import { useTranslations } from 'next-intl';
+export default async function HeadMenu() {
+    const t = await getTranslations('StaticPages');
 
-export default function HeadLinks() {
-    const t = useTranslations('StaticPages');
     return (
         <nav
             className={
-                'flex gap-10 pt-1 justify-end text-md text-dark font-(family-name:--font-roboto)'
+                'flex gap-10 w-full max-w-130 pt-1 justify-end text-md text-dark font-(family-name:--font-roboto)'
             }
         >
-            <ul className={'flex flex-wrap gap-x-3 gap-y-6'}>
+            <ul className={'flex flex-wrap w-full justify-evenly'}>
                 {headMenuData.map((item) => (
                     <li key={item.name}>
                         <Link
