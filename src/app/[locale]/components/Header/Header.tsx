@@ -1,8 +1,7 @@
 import {
     BurgerButton,
     CartButton,
-    CatalogMenu,
-    HeadLinks,
+    CatalogMenu, HeadMenu,
     LanguageSwitcher, LoginButton, Logo,
     SearchBar,
     SocialIcons,
@@ -15,7 +14,7 @@ export default async function Header() {
             <div className={'hidden sm:flex bg-gray-100 py-2 justify-evenly'}>
                 <div className={'flex px-4 gap-4 w-full lg:w-[1100px] justify-between'}>
                     <SocialIcons/>
-                    <HeadLinks/>
+                    <HeadMenu/>
                     <LanguageSwitcher/>
                 </div>
             </div>

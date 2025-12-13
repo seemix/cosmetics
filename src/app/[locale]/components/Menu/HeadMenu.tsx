@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
 import { headMenuData } from './headMenuData';
+import { useTranslations } from 'next-intl';
 
-export default async function HeadMenu() {
-    const t = await getTranslations('StaticPages');
+export default function HeadMenu() {
+    const t = useTranslations('StaticPages');
 
     return (
         <nav
