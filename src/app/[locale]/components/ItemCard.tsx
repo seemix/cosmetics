@@ -1,8 +1,7 @@
-import React from "react";
 import Image from "next/image";
-
-import { assets } from "../assets/assets";
 import { getTranslations } from "next-intl/server";
+import React from "react";
+import { assets } from "../assets/assets";
 
 const ItemCard = async () => {
 	const t = await getTranslations("HomePage");

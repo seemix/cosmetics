@@ -3,7 +3,7 @@ import { TfiSearch } from "react-icons/tfi";
 const SearchBar = () => {
 	// const t = await getTranslations('Header');
 	return (
-		<button type={'button'} className={"cursor-pointer"}>
+		<button type={"button"} className={"cursor-pointer"}>
 			<TfiSearch
 				size={25}
 				className={

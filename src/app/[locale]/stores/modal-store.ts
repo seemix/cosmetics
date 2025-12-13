@@ -1,24 +1,22 @@
-import { create } from 'zustand';
-import type { ModalAppearance } from '@/app/[locale]/types/modal';
+import { create } from "zustand";
+import type { ModalAppearance } from "@/app/[locale]/types/modal";
 
 interface ModalStore {
-    open: boolean;
-    appearance: ModalAppearance;
-    content: React.ReactNode | null;
+	open: boolean;
+	appearance: ModalAppearance;
+	content: React.ReactNode | null;
 
-    showModal: (
-        content: React.ReactNode,
-        appearance?: ModalAppearance
-    ) => void;
+	showModal: (content: React.ReactNode, appearance?: ModalAppearance) => void;
 
-    hideModal: () => void;
+	hideModal: () => void;
 }
 
 export const useModalStore = create<ModalStore>((set) => ({
-    open: false,
-    appearance: 'zoom',
-    content: null,
+	open: false,
+	appearance: "zoom",
+	content: null,
 
-    showModal: (content, appearance = 'zoom') => set({ open: true, content, appearance }),
-    hideModal: () => set({ open: false }),
+	showModal: (content, appearance = "zoom") =>
+		set({ open: true, content, appearance }),
+	hideModal: () => set({ open: false }),
 }));

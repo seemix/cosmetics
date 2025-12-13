@@ -54,15 +54,15 @@ export default function LoginForm() {
 						/>
 					</div>
 
-                    <button
-                        type={'submit'}
-                        aria-label={'add-to-cart'}
-                        className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
+					<button
+						type={"submit"}
+						aria-label={"add-to-cart"}
+						className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
                                  hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
                                  font-(family-name:--font-roboto) w-full`}
-                    >
-                        Вход
-                    </button>
+					>
+						Вход
+					</button>
 				</form>
 				{/*<p className="text-center text-sm text-gray-600 mt-4">*/}
 				{/*    Немає акаунта?*/}
