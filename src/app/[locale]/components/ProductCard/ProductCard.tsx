@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { PiShoppingCartSimple } from "react-icons/pi";
+import { AddToBasketButton } from '@/app/[locale]/components';
 
 export type Product = {
 	id: string | number;
@@ -57,16 +57,7 @@ export default function ProductCard({ product }: Props) {
 						{formatPrice(price)}
 					</p>
 				</div>
-				<button
-					type={"button"}
-					aria-label={"add-to-cart"}
-					className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
-                                 hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
-                                 font-(family-name:--font-roboto)`}
-				>
-					Добавить в корзину
-					<PiShoppingCartSimple size={23} />
-				</button>
+				<AddToBasketButton/>
 			</div>
 		</div>
 	);

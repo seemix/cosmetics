@@ -61,7 +61,8 @@ export default function LanguageSwitcher() {
 								type={"button"}
 								key={code}
 								onClick={() => changeLocale(code)}
-								className="block px-4 py-2 text-sm w-full text-left hover:bg-gray-100 cursor-pointer"
+								className={`block px-4 py-2 md:text-sm w-full text-left hover:bg-gray-100 
+								            hover:text-[var(--main)] cursor-pointer`}
 							>
 								{label}
 							</button>

@@ -2,20 +2,22 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { CiLogin } from "react-icons/ci";
 import { PiUser } from "react-icons/pi";
 import { LoginForm } from "@/app/[locale]/components";
 import { useClickOutside } from "@/app/[locale]/hooks/useClickOutside";
 import { useModal } from "@/app/[locale]/hooks/useModal";
+import { useTranslations } from 'next-intl';
 
 export default function LoginButton() {
-	const ref = useRef<HTMLDivElement>(null);
 
+    const ref = useRef<HTMLDivElement>(null);
 	const { showModal } = useModal();
 	const [open, setOpen] = useState(false);
 	useClickOutside(ref, () => setOpen(false), open);
+    const t = useTranslations('Header');
 
 	return (
 		<div className={"relative"} ref={ref}>
@@ -48,7 +50,8 @@ export default function LoginButton() {
 							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
                                     hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
 						>
-							<CiLogin size={20} /> Login
+							<CiLogin size={20} />
+                            {t('login')}
 						</Link>
 
 						<Link
@@ -58,7 +61,8 @@ export default function LoginButton() {
 							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
                                     hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
 						>
-							<AiOutlineUserAdd size={20} /> Register
+							<AiOutlineUserAdd size={20} />
+                            {t('register')}
 						</Link>
 					</motion.div>
 				)}

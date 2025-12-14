@@ -1,24 +1,16 @@
-import { ProductCard } from "@/app/[locale]/components";
+import type { IProduct } from '@/app/[locale]/types/product';
+import { ProductDetails } from '@/app/[locale]/components';
 
-export default function ProductPage() {
-	const product = {
-		id: 1,
-		name: "Бальзам Після Гоління Truefitt & Hill Grafton Aftershave Balm 100 мл",
-		price: 680,
-		image:
-			"https://barbercompany.com/image/cache/wp/gj/Truefitt/balzam-posle-brytya-truefitt-hill-grafton-aftershave-balm-100-ml-660x660.webp",
-		alt: "alt2",
-	};
-	return (
-		<div>
-			<h2 className={"text-black text 2xl bold my-5"}>Product page</h2>
-			<div className={"grid grid-cols-[1fr_1fr_1fr] gap-3"}>
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-				<ProductCard product={product} />
-			</div>
-		</div>
-	);
+export default async function ProductPage(props: { params: Promise<{ locale: string, slug: string }> }) {
+
+    const { locale, slug } = await props.params;
+    const response = await fetch(`${process.env.API_URL}/products?where[slug][equals]=${slug}&locale=${locale}`)
+                                    .then(res => res.json());
+    const product: IProduct = response.docs[0];
+
+    return (
+        <div className={'mx-auto max-w-[1100px] p-4'}>
+        <ProductDetails product={product}/>
+        </div>
+    );
 }
