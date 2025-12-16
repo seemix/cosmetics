@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { CloseModalButton } from '@/app/[locale]/components';
 
 export default function LoginForm() {
 	const [email, setEmail] = useState("");
@@ -12,9 +13,8 @@ export default function LoginForm() {
 	};
 
 	return (
-		<div
-			className={"flex items-center justify-center bg-gray-50 p-6 mt-2 w-100"}
-		>
+		<div className={"flex items-center justify-center flex-col bg-gray-50 p-2 w-100"}>
+            <CloseModalButton/>
 			<div className={"w-full bg-white p-8 shadow-lg border border-gray-100"}>
 				<h2 className={"text-2xl font-semibold text-gray-800 text-center mb-6"}>
 					Войти в аккаунт

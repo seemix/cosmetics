@@ -7,7 +7,6 @@ interface ModalStore {
 	content: React.ReactNode | null;
 
 	showModal: (content: React.ReactNode, appearance?: ModalAppearance) => void;
-
 	hideModal: () => void;
 }
 

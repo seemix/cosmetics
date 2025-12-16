@@ -1,4 +1,4 @@
-type ProductGallery = {
+export type ProductGallery = {
     image: {
         id: string;
         createdAt: string;

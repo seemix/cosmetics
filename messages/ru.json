@@ -31,7 +31,7 @@
   },
   "Catalog": {
     "quantity": "количество",
-    "addToCart": "Добавить в корзину",
+    "addToCart": "В корзину",
     "article": "Код товара"
   }
 }

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { MdDeleteOutline } from "react-icons/md";
+import { CloseModalButton } from '@/app/[locale]/components';
 
 export default function CartWindow() {
 	return (
-		<div className={"h-screen bg-background text-black"}>
-			<h2 className={"text-xl text-black text-center font-bold my-5"}>
+		<div className={"h-screen bg-background text-black max-w-130"}>
+            <CloseModalButton/>
+			<h2 className={"text-xl text-black text-center font-bold -my-3"}>
 				Корзина
 			</h2>
 			<div

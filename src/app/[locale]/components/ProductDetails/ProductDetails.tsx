@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { RichText } from '@payloadcms/richtext-lexical/react';
-import { AddToBasketButton, Quantity } from '@/app/[locale]/components';
+import { AddToBasketButton, ProductGallerySlider, Quantity } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
 
 export default async function ProductDetails({ product }: { product: IProduct }) {
@@ -15,9 +15,10 @@ export default async function ProductDetails({ product }: { product: IProduct })
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
-            <div className={'w-[400px] max-w-[95%] aspect-square mx-auto relative'}>
-                <Image className={'object-fit'} src={backendUrl + url} alt={alt} fill unoptimized/>
-            </div>
+            {gallery.length > 1 ? <ProductGallerySlider images={gallery}/> :
+                <div className={'w-[400px] max-w-[95%] aspect-square mx-auto relative'}>
+                    <Image className={'object-fit'} src={backendUrl + url} alt={alt} fill unoptimized/>
+                </div>}
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
                     <div>

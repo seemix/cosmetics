@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { IoCloseSharp } from "react-icons/io5";
 import { useModal } from "@/app/[locale]/hooks/useModal";
 
 export default function ModalWindow() {
@@ -55,25 +54,12 @@ export default function ModalWindow() {
 					}`}
 				>
 					<motion.div
-						className={`relative bg-white ${
-							appearance !== "zoom" ? "h-dvh" : ""
-						} min-w-70 max-w-120 shadow-lg`}
+						// className={`relative bg-white ${
+						// 	appearance !== "zoom" ? "h-dvh" : ""
+						// } min-w-70 max-w-120 shadow-lg`}
 						onClick={(e) => e.stopPropagation()}
 					>
-						<div
-							className={`flex w-full h-5 ${
-								appearance === "right" ? "justify-start" : "justify-end"
-							}`}
-						>
-							<button
-								type="button"
-								aria-label="Close"
-								className="cursor-pointer m-3 transition-colors duration-300 hover:text-[var(--main)]"
-								onClick={hideModal}
-							>
-								<IoCloseSharp size={33} />
-							</button>
-						</div>
+
 
 						{content}
 					</motion.div>
