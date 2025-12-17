@@ -16,8 +16,7 @@ export default function CartButton() {
 		>
 			<PiShoppingCartSimple
 				size={29}
-				className={`text-black transition-colors duration-300 
-                                                      hover:text-[var(--main)] cursor-pointer`}
+				className={`text-black transition-colors duration-300 hover:text-[var(--main)] cursor-pointer`}
 			/>
 		</button>
 	);

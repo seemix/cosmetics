@@ -4,6 +4,7 @@ export { default as Footer } from './Footer';
 export { default as BurgerButton } from './Header/BurgerButton';
 export { default as CartButton } from './Header/CartButton';
 export { default as CloseModalButton } from './ModalWindow/CloseModalButton';
+export { default as FullScreenProductGallery } from './ProductDetails/FullScreenProductGallery';
 export { default as Header } from './Header/Header';
 export { default as LanguageSwitcher } from './Header/LanguageSwitcher';
 export { default as LoginButton } from './Header/LoginButton';
