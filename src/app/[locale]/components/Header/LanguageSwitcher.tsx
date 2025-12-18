@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname, useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
-import { useRef, useState, useTransition } from "react";
-import { useClickOutside } from "@/app/[locale]/hooks/useClickOutside";
+import { AnimatePresence, motion } from 'framer-motion';
+import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
+import { useRef, useState, useTransition } from 'react';
+import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 
 const locales = [
-	{ code: "ru", label: "RU" },
-	{ code: "ro", label: "RO" },
+	{ code: 'ru', label: 'RU' },
+	{ code: 'ro', label: 'RO' },
 ];
 
 export default function LanguageSwitcher() {
@@ -24,11 +24,11 @@ export default function LanguageSwitcher() {
 	useClickOutside(ref, () => setOpen(false), open);
 
 	const changeLocale = (newLocale: string) => {
-		const segments = pathname.split("/");
+		const segments = pathname.split('/');
 		segments[1] = newLocale;
 
 		startTransition(() => {
-			router.replace(segments.join("/"));
+			router.replace(segments.join('/'));
 		});
 
 		setOpen(false);
@@ -38,7 +38,7 @@ export default function LanguageSwitcher() {
 		<div className="relative" ref={ref}>
 			{/* BUTTON */}
 			<button
-				type={"button"}
+				type={'button'}
 				onClick={() => setOpen(!open)}
 				className="px-2 py-1 bg-transparent text-black cursor-pointer"
 			>
@@ -58,7 +58,7 @@ export default function LanguageSwitcher() {
 					>
 						{locales.map(({ code, label }) => (
 							<button
-								type={"button"}
+								type={'button'}
 								key={code}
 								onClick={() => changeLocale(code)}
 								className={`block px-4 py-2 md:text-sm w-full text-left hover:bg-gray-100 

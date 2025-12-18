@@ -1,7 +1,3 @@
 export default function Brand() {
-  return (
-    <div>
-      brand
-    </div>
-  );
+	return <div>brand</div>;
 }

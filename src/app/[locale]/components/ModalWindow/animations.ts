@@ -1,18 +1,18 @@
-import type { ModalAppearance } from "@/app/[locale]/types/modal";
+import type { ModalAppearance } from '@/app/[locale]/types/modal';
 
 export function getAnimation(type: ModalAppearance) {
 	switch (type) {
-		case "left":
+		case 'left':
 			return {
-				initial: { x: "-100%", opacity: 0 },
+				initial: { x: '-100%', opacity: 0 },
 				animate: { x: 0, opacity: 1 },
-				exit: { x: "-100%", opacity: 0 },
+				exit: { x: '-100%', opacity: 0 },
 			};
-		case "right":
+		case 'right':
 			return {
-				initial: { x: "100%", opacity: 0 },
+				initial: { x: '100%', opacity: 0 },
 				animate: { x: 0, opacity: 1 },
-				exit: { x: "100%", opacity: 0 },
+				exit: { x: '100%', opacity: 0 },
 			};
 		default:
 			return {

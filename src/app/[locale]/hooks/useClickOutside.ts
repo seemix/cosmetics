@@ -1,4 +1,4 @@
-import { type RefObject, useEffect } from "react";
+import { type RefObject, useEffect } from 'react';
 
 export function useClickOutside<T extends HTMLElement>(
 	ref: RefObject<T | null>,
@@ -16,12 +16,12 @@ export function useClickOutside<T extends HTMLElement>(
 			}
 		};
 
-		document.addEventListener("mousedown", handler);
-		document.addEventListener("touchstart", handler);
+		document.addEventListener('mousedown', handler);
+		document.addEventListener('touchstart', handler);
 
 		return () => {
-			document.removeEventListener("mousedown", handler);
-			document.removeEventListener("touchstart", handler);
+			document.removeEventListener('mousedown', handler);
+			document.removeEventListener('touchstart', handler);
 		};
 	}, [ref, onOutsideClick, enabled]);
 }

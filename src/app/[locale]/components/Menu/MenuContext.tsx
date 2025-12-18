@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { createContext, useContext } from "react";
-import type { IMenuItem } from "@/app/[locale]/types/catalog-menu";
+import { createContext, useContext } from 'react';
+import type { IMenuItem } from '@/app/[locale]/types/catalog-menu';
 
 export type MenuData = {
 	categories: IMenuItem[];
@@ -13,7 +13,7 @@ const MenuContext = createContext<MenuData | null>(null);
 export function useMenu() {
 	const ctx = useContext(MenuContext);
 	if (!ctx) {
-		throw new Error("useMenu must be used inside MenuProvider");
+		throw new Error('useMenu must be used inside MenuProvider');
 	}
 	return ctx;
 }

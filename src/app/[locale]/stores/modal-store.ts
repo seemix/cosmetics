@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import type { ModalAppearance } from "@/app/[locale]/types/modal";
+import { create } from 'zustand';
+import type { ModalAppearance } from '@/app/[locale]/types/modal';
 
 interface ModalStore {
 	open: boolean;
@@ -12,10 +12,10 @@ interface ModalStore {
 
 export const useModalStore = create<ModalStore>((set) => ({
 	open: false,
-	appearance: "zoom",
+	appearance: 'zoom',
 	content: null,
 
-	showModal: (content, appearance = "zoom") =>
+	showModal: (content, appearance = 'zoom') =>
 		set({ open: true, content, appearance }),
 	hideModal: () => set({ open: false }),
 }));

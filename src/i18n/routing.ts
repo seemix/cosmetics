@@ -1,21 +1,21 @@
-import { defineRouting } from "next-intl/routing";
+import { defineRouting } from 'next-intl/routing';
 
 export const routing = defineRouting({
 	// A list of all locales that are supported
-	locales: ["ru", "ro"],
+	locales: ['ru', 'ro'],
 
 	// Used when no locale matches
-	defaultLocale: "ru",
+	defaultLocale: 'ru',
 	pathnames: {
-		"/": "/",
-		"/o-nas": {
-			ro: "/despre-noi",
+		'/': '/',
+		'/o-nas': {
+			ro: '/despre-noi',
 		},
-		"/oplata-i-dostavka": {
-			ro: "/plata-si-livrare",
+		'/oplata-i-dostavka': {
+			ro: '/plata-si-livrare',
 		},
-		"/kontakty": {
-			ro: "/contacte",
+		'/kontakty': {
+			ro: '/contacte',
 		},
 	},
 });

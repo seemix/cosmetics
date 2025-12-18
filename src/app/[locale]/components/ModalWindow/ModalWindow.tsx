@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useModal } from "@/app/[locale]/hooks/useModal";
+import { AnimatePresence, motion } from 'framer-motion';
+import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function ModalWindow() {
 	const variants = {
 		left: {
-			hidden: { x: "-100%" },
+			hidden: { x: '-100%' },
 			visible: { x: 0 },
 		},
 		right: {
-			hidden: { x: "100%" },
+			hidden: { x: '100%' },
 			visible: { x: 0 },
 		},
 		zoom: {
@@ -41,16 +41,16 @@ export default function ModalWindow() {
 					exit="hidden"
 					variants={variants[appearance]}
 					transition={{
-						type: "tween",
+						type: 'tween',
 						duration: 0.35,
-						ease: "easeInOut",
+						ease: 'easeInOut',
 					}}
 					className={`fixed inset-0 z-50 flex items-center ${
-						appearance === "left"
-							? "justify-start"
-							: appearance === "right"
-								? "justify-end"
-								: "justify-center"
+						appearance === 'left'
+							? 'justify-start'
+							: appearance === 'right'
+								? 'justify-end'
+								: 'justify-center'
 					}`}
 				>
 					<motion.div
@@ -59,8 +59,6 @@ export default function ModalWindow() {
 						// } min-w-70 max-w-120 shadow-lg`}
 						onClick={(e) => e.stopPropagation()}
 					>
-
-
 						{content}
 					</motion.div>
 				</motion.div>,

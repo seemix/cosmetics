@@ -37,6 +37,31 @@ button:active {
     transform: translateY(2px) scale(0.99);
     transition: all .15s ease-in;
 }
-.button-simple:active {
-    transform: translateY(0) scale(.95);
+.simple-button:active {
+    transform: none !important;
+}
+@layer base {
+    h1 {
+        @apply text-3xl md:text-4xl font-bold leading-tight mt-6 mb-4;
+    }
+
+    h2 {
+        @apply text-2xl md:text-3xl font-semibold leading-tight mt-6 mb-3;
+    }
+
+    h3 {
+        @apply text-xl md:text-2xl font-semibold leading-snug mt-5 mb-3;
+    }
+
+    h4 {
+        @apply text-lg md:text-xl font-medium leading-snug mt-4 mb-2;
+    }
+
+    h5 {
+        @apply text-base md:text-lg font-medium leading-normal mt-4 mb-2;
+    }
+
+    h6 {
+        @apply text-sm md:text-base font-medium leading-normal mt-3 mb-2 text-gray-600;
+    }
 }

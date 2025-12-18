@@ -1,86 +1,86 @@
-import Image from "next/image";
-import { MdDeleteOutline } from "react-icons/md";
+import Image from 'next/image';
+import { MdDeleteOutline } from 'react-icons/md';
 import { CloseModalButton } from '@/app/[locale]/components';
 
 export default function CartWindow() {
 	return (
-		<div className={"h-screen bg-background text-black max-w-130"}>
-            <CloseModalButton/>
-			<h2 className={"text-xl text-black text-center font-bold -my-3"}>
+		<div className={'h-screen bg-background text-black max-w-130'}>
+			<CloseModalButton />
+			<h2 className={'text-xl text-black text-center font-bold -my-3'}>
 				Корзина
 			</h2>
 			<div
-				className={"border-b border-gray-300 flex items-center gap-2 mx-4 my-2"}
+				className={'border-b border-gray-300 flex items-center gap-2 mx-4 my-2'}
 			>
 				<Image
 					src={
-						"https://barbercompany.com/image/cache/wp/gj/2024/12-24/nishman-beard-hair-milk-therapy-conditioner-400-ml-1000x1000.webp"
+						'https://barbercompany.com/image/cache/wp/gj/2024/12-24/nishman-beard-hair-milk-therapy-conditioner-400-ml-1000x1000.webp'
 					}
-					alt={"product"}
+					alt={'product'}
 					width={80}
 					height={80}
 				/>
 				<div>
-					<p className={"text-black text-xs"}>
-						{" "}
+					<p className={'text-black text-xs'}>
+						{' '}
 						Nishman Beard & Hair Milk Therapy Conditioner 400 мл
 					</p>
-					<p className={"text-center"}>590 MDL</p>
+					<p className={'text-center'}>590 MDL</p>
 				</div>
-				<div className={"flex gap-2 items-center border-1 border-gray-400"}>
+				<div className={'flex gap-2 items-center border-1 border-gray-400'}>
 					<button
-						className={"rounded p-2 cursor-pointer text-lg"}
-						type={"button"}
+						className={'rounded p-2 cursor-pointer text-lg'}
+						type={'button'}
 					>
 						-
 					</button>
 					<p>222</p>
 					<button
-						className={"rounded p-2 cursor-pointer text-lg"}
-						type={"button"}
+						className={'rounded p-2 cursor-pointer text-lg'}
+						type={'button'}
 					>
 						+
 					</button>
 				</div>
 				<div>
-					<button className={"cursor-pointer"} type={"button"}>
-						<MdDeleteOutline className={"w-8 sm:w-6 h-auto"} />
+					<button className={'cursor-pointer'} type={'button'}>
+						<MdDeleteOutline className={'w-8 sm:w-6 h-auto'} />
 					</button>
 				</div>
 			</div>
-			<div className={"border-b border-gray-300 flex items-center gap-2 mx-4"}>
+			<div className={'border-b border-gray-300 flex items-center gap-2 mx-4'}>
 				<Image
 					src={
-						"https://barbercompany.com/image/cache/wp/gj/Morgans%20/kondicioner-dlja-volos-morgans-mens-conditioner-1000-ml-1000x1000.webp"
+						'https://barbercompany.com/image/cache/wp/gj/Morgans%20/kondicioner-dlja-volos-morgans-mens-conditioner-1000-ml-1000x1000.webp'
 					}
-					alt={"product"}
+					alt={'product'}
 					width={80}
 					height={80}
 				/>
 				<div>
-					<p className={"text-black text-xs"}>
+					<p className={'text-black text-xs'}>
 						Кондиціонер для волосся Morgan`s Men`s Conditioner 1000 мл
 					</p>
-					<p className={"text-center"}>690 MDL</p>
+					<p className={'text-center'}>690 MDL</p>
 				</div>
-				<div className={"flex gap-2 items-center border-1 border-gray-400"}>
+				<div className={'flex gap-2 items-center border-1 border-gray-400'}>
 					<button
-						className={"rounded p-2 cursor-pointer text-lg"}
-						type={"button"}
+						className={'rounded p-2 cursor-pointer text-lg'}
+						type={'button'}
 					>
 						-
 					</button>
 					<p>110</p>
 					<button
-						className={"rounded p-2 cursor-pointer text-lg"}
-						type={"button"}
+						className={'rounded p-2 cursor-pointer text-lg'}
+						type={'button'}
 					>
 						+
 					</button>
 				</div>
 				<div>
-					<button className={"cursor-pointer"} type={"button"}>
-						<MdDeleteOutline className={"w-8 sm:w-6 h-auto"} />
+					<button className={'cursor-pointer'} type={'button'}>
+						<MdDeleteOutline className={'w-8 sm:w-6 h-auto'} />
 					</button>
 				</div>
 			</div>

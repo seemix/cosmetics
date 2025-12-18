@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import type { IMenuItem } from "@/app/[locale]/types/catalog-menu";
+import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
+import type { IMenuItem } from '@/app/[locale]/types/catalog-menu';
 
 export default function MenuItem({
 	item,
@@ -22,8 +22,8 @@ export default function MenuItem({
 			{/* MOBILE */}
 			<div className="block md:hidden border-b">
 				<button
-					type={"button"}
-					aria-label={"open-submenu"}
+					type={'button'}
+					aria-label={'open-submenu'}
 					onClick={toggle}
 					className="flex cursor-pointer items-center justify-between py-3 w-full uppercase text-lg md:text-base font-semibold"
 				>
@@ -47,7 +47,7 @@ export default function MenuItem({
 						<motion.div
 							key="content"
 							initial={{ opacity: 0, height: 0 }}
-							animate={{ opacity: 1, height: "auto" }}
+							animate={{ opacity: 1, height: 'auto' }}
 							exit={{ opacity: 0, height: 0 }}
 							transition={{ duration: 0.35 }}
 							className="pl-4 pb-3 space-y-6 overflow-hidden"
@@ -70,10 +70,10 @@ export default function MenuItem({
 				onHoverStart={() => setOpenItem(item.id)}
 				onHoverEnd={() => setOpenItem(null)}
 				animate={{
-					color: isOpen ? "var(--main)" : "black",
+					color: isOpen ? 'var(--main)' : 'black',
 				}}
 				whileHover={{
-					color: "var(--main)",
+					color: 'var(--main)',
 				}}
 				transition={{ duration: 0.25 }}
 			>
@@ -102,10 +102,10 @@ export default function MenuItem({
 				</AnimatePresence>
 				<motion.span
 					animate={{
-						color: isOpen ? "var(--main)" : "black",
+						color: isOpen ? 'var(--main)' : 'black',
 					}}
 					whileHover={{
-						color: "var(--main)",
+						color: 'var(--main)',
 					}}
 					transition={{ duration: 0.25 }}
 				>

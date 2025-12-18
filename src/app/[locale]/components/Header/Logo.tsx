@@ -1,16 +1,16 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import logo from "./logo1.webp";
+import logo from './logo1.webp';
 
 export default function Logo() {
 	return (
-		<div className={"flex gap-1 items-center"}>
+		<div className={'flex gap-1 items-center'}>
 			<Image
-				className={"ml-5 ml-5 w-18 lg:w-20 h-auto"}
+				className={'ml-5 ml-5 w-18 lg:w-20 h-auto'}
 				src={logo}
-				alt={"logo"}
+				alt={'logo'}
 			/>
-			<div className={"flex flex-col items-center"}>
+			<div className={'flex flex-col items-center'}>
 				<h1
 					className={`hidden sm:block text-sm sm:text-xl text-center lg:text-2xl 
                                                 tracking-tight font-semibold sm:block`}

@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-export type ModalAppearance = "left" | "right" | "zoom";
+export type ModalAppearance = 'left' | 'right' | 'zoom';
 
 export interface ModalProps {
 	open: boolean;

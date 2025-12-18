@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import type { IMenuItem } from "@/app/[locale]/types/catalog-menu";
-import { MenuProvider } from "./MenuContext";
+import type { IMenuItem } from '@/app/[locale]/types/catalog-menu';
+import { MenuProvider } from './MenuContext';
 
 export default function MenuProviderWrapper({
 	children,

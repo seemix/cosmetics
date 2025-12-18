@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 import { AddToBasketButton } from '@/app/[locale]/components';
 
 export type Product = {
@@ -16,7 +16,7 @@ export type Product = {
 	rating?: number; // 0..5
 	reviews?: number;
 	brand?: string;
-	badge?: "sale" | "new" | string | null;
+	badge?: 'sale' | 'new' | string | null;
 };
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
 };
 
 const formatPrice = (value: number) =>
-	new Intl.NumberFormat("md-MD", { style: "currency", currency: "MDL" }).format(
+	new Intl.NumberFormat('md-MD', { style: 'currency', currency: 'MDL' }).format(
 		value,
 	);
 
@@ -36,28 +36,28 @@ export default function ProductCard({ product }: Props) {
 		name,
 		slug,
 		image,
-		alt = "product image",
+		alt = 'product image',
 		price,
 		brand,
 	} = product;
 
 	return (
-		<div className={"w-80 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]"}>
-			<div className={"w-full aspect-[4/3] relative"}>
-				<Image src={image} alt={alt} layout={"fill"} objectFit={"cover"} />
+		<div className={'w-80 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
+			<div className={'w-full aspect-[4/3] relative'}>
+				<Image src={image} alt={alt} layout={'fill'} objectFit={'cover'} />
 			</div>
-			<div className={"p-4 flex flex-col gap-2"}>
-				<p className={"text-xs uppercase"}>{brand}</p>
-				<Link href={`/catalog/${slug}`} className={"text-black text"}>
+			<div className={'p-4 flex flex-col gap-2'}>
+				<p className={'text-xs uppercase'}>{brand}</p>
+				<Link href={`/catalog/${slug}`} className={'text-black text'}>
 					{name}
 				</Link>
-				<p className={"text-sm text-gray-500"}>Код товара: {"005" + id}</p>
-				<div className={"flex justify-end w-full"}>
-					<p className={"text-black font-gray-500 font-bold text-xl"}>
+				<p className={'text-sm text-gray-500'}>Код товара: {'005' + id}</p>
+				<div className={'flex justify-end w-full'}>
+					<p className={'text-black font-gray-500 font-bold text-xl'}>
 						{formatPrice(price)}
 					</p>
 				</div>
-				<AddToBasketButton/>
+				<AddToBasketButton />
 			</div>
 		</div>
 	);

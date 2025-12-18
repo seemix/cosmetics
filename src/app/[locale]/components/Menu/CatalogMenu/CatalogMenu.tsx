@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { MenuItem } from "@/app/[locale]/components";
-import { useMenu } from "@/app/[locale]/components/Menu/MenuContext";
+import { useTranslations } from 'next-intl';
+import { useState } from 'react';
+import { MenuItem } from '@/app/[locale]/components';
+import { useMenu } from '@/app/[locale]/components/Menu/MenuContext';
 
 export default function CatalogMenu() {
 	const [openItem, setOpenItem] = useState<string | null>(null);
 	const { categories, brands } = useMenu();
-	const t = useTranslations("CatalogMenu");
-	const brandsMenu = { title: t("brands"), id: "brands", sub: brands, uri: "" };
+	const t = useTranslations('CatalogMenu');
+	const brandsMenu = { title: t('brands'), id: 'brands', sub: brands, uri: '' };
 	const arr = [...categories, brandsMenu];
 
 	return (
