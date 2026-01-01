@@ -12,7 +12,8 @@ import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function LoginButton() {
-	const ref = useRef<HTMLDivElement>(null);
+
+    const ref = useRef<HTMLDivElement>(null);
 	const { showModal } = useModal();
 	const [open, setOpen] = useState(false);
 	useClickOutside(ref, () => setOpen(false), open);
@@ -46,7 +47,7 @@ export default function LoginButton() {
 								showModal(<LoginForm />, 'zoom');
 								setOpen(false);
 							}}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
+							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.95em]
                                     hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
 						>
 							<CiLogin size={20} />
@@ -57,7 +58,7 @@ export default function LoginButton() {
 							href={'/register'}
 							onClick={() => setOpen(false)}
 							type={'button'}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
+							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.95em]
                                     hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
 						>
 							<AiOutlineUserAdd size={20} />

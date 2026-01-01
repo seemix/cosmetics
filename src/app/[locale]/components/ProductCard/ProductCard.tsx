@@ -3,62 +3,48 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { AddToBasketButton } from '@/app/[locale]/components';
-
-export type Product = {
-	id: string | number;
-	name: string;
-	slug?: string;
-	category?: string;
-	image: string; // url or import
-	alt?: string;
-	price: number; // in smallest currency unit or float
-	oldPrice?: number;
-	rating?: number; // 0..5
-	reviews?: number;
-	brand?: string;
-	badge?: 'sale' | 'new' | string | null;
-};
-
-type Props = {
-	product: Product;
-	onAddToCart?: (product: Product) => void;
-	className?: string;
-};
+import type { IProduct } from '@/app/[locale]/types/product';
+import { assets } from '@/app/[locale]/assets/assets';
 
 const formatPrice = (value: number) =>
-	new Intl.NumberFormat('md-MD', { style: 'currency', currency: 'MDL' }).format(
-		value,
-	);
+    new Intl.NumberFormat('md-MD', { style: 'currency', currency: assets.currency }).format(
+        value,
+    );
 
-export default function ProductCard({ product }: Props) {
-	const {
-		id,
-		name,
-		slug,
-		image,
-		alt = 'product image',
-		price,
-		brand,
-	} = product;
+export default function ProductCard({ product }: { product: IProduct }) {
+    const {
+        title,
+        subtitle,
+        article,
+        slug,
+        gallery,
+        price,
+    } = product;
+    const { backendUrl } = assets;
 
-	return (
-		<div className={'w-80 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
-			<div className={'w-full aspect-[4/3] relative'}>
-				<Image src={image} alt={alt} layout={'fill'} objectFit={'cover'} />
-			</div>
-			<div className={'p-4 flex flex-col gap-2'}>
-				<p className={'text-xs uppercase'}>{brand}</p>
-				<Link href={`/catalog/${slug}`} className={'text-black text'}>
-					{name}
-				</Link>
-				<p className={'text-sm text-gray-500'}>Код товара: {'005' + id}</p>
-				<div className={'flex justify-end w-full'}>
-					<p className={'text-black font-gray-500 font-bold text-xl'}>
-						{formatPrice(price)}
-					</p>
-				</div>
-				<AddToBasketButton />
-			</div>
-		</div>
-	);
+    return (
+        <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
+            <div className={'w-full aspect-[4/3] relative'}>
+                <Link href={`/product/${slug}`}>
+                <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
+                       className={'object-cover'} placeholder={'blur'} blurDataURL={gallery[0].image.blurHash}/>
+                </Link>
+            </div>
+            <div className={'p-4 flex flex-col gap-2 bg-white'}>
+                <Link href={`/product/${slug}`} className={'transition-colors duration-300 hover:text-[var(--main)]'}>
+                    <p className={'text-lg font-bold'}>{title}</p>
+                    <p className={'text-xs'}>{subtitle}</p>
+                </Link>
+                <div className={'flex justify-between mt-2 items-center'}>
+                    <p className={'text-gray-500 text-sm'}>Код: {article}</p>
+                    <p className={'text-[var(--main)] font-bold text-[1.2em]'}>
+                        {formatPrice(price)}
+                    </p>
+                </div>
+                <div className={'mx-auto mt-3'}>
+                    <AddToBasketButton/>
+                </div>
+            </div>
+        </div>
+    );
 }

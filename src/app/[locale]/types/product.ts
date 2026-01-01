@@ -17,6 +17,13 @@ export type ProductGallery = {
 	};
 };
 
+export type ProductCategory = {
+    id: string;
+    title: string;
+    slug: string;
+    parent?: ProductCategory;
+}
+
 export interface IProduct {
 	id: string;
 	createdAt: string;
@@ -34,6 +41,9 @@ export interface IProduct {
 			url: string;
 		};
 		slug: string;
+        title: string;
 	};
 	gallery: ProductGallery[];
+    categories: ProductCategory[];
+    relatedProducts?: IProduct[];
 }

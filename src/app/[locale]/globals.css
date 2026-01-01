@@ -37,31 +37,73 @@ button:active {
     transform: translateY(2px) scale(0.99);
     transition: all .15s ease-in;
 }
+
 .simple-button:active {
     transform: none !important;
 }
-@layer base {
-    h1 {
-        @apply text-3xl md:text-4xl font-bold leading-tight mt-6 mb-4;
-    }
 
-    h2 {
-        @apply text-2xl md:text-3xl font-semibold leading-tight mt-6 mb-3;
-    }
+.product-cards-grid {
+    min-width: min(1000px, 95%);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1em;
+}
 
-    h3 {
-        @apply text-xl md:text-2xl font-semibold leading-snug mt-5 mb-3;
-    }
+.description-text h1 {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700;    /* font-bold */
+    line-height: 1.25;   /* leading-tight */
+    margin-top: 1.5rem;  /* mt-6 */
+    margin-bottom: 1rem; /* mb-4 */
+}
 
-    h4 {
-        @apply text-lg md:text-xl font-medium leading-snug mt-4 mb-2;
-    }
+.description-text h2 {
+    font-size: 1.5rem;   /* text-2xl */
+    font-weight: 600;    /* font-semibold */
+    line-height: 1.25;   /* leading-tight */
+    margin-top: 1.5rem;  /* mt-6 */
+    margin-bottom: 0.75rem; /* mb-3 */
+}
 
-    h5 {
-        @apply text-base md:text-lg font-medium leading-normal mt-4 mb-2;
-    }
+.description-text h3 {
+    font-size: 1.25rem;  /* text-xl */
+    font-weight: 600;
+    line-height: 1.375;  /* leading-snug */
+    margin-top: 1.25rem; /* mt-5 */
+    margin-bottom: 0.75rem;
+}
 
-    h6 {
-        @apply text-sm md:text-base font-medium leading-normal mt-3 mb-2 text-gray-600;
-    }
+.description-text h4 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 500;    /* font-medium */
+    line-height: 1.375;
+    margin-top: 1rem;    /* mt-4 */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.description-text h5 {
+    font-size: 1rem;     /* text-base */
+    font-weight: 500;
+    line-height: 1.5;    /* leading-normal */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.description-text h6 {
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+    line-height: 1.5;
+    margin-top: 0.75rem; /* mt-3 */
+    margin-bottom: 0.5rem;
+    color: #4b5563;      /* text-gray-600 */
+}
+
+/* md: (≥768px) */
+@media (min-width: 768px) {
+    .description-text h1 { font-size: 2.25rem; }   /* text-4xl */
+    .description-text h2 { font-size: 1.875rem; } /* text-3xl */
+    .description-text h3 { font-size: 1.5rem; }   /* text-2xl */
+    .description-text h4 { font-size: 1.25rem; }  /* text-xl */
+    .description-text h5 { font-size: 1.125rem; } /* text-lg */
+    .description-text h6 { font-size: 1rem; }     /* text-base */
 }

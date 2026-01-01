@@ -1,4 +1,5 @@
 export { default as AddToBasketButton } from './AddToBasketButton/AddToBasketButton';
+export { default as BreadCrumbs } from './BreadCrumbs/BreadCrumbs';
 export { default as Cart } from './Cart/CartWindow';
 export { default as Footer } from './Footer';
 export { default as BurgerButton } from './Header/BurgerButton';
@@ -19,5 +20,7 @@ export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as FullScreenProductGallery } from './ProductDetails/FullScreenProductGallery';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';
 export { default as ProductGallerySlider } from './ProductDetails/ProductGallerySlider';
+export { default as RelatedProducts } from './RelatedProducts/RelatedProducts';
+export { default as SortSelect } from './SortSelect/SortSelect';
 export { default as Quantity } from './ProductDetails/Quantity';
 export { default as SearchBar } from './SearchBar';

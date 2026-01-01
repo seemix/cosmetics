@@ -6,11 +6,8 @@ export default function HeadMenu() {
 	const t = useTranslations('StaticPages');
 
 	return (
-		<nav
-			className={
-				'flex gap-10 w-full max-w-130 pt-1 justify-end text-md text-dark font-(family-name:--font-roboto)'
-			}
-		>
+		<nav className={`flex gap-10 w-full max-w-130 pt-1 justify-end text-md text-dark 
+		                font-(family-name:--font-roboto)`}>
 			<ul className={'flex flex-wrap w-full justify-evenly'}>
 				{headMenuData.map((item) => (
 					<li key={item.name}>
