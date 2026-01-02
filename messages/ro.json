@@ -1,36 +1,37 @@
 {
-	"Header": {
-		"search": "căutare",
-		"about": "despre noi",
-		"paymentAndDelivery": "plată și livrare",
-		"reviews": "recenzii",
-		"contacts": "contacte",
-		"catalog": "Catalog",
-		"login": "Login",
-		"register": "Înregistrare"
-	},
-	"CatalogMenu": {
-		"hair": "Păr",
-		"beard": "Barbă",
-		"body": "Corp",
-		"brands": "Mărci"
-	},
-	"StaticPages": {
-		"Main": "Principală",
-		"About": "Despre noi",
-		"PaymentAndDelivery": "Plată și livrare",
-		"Contacts": "Contacte"
-	},
-	"HomePage": {
-		"title": "Salut",
-		"main": "acasă",
-		"catalog": "catalog",
-		"toCart": "în coș",
-		"about": "Go to the about page"
-	},
-	"Catalog": {
-		"quantity": "cantitate",
-		"addToCart": "Adaugă in coş",
-		"article": "Cod produs"
-	}
+  "Header": {
+    "search": "căutare",
+    "about": "despre noi",
+    "paymentAndDelivery": "plată și livrare",
+    "reviews": "recenzii",
+    "contacts": "contacte",
+    "catalog": "Catalog",
+    "login": "Login",
+    "register": "Înregistrare"
+  },
+  "CatalogMenu": {
+    "hair": "Păr",
+    "beard": "Barbă",
+    "body": "Corp",
+    "brands": "Mărci"
+  },
+  "StaticPages": {
+    "Main": "Principală",
+    "About": "Despre noi",
+    "PaymentAndDelivery": "Plată și livrare",
+    "Contacts": "Contacte"
+  },
+  "HomePage": {
+    "title": "Salut",
+    "main": "acasă",
+    "catalog": "catalog",
+    "toCart": "în coș",
+    "about": "Go to the about page"
+  },
+  "Catalog": {
+    "quantity": "cantitate",
+    "addToCart": "Adaugă in coş",
+    "article": "Cod produs",
+    "relatedProducts": "Produse conexe"
+  }
 }

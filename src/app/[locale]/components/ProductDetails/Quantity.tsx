@@ -26,12 +26,13 @@ export default function Quantity() {
 				{t('quantity')}
 			</span>
 
-			<div className="flex items-center border border-black">
+			<div className={'flex items-center border border-black h-10'}>
 				<button
 					onClick={decrease}
 					className={`w-10 h-9 flex items-center justify-center text-lg text-gray-600
-                     hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
+                                hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
 					type="button"
+                    aria-label={'decrease-quantity'}
 				>
 					−
 				</button>
@@ -46,8 +47,9 @@ export default function Quantity() {
 				<button
 					onClick={increase}
 					className={`w-10 h-9 flex items-center justify-center text-lg text-gray-600
-                     hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
+                                hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
 					type="button"
+                    aria-label={'increase-quantity'}
 				>
 					+
 				</button>

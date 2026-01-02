@@ -1,37 +1,38 @@
 {
-	"Header": {
-		"search": "поиск",
-		"about": "о нас",
-		"paymentAndDelivery": "оплата и доставка",
-		"reviews": "отзывы",
-		"contacts": "контакты",
-		"catalog": "Каталог",
-		"login": "Вход",
-		"register": "Регистрация"
-	},
-	"CatalogMenu": {
-		"hair": "Волосы",
-		"beard": "Борода",
-		"body": "Тело",
-		"brands": "Бренды"
-	},
-	"StaticPages": {
-		"Main": "Главная",
-		"About": "О нас",
-		"PaymentAndDelivery": "Оплата и доставка",
-		"Contacts": "Контакты"
-	},
-	"HomePage": {
-		"title": "Привет мир",
-		"search": "поиск",
-		"main": "главная",
-		"catalog": "каталог",
-		"toCart": "в корзину",
-		"about": "Go to the about page"
-	},
-	"Catalog": {
-		"quantity": "количество",
-		"addToCart": "В корзину",
-		"article": "Код товара"
-	}
+  "Header": {
+    "search": "поиск",
+    "about": "о нас",
+    "paymentAndDelivery": "оплата и доставка",
+    "reviews": "отзывы",
+    "contacts": "контакты",
+    "catalog": "Каталог",
+    "login": "Вход",
+    "register": "Регистрация"
+  },
+  "CatalogMenu": {
+    "hair": "Волосы",
+    "beard": "Борода",
+    "body": "Тело",
+    "brands": "Бренды"
+  },
+  "StaticPages": {
+    "Main": "Главная",
+    "About": "О нас",
+    "PaymentAndDelivery": "Оплата и доставка",
+    "Contacts": "Контакты"
+  },
+  "HomePage": {
+    "title": "Привет мир",
+    "search": "поиск",
+    "main": "главная",
+    "catalog": "каталог",
+    "toCart": "в корзину",
+    "about": "Go to the about page"
+  },
+  "Catalog": {
+    "quantity": "количество",
+    "addToCart": "В корзину",
+    "article": "Код товара",
+    "relatedProducts": "Похожие товары"
+  }
 }

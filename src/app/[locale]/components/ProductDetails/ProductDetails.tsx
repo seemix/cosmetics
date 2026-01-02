@@ -35,11 +35,7 @@ export default async function ProductDetails({
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
                     <div>
-                        <h2
-                            className={
-                                'text-2xl lg:text-3xl font-bold leading-10 lg:leading-15 mt-3'
-                            }
-                        >
+                        <h2 className={'text-2xl lg:text-3xl font-bold leading-10 lg:leading-15 mt-3'}>
                             {' '}
                             {title}
                         </h2>
@@ -47,16 +43,13 @@ export default async function ProductDetails({
                             {subtitle}
                         </h3>
                     </div>
-                    <Link
-                        href={`..//brand/${brand.slug}`}
-                        className={'w-28 aspect-video relative'}
-                    >
+                    <Link href={`..//brand/${brand.slug}`} className={'w-28 aspect-video relative'}>
                         <Image
                             className={'object-contain'}
                             src={backendUrl + brand.logo.url}
                             alt={'brand logo'}
                             fill
-                            unoptimized
+                            // unoptimized
                         />
                     </Link>
                 </div>
@@ -66,14 +59,10 @@ export default async function ProductDetails({
                 <p className={'text-[.95em] mt-2'}>{shortDescription}</p>
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
                     <div className={'mt-2'}>
-						<span
-                            className={'text-2xl font-bold text-[var(--main)] leading-15'}
-                        >
+						<span className={'text-2xl font-bold text-[var(--main)] leading-15'}>
 							{price} {currency}
 						</span>
-                        <span
-                            className={'text-2xl font-bold text-green-500 leading-15 ml-4'}
-                        >
+                        <span className={'text-2xl font-bold text-green-500 leading-15 ml-4'}>
 							{wholesale} {currency}
 						</span>
                     </div>
@@ -92,9 +81,10 @@ export default async function ProductDetails({
             </div>
             {product.relatedProducts &&
                 <div className={'lg:col-span-2'}>
-                    <h2 className={'text-2xl font-bold mb-4'}>Related products</h2>
+                    <h2 className={'text-2xl font-bold mb-4'}>{t('relatedProducts')}</h2>
                     <RelatedProducts products={product.relatedProducts}/>
-                </div>}
+                </div>
+            }
         </div>
     );
 }
