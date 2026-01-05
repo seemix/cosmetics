@@ -33,5 +33,17 @@
     "addToCart": "Adaugă in coş",
     "article": "Cod produs",
     "relatedProducts": "Produse conexe"
+  },
+  "RegisterForm": {
+    "newUserRegistration": "Înregistrarea unui utilizator nou",
+    "name": "Prenume",
+    "surname": "Nume",
+    "phone": "Număr de telefon",
+    "password": "Parolă",
+    "confirmPassword": "Repetă parola",
+    "incorrectFormat": "Format incorect",
+    "incorrectEmail": "Format de email incorect",
+    "passwordsDontMatch": "Parolele nu coincid",
+    "registration": "Înregistrare"
   }
 }

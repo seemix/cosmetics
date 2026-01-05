@@ -34,5 +34,17 @@
     "addToCart": "В корзину",
     "article": "Код товара",
     "relatedProducts": "Похожие товары"
+  },
+  "RegisterForm": {
+    "newUserRegistration": "Регистрация нового пользователя",
+    "name": "Имя",
+    "surname": "Фамилия",
+    "phone": "Номер телефона",
+    "password": "Пароль",
+    "confirmPassword": "Повторите пароль",
+    "incorrectFormat": "Некорректный формат",
+    "incorrectEmail": "Некорректный формат email",
+    "passwordsDontMatch": "Пароли не совпадают",
+    "registration": "Регистрация"
   }
 }
