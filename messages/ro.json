@@ -44,6 +44,10 @@
     "incorrectFormat": "Format incorect",
     "incorrectEmail": "Format de email incorect",
     "passwordsDontMatch": "Parolele nu coincid",
-    "registration": "Înregistrare"
+    "registration": "Înregistrare",
+    "successfullyRegistered": "Vă mulțumim pentru înregistrarea în magazinul online",
+    "checkEmail": "Pentru activarea contului, vă rugăm să verificați adresa de e-mail",
+    "successfulActivation": "Contul dumneavoastră a fost activat cu succes!",
+    "loginWithCredentials": "Conectați-vă folosind adresa de e-mail și parola"
   }
 }

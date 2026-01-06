@@ -12,6 +12,7 @@ export const createRegisterSchema = (t: Translator) =>
                 .regex(/^\d{8}$/, t('incorrectFormat')),
             password: z.string().min(8, t('incorrectFormat')),
             confirmPassword: z.string(),
+            locale: z.string(),
         })
         .refine((data) => data.password === data.confirmPassword, {
             message: t('passwordsDontMatch'),

@@ -15,13 +15,11 @@ export default async function ProductPage(props: {
         id: product.id,
         title: product.title,
         slug: product.slug
-    }
+    };
 
     return (
         <div className={'mx-auto max-w-[1100px] p-4'}>
-            {/*<div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] p-4 flex justify-between items-center'}>*/}
-                <BreadCrumbs breadcrumbs={categoriesChain}/>
-            {/*</div>*/}
+            <BreadCrumbs breadcrumbs={categoriesChain}/>
             <ProductDetails product={product}/>
         </div>
     );

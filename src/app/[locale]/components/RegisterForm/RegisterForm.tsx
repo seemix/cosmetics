@@ -3,15 +3,17 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createRegisterSchema, type RegisterFormData } from './registerSchema';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Loader } from '@/app/[locale]/components';
 import { useTranslations } from 'next-intl';
+import { useParams, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/app/[locale]/stores/auth-store';
 
 
 export default function RegisterForm() {
     const t = useTranslations('RegisterForm');
-    const schema = useMemo(() => createRegisterSchema(t), [t])
-
+    const schema = useMemo(() => createRegisterSchema(t), [t]);
+    const params = useParams();
     const {
         register,
         handleSubmit,
@@ -21,43 +23,38 @@ export default function RegisterForm() {
         mode: 'onChange'
     });
 
-    //const { loading, error, register: registerUser } = useAuthStore();
-    const [loading, setLoading] = useState(false);
-
-    const onSubmit = (data: RegisterFormData) => {
-        // registerUser(data).then();
-        setLoading(true);
-        setTimeout(() => {
-            console.log(data);
-            setLoading(false);
-
-        }, 1500);
+    const { loading, error, register: registerUser } = useAuthStore();
+    const router = useRouter();
+    const onSubmit = async (data: RegisterFormData) => {
+        const res= await registerUser(data).then();
+        if (res.success) { router.push('/verify-email'); }
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}
-             className="mx-auto my-4 w-full max-w-md border border-gray-300 bg-white p-6">
+              className="mx-auto my-4 w-full max-w-md border border-gray-300 bg-white p-6">
             <h2 className="mb-6 text-xl font-semibold text-gray-800 text-center">
-                {t('registration')}
+                {t('newUserRegistration')}
             </h2>
 
             <div className="space-y-3">
+                <input type="hidden" {...register('locale')} value={params?.locale as string}/>
                 {/* Name */}
                 <div>
                     <label htmlFor="name" className="block text-xs font-medium">
                         {t('name')}
                     </label>
                     <input id="name"
-                        {...register('name')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
+                           {...register('name')}
+                           className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
                                     focus:ring-black text-sm ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
                     <div className={'h-5'}>
-                    {errors.name && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.name.message}
-                        </p>
-                    )}
+                        {errors.name && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.name.message}
+                            </p>
+                        )}
                     </div>
                 </div>
                 {/* Surname */}
@@ -71,11 +68,13 @@ export default function RegisterForm() {
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
                                     focus:ring-black text-sm ${errors.surname ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
-                    {errors.surname && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.surname.message}
-                        </p>
-                    )}
+                    <div className={'h-5'}>
+                        {errors.surname && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.surname.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 {/* Email */}
                 <div>
@@ -89,11 +88,13 @@ export default function RegisterForm() {
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
                                     focus:ring-black text-sm ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
-                    {errors.email && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.email.message}
-                        </p>
-                    )}
+                    <div className={'h-5'}>
+                        {errors.email && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.email.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 {/* Phone */}
                 <div>
@@ -107,11 +108,13 @@ export default function RegisterForm() {
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
                                     focus:ring-black text-sm ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
-                    {errors.phone && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.phone.message}
-                        </p>
-                    )}
+                    <div className={'h-5'}>
+                        {errors.phone && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.phone.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 {/* Password */}
                 <div>
@@ -125,11 +128,13 @@ export default function RegisterForm() {
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
                                     focus:ring-black text-sm ${errors.password ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
-                    {errors.password && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.password.message}
-                        </p>
-                    )}
+                    <div className={'h-5'}>
+                        {errors.password && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.password.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
                 {/* Confirm password */}
                 <div>
@@ -141,22 +146,29 @@ export default function RegisterForm() {
                         type="password"
                         {...register('confirmPassword')}
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.confirmPassword ? 'border-red-500 focus:ring-red-500' : ''}`}
+                                    focus:ring-black text-sm 
+                                    ${errors.confirmPassword ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
-                    {errors.confirmPassword && (
-                        <p className="mt-1 text-xs text-red-600">
-                            {errors.confirmPassword.message}
-                        </p>
-                    )}
+                    <div className={'h-5'}>
+                        {errors.confirmPassword && (
+                            <p className="mt-1 text-xs text-red-600">
+                                {errors.confirmPassword.message}
+                            </p>
+                        )}
+                    </div>
                 </div>
             </div>
-            <button
-                disabled={loading}
-                type="submit"
-                className="mt-6 w-full border border-gray-800  px-4 py-2 cursor-pointer"
+            <button type="submit"
+                    disabled={loading}
+                    className={'mt-2 w-full border border-gray-800  px-4 py-2 cursor-pointer'}
             >
                 {loading ? <Loader/> : t('registration')}
             </button>
+            {error && (
+                <p className="mt-4 text-sm text-red-600">
+                    {error}
+                </p>
+            )}
         </form>
     );
 }

@@ -11,6 +11,7 @@ export { default as LoginButton } from './Header/LoginButton';
 export { default as Logo } from './Header/Logo';
 export { default as SocialIcons } from './Header/SocialIcons';
 export { default as LoginForm } from './LoginFrom/LoginForm';
+export { default as LoginLinkbutton } from './LoginLinkButton/LoginLinkButton';
 export { default as BurgerMenu } from './Menu/BurgerMenu/BurgerMenu';
 export { default as CatalogMenu } from './Menu/CatalogMenu/CatalogMenu';
 export { default as MenuItem } from './Menu/CatalogMenu/MenuItem';
@@ -24,5 +25,6 @@ export { default as ProductGallerySlider } from './ProductDetails/ProductGallery
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
 export { default as RelatedProducts } from './RelatedProducts/RelatedProducts';
 export { default as SortSelect } from './SortSelect/SortSelect';
+export { default as VerifyEmail } from './VerifyEmail/VerifyEmail';
 export { default as Quantity } from './ProductDetails/Quantity';
 export { default as SearchBar } from './SearchBar';

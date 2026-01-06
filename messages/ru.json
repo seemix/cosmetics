@@ -45,6 +45,10 @@
     "incorrectFormat": "Некорректный формат",
     "incorrectEmail": "Некорректный формат email",
     "passwordsDontMatch": "Пароли не совпадают",
-    "registration": "Регистрация"
+    "registration": "Зарегистрироваться",
+    "successfullyRegistered": "Спасибо за регистрацию в интернет-магазине",
+    "checkEmail": "Для активации учётной записи проверьте электронную почту",
+    "successfulActivation": "Ваша учётная запись успешно активирована!",
+    "loginWithCredentials": "Выполните вход, используя ваш email и пароль"
   }
 }
