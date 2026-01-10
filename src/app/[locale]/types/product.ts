@@ -34,8 +34,8 @@ export interface IProduct {
     subtitle: string;
     slug: string;
     article: string;
-    wholesale?: number;
-    price: number;
+    wholesalePrice?: number;
+    retailPrice: number;
     shortDescription: string;
     description: SerializedEditorState;
     brand: {

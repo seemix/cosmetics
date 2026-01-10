@@ -23,8 +23,8 @@ export default async function ProductDetails({
         description,
         title,
         subtitle,
-        price,
-        wholesale,
+        retailPrice,
+        wholesalePrice,
         brand,
     } = product;
     const { currency, backendUrl } = assets;
@@ -60,10 +60,10 @@ export default async function ProductDetails({
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
                     <div className={'mt-2'}>
 						<span className={'text-2xl font-bold text-[var(--main)] leading-15'}>
-							{price} {currency}
+							{retailPrice} {currency}
 						</span>
                         <span className={'text-2xl font-bold text-green-500 leading-15 ml-4'}>
-							{wholesale} {currency}
+							{wholesalePrice} {currency}
 						</span>
                     </div>
                     <div className={'flex gap-4 mt-2 items-end'}>

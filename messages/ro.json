@@ -48,6 +48,12 @@
     "successfullyRegistered": "Vă mulțumim pentru înregistrarea în magazinul online",
     "checkEmail": "Pentru activarea contului, vă rugăm să verificați adresa de e-mail",
     "successfulActivation": "Contul dumneavoastră a fost activat cu succes!",
-    "loginWithCredentials": "Conectați-vă folosind adresa de e-mail și parola"
+    "loginWithCredentials": "Conectați-vă folosind adresa de e-mail și parola",
+    "authorization": "Autorizare",
+    "login": "Autentificare",
+    "forgotPassword": "Ai uitat parola?",
+    "Invalid credentials": "Nume de utilizator și/sau parolă incorecte",
+    "cabinet": "Cont personal",
+    "logout": "Deconectare"
   }
 }

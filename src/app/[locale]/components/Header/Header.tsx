@@ -4,10 +4,9 @@ import {
     CatalogMenu,
     HeadMenu,
     LanguageSwitcher,
-    LoginButton,
     Logo,
     SearchBar,
-    SocialIcons,
+    SocialIcons, UserButtonWrapper,
 } from '@/app/[locale]/components';
 
 export default async function Header() {
@@ -38,7 +37,7 @@ export default async function Header() {
                     <div className={'flex h-full justify-end'}>
                         <div className={'flex items-center justify-items-end gap-5'}>
                             <SearchBar/>
-                            <LoginButton/>
+                            <UserButtonWrapper/>
                             <CartButton/>
                         </div>
                     </div>

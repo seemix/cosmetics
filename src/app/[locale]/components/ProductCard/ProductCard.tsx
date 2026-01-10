@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
         article,
         slug,
         gallery,
-        price,
+        retailPrice,
     } = product;
     const { backendUrl } = assets;
 
@@ -38,7 +38,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
                 <div className={'flex justify-between mt-2 items-center'}>
                     <p className={'text-gray-500 text-sm'}>Код: {article}</p>
                     <p className={'text-[var(--main)] font-bold text-[1.2em]'}>
-                        {formatPrice(price)}
+                        {formatPrice(retailPrice)}
                     </p>
                 </div>
                 <div className={'mx-auto mt-3'}>

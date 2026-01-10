@@ -7,7 +7,9 @@ export default async function ProductPage(props: {
 }) {
     const { locale, slug } = await props.params;
     const response = await fetch(
-        `${process.env.API_URL}/products?where[slug][equals]=${slug}&locale=${locale}`,
+        `${process.env.API_URL}/products?where[slug][equals]=${slug}&locale=${locale}`, {
+            credentials: 'include'
+        }
     ).then((res) => res.json());
     const product: IProduct = response.docs[0];
     const categoriesChain = buildCategoryChain(product.categories[0]);
