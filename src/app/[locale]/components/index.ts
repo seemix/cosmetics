@@ -2,6 +2,7 @@ export { default as AddToBasketButton } from './AddToBasketButton/AddToBasketBut
 export { default as AuthUserButton } from './Header/AuthUserButton';
 export { default as BreadCrumbs } from './BreadCrumbs/BreadCrumbs';
 export { default as Cart } from './Cart/CartWindow';
+export { default as CartItem } from './Cart/CartItem';
 export { default as CheckAuth } from './CheckAuth/CheckAuth';
 export { default as Footer } from './Footer';
 export { default as BurgerButton } from './Header/BurgerButton';
@@ -16,6 +17,7 @@ export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as LoginLinkbutton } from './LoginLinkButton/LoginLinkButton';
 export { default as BurgerMenu } from './Menu/BurgerMenu/BurgerMenu';
 export { default as CatalogMenu } from './Menu/CatalogMenu/CatalogMenu';
+export { default as MainPage } from './MainPage/MainPage';
 export { default as MenuItem } from './Menu/CatalogMenu/MenuItem';
 export { default as HeadMenu } from './Menu/HeadMenu';
 export { default as CloseModalButton } from './ModalWindow/CloseModalButton';

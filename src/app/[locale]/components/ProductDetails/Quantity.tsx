@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function Quantity() {
-	const t = useTranslations('Catalog');
+	// const t = useTranslations('Catalog');
 	const [value, setValue] = useState(1);
 
 	const decrease = () => {
@@ -22,9 +22,9 @@ export default function Quantity() {
 
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-xs tracking-[0.2em] text-gray-600 uppercase">
-				{t('quantity')}
-			</span>
+			{/*<span className="text-xs tracking-[0.2em] text-gray-600 uppercase">*/}
+			{/*	{t('quantity')}*/}
+			{/*</span>*/}
 
 			<div className={'flex items-center border border-black h-10'}>
 				<button

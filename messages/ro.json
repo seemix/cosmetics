@@ -53,7 +53,9 @@
     "login": "Autentificare",
     "forgotPassword": "Ai uitat parola?",
     "Invalid credentials": "Nume de utilizator și/sau parolă incorecte",
-    "cabinet": "Cont personal",
+    "welcome": "Bun venit",
+    "profile": "Profil",
+    "orders": "Comenzi",
     "logout": "Deconectare"
   }
 }

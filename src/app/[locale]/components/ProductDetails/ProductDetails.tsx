@@ -16,6 +16,7 @@ export default async function ProductDetails({
     product: IProduct;
 }) {
     const t = await getTranslations('Catalog');
+
     const {
         gallery,
         article,

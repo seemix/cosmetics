@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
 import { PiUserCheck } from 'react-icons/pi';
 import { MdLogout } from 'react-icons/md';
+import { LuClipboardList } from 'react-icons/lu';
 import { FaChalkboardUser } from 'react-icons/fa6';
 import Link from 'next/link';
 
@@ -41,29 +42,45 @@ export default function AuthUserButton() {
                         transition={{ duration: 0.2 }}
                         className={'absolute -right-20 mt-2 bg-white shadow-md z-12 w-50'}
                     >
-                        <p className={'font-bold m-3'}>Welcome, {user?.name}</p>
+                        <p className={'font-bold m-3'}>{t('welcome')}, {user?.name}</p>
                         <Link
-                            href={'/cabinet'}
+                            href={'/orders'}
                             type={'button'}
                             onClick={() => {
                                 // showModal(<LoginForm/>, 'zoom');
                                 setOpen(false);
                             }}
-                            className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.9em]
-                                    hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
+                            className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
+                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
+                                        cursor-pointer text-black`}
                         >
-                            <FaChalkboardUser size={20}/>
-                            {t('cabinet')}
+                            <LuClipboardList size={20} className={'mr-2'}/>
+                            {t('orders')}
+                        </Link>
+                        <Link
+                            href={'/profile'}
+                            type={'button'}
+                            onClick={() => {
+                                // showModal(<LoginForm/>, 'zoom');
+                                setOpen(false);
+                            }}
+                            className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
+                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
+                                        cursor-pointer text-black`}
+                        >
+                            <FaChalkboardUser size={20} className={'mr-2'}/>
+                            {t('profile')}
                         </Link>
 
                         <Link
                             href={'/'}
                             onClick={() => logout()}
                             type={'button'}
-                            className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.9em]
-                                    hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
+                            className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
+                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
+                                        cursor-pointer text-black`}
                         >
-                            <MdLogout size={20}/>
+                            <MdLogout size={20} className={'mr-2'}/>
                             {t('logout')}
                         </Link>
                     </motion.div>

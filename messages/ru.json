@@ -54,7 +54,9 @@
     "login": "Вход",
     "forgotPassword": "Забыли пароль?",
     "Invalid credentials": "Неверный логин и/или пароль",
-    "cabinet": "Личный кабинет",
+    "welcome": "Привет",
+    "profile": "Профиль",
+    "orders": "Заказы",
     "logout": "Выход"
   }
 }
