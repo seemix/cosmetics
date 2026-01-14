@@ -44,13 +44,12 @@ export default async function ProductDetails({
                             {subtitle}
                         </h3>
                     </div>
-                    <Link href={`..//brand/${brand.slug}`} className={'w-28 aspect-video relative'}>
+                    <Link href={`../brand/${brand.slug}`} className={'w-28 aspect-video relative'}>
                         <Image
                             className={'object-contain'}
                             src={backendUrl + brand.logo.url}
                             alt={'brand logo'}
                             fill
-                            // unoptimized
                         />
                     </Link>
                 </div>
@@ -60,12 +59,15 @@ export default async function ProductDetails({
                 <p className={'text-[.95em] mt-2'}>{shortDescription}</p>
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
                     <div className={'mt-2'}>
-						<span className={'text-2xl font-bold text-[var(--main)] leading-15'}>
+						<span className={`${wholesalePrice ? 'text-xl' : 'text-2xl'} 
+						                   font-bold text-[var(--main)] leading-15`}>
 							{retailPrice} {currency}
 						</span>
-                        <span className={'text-2xl font-bold text-green-500 leading-15 ml-4'}>
+                        {wholesalePrice && (
+                            <span className={'text-2xl font-bold text-green-500 leading-15 ml-4'}>
 							{wholesalePrice} {currency}
 						</span>
+                        )}
                     </div>
                     <div className={'flex gap-4 mt-2 items-end'}>
                         <Quantity/>

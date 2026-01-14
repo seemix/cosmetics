@@ -41,11 +41,11 @@ export default async function LocaleLayout({
             <NextIntlClientProvider>
                 <MenuProvider initialMenu={menu}>
                     <Header/>
+                    <CheckAuth/>
                     <main className={'w-full flex justify-center'}>
                         {children}
                     </main>
                     <Footer/>
-                    <CheckAuth/>
                     <ModalWindow/>
                 </MenuProvider>
             </NextIntlClientProvider>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useAuthStore } from '@/app/[locale]/stores/auth-store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { AuthUserButton, UserButton } from '@/app/[locale]/components';
 
 export default function UserButtonWrapper() {

@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { Loader } from '@/app/[locale]/components';
 import { useTranslations } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
-import { useAuthStore } from '@/app/[locale]/stores/auth-store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 
 
 export default function RegisterForm() {

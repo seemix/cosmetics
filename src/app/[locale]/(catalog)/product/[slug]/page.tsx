@@ -1,17 +1,27 @@
+import { cookies } from 'next/headers';
+
 import { BreadCrumbs, ProductDetails } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { buildCategoryChain } from '@/app/[locale]/services/buildCategoryChain';
+import { assets } from '@/app/[locale]/assets/assets';
 
 export default async function ProductPage(props: {
     params: Promise<{ locale: string; slug: string }>;
 }) {
+
     const { locale, slug } = await props.params;
+    const cookieStore = await cookies();
+    const { backendUrl } = assets;
     const response = await fetch(
-        `${process.env.API_URL}/products?where[slug][equals]=${slug}&locale=${locale}`, {
-            credentials: 'include'
+        `${backendUrl}/api/products?where[slug][equals]=${slug}&locale=${locale}`, {
+            credentials: 'include',
+            headers: {
+                Cookie: cookieStore.toString(),
+            },
         }
     ).then((res) => res.json());
     const product: IProduct = response.docs[0];
+
     const categoriesChain = buildCategoryChain(product.categories[0]);
     categoriesChain[2] = {
         id: product.id,

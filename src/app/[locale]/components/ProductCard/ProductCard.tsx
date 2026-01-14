@@ -19,8 +19,10 @@ export default function ProductCard({ product }: { product: IProduct }) {
         slug,
         gallery,
         retailPrice,
+        wholesalePrice,
     } = product;
     const { backendUrl } = assets;
+    const price = wholesalePrice || retailPrice;
 
     return (
         <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
@@ -37,8 +39,8 @@ export default function ProductCard({ product }: { product: IProduct }) {
                 </Link>
                 <div className={'flex justify-between mt-2 items-center'}>
                     <p className={'text-gray-500 text-sm'}>Код: {article}</p>
-                    <p className={'text-[var(--main)] font-bold text-[1.2em]'}>
-                        {formatPrice(retailPrice)}
+                    <p className={`${wholesalePrice ? 'text-green-500': 'text-[var(--main)]'} font-bold text-[1.2em]`}>
+                        {formatPrice(price)}
                     </p>
                 </div>
                 <div className={'mx-auto mt-3'}>

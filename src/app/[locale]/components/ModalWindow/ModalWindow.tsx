@@ -1,68 +1,79 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
+
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
+const PANEL_WIDTH = 500;
+
 export default function ModalWindow() {
-	const variants = {
-		left: {
-			hidden: { x: '-100%' },
-			visible: { x: 0 },
-		},
-		right: {
-			hidden: { x: '100%' },
-			visible: { x: 0 },
-		},
-		zoom: {
-			hidden: { scale: 0.8, opacity: 0 },
-			visible: { scale: 1, opacity: 1 },
-		},
-	};
-	const { open, appearance, content, hideModal } = useModal();
+    const variants = {
+        left: {
+            hidden: { x: -PANEL_WIDTH },
+            visible: { x: 0 },
+        },
+        right: {
+            hidden: { x: PANEL_WIDTH },
+            visible: { x: 0 },
+        },
+        zoom: {
+            hidden: { scale: 0.8, opacity: 0 },
+            visible: { scale: 1, opacity: 1 },
+        },
+    };
 
-	return (
-		<AnimatePresence>
-			{open && [
-				<motion.div
-					key="overlay"
-					onClick={hideModal}
-					initial={{ opacity: 0 }}
-					animate={{ opacity: 1 }}
-					exit={{ opacity: 0 }}
-					transition={{ duration: 0.25 }}
-					className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
-				/>,
+    const { open, appearance, content, hideModal } = useModal();
 
-				<motion.div
-					key="wrapper"
-					onClick={hideModal}
-					initial="hidden"
-					animate="visible"
-					exit="hidden"
-					variants={variants[appearance]}
-					transition={{
-						type: 'tween',
-						duration: 0.35,
-						ease: 'easeInOut',
-					}}
-					className={`fixed inset-0 z-50 flex items-center ${
-						appearance === 'left'
-							? 'justify-start'
-							: appearance === 'right'
-								? 'justify-end'
-								: 'justify-center'
-					}`}
-				>
-					<motion.div
-						// className={`relative bg-white ${
-						// 	appearance !== "zoom" ? "h-dvh" : ""
-						// } min-w-70 max-w-120 shadow-lg`}
-						onClick={(e) => e.stopPropagation()}
-					>
-						{content}
-					</motion.div>
-				</motion.div>,
-			]}
-		</AnimatePresence>
-	);
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [open]);
+
+    return (
+        <AnimatePresence>
+            {open && (
+                <>
+                    <motion.div
+                        onClick={hideModal}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+                    />
+
+                    <div
+                        className={`fixed inset-0 z-50 flex items-stretch pointer-events-none ${
+                            appearance === 'left'
+                                ? 'justify-start'
+                                : appearance === 'right'
+                                    ? 'justify-end'
+                                    : 'justify-center'
+                        }`}
+                    >
+                        <motion.div
+                            onClick={(e) => e.stopPropagation()}
+                            initial={'hidden'}
+                            animate={'visible'}
+                            exit={'hidden'}
+                            variants={variants[appearance]}
+                            transition={{
+                                type: 'tween',
+                                duration: 0.35,
+                                ease: 'easeInOut',
+                            }}
+                            className={'h-full w-full max-w-125 bg-background pointer-events-auto'}
+                        >
+                            {content}
+                        </motion.div>
+                    </div>
+                </>
+            )}
+        </AnimatePresence>
+    );
 }

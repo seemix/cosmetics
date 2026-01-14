@@ -1,10 +1,8 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 export default function Quantity() {
-	// const t = useTranslations('Catalog');
 	const [value, setValue] = useState(1);
 
 	const decrease = () => {
@@ -21,34 +19,30 @@ export default function Quantity() {
 	};
 
 	return (
-		<div className="flex flex-col gap-2">
-			{/*<span className="text-xs tracking-[0.2em] text-gray-600 uppercase">*/}
-			{/*	{t('quantity')}*/}
-			{/*</span>*/}
-
+		<div className={'flex flex-col gap-2'}>
 			<div className={'flex items-center border border-black h-10'}>
 				<button
 					onClick={decrease}
-					className={`w-10 h-9 flex items-center justify-center text-lg text-gray-600
+					className={`w-9 h-8 flex items-center justify-center text-lg text-gray-600
                                 hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
-					type="button"
+					type={'button'}
                     aria-label={'decrease-quantity'}
 				>
 					−
 				</button>
 				<input
-					type="text"
-					inputMode="numeric"
+					type={'text'}
+					inputMode={'numeric'}
 					value={value}
 					onChange={onChange}
-					className={`w-12 h-10 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
+					className={`w-11 h-10 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
 				/>
 
 				<button
 					onClick={increase}
-					className={`w-10 h-9 flex items-center justify-center text-lg text-gray-600
+					className={`w-9 h-8 flex items-center justify-center text-lg text-gray-600
                                 hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
-					type="button"
+					type={'button'}
                     aria-label={'increase-quantity'}
 				>
 					+

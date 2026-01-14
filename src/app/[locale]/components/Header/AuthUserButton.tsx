@@ -10,7 +10,7 @@ import { LuClipboardList } from 'react-icons/lu';
 import { FaChalkboardUser } from 'react-icons/fa6';
 import Link from 'next/link';
 
-import { useAuthStore } from '@/app/[locale]/stores/auth-store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 
 export default function AuthUserButton() {
 

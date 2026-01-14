@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { CloseModalButton, Loader } from '@/app/[locale]/components';
 import { createLoginSchema, type LoginFormData } from '@/app/[locale]/components/LoginForm/loginSchema';
-import { useAuthStore } from '@/app/[locale]/stores/auth-store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function LoginForm() {

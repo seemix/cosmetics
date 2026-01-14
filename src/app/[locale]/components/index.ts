@@ -24,6 +24,7 @@ export { default as CloseModalButton } from './ModalWindow/CloseModalButton';
 export { default as ModalWindow } from './ModalWindow/ModalWindow';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as FullScreenProductGallery } from './ProductDetails/FullScreenProductGallery';
+export { default as ProductCardsGrid } from './ProductCardsGrid';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';
 export { default as ProductGallerySlider } from './ProductDetails/ProductGallerySlider';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
