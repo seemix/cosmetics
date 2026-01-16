@@ -1,11 +1,19 @@
-export type CartItem = {
+export type CartItemId = {
+    cartId?: string;
     productId: string
     quantity: number
-    priceSnapshot: number
-    subtotal: number
 }
-
+export type CartItem = {
+    id: string;
+    title: string;
+    subtitle: string;
+    slug: string;
+    price: number;
+    quantity: number;
+    thumbnail: string;
+}
 export type Cart = {
+    id?: string;
     items: CartItem[]
     subtotal: number
 }

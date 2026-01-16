@@ -31,6 +31,7 @@
   "Catalog": {
     "quantity": "cantitate",
     "addToCart": "Adaugă in coş",
+    "alreadyInCart": "Deja în coș",
     "article": "Cod produs",
     "relatedProducts": "Produse conexe"
   },
@@ -57,5 +58,15 @@
     "profile": "Profil",
     "orders": "Comenzi",
     "logout": "Deconectare"
+  },
+  "Cart": {
+    "cart": "Coş",
+    "cartIsEmpty": "Coșul tău este gol",
+    "checkout": "Plasați o comandă",
+    "emptyCart": "Curăță gunoiul",
+    "itemsInCart": "Articole în coș",
+    "subtotal": "Pentru suma totală",
+    "ok": "ОК",
+    "cancel": "anulare"
   }
 }

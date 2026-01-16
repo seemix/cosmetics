@@ -43,8 +43,8 @@ export default function ModalWindow() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+                        transition={{ duration: .25 }}
+                        className={'fixed inset-0 z-40 bg-black/40 backdrop-blur-sm'}
                     />
 
                     <div
@@ -67,7 +67,8 @@ export default function ModalWindow() {
                                 duration: 0.35,
                                 ease: 'easeInOut',
                             }}
-                            className={'h-full w-full max-w-125 bg-background pointer-events-auto'}
+                            className={`bg-background pointer-events-auto h-dvh max-h-dvh w-full max-w-125 flex 
+                                        flex-col overflow-hidden`}
                         >
                             {content}
                         </motion.div>

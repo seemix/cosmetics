@@ -1,55 +1,60 @@
-import { CartItem, CloseModalButton } from '@/app/[locale]/components';
+import { useTranslations } from 'next-intl';
+
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { assets } from '@/app/[locale]/assets/assets';
+import { CartItem, ClearCart } from '@/app/[locale]/components';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function CartWindow() {
-    const products = [
-        {
-            id: '692dadc51e3b32b700a79163',
-            title: 'Clay 70g',
-            subtitle: 'Așezarea argilei',
-            slug: 'clay-70g',
-            price: 120,
-            quantity: 2,
-            thumbnail: '/api/media/file/FUllSize_Travel-CC-1-96x96.webp'
-        },
-        {
-            id: '69389115f3dcee46ed8433b9',
-            title: 'DAILY SHAMPOO',
-            subtitle: 'ȘAMPON ZILNIC 400 ML',
-            slug: 'daily-shampoo',
-            price: 320,
-            quantity: 1,
-            thumbnail: '/api/media/file/ds1-1-96x96.webp'
-        }
-    ];
+
+    const { cart } = useCartStore();
+    const t = useTranslations('Cart');
 
     return (
-        <div className={'h-full bg-background text-black flex flex-col max-w-125'}>
-            <div className={'shrink-0'}>
-                <CloseModalButton />
-                <h2 className={'text-xl text-center font-bold py-2'}>
+        <div className={'grid grid-rows-[auto_1fr_auto] h-full'}>
+            <div className={'bg-white w-full'}>
+                <h2 className={'text-2xl -mt-5 py-2 mx-2 text-center font-medium'}>
                     Корзина
                 </h2>
             </div>
 
             {/* SCROLL AREA */}
-            <div className={'flex-1 overflow-hidden'}>
-                <div className={'h-full overflow-y-auto p-4 border'}>
-                    {products.map(product => (
-                        <CartItem key={product.id} product={product} />
-                    ))}
-                    <div className={'h-[200vh] bg-gray-100 mt-4'}>
-                        Довгий контент
-                    </div>
+            <div className={'overflow-hidden w-full'}>
+                <div className={'h-full border-t border-b border-gray-300 overflow-y-auto'}>
+                    <AnimatePresence initial={false}>
+                        {cart?.items.map(product => (
+                            <motion.div
+                                className={'overflow-x-hidden'}
+                                key={product.id}
+                                layout
+                                exit={{ opacity: 0, height: 0, scale: .5, y: 10 }}
+                                transition={{ duration: .25, delay: .15, ease: 'easeOut' }}
+                            >
+                                <CartItem product={product} />
+                            </motion.div>
+                        ))}
+                    </AnimatePresence>
                 </div>
             </div>
 
-            <div className={'shrink-0 border-t p-4'}>
+            <div className={'flex flex-col gap-2 items-center bg-white'}>
+                <div className={'flex justify-between w-full items-start border-b border-gray-300 p-4'}>
+                    <ClearCart/>
+                    <div>
+                        <p>{t('itemsInCart')}:
+                            <span className={'text-green-500 font-bold'}> {cart?.items.length}</span>
+                        </p>
+                        <p>{t('subtotal')}
+                            : <span className={'text-green-500 font-bold'}> {cart?.subtotal} {assets.currency}</span>
+                        </p>
+                    </div>
+                </div>
                 <button
                     type={'button'}
-                    className={`w-full border border-black p-2 transition-colors hover:border-[var(--main)] 
-                                hover:text-[var(--main)]`}
+                    className={`w-[85%] mx-auto border border-black p-2 transition-colors hover:border-[var(--main)] 
+                                hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}
                 >
-                    Checkout
+                    {t('checkout')}
                 </button>
             </div>
         </div>

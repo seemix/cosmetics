@@ -34,8 +34,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={locale}>
-        <body
-            className={`${roboto.className} ${montSerrat.className} antialiased`}
+        <body className={`${roboto.className} ${montSerrat.className} antialiased`}
         >
         <div className={'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen'}>
             <NextIntlClientProvider>

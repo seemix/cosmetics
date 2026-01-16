@@ -1,9 +1,14 @@
-import type { Cart, CartItem } from '@/app/[locale]/services/cart/cart.types';
+import type { Cart, CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 export interface CartAdapter {
-    load(): Promise<Cart>
-    addItem(item: CartItem): Promise<Cart>
-    updateQty(id: string, qty: number): Promise<Cart>
-    removeItem(id: string): Promise<Cart>
-    clear(): Promise<Cart>
+
+    load(): Promise<Cart>;
+
+    addItem(item: CartItemId): Promise<Cart>;
+
+    updateQty(item: CartItemId): Promise<Cart>;
+
+    removeItem(cartId: string, productId: string): Promise<Cart>;
+
+    clear(): Promise<void>;
 }

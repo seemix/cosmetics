@@ -32,6 +32,7 @@
   "Catalog": {
     "quantity": "количество",
     "addToCart": "В корзину",
+    "alreadyInCart": "Уже в корзине",
     "article": "Код товара",
     "relatedProducts": "Похожие товары"
   },
@@ -58,5 +59,15 @@
     "profile": "Профиль",
     "orders": "Заказы",
     "logout": "Выход"
+  },
+  "Cart": {
+    "cart": "Корзина",
+    "cartIsEmpty": "Ваша корзина пуста",
+    "checkout": "Оформить заказ",
+    "emptyCart": "Очистить корзину",
+    "itemsInCart": "Товаров в корзине",
+    "subtotal": "На общую сумму",
+    "ok": "ОК",
+    "cancel": "отмена"
   }
 }

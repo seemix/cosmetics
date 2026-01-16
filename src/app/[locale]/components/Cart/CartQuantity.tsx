@@ -1,33 +1,35 @@
 'use client';
 
-interface QuantityProps {
-    value: number;
-    setValue: React.Dispatch<React.SetStateAction<number>>;
-}
+import { useState } from 'react';
 
-export default function Quantity({ value, setValue }: QuantityProps) {
-    const setSafeValue = (updater: number | ((v: number) => number)) => {
-        setValue(prev => {
-            const next =
-                typeof updater === 'function' ? updater(prev) : updater
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
 
-            return Math.max(1, next)
-        })
-    }
+export default function CartQuantity({ productId, quantity = 1 }: { productId: string, quantity: number }) {
+    const [value, setValue] = useState(quantity);
+    const { updateQty } = useCartStore();
 
-    const decrease = () => setSafeValue(v => v - 1)
-    const increase = () => setSafeValue(v => v + 1)
+    const decrease = () => {
+        const next = Math.max(1, value - 1);
+        setValue(next);
+        updateQty({ productId, quantity: next }).then();
+    };
 
-    const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSafeValue(Number(e.target.value))
-    }
+    const increase = () => {
+        const next = value + 1;
+        setValue(next);
+        updateQty({ productId, quantity: next }).then();
+    };
 
+    const onBlur = () => {
+        updateQty({ productId, quantity: value }).then();
+    };
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const val = e.target.value.replace(/\D/g, '')
-        setSafeValue(val === '' ? 1 : Number(val))
-    }
+        const val = e.target.value.replace(/\D/g, '');
+        setValue(val === '' ? 1 : Number(val));
+    };
+
     return (
-        <div className={'flex flex-col gap-2 w-30'}>
+        <div className={'flex flex-col gap-2'}>
             <div className={'flex items-center border border-black h-10'}>
                 <button
                     onClick={decrease}

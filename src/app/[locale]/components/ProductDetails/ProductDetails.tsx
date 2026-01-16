@@ -1,21 +1,28 @@
+'use client';
+
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+
 import { assets } from '@/app/[locale]/assets/assets';
 import {
-    AddToBasketButton,
+    AddToCartButton, AlreadyInCartButton,
     ProductGallerySlider,
     Quantity, RelatedProducts,
 } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
 
-export default async function ProductDetails({
-                                                 product,
-                                             }: {
+export default function ProductDetails({
+                                           product,
+                                       }: {
     product: IProduct;
 }) {
-    const t = await getTranslations('Catalog');
+    const t = useTranslations('Catalog');
+    const { cart } = useCartStore();
+    const inCart = cart?.items.some((item) => item.id === product.id);
 
     const {
         gallery,
@@ -29,6 +36,7 @@ export default async function ProductDetails({
         brand,
     } = product;
     const { currency, backendUrl } = assets;
+    const [value, setValue] = useState<number>(1);
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
@@ -70,8 +78,12 @@ export default async function ProductDetails({
                         )}
                     </div>
                     <div className={'flex gap-4 mt-2 items-end'}>
-                        <Quantity/>
-                        <AddToBasketButton/>
+                        {!inCart ? (<><Quantity value={value} setValue={setValue}/>
+                            <AddToCartButton productId={product.id} quantity={value}/></>) :
+                            (<>
+                                <div className={'w-30'}></div>
+                                <AlreadyInCartButton/>
+                            </>)}
                     </div>
                 </div>
             </div>
