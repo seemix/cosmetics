@@ -22,7 +22,8 @@ export default function ProductDetails({
 }) {
     const t = useTranslations('Catalog');
     const { cart } = useCartStore();
-    const inCart = cart?.items.some((item) => item.id === product.id);
+
+    const inCart = cart?.items.some((item) => item.id === product.id) as boolean;
 
     const {
         gallery,

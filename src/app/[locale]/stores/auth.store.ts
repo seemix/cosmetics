@@ -17,6 +17,7 @@ type UserState = {
 
 interface AuthState {
     loading: boolean;
+    authChecked: boolean;
     error: string | null;
     register: (data: RegisterFormData) => Promise<RegisterResult>;
     login: (email: string, password: string) => Promise<boolean>;
@@ -29,6 +30,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set) => ({
     loading: false,
+    authChecked: false,
     error: null,
     pendingEmail: null,
     pendingName: null,
@@ -75,33 +77,50 @@ export const useAuthStore = create<AuthState>((set) => ({
 
     login: async (email: string, password: string) => {
         set({ loading: true, error: null });
-        const res = await fetch(`${assets.backendUrl}/api/users/login`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
 
-        if (!res.ok) {
-            set({ error: 'Invalid credentials', loading: false });
+        try {
+            const res = await fetch(`${assets.backendUrl}/api/users/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                // Використовуємо повідомлення від сервера, якщо воно є
+                set({ error: data.message || 'Невірний логін або пароль', authChecked: true });
+                return false;
+            }
+
+            set({ user: data.user, authChecked: true });
+            return true;
+
+        } catch (err) {
+            set({ error: 'Помилка з’єднання з сервером' });
+            console.error('Login error:', err);
             return false;
+        } finally {
+            // Виконується в будь-якому випадку: і при успіху, і при помилці
+            //  set({ loading: false, authChecked: true });
         }
 
-        const data = await res.json();
-        set({ user: data.user, loading: false });
-
-        return true;
     },
 
     checkAuth: async () => {
-        const res = await fetch(`${assets.backendUrl}/api/users/me`, {
-            credentials: 'include',
-        });
-
-        if (res.ok) {
+        try {
+            const res = await fetch(`${assets.backendUrl}/api/users/me`, {
+                credentials: 'include',
+            });
             const { user } = await res.json();
             set({ user });
+        } catch (e) {
+            set({error: e as string})
+        } finally {
+            set({ authChecked: true });
         }
+
     },
 
     logout: async () => {

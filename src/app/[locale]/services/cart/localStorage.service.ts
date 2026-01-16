@@ -1,11 +1,31 @@
 import type { CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
+const STORAGE_KEY = 'nextLevelCart';
+
 export const localStorageService = {
-    get: (): CartItemId[] => {
-        return JSON.parse(<string>localStorage.getItem('nextLevelCart'));
+    get(): CartItemId[] {
+        if (typeof window === 'undefined') return [];
+
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return [];
+
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
     },
-    save: (cart: CartItemId[]) => {
-        return localStorage.setItem('nextLevelCart', JSON.stringify(cart));
+
+    save(cart: CartItemId[]): void {
+        if (typeof window === 'undefined') return;
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
     },
-    clear: () => localStorage.removeItem('nextLevelCart')
-}
+
+    clear(): void {
+        if (typeof window === 'undefined') return;
+
+        localStorage.removeItem(STORAGE_KEY);
+    },
+};

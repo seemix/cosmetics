@@ -64,11 +64,11 @@ export default function ModalWindow() {
                             variants={variants[appearance]}
                             transition={{
                                 type: 'tween',
-                                duration: 0.35,
+                                duration: .35,
                                 ease: 'easeInOut',
                             }}
-                            className={`bg-background pointer-events-auto h-dvh max-h-dvh w-full max-w-125 flex 
-                                        flex-col overflow-hidden`}
+                            className={`pointer-events-auto flex flex-col overflow-hidden 
+                                   ${appearance!== 'zoom' ? 'bg-background max-w-125' : 'items-center justify-center'}`}
                         >
                             {content}
                         </motion.div>
