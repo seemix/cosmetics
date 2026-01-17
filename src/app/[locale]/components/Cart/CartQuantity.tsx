@@ -29,11 +29,11 @@ export default function CartQuantity({ productId, quantity = 1 }: { productId: s
     };
 
     return (
-        <div className={'flex flex-col gap-2'}>
-            <div className={'flex items-center border border-black h-10'}>
+        <div className={'flex flex-col gap-1'}>
+            <div className={'flex items-center border border-black h-9'}>
                 <button
                     onClick={decrease}
-                    className={`w-9 h-8 flex items-center justify-center text-lg text-gray-600
+                    className={`w-8 h-7 flex items-center justify-center text-lg text-gray-600
                                 hover:bg-gray-100 hover:text-[var(--main)] cursor-pointer`}
                     type={'button'}
                     aria-label={'decrease-quantity'}
@@ -46,7 +46,7 @@ export default function CartQuantity({ productId, quantity = 1 }: { productId: s
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}
-                    className={`w-11 h-10 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
+                    className={`w-10 h-9 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
                 />
 
                 <button

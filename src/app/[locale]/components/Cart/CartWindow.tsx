@@ -19,7 +19,7 @@ export default function CartWindow() {
             </div>
 
             {/* SCROLL AREA */}
-            <div className={'overflow-hidden w-full'}>
+            <div className={'overflow-hidden w-full mt-2'}>
                 <div className={'h-full border-t border-b border-gray-300 overflow-y-auto'}>
                     <AnimatePresence initial={false}>
                         {cart?.items.map(product => (
@@ -30,7 +30,7 @@ export default function CartWindow() {
                                 exit={{ opacity: 0, height: 0, scale: .5, y: 10 }}
                                 transition={{ duration: .25, delay: .15, ease: 'easeOut' }}
                             >
-                                <CartItem product={product} />
+                                <CartItem product={product}/>
                             </motion.div>
                         ))}
                     </AnimatePresence>
@@ -38,20 +38,23 @@ export default function CartWindow() {
             </div>
 
             <div className={'flex flex-col gap-2 items-center bg-white'}>
-                <div className={'flex justify-between w-full items-start border-b border-gray-300 p-4'}>
+                <div className={'flex justify-between w-full gap-2 items-start border-b border-gray-300 p-4'}>
                     <ClearCart/>
-                    <div>
-                        <p>{t('itemsInCart')}:
-                            <span className={'text-green-500 font-bold'}> {cart?.items.length}</span>
+                    <div className={'text-sm flex flex-col'}>
+                        {/*<p>{t('itemsInCart')}:*/}
+                        {/*    <span className={'text-green-500 font-bold'}> {cart?.items.length}</span>*/}
+                        {/*</p>*/}
+                        <div className={'mt-2'}>
+                            {t('subtotal')}
+                            : <p className={'text-green-500 text-[1.3em] mt-1 font-bold text-center'}>
+                            {cart?.subtotal} {assets.currency}
                         </p>
-                        <p>{t('subtotal')}
-                            : <span className={'text-green-500 font-bold'}> {cart?.subtotal} {assets.currency}</span>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 <button
                     type={'button'}
-                    className={`w-[85%] mx-auto border border-black p-2 transition-colors hover:border-[var(--main)] 
+                    className={`w-[80%] mx-auto border border-black p-2 transition-colors hover:border-[var(--main)] 
                                 hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}
                 >
                     {t('checkout')}

@@ -11,7 +11,7 @@ export default function ClearCart() {
     const { clear } = useCartStore();
 
     return (
-        <div className={'ml-2 relative'}>
+        <div className={'ml-0 lg:ml-2 relative'}>
             <AnimatePresence mode={'wait'}>
                 {!showConfirm && (
                     <button
@@ -33,7 +33,7 @@ export default function ClearCart() {
                     >
                         <p className={'text-sm'}>{t('emptyCart')}?</p>
 
-                        <div className={'flex justify-between mt-2'}>
+                        <div className={'flex justify-between mt-4'}>
                             <button
                                 onClick={() => clear()}
                                 type={'button'}

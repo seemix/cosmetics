@@ -29,6 +29,12 @@ export default function ProductGalleryModal({
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
     useEffect(() => {
+        if (mainSwiper) {
+            mainSwiper.slideTo(initialIndex, 0);
+        }
+    }, [initialIndex, mainSwiper]);
+
+    useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
                 hideModal();
@@ -150,7 +156,6 @@ export default function ProductGalleryModal({
                     ))}
                 </Swiper>
             )}
-            {/*</>*/}
         </div>
     );
 }

@@ -25,7 +25,6 @@ export const localStorageService = {
 
     clear(): void {
         if (typeof window === 'undefined') return;
-
         localStorage.removeItem(STORAGE_KEY);
     },
 };

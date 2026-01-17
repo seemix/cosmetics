@@ -82,7 +82,7 @@ export default function ProductDetails({
                         {!inCart ? (<><Quantity value={value} setValue={setValue}/>
                             <AddToCartButton productId={product.id} quantity={value}/></>) :
                             (<>
-                                <div className={'w-30'}></div>
+                                <div className={'w-0 lg:w-30'}></div>
                                 <AlreadyInCartButton/>
                             </>)}
                     </div>

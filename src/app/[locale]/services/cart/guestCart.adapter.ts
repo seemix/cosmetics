@@ -1,6 +1,6 @@
 import type { CartAdapter } from '@/app/[locale]/services/cart/cart.adapter';
 import { localStorageService } from '@/app/[locale]/services/cart/localStorage.service';
-import { axiosService } from '@/app/[locale]/services/cart/axios.service';
+import { axiosService } from '@/app/[locale]/services/axios.service';
 import type { CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 export const guestCartAdapter = (): CartAdapter => ({
@@ -8,7 +8,7 @@ export const guestCartAdapter = (): CartAdapter => ({
     async load() {
         const items = localStorageService.get();
         if(!items.length) return null;
-        return  await axiosService.post('guest', items).then(value => value.data);
+        return  await axiosService.post('carts/guest', items).then(value => value.data);
 
     },
 
@@ -21,7 +21,7 @@ export const guestCartAdapter = (): CartAdapter => ({
             items.push(itemToAdd);
         }
         localStorageService.save(items);
-        return await axiosService.post('guest', items).then(value => value.data);
+        return await axiosService.post('carts/guest', items).then(value => value.data);
 
     },
 
@@ -30,7 +30,7 @@ export const guestCartAdapter = (): CartAdapter => ({
         const index = items.findIndex(item => item.productId === itemToUpdate.productId);
         items[index].quantity = itemToUpdate.quantity;
         localStorageService.save(items);
-        return await axiosService.post('guest', items).then(value => value.data);
+        return await axiosService.post('carts/guest', items).then(value => value.data);
 
     },
 
