@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function CartWindow() {
 
     const { cart } = useCartStore();
+    const cartId = cart?.id || '';
     const t = useTranslations('Cart');
 
     return (
@@ -22,7 +23,7 @@ export default function CartWindow() {
             <div className={'overflow-hidden w-full mt-2'}>
                 <div className={'h-full border-t border-b border-gray-300 overflow-y-auto'}>
                     <AnimatePresence initial={false}>
-                        {cart?.items.map(product => (
+                        {cart?.items?.map(product => (
                             <motion.div
                                 className={'overflow-x-hidden'}
                                 key={product.id}
@@ -30,7 +31,7 @@ export default function CartWindow() {
                                 exit={{ opacity: 0, height: 0, scale: .5, y: 10 }}
                                 transition={{ duration: .25, delay: .15, ease: 'easeOut' }}
                             >
-                                <CartItem product={product}/>
+                                <CartItem cartId={cartId} product={product}/>
                             </motion.div>
                         ))}
                     </AnimatePresence>

@@ -108,6 +108,8 @@ export default function ProductGalleryModal({
                                 //  onClick={e => e.stopPropagation()}
                                 src={backendUrl + img.image.url}
                                 alt={img.image.alt || ''}
+                                placeholder={'blur'}
+                               blurDataURL={img.image.blurHash}
                                 fill
                                 className={'object-contain'}
                                 priority

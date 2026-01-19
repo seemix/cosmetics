@@ -20,10 +20,10 @@ interface ICartItem {
 
 const { backendUrl, currency } = assets;
 
-export default function CartItem({ product }: { product: ICartItem }) {
+export default function CartItem({ cartId, product }: { cartId?: string, product: ICartItem }) {
     const { hideModal } = useModal();
-    const { removeItem, cart } = useCartStore();
-
+    const { removeItem } = useCartStore();
+  //  console.log(cart.id);
     return (
         <div className={'grid grid-cols-[auto_1fr_auto_auto] m-2 gap-2 border-b border-gray-300'}>
             <Image src={`${backendUrl}${product.thumbnail}`} alt={product.title} width={80} height={80}/>
@@ -37,7 +37,7 @@ export default function CartItem({ product }: { product: ICartItem }) {
                 <div className={'place-self-center'}>
                     <CartQuantity productId={product.id} quantity={product.quantity}/>
                 </div>
-                <button onClick={() => removeItem(cart?.id as string, product.id)}
+                <button onClick={() => removeItem(cartId as string, product.id)}
                         className={`cursor-pointer transition-colors duration-300 hover:text-[var(--main)]`}
                         type={'button'}>
                     <GoTrash className={'w-5 h-auto mx-2'}/>

@@ -11,15 +11,22 @@ import { FaChalkboardUser } from 'react-icons/fa6';
 import Link from 'next/link';
 
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { useRouter } from 'next/navigation';
 
 export default function AuthUserButton() {
 
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
     useClickOutside(ref, () => setOpen(false), open);
-    const { logout } = useAuthStore();
+    const router = useRouter();
     const t = useTranslations('RegisterForm');
+    const { logout } = useAuthStore();
     const { user } = useAuthStore();
+
+    const userLogout = () => {
+        logout();
+        router.refresh()
+    }
 
     return (
         <div className={'relative'} ref={ref}>
@@ -73,8 +80,8 @@ export default function AuthUserButton() {
                         </Link>
 
                         <Link
-                            href={'/'}
-                            onClick={() => logout()}
+                            href={''}
+                            onClick={userLogout}
                             type={'button'}
                             className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
                                         text-[.95em] hover:text-[var(--main)] transition-colors duration-300 

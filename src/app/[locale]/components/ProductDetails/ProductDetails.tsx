@@ -2,7 +2,7 @@
 
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -14,16 +14,20 @@ import {
 } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { useRouter } from 'next/navigation';
 
 export default function ProductDetails({
                                            product,
                                        }: {
     product: IProduct;
 }) {
+    const router = useRouter();
     const t = useTranslations('Catalog');
     const { cart } = useCartStore();
+    const{ user } = useAuthStore();
 
-    const inCart = cart?.items.some((item) => item.id === product.id) as boolean;
+    const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
 
     const {
         gallery,
@@ -38,6 +42,11 @@ export default function ProductDetails({
     } = product;
     const { currency, backendUrl } = assets;
     const [value, setValue] = useState<number>(1);
+
+    useEffect(() => {
+        if(!user) return;
+        if (user.wholesale) router.refresh();
+    }, [user, router.refresh]);
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>

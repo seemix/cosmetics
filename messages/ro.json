@@ -33,6 +33,7 @@
     "addToCart": "Adaugă in coş",
     "alreadyInCart": "Deja în coș",
     "article": "Cod produs",
+    "shortArticle": "Cod",
     "relatedProducts": "Produse conexe"
   },
   "RegisterForm": {

@@ -3,6 +3,8 @@ import { create } from 'zustand';
 import type { RegisterFormData } from '@/app/[locale]/components/RegisterForm/registerSchema';
 import { axiosService } from '@/app/[locale]/services/axios.service';
 import { getErrorMessage } from '@/app/[locale]/services/getErrorMessage';
+import { mergeGuestCart } from '@/app/[locale]/services/cart/mergeGuestCart';
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
 
 type RegisterResult = {
     success: boolean;
@@ -73,10 +75,15 @@ export const useAuthStore = create<AuthState>((set) => ({
             }>('users/login', { email, password });
 
             set({ user: data.user, authChecked: true });
+            const mergedCart = await mergeGuestCart();
+           useCartStore.getState().setCart(mergedCart?.cart);
+
             return true;
+
         } catch (error) {
             set({ error: getErrorMessage(error) });
             return false;
+
         } finally {
             set({ loading: false, authChecked: true });
         }

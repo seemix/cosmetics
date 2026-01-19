@@ -46,4 +46,5 @@ export const guestCartAdapter = (): CartAdapter => ({
     async clear() {
         return localStorageService.clear();
     },
+
 });

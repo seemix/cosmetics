@@ -1,6 +1,6 @@
 import type { CartAdapter } from '@/app/[locale]/services/cart/cart.adapter';
-import { axiosService } from '@/app/[locale]/services/axios.service';
 import type { CartItemId, Cart } from '@/app/[locale]/services/cart/cart.types';
+import { axiosService } from '@/app/[locale]/services/axios.service';
 
 export const authCartAdapter = (): CartAdapter => ({
     async load(): Promise<Cart> {
@@ -24,15 +24,15 @@ export const authCartAdapter = (): CartAdapter => ({
         return data.cart;
     },
 
-    async removeItem(productId: string): Promise<Cart> {
+    async removeItem(cartId: string, productId: string): Promise<Cart> {
         const { data } = await axiosService.post<{ cart: Cart }>(
             'carts/remove-item',
-            { productId }
+            { cartId, productId }
         );
         return data.cart;
     },
 
     async clear(): Promise<void> {
         return await axiosService.post('carts/clear');
-    },
+    }
 });

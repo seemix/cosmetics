@@ -6,11 +6,12 @@ import { AddToCartButton, AlreadyInCartButton } from '@/app/[locale]/components'
 import type { IProduct } from '@/app/[locale]/types/product';
 import { assets } from '@/app/[locale]/assets/assets';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useTranslations } from 'next-intl';
 
-const formatPrice = (value: number) =>
-    new Intl.NumberFormat('md-MD', { style: 'currency', currency: assets.currency }).format(
-        value,
-    );
+// const formatPrice = (value: number) =>
+//     new Intl.NumberFormat('md-MD', { style: 'currency', currency: assets.currency }).format(
+//         value,
+//     );
 
 export default function ProductCard({ product }: { product: IProduct }) {
     const {
@@ -22,10 +23,13 @@ export default function ProductCard({ product }: { product: IProduct }) {
         retailPrice,
         wholesalePrice,
     } = product;
-    const { backendUrl } = assets;
+    const { backendUrl, currency } = assets;
+    const t = useTranslations('Catalog');
     const price = wholesalePrice || retailPrice;
     const { cart } = useCartStore();
-    const inCart = cart?.items.some((item) => item.id === product.id);
+
+    const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
+
 
     return (
         <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
@@ -41,9 +45,9 @@ export default function ProductCard({ product }: { product: IProduct }) {
                     <p className={'text-xs'}>{subtitle}</p>
                 </Link>
                 <div className={'flex justify-between mt-2 items-center'}>
-                    <p className={'text-gray-500 text-sm'}>Код: {article}</p>
+                    <p className={'text-gray-500 text-sm'}>{t('shortArticle')}: {article}</p>
                     <p className={`${wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'} font-bold text-[1.2em]`}>
-                        {formatPrice(price)}
+                        {price} {currency}
                     </p>
                 </div>
                 <div className={'mx-auto mt-3'}>

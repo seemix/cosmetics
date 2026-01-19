@@ -11,6 +11,8 @@ interface CartState {
 
     init(adapter: CartAdapter): void;
 
+    setCart(cart: Cart): void;
+
     addItem(item: CartItemId): Promise<void>;
 
     updateQty(item: CartItemId): Promise<void>;
@@ -31,6 +33,8 @@ export const useCartStore = create<CartState>((set, get) => ({
         set({ adapter });
         adapter.load().then(cart => set({ cart: cart }));
     },
+
+    setCart: (cart) => set({ cart }),
 
     async addItem(item: CartItemId) {
         set({ itemLoading: item.productId });
@@ -56,8 +60,7 @@ export const useCartStore = create<CartState>((set, get) => ({
             },
         });
         try {
-            // 2️⃣ backend
-             const cart = await get().adapter?.removeItem(productId, cartId);
+            const cart = await get().adapter?.removeItem(productId, cartId);
             set({ cart });
         } catch (e) {
             console.log(e);

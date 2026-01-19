@@ -98,7 +98,7 @@ export default function LoginForm() {
                     </div>
                 </form>
                 <div className={'h-10'}>
-                    {error && <p className={'text-red-500 text-center mt-3 font-bold'}>{t(error)}</p>}
+                    {error && <p className={'text-red-500 text-center mt-3 font-bold'}>{error}</p>}
                 </div>
                 <div className={'flex justify-between w-full mt-5'}>
                     <a href="/register" className="text-gray-900 text-sm ml-1 hover:underline">
