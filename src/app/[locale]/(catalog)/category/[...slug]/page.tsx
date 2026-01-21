@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-import { BreadCrumbs, ProductCardsGrid } from '@/app/[locale]/components';
+import { BreadCrumbs, NoContent, ProductCardsGrid } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
 
 export default async function CategoryPage(props: { params: Promise<{ locale: string, slug: string }> }) {
@@ -14,15 +14,16 @@ export default async function CategoryPage(props: { params: Promise<{ locale: st
             Cookie: cookieStore.toString(),
         }
     }).then(res => res.json());
-    const products = Array(10).fill(response.products[0]);
+    const { products, categories } = response;
 
     return (
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
-            <div className={'p-4 flex justify-between items-center'}>
-                {response.categories && <BreadCrumbs breadcrumbs={response.categories}/>}
-                {/*<SortSelect/>*/}
-            </div>
-            <ProductCardsGrid products={products}/>
+            {categories &&
+                <div className={'p-4 flex justify-between items-center'}>
+                    <BreadCrumbs breadcrumbs={response.categories}/>
+                    {/*<SortSelect/>*/}
+                </div>}
+            {products.length ? <ProductCardsGrid products={products}/> : <NoContent/>}
         </div>
     );
 }

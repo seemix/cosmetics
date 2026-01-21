@@ -34,7 +34,8 @@
     "alreadyInCart": "Deja în coș",
     "article": "Cod produs",
     "shortArticle": "Cod",
-    "relatedProducts": "Produse conexe"
+    "relatedProducts": "Produse conexe",
+    "noContent": "Conținut negăsit"
   },
   "RegisterForm": {
     "newUserRegistration": "Înregistrarea unui utilizator nou",

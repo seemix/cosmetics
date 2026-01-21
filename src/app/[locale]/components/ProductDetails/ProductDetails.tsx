@@ -2,7 +2,7 @@
 
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ import {
 import type { IProduct } from '@/app/[locale]/types/product';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function ProductDetails({
                                            product,
@@ -42,11 +42,21 @@ export default function ProductDetails({
     } = product;
     const { currency, backendUrl } = assets;
     const [value, setValue] = useState<number>(1);
+    const pathname = usePathname();
+
+    const prevUserRef = useRef<typeof user>(null);
 
     useEffect(() => {
-        if(!user) return;
-        if (user.wholesale) router.refresh();
-    }, [user, router.refresh]);
+        if (prevUserRef.current && !user) {
+            router.replace(pathname);
+        }
+
+        if (!prevUserRef.current && user) {
+            router.refresh();
+        }
+
+        prevUserRef.current = user;
+    }, [user, router, pathname]);
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
@@ -76,7 +86,7 @@ export default function ProductDetails({
                 </h4>
                 <p className={'text-[.95em] mt-2'}>{shortDescription}</p>
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
-                    <div className={'mt-2'}>
+                    <div className={'mt-2 flex items-center'}>
 						<span className={`${wholesalePrice ? 'text-xl' : 'text-2xl'} 
 						                   font-bold text-[var(--main)] leading-15`}>
 							{retailPrice} {currency}

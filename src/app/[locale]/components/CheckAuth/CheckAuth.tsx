@@ -16,9 +16,8 @@ export default function CheckAuth() {
     }, [checkAuth]);
 
     useEffect(() => {
-        if (!authChecked) return;
-
+      if (!authChecked) return;
         init(user ? authCartAdapter() : guestCartAdapter());
-    }, [authChecked, user, init]);
+    }, [user, init, authChecked]);
     return null;
 }

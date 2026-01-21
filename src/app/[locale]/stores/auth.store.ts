@@ -5,6 +5,7 @@ import { axiosService } from '@/app/[locale]/services/axios.service';
 import { getErrorMessage } from '@/app/[locale]/services/getErrorMessage';
 import { mergeGuestCart } from '@/app/[locale]/services/cart/mergeGuestCart';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { guestCartAdapter } from '@/app/[locale]/services/cart/guestCart.adapter';
 
 type RegisterResult = {
     success: boolean;
@@ -23,10 +24,8 @@ interface AuthState {
     loading: boolean;
     authChecked: boolean;
     error: string | null;
-
     pendingName: string | null;
     pendingEmail: string | null;
-
     user: UserState | null;
 
     register: (data: RegisterFormData) => Promise<RegisterResult>;
@@ -39,7 +38,6 @@ export const useAuthStore = create<AuthState>((set) => ({
     loading: false,
     authChecked: false,
     error: null,
-
     pendingEmail: null,
     pendingName: null,
     user: null,
@@ -76,7 +74,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
             set({ user: data.user, authChecked: true });
             const mergedCart = await mergeGuestCart();
-           useCartStore.getState().setCart(mergedCart?.cart);
+            useCartStore.getState().setCart(mergedCart?.cart);
 
             return true;
 
@@ -106,7 +104,9 @@ export const useAuthStore = create<AuthState>((set) => ({
     logout: async () => {
         try {
             await axiosService.post('users/logout');
-            set({ user: null });
+            useCartStore.getState().init(guestCartAdapter());
+            useCartStore.getState().adapter?.load();
+            set({ user: null, authChecked: false });
         } catch (error) {
             set({ error: getErrorMessage(error) });
         }

@@ -35,7 +35,8 @@
     "alreadyInCart": "Уже в корзине",
     "article": "Код товара",
     "shortArticle": "Код",
-    "relatedProducts": "Похожие товары"
+    "relatedProducts": "Похожие товары",
+    "noContent": "Контент не найден"
   },
   "RegisterForm": {
     "newUserRegistration": "Регистрация нового пользователя",

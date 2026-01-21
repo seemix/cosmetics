@@ -32,7 +32,7 @@ export default function ProductCard({ product }: { product: IProduct }) {
 
 
     return (
-        <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
+        <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] max-w-70'}>
             <div className={'w-full aspect-[4/3] relative'}>
                 <Link href={`/product/${slug}`}>
                     <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
