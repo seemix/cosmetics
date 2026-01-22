@@ -24,7 +24,7 @@ export default function AuthUserButton() {
     const { user } = useAuthStore();
 
     const userLogout = () => {
-        logout();
+        logout().then();
         router.refresh()
     }
 

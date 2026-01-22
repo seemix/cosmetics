@@ -10,7 +10,7 @@ export default function Cart() {
     const items = cart?.items;
 
     return (
-        <div className={'text-black max-w-[100%] w-110 flex flex-col h-full overflow-x-hidden'}>
+        <div className={'text-black max-w-[100%] w-110 flex flex-col h-dvh overflow-x-hidden'}>
             <CloseModalButton/>
             <AnimatePresence mode={'wait'}>
                 {items?.length ? (

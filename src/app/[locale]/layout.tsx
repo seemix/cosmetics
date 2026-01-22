@@ -38,9 +38,9 @@ export default async function LocaleLayout({
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
-    const menu = await fetch(`${process.env.API_URL}/menu?locale=${locale}`).then(
-        (res) => res.json(),
-    );
+    const menu = await fetch(`${process.env.API_URL}/menu?locale=${locale}`,{
+        cache: 'force-cache'
+    }).then(res => res.json()) || [];
 
     return (
         <html lang={locale}>

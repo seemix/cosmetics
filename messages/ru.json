@@ -1,6 +1,8 @@
 {
   "Header": {
     "search": "поиск",
+    "Search": "Поиск",
+    "find": "Искать",
     "about": "о нас",
     "paymentAndDelivery": "оплата и доставка",
     "reviews": "отзывы",
@@ -36,7 +38,9 @@
     "article": "Код товара",
     "shortArticle": "Код",
     "relatedProducts": "Похожие товары",
-    "noContent": "Контент не найден"
+    "noContent": "Контент не найден",
+    "searchResults": "Результаты поиска",
+    "Error": "Ошибка"
   },
   "RegisterForm": {
     "newUserRegistration": "Регистрация нового пользователя",

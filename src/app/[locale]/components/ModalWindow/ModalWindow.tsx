@@ -48,7 +48,7 @@ export default function ModalWindow() {
                     />
 
                     <div
-                        className={`fixed inset-0 z-50 flex items-stretch pointer-events-none ${
+                        className={`fixed inset-0 z-50 flex items-center pointer-events-none ${
                             appearance === 'left'
                                 ? 'justify-start'
                                 : appearance === 'right'
@@ -57,7 +57,7 @@ export default function ModalWindow() {
                         }`}
                     >
                         <motion.div
-                            onClick={(e) => e.stopPropagation()}
+                          //  onClick={(e) => e.stopPropagation()}
                             initial={'hidden'}
                             animate={'visible'}
                             exit={'hidden'}
@@ -67,7 +67,7 @@ export default function ModalWindow() {
                                 duration: .35,
                                 ease: 'easeInOut',
                             }}
-                            className={`pointer-events-auto flex flex-col overflow-hidden 
+                            className={`pointer-events-auto flex flex-col overflow-hidden
                                    ${appearance!== 'zoom' ? 'bg-background max-w-125' : 'items-center justify-center'}`}
                         >
                             {content}

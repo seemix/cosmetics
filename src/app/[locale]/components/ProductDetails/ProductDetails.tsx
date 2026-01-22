@@ -72,10 +72,10 @@ export default function ProductDetails({
                             {subtitle}
                         </h3>
                     </div>
-                    <Link href={`../brand/${brand.slug}`} className={'w-28 aspect-video relative'}>
+                    <Link href={`../brand/${brand?.slug}`} className={'w-28 aspect-video relative'}>
                         <Image
                             className={'object-contain'}
-                            src={backendUrl + brand.logo.url}
+                            src={backendUrl + brand?.logo.url}
                             alt={'brand logo'}
                             fill
                         />
@@ -108,7 +108,7 @@ export default function ProductDetails({
                 </div>
             </div>
             <div className={'lg:col-span-2 text-sm'}>
-                <RichText data={description} className={'description-text'}/>
+                {description && <RichText data={description} className={'description-text'}/>}
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
                 cupiditate ex fuga impedit laudantium, nam pariatur possimus suscipit.
                 Consequuntur id nesciunt omnis provident reprehenderit? Ab accusantium

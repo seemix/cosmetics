@@ -35,7 +35,9 @@
     "article": "Cod produs",
     "shortArticle": "Cod",
     "relatedProducts": "Produse conexe",
-    "noContent": "Conținut negăsit"
+    "noContent": "Conținut negăsit",
+    "searchResults": "Rezultate căutare",
+    "Error": "Ошибка"
   },
   "RegisterForm": {
     "newUserRegistration": "Înregistrarea unui utilizator nou",

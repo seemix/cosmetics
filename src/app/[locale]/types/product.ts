@@ -36,9 +36,9 @@ export interface IProduct {
     article: string;
     wholesalePrice?: number;
     retailPrice: number;
-    shortDescription: string;
-    description: SerializedEditorState;
-    brand: {
+    shortDescription?: string;
+    description?: SerializedEditorState;
+    brand?: {
         logo: {
             url: string;
         };
@@ -46,6 +46,6 @@ export interface IProduct {
         title: string;
     };
     gallery: ProductGallery[];
-    categories: ProductCategory[];
+    categories?: ProductCategory[];
     relatedProducts?: IProduct[];
 }
