@@ -24,6 +24,8 @@ interface AuthState {
     loading: boolean;
     authChecked: boolean;
     error: string | null;
+    forgotPasswordEmailSent: boolean;
+    passwordHasReset: boolean;
     pendingName: string | null;
     pendingEmail: string | null;
     user: UserState | null;
@@ -32,11 +34,15 @@ interface AuthState {
     login: (email: string, password: string) => Promise<boolean>;
     logout: () => Promise<void>;
     checkAuth: () => Promise<void>;
+    forgotPassword: (email: string) => Promise<void>;
+    resetPassword: (token: string, email: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
     loading: false,
     authChecked: false,
+    forgotPasswordEmailSent: false,
+    passwordHasReset: false,
     error: null,
     pendingEmail: null,
     pendingName: null,
@@ -111,4 +117,24 @@ export const useAuthStore = create<AuthState>((set) => ({
             set({ error: getErrorMessage(error) });
         }
     },
+
+    forgotPassword: async (email: string) => {
+        try {
+            set({ loading: true, error: null });
+            await axiosService.post('users/forgot-password', { email });
+            set({ forgotPasswordEmailSent: true, loading: false });
+        } catch (error) {
+            set({ error: getErrorMessage(error) });
+        }
+    },
+
+    resetPassword: async (token: string, password: string) => {
+        try {
+            set({ loading: true });
+            await axiosService.post('users/reset-password', { token, password });
+            set({ loading: false, passwordHasReset: true });
+        } catch (error) {
+            set({ error: getErrorMessage(error), loading: false });
+        }
+    }
 }));

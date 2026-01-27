@@ -64,7 +64,15 @@
     "welcome": "Привет",
     "profile": "Профиль",
     "orders": "Заказы",
-    "logout": "Выход"
+    "logout": "Выход",
+    "resetPassword": "Сбросить пароль",
+    "inputEmailForReset": "Для сброса пароля введите адрес почты, указанный при регистрации",
+    "resetEmailIsSent": "Ссылка для сброса пароля отправлена на указанную вами почту",
+    "inputNewPassword": "Введите новый пароль",
+    "setNewPassword": "Установить пароль",
+    "passwordHasChanged": "Пароль успешно изменён",
+    "loginIntoAccount": "Войти в аккаунт"
+
   },
   "Cart": {
     "cart": "Корзина",

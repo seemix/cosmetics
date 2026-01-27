@@ -42,9 +42,6 @@ export default function CartWindow() {
                 <div className={'flex justify-between w-full gap-2 items-start border-b border-gray-300 p-4'}>
                     <ClearCart/>
                     <div className={'text-sm flex flex-col'}>
-                        {/*<p>{t('itemsInCart')}:*/}
-                        {/*    <span className={'text-green-500 font-bold'}> {cart?.items.length}</span>*/}
-                        {/*</p>*/}
                         <div className={'mt-2'}>
                             {t('subtotal')}
                             : <p className={'text-green-500 text-[1.3em] mt-1 font-bold text-center'}>

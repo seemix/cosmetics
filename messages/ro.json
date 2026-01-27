@@ -61,7 +61,14 @@
     "welcome": "Bun venit",
     "profile": "Profil",
     "orders": "Comenzi",
-    "logout": "Deconectare"
+    "logout": "Deconectare",
+    "resetPassword": "Resetare parolă",
+    "inputEmailForReset": "Pentru a reseta parola, introduceți adresa de e-mail pe care ați furnizat-o în timpul înregistrării.",
+    "resetEmailIsSent": "Un link de resetare a parolei a fost trimis la adresa de e-mail pe care ați furnizat-o.",
+    "inputNewPassword": "Introduceți o parolă nouă",
+    "setNewPassword": "Setați o parolă",
+    "passwordHasChanged": "Parola a fost schimbată cu succes",
+    "loginIntoAccount": "Login la contul"
   },
   "Cart": {
     "cart": "Coş",

@@ -20,7 +20,8 @@ export default function SingleSearchItem({ product }: { product: IProduct }) {
                     <p className={'text-xs'}>{subtitle}</p>
                 </div>
             </Link>
-            <p className={'text-[var(--main)] text-md font-bold whitespace-nowrap'}>
+            <p className={`text-md font-bold whitespace-nowrap 
+                          ${wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'}`}>
                 {wholesalePrice || retailPrice} {currency}
             </p>
         </div>

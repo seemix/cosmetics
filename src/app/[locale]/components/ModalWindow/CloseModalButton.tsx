@@ -11,9 +11,9 @@ export default function CloseModalButton() {
 			}`}
 		>
 			<button
-				type="button"
-				aria-label="Close"
-				className="cursor-pointer m-1 transition-colors duration-300 hover:text-[var(--main)]"
+				type={'button'}
+				aria-label={'Close'}
+				className={'cursor-pointer m-1 transition-colors duration-300 hover:text-[var(--main)]'}
 				onClick={hideModal}
 			>
 				<IoCloseSharp size={33} />

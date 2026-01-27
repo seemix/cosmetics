@@ -81,8 +81,10 @@ export default function SearchComponent() {
             </div>
             <div>
                 {loading && <Loader/>}
-                {inputValue.length > 2 && items.products?.map(product =>
-                    <SingleSearchItem key={product.id} product={product}/>)}
+                {inputValue.length > 2 && <div className={'overflow-y-auto h-50'}>
+                    {items.products?.map(product =>
+                        <SingleSearchItem key={product.id} product={product}/>)}
+                </div>}
             </div>
         </div>
     );

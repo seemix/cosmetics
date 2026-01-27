@@ -1,9 +1,13 @@
-import type { AxiosError } from 'axios';
+import axios from 'axios';
+
+type ApiErrorResponse = {
+    errors?: { message: string }[];
+};
 
 export function getErrorMessage(error: unknown): string {
-    if (error && typeof error === 'object' && 'response' in error) {
-        const err = error as AxiosError<{ message?: string }>;
-        return err.response?.data?.message ?? 'Unknown error';
+    if (axios.isAxiosError<ApiErrorResponse>(error)) {
+        return error.response?.data?.errors?.[0]?.message ?? 'Unknown error';
     }
+
     return 'Unknown error';
 }

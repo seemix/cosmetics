@@ -3,9 +3,10 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { useEffect } from 'react';
-import { CloseModalButton, Loader } from '@/app/[locale]/components';
+import { motion } from 'framer-motion';
+
+import { CloseModalButton, ForgotPasswordForm, Loader } from '@/app/[locale]/components';
 import { createLoginSchema, type LoginFormData } from '@/app/[locale]/components/LoginForm/loginSchema';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useModal } from '@/app/[locale]/hooks/useModal';
@@ -19,7 +20,7 @@ export default function LoginForm() {
         mode: 'onSubmit'
     });
     const { login, loading, user, error } = useAuthStore();
-    const { hideModal } = useModal();
+    const { hideModal, showModal } = useModal();
 
     const submit = async (data: LoginFormData) => {
         await login(data.email, data.password);
@@ -34,14 +35,17 @@ export default function LoginForm() {
     }, [hideModal, user]);
 
     return (
-        <div className={'flex items-center justify-center flex-col bg-gray-50 w-100'}>
+        <motion.div className={'flex items-center justify-center flex-col bg-gray-50 w-100'}
+                    initial={{ opacity: 0, filter: 'blur(5px)', x: 15 }}
+                    animate={{ opacity: 1, filter: 'blur(0px)', x: 0 }} exit={{ opacity: 0 }}
+                    transition={{ duration: .3 }}>
             <CloseModalButton/>
             <h2 className={'text-2xl font-semibold text-gray-800 text-center mb-2'}>
                 {t('authorization')}
             </h2>
             <div className={'w-full bg-white p-5 shadow-lg border border-gray-100'}>
                 <form onSubmit={handleSubmit(submit)} className={'mx-auto bg-white'}>
-                    <div className={'space-y-3  '}>
+                    <div className={'space-y-3 '}>
                         <div>
                             <label htmlFor={'email'} className={'block text-sm font-medium text-gray-700 mb-1'}>
                                 E-mail
@@ -101,14 +105,15 @@ export default function LoginForm() {
                     {error && <p className={'text-red-500 text-center mt-3 font-bold'}>{error}</p>}
                 </div>
                 <div className={'flex justify-between w-full mt-5'}>
-                    <a href="/register" className="text-gray-900 text-sm ml-1 hover:underline">
+                    <a href='/register' className={'text-gray-900 text-sm ml-1 hover:underline'}>
                         {t('registration')}
                     </a>
-                    <a href="/register" className="text-gray-900 text-sm mr-1 hover:underline">
+                    <button onClick={() => showModal(<ForgotPasswordForm/>, 'zoom')}
+                            type={'button'} className={'text-gray-900 text-sm mr-1 hover:underline cursor-pointer'}>
                         {t('forgotPassword')}
-                    </a>
+                    </button>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
