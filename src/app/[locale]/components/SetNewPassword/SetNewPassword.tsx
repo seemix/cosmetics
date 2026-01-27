@@ -22,7 +22,8 @@ export default function SetNewPassword({ token }: { token: string }) {
 
     return (
         <>
-            {passwordHasReset ? <PasswordResetSuccess/> :
+            {!error && passwordHasReset && <PasswordResetSuccess/> }
+            {!error &&
                 <form className={'mx-auto my-4 w-full h-85 max-w-md border border-gray-300 bg-white p-6 relative'}
                       onSubmit={handleSubmit(submit)}>
                     <h2 className={'mb-6 text-xl font-semibold text-gray-800 text-center'}>
@@ -78,8 +79,8 @@ export default function SetNewPassword({ token }: { token: string }) {
                             {loading ? <Loader/> : t('setNewPassword')}
                         </button>
                     </div>
-                    {error && <div className={'absolute top-0 w-full left-0'}><ErrorComponent error={error}/></div>}
                 </form>}
+            {error && <div className={'w-100 h-100'}><ErrorComponent error={error}/></div>}
         </>
     );
 }

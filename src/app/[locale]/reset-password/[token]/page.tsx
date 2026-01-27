@@ -4,7 +4,5 @@ export default async function ResetPasswordPage(props: { params: Promise<{ token
 
     const { token } = await props.params;
 
-    return (
-        <SetNewPassword token={token}/>
-    );
+    return <SetNewPassword token={token}/>
 }
