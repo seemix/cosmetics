@@ -3,6 +3,7 @@ export { default as AlreadyInCartButton } from './AlreadyInCartButton/AlreadyInC
 export { default as AuthUserButton } from './Header/AuthUserButton';
 export { default as BreadCrumbs } from './BreadCrumbs/BreadCrumbs';
 export { default as Cart } from './Cart/Cart';
+export { default as ClearAuthError } from './ClearAuthError/ClearAuthError';
 export { default as ClearCart } from './Cart/ClearCart';
 export { default as CartWindow } from './Cart/CartWindow';
 export { default as CartItem } from './Cart/CartItem';

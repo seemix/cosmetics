@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 import { CloseModalButton, ForgotPasswordForm, Loader } from '@/app/[locale]/components';
 import { createLoginSchema, type LoginFormData } from '@/app/[locale]/components/LoginForm/loginSchema';
@@ -102,12 +103,12 @@ export default function LoginForm() {
                     </div>
                 </form>
                 <div className={'h-10'}>
-                    {error && <p className={'text-red-500 text-center mt-3 font-bold'}>{error}</p>}
+                    {error && <p className={'text-red-500 text-center mt-3 font-bold text-sm'}>{error}</p>}
                 </div>
                 <div className={'flex justify-between w-full mt-5'}>
-                    <a href='/register' className={'text-gray-900 text-sm ml-1 hover:underline'}>
+                    <Link href={'/register'} className={'text-gray-900 text-sm ml-1 hover:underline'}>
                         {t('registration')}
-                    </a>
+                    </Link>
                     <button onClick={() => showModal(<ForgotPasswordForm/>, 'zoom')}
                             type={'button'} className={'text-gray-900 text-sm mr-1 hover:underline cursor-pointer'}>
                         {t('forgotPassword')}

@@ -36,6 +36,7 @@ interface AuthState {
     checkAuth: () => Promise<void>;
     forgotPassword: (email: string) => Promise<void>;
     resetPassword: (token: string, email: string) => Promise<void>;
+    clearError: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -136,5 +137,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         } catch (error) {
             set({ error: getErrorMessage(error), loading: false });
         }
-    }
+    },
+
+    clearError: () => set({ error: null })
 }));

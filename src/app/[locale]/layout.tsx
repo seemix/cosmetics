@@ -1,7 +1,7 @@
 import { Montserrat, Roboto } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { CheckAuth, Footer, Header, ModalWindow } from '@/app/[locale]/components';
+import { CheckAuth, ClearAuthError, Footer, Header, ModalWindow } from '@/app/[locale]/components';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
@@ -51,6 +51,7 @@ export default async function LocaleLayout({
                 <MenuProvider initialMenu={menu}>
                     <Header/>
                     <CheckAuth/>
+                    <ClearAuthError/>
                     <main className={'w-full flex justify-center'}>
                         {children}
                     </main>
