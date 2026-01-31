@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { TfiSearch } from 'react-icons/tfi';
@@ -16,7 +16,7 @@ export default function SearchComponent() {
     const t = useTranslations('Header');
     const router = useRouter();
     const { hideModal } = useModal();
-
+    const locale = useLocale();
     const searchSubmit = () => {
         router.push(`/search?query=${inputValue}`);
         hideModal();
@@ -35,11 +35,11 @@ export default function SearchComponent() {
     useEffect(() => {
         const handler = setTimeout(() => {
             if (inputValue.length > 2) {
-                fastSearch(inputValue).then();
+                fastSearch(inputValue, locale).then();
             }
         }, 500);
         return () => clearTimeout(handler);
-    }, [inputValue, fastSearch]);
+    }, [inputValue, fastSearch, locale]);
 
     return (
         <div className={'flex flex-col bg-gray-50 w-100 min-h-50'}>

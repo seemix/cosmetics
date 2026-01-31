@@ -33,7 +33,7 @@ export default function SortSelect() {
     useEffect(() => {
         setCurrent(searchParams.get('sort') === 'default' ? options[0] :
             options.find(o => o.value === searchParams.get('sort')) ?? options[0]);
-    }, [searchParams.get]);
+    }, [searchParams.get('sort')]);
 
     const handleUpdateQuery = (name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());

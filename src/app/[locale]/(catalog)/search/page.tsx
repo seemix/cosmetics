@@ -19,7 +19,7 @@ export default async function SearchPage(props: {
         q: query as string
     }).toString();
 
-    const response = await fetch(url.toString(), {
+    const response = await fetch(url, {
         credentials: 'include',
         headers: new Headers({
             Cookie: cookieStore.toString()
@@ -27,17 +27,17 @@ export default async function SearchPage(props: {
     }).then(res => res.json());
 
     const { products, pagination } = response;
-
+    const searchResults = `${t('Catalog.searchResults')} '${query}'`;
     const breadCrumbs = [
-        { id: '1', title: t('Header.Search'), slug: 'search' }
+        { id: '1', title: t('Header.find'), slug: 'search' },
+        { id: '2', title: searchResults, slug: searchResults }
     ];
 
     return (
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
-            <BreadCrumbs breadcrumbs={breadCrumbs}/>
-            <h2 className={'text-2xl text-center'}>{t('Catalog.searchResults')} {`'${query}'`}</h2>
+            <div className={'p-4'}><BreadCrumbs breadcrumbs={breadCrumbs}/></div>
             {products?.length < 1 ? <NoContent/> :
-                <ProductCardsGrid products={response.products}/>}
+                <ProductCardsGrid products={products}/>}
             {pagination.totalPages > 1 && <Pagination pagination={pagination}/>}
         </div>
     );

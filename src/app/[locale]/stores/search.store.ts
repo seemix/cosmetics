@@ -10,7 +10,7 @@ interface SearchStore {
         products: IProduct[] | null
     };
 
-    fastSearch: (query: string) => Promise<void>;
+    fastSearch: (query: string, locale: string) => Promise<void>;
 }
 
 export const useSearchStore = create<SearchStore>((set) => ({
@@ -20,10 +20,10 @@ export const useSearchStore = create<SearchStore>((set) => ({
         products: null
     },
 
-    fastSearch: async (q: string) => {
+    fastSearch: async (q: string, locale: string = 'ru') => {
         set({ loading: true, error: null });
         const { data } = await axiosService.get('products/products-search', {
-            params: { q }
+            params: { q, locale }
         });
         set({ items: data, loading: false });
     }

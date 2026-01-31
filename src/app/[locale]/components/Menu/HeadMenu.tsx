@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+
 import { headMenuData } from './headMenuData';
 
 export default function HeadMenu() {
+
 	const t = useTranslations('StaticPages');
 
 	return (

@@ -1,6 +1,8 @@
 {
   "Header": {
     "search": "căutare",
+    "Search": "Căutare",
+    "find": "Căutare",
     "about": "despre noi",
     "paymentAndDelivery": "plată și livrare",
     "reviews": "recenzii",
@@ -19,7 +21,8 @@
     "Main": "Principală",
     "About": "Despre noi",
     "PaymentAndDelivery": "Plată și livrare",
-    "Contacts": "Contacte"
+    "Contacts": "Contacte",
+    "Partnership": "Cooperare"
   },
   "HomePage": {
     "title": "Salut",

@@ -6,16 +6,16 @@ export const routing = defineRouting({
 
 	// Used when no locale matches
 	defaultLocale: 'ru',
-	pathnames: {
-		'/': '/',
-		'/o-nas': {
-			ro: '/despre-noi',
-		},
-		'/oplata-i-dostavka': {
-			ro: '/plata-si-livrare',
-		},
-		'/kontakty': {
-			ro: '/contacte',
-		},
-	},
+	// pathnames: {
+	// 	'/': '/',
+	// 	'/o-nas': {
+	// 		ro: '/despre-noi',
+	// 	},
+	// 	'/oplata-i-dostavka': {
+	// 		ro: '/plata-si-livrare',
+	// 	},
+	// 	'/kontakty': {
+	// 		ro: '/contacte',
+	// 	},
+	// },
 });
