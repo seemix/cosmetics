@@ -37,7 +37,13 @@
     "relatedProducts": "Produse conexe",
     "noContent": "Conținut negăsit",
     "searchResults": "Rezultate căutare",
-    "Error": "Ошибка"
+    "Error": "Eroare",
+    "action": "ofertă",
+    "sort": "sorta",
+    "bestSeller": "cel mai vândut",
+    "default": "implicit",
+    "priceASC": "preț crescător",
+    "priceDESC": "preț descrescător"
   },
   "RegisterForm": {
     "newUserRegistration": "Înregistrarea unui utilizator nou",

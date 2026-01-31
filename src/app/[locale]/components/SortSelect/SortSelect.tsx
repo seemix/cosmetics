@@ -2,7 +2,9 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
+
 import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 
 type SortOption = {
@@ -10,14 +12,15 @@ type SortOption = {
     value: 'default' | 'price-asc' | 'price-desc'
 }
 
-const options: SortOption[] = [
-    { label: 'по умолчанию', value: 'default' },
-    { label: 'По цене 0-9', value: 'price-asc' },
-    { label: 'По цене 9-0', value: 'price-desc' },
-];
 
 export default function SortSelect() {
     const [open, setOpen] = useState(false);
+    const t = useTranslations('Catalog');
+    const options: SortOption[] = [
+        { label: t('default'), value: 'default' },
+        { label: t('priceASC'), value: 'price-asc' },
+        { label: t('priceDESC'), value: 'price-desc' },
+    ];
     const [current, setCurrent] = useState<SortOption>(options[0]);
 
     const ref = useRef<HTMLDivElement>(null);
@@ -28,7 +31,8 @@ export default function SortSelect() {
     const { replace } = useRouter();
 
     useEffect(() => {
-        setCurrent(searchParams.get('sort') === 'default' ? options[0] : options.find(o => o.value === searchParams.get('sort')) ?? options[0]);
+        setCurrent(searchParams.get('sort') === 'default' ? options[0] :
+            options.find(o => o.value === searchParams.get('sort')) ?? options[0]);
     }, [searchParams.get]);
 
     const handleUpdateQuery = (name: string, value: string) => {
@@ -44,7 +48,7 @@ export default function SortSelect() {
 
     return (
         <div className={'relative flex gap-2 text-sm self-center md:self-auto'} ref={ref}>
-            <span>сортировать:</span>
+            <span>{t('sort')}:</span>
             <motion.button
                 type={'button'}
                 onClick={() => setOpen(v => !v)}

@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { assets } from '@/app/[locale]/assets/assets';
 import {
     AddToCartButton, AlreadyInCartButton,
-    ProductGallerySlider,
+    ProductGallerySlider, ProductLabels,
     Quantity, RelatedProducts,
 } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
@@ -46,7 +46,10 @@ export default function ProductDetails({
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
-            <ProductGallerySlider images={gallery}/>
+            <div className={'relative'}>
+                <ProductGallerySlider images={gallery}/>
+                <ProductLabels action={Boolean(product.action)} bestSeller={Boolean(product.bestSeller)}/>
+            </div>
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
                     <div>

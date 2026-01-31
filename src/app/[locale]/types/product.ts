@@ -37,6 +37,8 @@ export interface IProduct {
     wholesalePrice?: number;
     retailPrice: number;
     shortDescription?: string;
+    action?: boolean;
+    bestSeller?: boolean;
     description?: SerializedEditorState;
     brand?: {
         logo: {

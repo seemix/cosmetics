@@ -40,6 +40,7 @@ export { default as PaginationButton } from './Pagination/PaginationButton';
 export { default as PasswordResetSuccess } from './PasswordResetSuccess/PasswordResetSuccess';
 export { default as ProductCardsGrid } from './ProductCardsGrid/ProductCardsGrid';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';
+export { default as ProductLabels } from './ProductLabels/ProductLabels';
 export { default as ProductGallerySlider } from './ProductDetails/ProductGallerySlider';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
 export { default as RelatedProducts } from './RelatedProducts/RelatedProducts';

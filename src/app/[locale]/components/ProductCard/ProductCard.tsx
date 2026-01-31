@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
-import { AddToCartButton, AlreadyInCartButton } from '@/app/[locale]/components';
+import { AddToCartButton, AlreadyInCartButton, ProductLabels } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { assets } from '@/app/[locale]/assets/assets';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
@@ -18,6 +18,8 @@ export default function ProductCard({ product }: { product: IProduct }) {
         gallery,
         retailPrice,
         wholesalePrice,
+        action,
+        bestSeller
     } = product;
     const { backendUrl, currency } = assets;
     const t = useTranslations('Catalog');
@@ -31,7 +33,8 @@ export default function ProductCard({ product }: { product: IProduct }) {
             <div className={'w-full aspect-[4/3] relative'}>
                 <Link href={`/product/${slug}`}>
                     <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
-                           className={'object-cover'} placeholder={'blur'} blurDataURL={gallery[0].image.blurHash}/>
+                           className={'object-cover relative'} placeholder={'blur'} blurDataURL={gallery[0].image.blurHash}/>
+                    {(action || bestSeller) && <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>  }
                 </Link>
             </div>
             <div className={'p-4 flex flex-col gap-2 bg-white'}>

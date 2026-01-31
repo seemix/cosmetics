@@ -40,7 +40,13 @@
     "relatedProducts": "Похожие товары",
     "noContent": "Контент не найден",
     "searchResults": "Результаты поиска",
-    "Error": "Ошибка"
+    "Error": "Ошибка",
+    "action": "акция",
+    "bestSeller": "хит продаж",
+    "sort": "сортировка",
+    "default": "по умолчанию",
+    "priceASC": "по цене 0-9",
+    "priceDESC": "по цене 9-0"
   },
   "RegisterForm": {
     "newUserRegistration": "Регистрация нового пользователя",
