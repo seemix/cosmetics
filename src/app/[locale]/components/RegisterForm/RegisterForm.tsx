@@ -38,7 +38,7 @@ export default function RegisterForm() {
             </h2>
 
             <div className={'space-y-3'}>
-                <input type="hidden" {...register('locale')} value={params?.locale as string}/>
+                <input type={'hidden'} {...register('locale')} value={params?.locale as string}/>
                 {/* Name */}
                 <div>
                     <label htmlFor={'name'} className={'block text-xs font-medium'}>

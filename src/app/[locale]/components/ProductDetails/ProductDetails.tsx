@@ -2,7 +2,7 @@
 
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -15,17 +15,16 @@ import {
 import type { IProduct } from '@/app/[locale]/types/product';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
-import { usePathname, useRouter } from 'next/navigation';
+import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
 
 export default function ProductDetails({
                                            product,
                                        }: {
     product: IProduct;
 }) {
-    const router = useRouter();
     const t = useTranslations('Catalog');
     const { cart } = useCartStore();
-    const{ user } = useAuthStore();
+    const { user } = useAuthStore();
 
     const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
 
@@ -42,21 +41,8 @@ export default function ProductDetails({
     } = product;
     const { currency, backendUrl } = assets;
     const [value, setValue] = useState<number>(1);
-    const pathname = usePathname();
 
-    const prevUserRef = useRef<typeof user>(null);
-
-    useEffect(() => {
-        if (prevUserRef.current && !user) {
-            router.replace(pathname);
-        }
-
-        if (!prevUserRef.current && user) {
-            router.refresh();
-        }
-
-        prevUserRef.current = user;
-    }, [user, router, pathname]);
+    useAuthPrices(user);
 
     return (
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
@@ -99,7 +85,7 @@ export default function ProductDetails({
                     </div>
                     <div className={'flex gap-4 mt-2 items-end'}>
                         {!inCart ? (<><Quantity value={value} setValue={setValue}/>
-                            <AddToCartButton productId={product.id} quantity={value}/></>) :
+                                <AddToCartButton productId={product.id} quantity={value}/></>) :
                             (<>
                                 <div className={'w-0 lg:w-30'}></div>
                                 <AlreadyInCartButton/>

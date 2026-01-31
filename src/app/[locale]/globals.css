@@ -43,9 +43,11 @@ button:active {
 }
 
 .product-cards-grid {
-    min-width: min(1000px, 95%);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    max-width: 1100px;
+    width: 95%;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: start;
     gap: 1em;
 }
 .loader {

@@ -1,12 +1,12 @@
 import { cookies } from 'next/headers';
 
 import { assets } from '@/app/[locale]/assets/assets';
-import { BreadCrumbs, NoContent, ProductCardsGrid } from '@/app/[locale]/components';
+import { BreadCrumbs, NoContent, Pagination, ProductCardsGrid } from '@/app/[locale]/components';
 import { getTranslations } from 'next-intl/server';
 
 export default async function SearchPage(props: {
     params: Promise<{ locale: string }>,
-    searchParams: Promise<{ query : string | undefined }>
+    searchParams: Promise<{ query: string | undefined }>
 }) {
     const cookieStore = await cookies();
     const { locale } = await props.params;
@@ -26,6 +26,8 @@ export default async function SearchPage(props: {
         })
     }).then(res => res.json());
 
+    const { products, pagination } = response;
+
     const breadCrumbs = [
         { id: '1', title: t('Header.Search'), slug: 'search' }
     ];
@@ -34,8 +36,9 @@ export default async function SearchPage(props: {
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
             <BreadCrumbs breadcrumbs={breadCrumbs}/>
             <h2 className={'text-2xl text-center'}>{t('Catalog.searchResults')} {`'${query}'`}</h2>
-            {response.products?.length < 1 ? <NoContent/> :
+            {products?.length < 1 ? <NoContent/> :
                 <ProductCardsGrid products={response.products}/>}
+            {pagination.totalPages > 1 && <Pagination pagination={pagination}/>}
         </div>
     );
 }

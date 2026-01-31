@@ -57,7 +57,6 @@ export default function ModalWindow() {
                         }`}
                     >
                         <motion.div
-                          //  onClick={(e) => e.stopPropagation()}
                             initial={'hidden'}
                             animate={'visible'}
                             exit={'hidden'}

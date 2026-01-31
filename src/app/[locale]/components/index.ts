@@ -35,6 +35,8 @@ export { default as ModalWindow } from './ModalWindow/ModalWindow';
 export { default as NoContent } from './NoContent/NoContent';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as FullScreenProductGallery } from './ProductDetails/FullScreenProductGallery';
+export { default as Pagination } from './Pagination/Pagination';
+export { default as PaginationButton } from './Pagination/PaginationButton';
 export { default as PasswordResetSuccess } from './PasswordResetSuccess/PasswordResetSuccess';
 export { default as ProductCardsGrid } from './ProductCardsGrid/ProductCardsGrid';
 export { default as ProductDetails } from './ProductDetails/ProductDetails';

@@ -2,16 +2,12 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+
 import { AddToCartButton, AlreadyInCartButton } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { assets } from '@/app/[locale]/assets/assets';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
-import { useTranslations } from 'next-intl';
-
-// const formatPrice = (value: number) =>
-//     new Intl.NumberFormat('md-MD', { style: 'currency', currency: assets.currency }).format(
-//         value,
-//     );
 
 export default function ProductCard({ product }: { product: IProduct }) {
     const {
@@ -30,9 +26,8 @@ export default function ProductCard({ product }: { product: IProduct }) {
 
     const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
 
-
     return (
-        <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] max-w-70'}>
+        <div className={'bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] mx-auto grid grid-rows-[auto_1fr_auto]'}>
             <div className={'w-full aspect-[4/3] relative'}>
                 <Link href={`/product/${slug}`}>
                     <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
@@ -50,9 +45,9 @@ export default function ProductCard({ product }: { product: IProduct }) {
                         {price} {currency}
                     </p>
                 </div>
-                <div className={'mx-auto mt-3'}>
-                    {!inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>}
-                </div>
+            </div>
+            <div className={'mx-auto mb-3'}>
+                {!inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>}
             </div>
         </div>
     );
