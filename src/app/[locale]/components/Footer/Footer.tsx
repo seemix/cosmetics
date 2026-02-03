@@ -1,9 +1,59 @@
-const Footer = () => {
-	return (
-		<footer className={'bg-foreground p-3 text-gray-50 flex justify-center'}>
-			footer
-		</footer>
-	);
-};
+import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { FaInstagram, FaPhoneSquareAlt, FaTelegramPlane } from 'react-icons/fa';
 
-export default Footer;
+import { assets } from '@/app/[locale]/assets/assets';
+
+export default async function Footer() {
+
+    const t = await getTranslations();
+
+    return (
+        <footer className={'w-full bg-foreground'}>
+            <div className={`p-5 text-gray-50 text-sm flex flex-wrap gap-3 justify-center max-w-[1100px] text-gray-500 
+                            justify-evenly mx-auto`}>
+                <div className={'flex flex-col gap-2 p-2'}>
+                    <p className={'tracking-normal uppercase mb-3'}>{t('Footer.info')}</p>
+                    <Link href={'/about-us'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('StaticPages.About')}
+                    </Link>
+                    <Link href={'/payment-and-delivery'}
+                          className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('StaticPages.PaymentAndDelivery')}
+                    </Link>
+                    <Link href={'/partnership'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('StaticPages.Partnership')}
+                    </Link>
+                </div>
+                <div className={'flex flex-col gap-2 p-2'}>
+                    <p className={'tracking-normal uppercase mb-3'}>{t('Footer.more')}</p>
+                    <Link href={'#'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('Footer.actions')}
+                    </Link>
+                    <Link href={'/orders'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('Footer.ordersHistory')}
+                    </Link>
+                </div>
+                <div className={'flex flex-col gap-2 p-2'}>
+                    <p className={'tracking-normal uppercase mb-3'}>{t('Header.contacts')}</p>
+                    <Link href={`tel:${assets.phone}`}
+                          className={`text-dark flex items-center text-sm transition-colors duration-300 
+                                            hover:text-[var(--main)]`}>
+                        <FaPhoneSquareAlt className={'w-9 sm:w-5 h-auto mr-1'} />
+                        <p className={'hidden sm:block'}>{assets.phone}</p>
+                    </Link>
+                    <Link href={assets.telegramLink}
+                          className={'flex transition-colors duration-300 hover:text-[var(--main)] text-dark'}>
+                        <FaTelegramPlane className={'w-9 sm:w-5 h-auto lg:w-4 mt-0 mr-2'} />Telegram
+                    </Link>
+                    <Link href={assets.instagramLink}
+                          className={`flex transition-colors duration-300 hover:text-[var(--main)] text-dark`}>
+                        <FaInstagram className={'w-9 sm:w-5 h-auto animate-fade-in mr-1'} /> Instagram
+                    </Link>
+
+                </div>
+            </div>
+            <div className={'p-1 bg-background flex justify-center text-gray-500 text-xs'}>Next Level Shop © 2026</div>
+        </footer>
+    );
+};

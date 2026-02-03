@@ -19,7 +19,8 @@ export default async function Header() {
                     <LanguageSwitcher/>
                 </div>
             </div>
-            <header className={'bg-foreground w-full py-3 px-6 text-black flex justify-center items-center sticky top-0 z-10'}>
+            <header className={`bg-foreground w-full py-3 px-6 text-black flex justify-center items-center sticky 
+                                top-0 z-10`}>
                 <div className={`grid gap-1 grid-cols-[auto_1fr_auto] md:grid-cols-[auto_auto_1fr_auto]                                
                                 max-w-[1200px] w-full mx-auto`}>
                     <div className={'flex gap-4 items-center justify-center'}>

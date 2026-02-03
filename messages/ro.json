@@ -88,5 +88,11 @@
     "subtotal": "Pentru suma totală",
     "ok": "ОК",
     "cancel": "anulare"
+  },
+  "Footer": {
+    "info": "Informații",
+    "more": "Suplimentar",
+    "ordersHistory": "Istoric comenzi",
+    "actions": "Promoții"
   }
 }
