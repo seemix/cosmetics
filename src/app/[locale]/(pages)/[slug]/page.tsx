@@ -11,6 +11,7 @@ export default async function AboutUsPage(props: propsType) {
         locale,
     }).toString();
     const { title, content } = await fetch(url).then(res => res.json());
+
     return (
         <>
             {!content ? <NoContent/> : <StaticPage content={content} title={title}/>}

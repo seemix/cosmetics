@@ -53,7 +53,7 @@ export default async function Footer() {
 
                 </div>
             </div>
-            <div className={'p-1 bg-background flex justify-center text-gray-500 text-xs'}>Next Level Shop © 2026</div>
+            <div className={'p-1 bg-foreground flex justify-center text-gray-400 text-xs'}>Next Level Shop © 2026</div>
         </footer>
     );
 };
