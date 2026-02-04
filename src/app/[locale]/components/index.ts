@@ -49,6 +49,7 @@ export { default as SearchComponent } from './SearchComponent/SearchComponent';
 export { default as SetNewPassword } from './SetNewPassword/SetNewPassword';
 export { default as SingleSearchItem } from './SearchComponent/SingleSearchItem';
 export { default as SortSelect } from './SortSelect/SortSelect';
+export { default as StaticPage } from './StaticPage/StaticPage';
 export { default as UserButtonWrapper } from './Header/UserButtonWrapper';
 export { default as VerifyEmail } from './VerifyEmail/VerifyEmail';
 export { default as Quantity } from './ProductDetails/Quantity';

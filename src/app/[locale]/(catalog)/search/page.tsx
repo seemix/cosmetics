@@ -3,11 +3,9 @@ import { cookies } from 'next/headers';
 import { assets } from '@/app/[locale]/assets/assets';
 import { BreadCrumbs, NoContent, Pagination, ProductCardsGrid } from '@/app/[locale]/components';
 import { getTranslations } from 'next-intl/server';
+import { propsType } from '@/app/[locale]/types/server-component-params';
 
-export default async function SearchPage(props: {
-    params: Promise<{ locale: string }>,
-    searchParams: Promise<{ query: string | undefined }>
-}) {
+export default async function SearchPage(props: propsType) {
     const cookieStore = await cookies();
     const { locale } = await props.params;
     const { query } = await props.searchParams;

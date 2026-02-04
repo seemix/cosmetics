@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
 				pathname: '/**',
 			},
 		],
+		unoptimized: process.env.NODE_ENV === 'development',
 	},
 };
 
