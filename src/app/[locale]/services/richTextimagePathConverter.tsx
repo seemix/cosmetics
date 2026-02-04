@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import { defaultJSXConverters } from '@payloadcms/richtext-lexical/react';
+import type { JSXConverters } from '@payloadcms/richtext-lexical/react';
+import { UploadNode } from '@payloadcms/richtext-lexical/client';
 
 import { assets } from '@/app/[locale]/assets/assets';
 
 const { backendUrl } = assets;
 
-export const richTextImagePathConverter = {
+export const richTextImagePathConverter: JSXConverters<UploadNode> = {
     ...defaultJSXConverters,
-    upload: ({ node }: any) => {
+    upload: ({ node }) => {
         const src = node.value?.url;
         if (!src) return null;
 
@@ -16,7 +18,7 @@ export const richTextImagePathConverter = {
             : `${backendUrl}${src}`;
 
         return (
-            <div className={'my-6 flex justify-center'}>
+            <div className={'my-3 flex justify-center'}>
                 <Image
                     src={fullSrc}
                     alt={node.value?.alt || 'image'}
