@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { defaultJSXConverters } from '@payloadcms/richtext-lexical/react';
 import type { JSXConverters } from '@payloadcms/richtext-lexical/react';
-import { UploadNode } from '@payloadcms/richtext-lexical/client';
+import type { UploadNode } from '@payloadcms/richtext-lexical/client';
 
 import { assets } from '@/app/[locale]/assets/assets';
 

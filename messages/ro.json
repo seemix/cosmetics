@@ -89,6 +89,18 @@
     "ok": "ОК",
     "cancel": "anulare"
   },
+  "Checkout": {
+    "city": "Localitate",
+    "street": "Stradă, număr",
+    "checkout": "Finalizează comanda",
+    "comment": "Comentariu",
+    "yourOrder": "Comanda ta",
+    "product": "Produs",
+    "qty": "Cant.",
+    "price": "Preț",
+    "sum": "Sumă",
+    "total": "Total de plată"
+  },
   "Footer": {
     "info": "Informații",
     "more": "Suplimentar",

@@ -1,5 +1,5 @@
 import { MainPage } from '@/app/[locale]/components';
 
-export default async function HomePage() {
+export default function HomePage() {
 	return <MainPage/>;
 }

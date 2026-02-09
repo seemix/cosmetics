@@ -9,7 +9,9 @@ interface CartState {
     itemLoading: string | null;
     error: string | null;
 
-    init(adapter: CartAdapter): void;
+    init(adapter: CartAdapter, locale: string): void;
+
+    loadCart(adapter: CartAdapter): Promise<void>;
 
     setCart(cart: Cart): void;
 
@@ -29,12 +31,16 @@ export const useCartStore = create<CartState>((set, get) => ({
     itemLoading: null,
     error: null,
 
-    init(adapter: CartAdapter) {
+    init(adapter: CartAdapter, locale: string = 'ru') {
         set({ adapter });
-        adapter.load().then(cart => set({ cart: cart }));
+        adapter.load(locale).then(cart => set({ cart: cart }));
     },
 
     setCart: (cart) => set({ cart }),
+
+    async loadCart(adapter: CartAdapter, locale: string = 'ru') {
+        adapter.load(locale).then(cart => set({ cart: cart }));
+    },
 
     async addItem(item: CartItemId) {
         set({ itemLoading: item.productId });

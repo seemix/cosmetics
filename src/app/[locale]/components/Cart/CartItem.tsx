@@ -21,9 +21,10 @@ interface ICartItem {
 const { backendUrl, currency } = assets;
 
 export default function CartItem({ cartId, product }: { cartId?: string, product: ICartItem }) {
+
     const { hideModal } = useModal();
     const { removeItem } = useCartStore();
-  //  console.log(cart.id);
+
     return (
         <div className={'grid grid-cols-[auto_1fr_auto_auto] m-2 gap-2 border-b border-gray-300'}>
             <Image src={`${backendUrl}${product.thumbnail}`} alt={product.title} width={80} height={80}/>

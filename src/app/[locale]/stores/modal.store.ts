@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import type { ModalAppearance } from '@/app/[locale]/types/modal';
 
-interface ModalStore {
+interface IModalStore {
 	open: boolean;
 	appearance: ModalAppearance;
 	content: React.ReactNode | null;
@@ -10,7 +10,7 @@ interface ModalStore {
 	hideModal: () => void;
 }
 
-export const useModalStore = create<ModalStore>((set) => ({
+export const useModalStore = create<IModalStore>((set) => ({
 	open: false,
 	appearance: 'zoom',
 	content: null,

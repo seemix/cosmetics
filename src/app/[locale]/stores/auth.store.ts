@@ -16,6 +16,8 @@ type UserState = {
     surname: string;
     email: string;
     phone: string;
+    city?: string;
+    street?: string;
     wholesale: boolean;
     locale: string;
 };

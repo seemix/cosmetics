@@ -3,8 +3,8 @@ import type { CartItemId, Cart } from '@/app/[locale]/services/cart/cart.types';
 import { axiosService } from '@/app/[locale]/services/axios.service';
 
 export const authCartAdapter = (): CartAdapter => ({
-    async load(): Promise<Cart> {
-        const { data } = await axiosService.get<Cart>('carts/me');
+    async load(locale: string): Promise<Cart> {
+        const { data } = await axiosService.get<Cart>(`carts/me?locale=${locale}`);
         return data;
     },
 

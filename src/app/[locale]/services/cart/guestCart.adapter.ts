@@ -5,11 +5,10 @@ import type { CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 export const guestCartAdapter = (): CartAdapter => ({
 
-    async load() {
+    async load(locale: string) {
         const items = localStorageService.get();
-        if(!items.length) return null;
-        return  await axiosService.post('carts/guest', items).then(value => value.data);
-
+        if (!items.length) return null;
+        return await axiosService.post(`carts/guest?locale=${locale}`, items).then(value => value.data);
     },
 
     async addItem(itemToAdd: CartItemId) {
@@ -38,7 +37,7 @@ export const guestCartAdapter = (): CartAdapter => ({
         const items = localStorageService.get();
         const filteredItems = items.filter(item => item.productId !== productId);
         localStorageService.save(filteredItems);
-        if(!filteredItems.length) return null;
+        if (!filteredItems.length) return null;
         return await axiosService.post('guest', filteredItems).then(value => value.data);
 
     },

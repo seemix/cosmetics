@@ -2,7 +2,7 @@ import type { Cart, CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 export interface CartAdapter {
 
-    load(): Promise<Cart>;
+    load(locale: string): Promise<Cart>;
 
     addItem(item: CartItemId): Promise<Cart>;
 
