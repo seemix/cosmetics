@@ -16,8 +16,16 @@ export default function CheckoutForm() {
     const { user } = useAuthStore();
 
     const schema = checkoutSchema(t);
-    const { register, handleSubmit, formState: { errors }, setValue} = useForm({
-        defaultValues: {name: user?.name, surname: user?.surname, email: user?.email, phone: user?.phone, city: '', street: '', comment: ''},
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+        defaultValues: {
+            name: user?.name,
+            surname: user?.surname,
+            email: user?.email,
+            phone: user?.phone,
+            city: '',
+            street: '',
+            comment: ''
+        },
         resolver: zodResolver(schema),
         mode: 'onSubmit'
     });
@@ -36,8 +44,8 @@ export default function CheckoutForm() {
     };
 
     return (
-        <form className={'mt-3 mx-auto'} onSubmit={handleSubmit(onSubmit)}>
-            <div className={'space-y-3 max-w-md w-80'}>
+        <form className={'mt-3 mx-auto w-full max-w-lg px-3'} onSubmit={handleSubmit(onSubmit)}>
+            <div className={'space-y-2 md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-5'}>
                 <div>
                     <label htmlFor={'name'} className={'block text-xs font-medium'}>
                         {t('name')}
@@ -152,24 +160,27 @@ export default function CheckoutForm() {
                     </div>
                 </div>
                 {/*Comment*/}
-                <div>
+                <div className={'md:col-span-2'}>
                     <label htmlFor={'comment'} className={'block text-xs font-medium'}>
                         {t2('comment')}
                     </label>
                     <input
                         id={'comment'}
                         {...register('comment')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.street ? 'border-red-500 focus:ring-red-500' : ''}`}
+                        className={`w-full border border-gray-300 px-1 py-2 focus:outline-none focus:ring-1 
+                                    focus:ring-black text-sm`}
                     />
                 </div>
             </div>
-            <button type={'submit'}
-                    disabled={loading}
-                    className={'mt-5 mx-auto my-4 border border-gray-800 w-full px-4 py-2 cursor-pointer'}
-            >
-                {loading ? <Loader/> : t2('checkout')}
-            </button>
+            <div className={'w-full flex justify-center'}>
+                <button type={'submit'}
+                        disabled={loading}
+                        className={`my-10 mx-auto border border-gray-800 w-[90%] md:w-[70%] px-4 py-2 cursor-pointer 
+                                    hover:text-[var(--main)] transition-colors duration-300 hover:border-[var(--main)]`}
+                >
+                    {loading ? <Loader/> : t2('checkout')}
+                </button>
+            </div>
             {error && (
                 <p className={'mt-4 text-sm text-red-600'}>
                     {error}

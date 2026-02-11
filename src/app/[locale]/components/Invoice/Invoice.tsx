@@ -4,21 +4,31 @@ import { useTranslations } from 'next-intl';
 
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
 import { assets } from '@/app/[locale]/assets/assets';
+import { Cart } from '@/app/[locale]/components';
+import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function Invoice() {
     const { cart } = useCartStore();
+    const { showModal } = useModal();
     const t = useTranslations('Checkout');
     if (!cart || !cart.items) return;
 
     return (
-        <div className={'max-w-md mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
-            <h2 className={'text-lg text-center font-bold mb-4 uppercase tracking-wider text-black'}>
-                {t('yourOrder')}
-            </h2>
-
-            <table className={'w-full text-left border-collapse text-sm'} cellSpacing={1}>
+        <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
+            <div className={'flex gap-4 justify-center items-center w-full'}>
+                <h2 className={'text-lg  text-center font-bold uppercase tracking-wider text-black'}>
+                    {t('yourOrder')}
+                </h2>
+                <button onClick={() => showModal(<Cart/>, 'right')}
+                        type={'button'}
+                        className={`border border-gray-800 px-3 py-1 cursor-pointer hover:text-[var(--main)] 
+                                    transition-colors duration-300 hover:border-[var(--main)]`}>
+                    {t('editOrder')}
+                </button>
+            </div>
+            <table className={'w-full text-left border-collapse text-sm text-black'} cellSpacing={1}>
                 <thead>
-                <tr className={'border-b-1 border-black'}>
+                <tr className={'border-b-1 border-gray-500'}>
                     <th className={'py-2 pr-2 w-8'}>№</th>
                     <th className={'py-2'}>{t('product')}</th>
                     <th className={'py-2 text-center w-15'}>{t('qty')}</th>

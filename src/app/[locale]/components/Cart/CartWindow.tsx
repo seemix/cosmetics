@@ -1,15 +1,21 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 
-import { useCartStore } from '@/app/[locale]/stores/cart.store';
-import { assets } from '@/app/[locale]/assets/assets';
-import { CartItem, ClearCart } from '@/app/[locale]/components';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
+import { CartItem, ClearCart } from '@/app/[locale]/components';
+import { assets } from '@/app/[locale]/assets/assets';
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function CartWindow() {
 
     const { cart } = useCartStore();
     const cartId = cart?.id || '';
+    const router = useRouter();
     const t = useTranslations('Cart');
+    const { hideModal } = useModal();
 
     return (
         <div className={'grid grid-rows-[auto_1fr_auto] h-full'}>
@@ -51,6 +57,7 @@ export default function CartWindow() {
                     </div>
                 </div>
                 <button
+                    onClick={() => {router.push('/checkout'); hideModal();}}
                     type={'button'}
                     className={`w-[80%] mx-auto border border-black p-2 transition-colors hover:border-[var(--main)] 
                                 hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}

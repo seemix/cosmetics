@@ -92,6 +92,7 @@
   "Checkout": {
     "city": "Localitate",
     "street": "Stradă, număr",
+    "editOrder": "editare",
     "checkout": "Finalizează comanda",
     "comment": "Comentariu",
     "yourOrder": "Comanda ta",
