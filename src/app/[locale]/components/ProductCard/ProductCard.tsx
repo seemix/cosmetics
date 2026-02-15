@@ -10,7 +10,7 @@ import type { IProduct } from '@/app/[locale]/types/product';
 import { assets } from '@/app/[locale]/assets/assets';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
 
-export default function ProductCard({ product, index = 0 }: { product: IProduct, index: number }) {
+export default function ProductCard({ product, index = 0, labels = true }: { product: IProduct, index: number, labels?: boolean }) {
     const {
         title,
         subtitle,
@@ -41,7 +41,7 @@ export default function ProductCard({ product, index = 0 }: { product: IProduct,
                     <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
                            className={'object-cover relative'} placeholder={'blur'}
                            blurDataURL={gallery[0].image.blurHash}/>
-                    {(action || bestSeller) &&
+                    {(action || bestSeller) && labels &&
                         <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
                 </Link>
             </div>

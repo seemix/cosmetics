@@ -1,17 +1,12 @@
 'use client';
 
-import type { IProduct } from '@/app/[locale]/types/product';
-
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
-import { Pagination, Navigation } from 'swiper/modules';
-import { ProductCard } from '@/app/[locale]/components';
+import { BrandCard } from '@/app/[locale]/components';
+import { IBrand } from '@/app/[locale]/types/brand';
 
-export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
+export default function Brands({ brands }: { brands: IBrand[] }) {
     return (
         <Swiper
             className={'max-w-[90%]'}
@@ -26,8 +21,8 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             }}
             modules={[Pagination, Navigation]}
         >
-            {products.map((product,index) => <SwiperSlide key={product.id}>
-                <ProductCard product={product} index={index} labels={labels}/>
+            {brands.map(brand => <SwiperSlide key={brand.id}>
+                <BrandCard brand={brand}/>
             </SwiperSlide>)}
         </Swiper>
     );
