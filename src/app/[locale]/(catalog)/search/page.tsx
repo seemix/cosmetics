@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { assets } from '@/app/[locale]/assets/assets';
 import { BreadCrumbs, NoContent, Pagination, ProductCardsGrid } from '@/app/[locale]/components';
 import { getTranslations } from 'next-intl/server';
-import { propsType } from '@/app/[locale]/types/server-component-params';
+import type { propsType } from '@/app/[locale]/types/server-component-params';
 
 export default async function SearchPage(props: propsType) {
     const cookieStore = await cookies();
@@ -27,7 +27,7 @@ export default async function SearchPage(props: propsType) {
     const { products, pagination } = response;
     const searchResults = `${t('Catalog.searchResults')} '${query}'`;
     const breadCrumbs = [
-        { id: '1', title: t('Header.find'), slug: 'search' },
+        { id: '0', title: t('Catalog.catalog'), slug: 'catalog' },
         { id: '2', title: searchResults, slug: searchResults }
     ];
 

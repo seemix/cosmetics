@@ -46,13 +46,13 @@ export default async function LocaleLayout({
         <html lang={locale}>
         <body className={`${roboto.className} ${montSerrat.className} antialiased`}
         >
-        <div className={'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen'}>
+        <div className={'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen min-w-0'}>
             <NextIntlClientProvider>
                 <MenuProvider initialMenu={menu}>
                     <Header/>
                     <CheckAuth/>
                     <ClearAuthError/>
-                    <main className={'w-full flex justify-center'}>
+                    <main className={'w-full min-w-0 flex justify-center'}>
                         {children}
                     </main>
                     <Footer/>

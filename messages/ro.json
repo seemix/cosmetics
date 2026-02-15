@@ -22,7 +22,9 @@
     "About": "Despre noi",
     "PaymentAndDelivery": "Plată și livrare",
     "Contacts": "Contacte",
-    "Partnership": "Cooperare"
+    "Partnership": "Cooperare",
+    "News": "Ştiri",
+    "readMore": "mai mult"
   },
   "HomePage": {
     "title": "Salut",
@@ -32,6 +34,7 @@
     "about": "Go to the about page"
   },
   "Catalog": {
+    "catalog": "Catalog",
     "quantity": "cantitate",
     "addToCart": "Adaugă in coş",
     "alreadyInCart": "Deja în coș",

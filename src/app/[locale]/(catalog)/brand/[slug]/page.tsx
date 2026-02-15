@@ -12,7 +12,7 @@ export default async function BrandPage(props: propsType) {
     const { sort, page } = await props.searchParams;
 
     const { backendUrl } = assets;
-    const t = await getTranslations('CatalogMenu');
+    const t = await getTranslations();
     const cookieStore = await cookies();
 
     const url = new URL(`${backendUrl}/api/products/products-brand/${slug}`);
@@ -32,7 +32,8 @@ export default async function BrandPage(props: propsType) {
     const { products, brand, pagination } = response;
 
     const breadCrumbs = [
-        { id: 0, title: t('brands'), slug: 'brands' },
+        { id: '0', title: t('Catalog.catalog'), slug: 'catalog' },
+        { id: '1', title: t('CatalogMenu.brands'), slug: 'brands' },
         { id: brand?.id, title: brand?.title, slug: brand?.slug }
     ];
 

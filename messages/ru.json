@@ -22,7 +22,9 @@
     "About": "О нас",
     "PaymentAndDelivery": "Оплата и доставка",
     "Contacts": "Контакты",
-    "Partnership": "Сотрудничество"
+    "Partnership": "Сотрудничество",
+    "News": "Новости",
+    "readMore": "читать далее"
   },
   "HomePage": {
     "title": "Привет мир",
@@ -33,6 +35,7 @@
     "about": "Go to the about page"
   },
   "Catalog": {
+    "catalog": "Каталог",
     "quantity": "количество",
     "addToCart": "В корзину",
     "alreadyInCart": "Уже в корзине",

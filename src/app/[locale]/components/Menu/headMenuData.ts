@@ -4,6 +4,10 @@ export const headMenuData = [
     //     link: '/',
     // },
     {
+      name: 'News',
+      link: '/news',
+    },
+    {
         name: 'About',
         link: '/about-us',
     },
@@ -15,8 +19,8 @@ export const headMenuData = [
         name: 'Contacts',
         link: '/contacts',
     },
-    {
-        name: 'Partnership',
-        link: '/partnership',
-    }
+    // {
+    //     name: 'Partnership',
+    //     link: '/partnership',
+    // }
 ];

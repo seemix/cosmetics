@@ -98,10 +98,6 @@ export default function ProductDetails({
             </div>
             <div className={'lg:col-span-2 text-sm'}>
                 {description && <RichText data={description} className={'description-text'}/>}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi
-                cupiditate ex fuga impedit laudantium, nam pariatur possimus suscipit.
-                Consequuntur id nesciunt omnis provident reprehenderit? Ab accusantium
-                mollitia officiis sequi totam?
             </div>
             {product.relatedProducts &&
                 <div className={'lg:col-span-2'}>

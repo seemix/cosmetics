@@ -42,15 +42,6 @@ button:active {
     transform: none !important;
 }
 
-/*.product-cards-grid {*/
-/*    display: grid;*/
-/*    max-width: 1100px;*/
-/*    width: 95%;*/
-/*    margin: 0 auto;*/
-/*    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));*/
-/*    justify-items: start;*/
-/*    gap: 1em;*/
-/*}*/
 .loader {
     position: relative;
     width: 45px;
@@ -140,4 +131,25 @@ button:active {
     .description-text h4 { font-size: 1.25rem; }  /* text-xl */
     .description-text h5 { font-size: 1.125rem; } /* text-lg */
     .description-text h6 { font-size: 1rem; }     /* text-base */
+}
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 100%; /* Робимо прямокутними */
+    background: var(--main);
+    transition: all 0.3s ease;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    width: 12px; /* Ефект розтягування */
+    height: 12px;
+    background: var(--main);
+    opacity: 1;
+}
+
+.swiper {
+    --swiper-navigation-color: var(--main);
+    --swiper-navigation-size: 50px;
 }
