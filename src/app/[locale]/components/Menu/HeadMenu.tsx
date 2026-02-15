@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 import { headMenuData } from './headMenuData';
+import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function HeadMenu() {
 
 	const t = useTranslations('StaticPages');
+	const { hideModal } = useModal();
 
 	return (
 		<nav className={`flex gap-10 w-full max-w-130 pt-1 justify-end text-md text-dark 
@@ -16,13 +18,12 @@ export default function HeadMenu() {
 				{headMenuData.map((item) => (
 					<li key={item.name}>
 						<Link
+							onClick={hideModal}
 							data-bubble={'true'}
 							href={item.link}
-							className={`whitespace-nowrap text-sm p-2 border border-[var(--dark)] rounded-sm 
-                                            bg-[var(--dark)]/10 text-dark transition-colors duration-300 
-                                            tracking-normal hover:bg-[var(--main)]/20 sm:px-0 sm:py-0 sm:border-none 
-                                            sm:rounded-none sm:bg-transparent                                         
-                                            sm:hover:bg-transparent sm:hover:text-[var(--main)]`}
+							className={`whitespace-nowrap text-sm p-2 text-dark transition-colors duration-300 
+                                            tracking-normal sm:px-0 sm:py-0 sm:border-none sm:bg-transparent 
+                                            hover:underline]`}
 						>
 							{t(item.name)}
 						</Link>

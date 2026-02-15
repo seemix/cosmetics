@@ -16,7 +16,7 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
     }).format(date);
 
     return (
-        <div className={'w-full m-2 p-4 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
+        <div className={'w-full my-2 p-4 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)]'}>
             <div>
                 <p className={'text-gray-500 text-right text-sm'}>{formattedDate}</p>
                 <h3 className={'text-xl text-center mb-4 font-semibold'}>{title}</h3>
@@ -28,7 +28,7 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
                 </div>
                 <p>{excerpt}</p>
             </div>
-            <div className={'w-full flex justify-end -mt-5'}>
+            <div className={'w-full flex justify-end -mt-3'}>
                 <Link href={`news//${slug}`}>
                 <button type={'button'}
                         className={`border border-black p-2 transition-colors hover:border-[var(--main)] 

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import type { IMenuItem } from '@/app/[locale]/types/catalog-menu';
+import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function MenuItem({
                                      item,
@@ -16,7 +17,7 @@ export default function MenuItem({
     const toggle = () => {
         setOpenItem(isOpen ? null : item.id);
     };
-
+    const { hideModal } = useModal();
     return (
         <div className={'relative p-2'}>
             {/* MOBILE */}
@@ -57,7 +58,7 @@ export default function MenuItem({
                             {item.sub?.length &&
                                 item.sub.map((child) => (
                                     <div key={child.id}>
-                                        <Link href={child.uri}>{child.title}</Link>
+                                        <Link href={child.uri} onClick={hideModal}>{child.title}</Link>
                                     </div>
                                 ))}
                         </motion.div>
@@ -82,7 +83,7 @@ export default function MenuItem({
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            key="submenu"
+                            key={'submenu'}
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
@@ -90,14 +91,15 @@ export default function MenuItem({
                             className="absolute left-0 top-full bg-white shadow w-42 py-2 z-[70]"
                         >
                             {(item.sub ?? []).map((child) => (
-                                <div
-                                    key={child.id}
-                                    className={`px-4 py-2 hover:bg-gray-100 cursor-pointer text-base tracking-normal 
-                                                normal-case font-normal
-                                                text-black hover:text-[var(--main)] transition-colors duration-300`}
-                                >
-                                    <Link href={child.uri}>{child.title}</Link>
-                                </div>
+                                <Link href={child.uri} key={child.id}>
+                                    <div
+                                        className={`px-4 py-2 hover:bg-gray-100 cursor-pointer text-base tracking-normal 
+                                                    normal-case font-normal
+                                                    text-black hover:text-[var(--main)] transition-colors duration-300`}
+                                    >
+                                        {child.title}
+                                    </div>
+                                </Link>
                             ))}
                         </motion.div>
                     )}
@@ -119,11 +121,11 @@ export default function MenuItem({
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     whileHover={{ rotate: 180 }}
                     transition={{ duration: 0.25 }}
-                    className="w-4 h-4"
-                    fill="currentColor"
+                    className={'w-4 h-4'}
+                    fill={'currentColor'}
                     viewBox="0 0 20 20"
-                    aria-hidden="true"
-                    focusable="false"
+                    aria-hidden={'true'}
+                    focusable={'false'}
                 >
                     <path
                         d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z"/>

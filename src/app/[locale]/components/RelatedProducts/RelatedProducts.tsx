@@ -24,8 +24,8 @@ export default function RelatedProducts({ products }: { products: IProduct[] }) 
             }}
             modules={[Pagination]}
         >
-            {products.map(product => <SwiperSlide key={product.id}>
-                <ProductCard product={product}/>
+            {products.map((product,index) => <SwiperSlide key={product.id}>
+                <ProductCard product={product} index={index}/>
             </SwiperSlide>)}
         </Swiper>
     );

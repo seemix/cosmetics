@@ -1,6 +1,6 @@
-import { assets } from '@/app/[locale]/assets/assets';
 import { getTranslations } from 'next-intl/server';
 
+import { assets } from '@/app/[locale]/assets/assets';
 import type { PostCard } from '@/app/[locale]/types/post-card';
 import type { propsType } from '@/app/[locale]/types/server-component-params';
 import { BreadCrumbs, NewsCard } from '@/app/[locale]/components';
@@ -15,8 +15,10 @@ export default async function NewsPage(props: propsType) {
     ];
 
     return (
-        <div className={'max-w-[1000px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4 pb-5'}>
-            <div className={'p-4 mt-3'}><BreadCrumbs breadcrumbs={breadCrumbs}/></div>
+        <div className={'max-w-[1000px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4 pb-5 px-3'}>
+            <div className={'p-4 mt-3'}>
+                <BreadCrumbs breadcrumbs={breadCrumbs}/>
+            </div>
             {docs.map((doc: PostCard) => <NewsCard key={doc.id} post={doc} locale={locale}/>)}
         </div>
     );
