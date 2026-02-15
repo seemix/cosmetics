@@ -1,17 +1,20 @@
 'use client';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useTranslations } from 'next-intl';
 import { Pagination, Navigation } from 'swiper/modules';
-import { motion } from 'framer-motion';
 
+import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
+import 'swiper/css/navigation';
 import { assets } from '@/app/[locale]/assets/assets';
 import type { PostCard } from '@/app/[locale]/types/post-card';
 
 export default function PostsSlider({ slides }: { slides: PostCard[] }) {
+    const t = useTranslations('StaticPages');
+
     return (
         <div className={'w-full overflow-hidden'}>
             <Swiper
@@ -37,15 +40,19 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                 transition={{ duration: .4, ease: 'easeInOut', delay: 0 }}
                                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-white 
                                              md:w-3xl w-md bg-black/70 p-6 text-md md:text-lg`}>
-                                <motion.span
+                                <motion.p
                                     initial={{ opacity: 0, filter: 'blur(3px)', y: 15 }}
                                     whileInView={{ opacity: 1, filter: 'blur(0)', y: 0 }}
                                     transition={{ duration: .5, ease: 'easeInOut', delay: .5 }}
-                                >{slide.excerpt}</motion.span>
-                                <button type={'button'}
-                                        className={'bg-[var(--main)] px-3 py-1 text-black cursor-pointer ml-3'}>
-                                    подробнее
-                                </button>
+                                >
+                                    {slide.excerpt}
+                                </motion.p>
+                                <div className={'flex w-full justify-end'}>
+                                    <button type={'button'}
+                                            className={'bg-[var(--main)] px-3 py-1 mt-3 text-black cursor-pointer ml-3'}>
+                                        {t('readMore')}
+                                    </button>
+                                </div>
                             </motion.div>
                         </div>
                     </SwiperSlide>

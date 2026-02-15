@@ -27,8 +27,8 @@ export default async function Footer() {
                 </div>
                 <div className={'flex flex-col gap-2 p-2'}>
                     <p className={'tracking-normal uppercase mb-3'}>{t('Footer.more')}</p>
-                    <Link href={'#'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
-                        {t('Footer.actions')}
+                    <Link href={'/news'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                        {t('StaticPages.News')}
                     </Link>
                     <Link href={'/orders'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
                         {t('Footer.ordersHistory')}
