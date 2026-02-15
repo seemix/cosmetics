@@ -1,14 +1,16 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useTranslations } from 'next-intl';
-import { Pagination, Navigation } from 'swiper/modules';
 
+import { Pagination, Navigation } from 'swiper/modules';
 import { motion } from 'framer-motion';
 import 'swiper/css';
-import 'swiper/css/pagination';
 
+import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+
 import { assets } from '@/app/[locale]/assets/assets';
 import type { PostCard } from '@/app/[locale]/types/post-card';
 
@@ -48,10 +50,12 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                     {slide.excerpt}
                                 </motion.p>
                                 <div className={'flex w-full justify-end'}>
-                                    <button type={'button'}
-                                            className={'bg-[var(--main)] px-3 py-1 mt-3 text-black cursor-pointer ml-3'}>
-                                        {t('readMore')}
-                                    </button>
+                                    <Link href={`/news/${slide.slug}`}>
+                                        <button type={'button'}
+                                                className={'bg-[var(--main)] px-3 py-1 mt-3 text-black cursor-pointer ml-3'}>
+                                            {t('readMore')}
+                                        </button>
+                                    </Link>
                                 </div>
                             </motion.div>
                         </div>

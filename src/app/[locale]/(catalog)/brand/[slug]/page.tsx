@@ -5,7 +5,6 @@ import { BreadCrumbs, NoContent, ProductCardsGrid, SortSelect, Pagination } from
 import { assets } from '@/app/[locale]/assets/assets';
 import type { propsType } from '@/app/[locale]/types/server-component-params';
 
-
 export default async function BrandPage(props: propsType) {
 
     const { locale, slug } = await props.params;

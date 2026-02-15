@@ -15,7 +15,7 @@ export default async function NewsPage(props: propsType) {
     ];
 
     return (
-        <div className={'max-w-[1000px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4'}>
+        <div className={'max-w-[1000px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4 pb-5'}>
             <div className={'p-4 mt-3'}><BreadCrumbs breadcrumbs={breadCrumbs}/></div>
             {docs.map((doc: PostCard) => <NewsCard key={doc.id} post={doc} locale={locale}/>)}
         </div>

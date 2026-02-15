@@ -3,11 +3,12 @@ import { getTranslations } from 'next-intl/server';
 
 import type { PostCard } from '@/app/[locale]/types/post-card';
 import { assets } from '@/app/[locale]/assets/assets';
+import Link from 'next/link';
 
 export default async function NewsCard({ post, locale }: { post: PostCard, locale: string }) {
 
     const t = await getTranslations('StaticPages');
-    const { title, slide, excerpt } = post;
+    const { title, slide, excerpt, slug } = post;
     const { backendUrl } = assets;
     const date = new Date(post.createdAt);
     const formattedDate = new Intl.DateTimeFormat(locale, {
@@ -28,11 +29,13 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
                 <p>{excerpt}</p>
             </div>
             <div className={'w-full flex justify-end -mt-5'}>
+                <Link href={`news//${slug}`}>
                 <button type={'button'}
                         className={`border border-black p-2 transition-colors hover:border-[var(--main)] 
                                         hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}>
                     {t('readMore')}
                 </button>
+                </Link>
             </div>
         </div>
     );

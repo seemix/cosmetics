@@ -5,8 +5,8 @@ import { richTextImagePathConverter } from '@/app/[locale]/services/richTextimag
 
 export default function StaticPage({ title, content }: { title: string, content: SerializedEditorState }) {
     return (
-        <div className={'w-full max-w-[1100px] mx-auto'}>
-            <h2 className={'text-2xl mt-4 text-center font-semibold'}>{title}</h2>
+        <div className={'w-full mx-auto'}>
+            <h2 className={'text-2xl my-4 text-center font-semibold'}>{title}</h2>
             <div>
                 <RichText
                     data={content}

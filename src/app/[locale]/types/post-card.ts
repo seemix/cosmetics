@@ -3,6 +3,7 @@ export type PostCard = {
     updatedAt: string;
     id: string;
     title: string;
+    slug: string;
     excerpt: string;
     slide: {
         alt: string;
