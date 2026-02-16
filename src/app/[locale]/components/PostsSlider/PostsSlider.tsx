@@ -40,12 +40,14 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                 initial={{ opacity: '0', y: -15 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: .4, ease: 'easeInOut', delay: 0 }}
+                                viewport={{ once: true }}
                                 className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-3/4 text-white 
                                              md:w-3xl w-md bg-black/70 p-6 text-md md:text-lg`}>
                                 <motion.p
                                     initial={{ opacity: 0, filter: 'blur(3px)', y: 15 }}
                                     whileInView={{ opacity: 1, filter: 'blur(0)', y: 0 }}
                                     transition={{ duration: .5, ease: 'easeInOut', delay: .5 }}
+                                    viewport={{ once: true }}
                                 >
                                     {slide.excerpt}
                                 </motion.p>

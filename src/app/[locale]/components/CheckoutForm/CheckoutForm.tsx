@@ -1,22 +1,26 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from '@/app/[locale]/components';
+import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
 import { useCheckoutStore } from '@/app/[locale]/stores/checkout.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
-import { useEffect } from 'react';
+import { useCartStore } from '@/app/[locale]/stores/cart.store';
 
 export default function CheckoutForm() {
+    const router = useRouter();
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
-    const { loading, error } = useCheckoutStore();
     const { user } = useAuthStore();
+    const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
+    const { clear } = useCartStore();
 
     const schema = checkoutSchema(t);
-    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         defaultValues: {
             name: user?.name,
             surname: user?.surname,
@@ -39,8 +43,24 @@ export default function CheckoutForm() {
         setValue('street', user?.street || '');
     }, [user, setValue]);
 
+    useEffect(() => {
+        if (success && orderNumber) {
+            setTimeout(() => {
+                reset();
+                clear().then();
+                router.push('/checkout/success');
+            }, 800);
+        }
+    }, [success, reset, router.push, orderNumber, clear]);
+
     const onSubmit = (data: CheckoutFormData) => {
-        console.log(data);
+        createNewOrder({
+            name: `${data.name} ${data.surname}`,
+            email: data.email,
+            phone: data.phone,
+            city: data.city,
+            address: data.street
+        }, data.comment).then();
     };
 
     return (

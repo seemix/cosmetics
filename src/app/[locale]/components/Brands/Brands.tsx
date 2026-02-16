@@ -4,7 +4,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { BrandCard } from '@/app/[locale]/components';
-import { IBrand } from '@/app/[locale]/types/brand';
+import type { IBrand } from '@/app/[locale]/types/brand';
 
 export default function Brands({ brands }: { brands: IBrand[] }) {
     return (

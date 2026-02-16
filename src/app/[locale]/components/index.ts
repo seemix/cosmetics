@@ -37,6 +37,7 @@ export { default as Invoice } from './Invoice/Invoice';
 export { default as ModalWindow } from './ModalWindow/ModalWindow';
 export { default as NewsCard } from './NewsCard/NewsCard';
 export { default as NoContent } from './NoContent/NoContent';
+export { default as OrderSuccessfullyCreated } from './OrderSuccessfullyCreated/OrderSuccessfullyCreated';
 export { default as ProductCard } from './ProductCard/ProductCard';
 export { default as FullScreenProductGallery } from './ProductDetails/FullScreenProductGallery';
 export { default as Pagination } from './Pagination/Pagination';
