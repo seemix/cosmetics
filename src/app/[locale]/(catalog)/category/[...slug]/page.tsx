@@ -28,7 +28,7 @@ export default async function CategoryPage(props: propsType) {
     }).then(res => res.json());
 
     const { products, categories, pagination } = response;
-    const breadCrumbs = [{ id: '0', title: t('catalog'), slug: 'catalog' }, ...response.categories];
+    const breadCrumbs = [{ id: '0', title: t('catalog'), slug: 'catalog' }, ...response.categories || []];
 
     return (
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>

@@ -4,17 +4,18 @@ import { useTranslations } from 'next-intl';
 
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
 import { assets } from '@/app/[locale]/assets/assets';
-import { Cart } from '@/app/[locale]/components';
+import { Cart, Loader } from '@/app/[locale]/components';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function Invoice() {
-    const { cart } = useCartStore();
+    const { cart, loading } = useCartStore();
     const { showModal } = useModal();
     const t = useTranslations('Checkout');
     if (!cart || !cart.items) return;
 
     return (
         <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
+            {loading && <Loader/>}
             <div className={'flex gap-4 justify-center items-center w-full'}>
                 <h2 className={'text-lg  text-center font-bold uppercase tracking-wider text-black'}>
                     {t('yourOrder')}
@@ -53,10 +54,10 @@ export default function Invoice() {
                 ))}
                 </tbody>
                 <tfoot>
-                <tr className={'border-t-2 border-black font-bold text-base'}>
-                    <td colSpan={2} className={'py-4 text-right uppercase pt-6'}>{t('total')}</td>
+                <tr className={'font-bold text-base'}>
+                    <td colSpan={2} className={'py-4 text-right uppercase pt-4 border-t'}>{t('total')}</td>
                     <td colSpan={3}
-                        className={'py-4 text-right pt-6 text-center'}>{cart.subtotal} {assets.currency}
+                        className={'py-4 text-right pt-4 text-center border-t'}>{cart.subtotal} {assets.currency}
                     </td>
                 </tr>
                 </tfoot>

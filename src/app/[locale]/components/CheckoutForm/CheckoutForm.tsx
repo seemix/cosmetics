@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from '@/app/[locale]/components';
 import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
@@ -16,8 +16,9 @@ export default function CheckoutForm() {
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
     const { user } = useAuthStore();
-    const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
+    const { success, orderNumber, loading, error, createNewOrder, created } = useCheckoutStore();
     const { clear } = useCartStore();
+    const locale = useLocale();
 
     const schema = checkoutSchema(t);
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
@@ -44,14 +45,14 @@ export default function CheckoutForm() {
     }, [user, setValue]);
 
     useEffect(() => {
-        if (success && orderNumber) {
+        if (success && orderNumber && !created) {
             setTimeout(() => {
                 reset();
                 clear().then();
                 router.push('/checkout/success');
             }, 800);
         }
-    }, [success, reset, router.push, orderNumber, clear]);
+    }, [success, reset, router.push, orderNumber, clear, created]);
 
     const onSubmit = (data: CheckoutFormData) => {
         createNewOrder({
@@ -60,7 +61,7 @@ export default function CheckoutForm() {
             phone: data.phone,
             city: data.city,
             address: data.street
-        }, data.comment).then();
+        }, locale, data.comment).then();
     };
 
     return (
@@ -110,8 +111,14 @@ export default function CheckoutForm() {
                         id={'email'}
                         type={'email'}
                         {...register('email')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
+                        readOnly={!!user?.email}
+                        className={`mt-1 w-full border border-gray-300 px-3 py-2 text-sm transition-all
+                                    focus:outline-none 
+                ${user?.email
+                            ? 'bg-gray-100 cursor-default focus:ring-0' 
+                            : 'focus:ring-1 focus:ring-black'          
+                        }
+                ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
                     <div className={'h-5'}>
                         {errors.email && (

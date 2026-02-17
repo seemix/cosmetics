@@ -113,8 +113,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     logout: async () => {
         try {
             await axiosService.post('users/logout');
-            useCartStore.getState().init(guestCartAdapter());
-            useCartStore.getState().adapter?.load();
+            useCartStore.getState().init(guestCartAdapter(),'ru');
+            useCartStore.getState().adapter?.load('ru');
             set({ user: null, authChecked: false });
         } catch (error) {
             set({ error: getErrorMessage(error) });
