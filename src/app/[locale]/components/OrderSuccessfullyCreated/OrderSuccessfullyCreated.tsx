@@ -2,24 +2,19 @@
 
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 import { useCheckoutStore } from '@/app/[locale]/stores/checkout.store';
 import { assets } from '@/app/[locale]/assets/assets';
 
 export default function OrderSuccessfullyCreated() {
-    const { orderNumber, success, loading, created, clearOrder } = useCheckoutStore();
-    const router = useRouter();
+    const { orderNumber, clearOrder } = useCheckoutStore();
+    // const router = useRouter();
     const t = useTranslations('Checkout');
 
     useEffect(() => {
-        if (created) clearOrder();
-    }, [clearOrder, created]);
-
-    useEffect(() => {
-        if (!success && !loading) router.push('/');
-    }, [loading, router.push, success]);
+        clearOrder();
+    }, [clearOrder]);
 
     return (
         <div className={'bg-white shadow max-w-xl mx-auto p-5 my-3'}>

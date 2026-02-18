@@ -10,7 +10,6 @@ interface ICheckoutStore {
     orderNumber?: string;
     loading: boolean;
     success: boolean;
-    created: boolean;
 
     createNewOrder: (shippingAddress: IShippingAddress, locale: string, comment?: string) => Promise<void>;
     clearOrder: () => void;
@@ -21,7 +20,6 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
         loading: false,
         success: false,
         orderNumber: '',
-        created: false,
 
         createNewOrder: async (shippingAddress: IShippingAddress, locale: string, comment?: string,) => {
             try {
@@ -30,18 +28,18 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
                 const items = cart?.items.map(item => {
                     return { product: item.id, quantity: item.quantity };
                 });
-                const res = await axiosService.post(`/orders/create?locale=${locale}`, {
+                const { data } = await axiosService.post(`/orders/create?locale=${locale}`, {
                     items, shippingAddress, comment
-                }).then(res => res.data);
-                set({ success: res.success, orderNumber: res.order.orderNumber });
+                });
+                set({ success: data.success, orderNumber: data.order.orderNumber });
             } catch (error) {
                 set({ error: getErrorMessage(error) });
             } finally {
-                set({ loading: false, created: true });
+                set({ loading: false });
             }
         },
         clearOrder: () => {
-            set({ created: false });
+            set({ success: false });
         }
     })
 );

@@ -16,7 +16,7 @@ export default function CheckoutForm() {
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
     const { user } = useAuthStore();
-    const { success, orderNumber, loading, error, createNewOrder, created } = useCheckoutStore();
+    const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
     const { clear } = useCartStore();
     const locale = useLocale();
 
@@ -45,14 +45,14 @@ export default function CheckoutForm() {
     }, [user, setValue]);
 
     useEffect(() => {
-        if (success && orderNumber && !created) {
+        if (success && orderNumber) {
             setTimeout(() => {
                 reset();
                 clear().then();
                 router.push('/checkout/success');
             }, 800);
         }
-    }, [success, reset, router.push, orderNumber, clear, created]);
+    }, [success, reset, router.push, orderNumber, clear]);
 
     const onSubmit = (data: CheckoutFormData) => {
         createNewOrder({
