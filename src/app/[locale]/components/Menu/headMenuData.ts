@@ -1,26 +1,18 @@
 export const headMenuData = [
-    // {
-    //     name: 'Main',
-    //     link: '/',
-    // },
     {
       name: 'News',
       link: '/news',
     },
     {
         name: 'About',
-        link: '/about-us',
+        link: 'pages/about-us',
     },
     {
         name: 'PaymentAndDelivery',
-        link: '/payment-and-delivery',
+        link: 'pages/payment-and-delivery',
     },
     {
         name: 'Contacts',
-        link: '/contacts',
+        link: 'pages/contacts',
     },
-    // {
-    //     name: 'Partnership',
-    //     link: '/partnership',
-    // }
 ];

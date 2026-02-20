@@ -82,8 +82,8 @@
     "inputNewPassword": "Введите новый пароль",
     "setNewPassword": "Установить пароль",
     "passwordHasChanged": "Пароль успешно изменён",
-    "loginIntoAccount": "Войти в аккаунт"
-
+    "loginIntoAccount": "Войти в аккаунт",
+    "saveChanges": "Сохранить изменения"
   },
   "Cart": {
     "cart": "Корзина",
@@ -117,7 +117,8 @@
   "Account": {
     "account": "Кабинет пользователя",
     "orders": "Заказы",
-    "favorites": "Избранное"
+    "favorites": "Избранное",
+    "profile": "Профиль"
   },
   "Footer": {
     "info": "Информация",

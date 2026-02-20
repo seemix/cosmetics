@@ -81,7 +81,8 @@
     "inputNewPassword": "Introduceți o parolă nouă",
     "setNewPassword": "Setați o parolă",
     "passwordHasChanged": "Parola a fost schimbată cu succes",
-    "loginIntoAccount": "Login la contul"
+    "loginIntoAccount": "Login la contul",
+    "saveChanges": "Salvați modificările"
   },
   "Cart": {
     "cart": "Coş",
@@ -115,7 +116,8 @@
   "Account": {
     "account": "Contul utilizatorului",
     "orders": "Comenzile",
-    "favorites": "Favorite"
+    "favorites": "Favorite",
+    "profile": "Profil"
   },
   "Footer": {
     "info": "Informații",

@@ -9,7 +9,8 @@ import type { PaginationProps } from '@/app/[locale]/types/pagination';
 export default async function NewsPage(props: propsType) {
     const t = await getTranslations('StaticPages');
     const { locale } = await props.params;
-    const resp = await fetch(`${assets.backendUrl}/api/posts`).then(res => res.json());
+    const resp = await fetch(`${assets.backendUrl}/api/posts?locale=${locale}`)
+        .then(res => res.json());
 
     const pagination: PaginationProps = {
         page: resp.page,

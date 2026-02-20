@@ -24,6 +24,14 @@ type UserState = {
     locale: string;
 };
 
+type UpdateUserInfo = {
+    name?: string;
+    surname?: string;
+    phone?: string;
+    city?: string;
+    street?: string;
+}
+
 interface AuthState {
     loading: boolean;
     authChecked: boolean;
@@ -40,6 +48,7 @@ interface AuthState {
     checkAuth: () => Promise<void>;
     forgotPassword: (email: string) => Promise<void>;
     resetPassword: (token: string, email: string) => Promise<void>;
+    updateUserInfo: (data: UpdateUserInfo) => Promise<void>;
     clearError: () => void;
 }
 
@@ -141,6 +150,20 @@ export const useAuthStore = create<AuthState>((set) => ({
             set({ loading: false, passwordHasReset: true });
         } catch (error) {
             set({ error: getErrorMessage(error), loading: false });
+        }
+    },
+
+    updateUserInfo: async(userInfo ) => {
+        try {
+            set({ loading: true });
+            await axiosService.patch('users/update', userInfo);
+            const { data } = await axiosService.get<{
+                user: UserState;
+            }>('users/me');
+            set({ user: data.user });
+            set({ loading: false });
+        } catch (error) {
+            set({ error: getErrorMessage(error) });
         }
     },
 
