@@ -20,9 +20,13 @@ export default async function ProductPage(props: {
             },
         }
     ).then((res) => res.json());
-    const product: IProduct = response.docs[0];
 
-    const categoriesChain = buildCategoryChain(product?.categories[0]);
+    const product: IProduct = response.docs[0];
+    const firstCategory = product.categories && product.categories.length > 0
+        ? product.categories[0]
+        : null;
+
+    const categoriesChain = buildCategoryChain(firstCategory);
     categoriesChain[2] = {
         id: product?.id,
         title: product?.title,

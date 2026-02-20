@@ -1,8 +1,9 @@
 'use client';
 
-import { LoginForm } from '@/app/[locale]/components';
 import { CiLogin } from 'react-icons/ci';
 import { useTranslations } from 'next-intl';
+
+import { LoginForm } from '@/app/[locale]/components';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function LoginLinkButton() {

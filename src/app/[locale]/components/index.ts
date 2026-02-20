@@ -25,7 +25,7 @@ export { default as UserButton } from './Header/UserButton';
 export { default as Logo } from './Header/Logo';
 export { default as SocialIcons } from './Header/SocialIcons';
 export { default as LoginForm } from './LoginForm/LoginForm';
-export { default as LoginLinkbutton } from './LoginLinkButton/LoginLinkButton';
+export { default as LoginLinkButton } from './LoginLinkButton/LoginLinkButton';
 export { default as BurgerMenu } from './Menu/BurgerMenu/BurgerMenu';
 export { default as CatalogMenu } from './Menu/CatalogMenu/CatalogMenu';
 export { default as ForgotPasswordForm } from './ForgotPasswordForm/ForgotPasswordForm';

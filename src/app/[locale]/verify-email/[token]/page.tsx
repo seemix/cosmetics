@@ -1,6 +1,7 @@
-import { assets } from '@/app/[locale]/assets/assets';
 import { getTranslations } from 'next-intl/server';
-import LoginLinkButton from '@/app/[locale]/components/LoginLinkButton/LoginLinkButton';
+
+import { assets } from '@/app/[locale]/assets/assets';
+import { LoginLinkButton } from '@/app/[locale]/components';
 
 export default async function VerifyEmailTokenPage(props: {
     params: Promise<{ token: string }>

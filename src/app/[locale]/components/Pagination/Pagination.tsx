@@ -5,7 +5,7 @@ import { GrFormPrevious } from 'react-icons/gr';
 import { GrFormNext } from 'react-icons/gr';
 
 import type { PaginationProps } from '@/app/[locale]/types/pagination';
-import PaginationButton from '@/app/[locale]/components/Pagination/PaginationButton';
+import { PaginationButton } from '@/app/[locale]/components';
 
 export default function Pagination({ pagination }: { pagination: PaginationProps }) {
 
