@@ -37,7 +37,6 @@ export default function ProfileForm() {
 
 
     const onSubmit = (data: ProfileFormData) => {
-        console.log(data);
         updateUserInfo(data).then();
     };
 
