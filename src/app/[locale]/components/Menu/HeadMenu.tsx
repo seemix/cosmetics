@@ -20,7 +20,7 @@ export default function HeadMenu() {
 						<Link
 							onClick={hideModal}
 							data-bubble={'true'}
-							href={item.link}
+							href={`/pages/${item.link}`}
 							className={`whitespace-nowrap text-sm p-2 text-dark transition-colors duration-300 
                                             tracking-normal sm:px-0 sm:py-0 sm:border-none sm:bg-transparent 
                                             hover:underline]`}

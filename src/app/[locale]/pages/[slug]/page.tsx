@@ -25,11 +25,11 @@ export default async function AboutUsPage(props: propsType) {
             title: title,
             slug: slug
         }
-    ]
+    ];
 
     return (
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
-            <div className={'p-4'}><BreadCrumbs breadcrumbs={breadCrumbs}/></div>
+            <BreadCrumbs breadcrumbs={breadCrumbs}/>
             {!content ? <NoContent/> : <StaticPage content={content} title={title}/>}
         </div>
     );

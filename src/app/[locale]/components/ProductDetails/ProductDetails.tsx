@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 import { assets } from '@/app/[locale]/assets/assets';
 import {
-    AddToCartButton, AlreadyInCartButton,
+    AddToCartButton, AlreadyInCartButton, FavoriteButton,
     ProductGallerySlider, ProductLabels,
     Quantity, RelatedProducts,
 } from '@/app/[locale]/components';
@@ -37,6 +37,7 @@ export default function ProductDetails({
         subtitle,
         retailPrice,
         wholesalePrice,
+        unavailable,
         brand,
     } = product;
     const { currency, backendUrl } = assets;
@@ -49,6 +50,7 @@ export default function ProductDetails({
             <div className={'relative'}>
                 <ProductGallerySlider images={gallery}/>
                 <ProductLabels action={Boolean(product.action)} bestSeller={Boolean(product.bestSeller)}/>
+                <FavoriteButton productId={product.id}/>
             </div>
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
@@ -75,7 +77,7 @@ export default function ProductDetails({
                 </h4>
                 <p className={'text-[.95em] mt-2'}>{shortDescription}</p>
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
-                    <div className={'mt-2 flex items-center'}>
+                    {!unavailable && <div className={'mt-2 flex items-center'}>
 						<span className={`${wholesalePrice ? 'text-xl' : 'text-2xl'} 
 						                   font-bold text-[var(--main)] leading-15`}>
 							{retailPrice} {currency}
@@ -85,15 +87,18 @@ export default function ProductDetails({
 							{wholesalePrice} {currency}
 						</span>
                         )}
-                    </div>
-                    <div className={'flex gap-4 mt-2 items-end'}>
-                        {!inCart ? (<><Quantity value={value} setValue={setValue}/>
-                                <AddToCartButton productId={product.id} quantity={value}/></>) :
-                            (<>
-                                <div className={'w-0 lg:w-30'}></div>
-                                <AlreadyInCartButton/>
-                            </>)}
-                    </div>
+                    </div>}
+                    {!unavailable ? (
+                        <div className={'flex gap-4 mt-2 items-end'}>
+                            {!inCart ? (<><Quantity value={value} setValue={setValue}/>
+                                    <AddToCartButton productId={product.id} quantity={value}/></>) :
+                                (<>
+                                    <div className={'w-0 lg:w-30'}></div>
+                                    <AlreadyInCartButton/>
+                                </>)}
+                        </div>) : (<p className={'text-xl font-semibold text-gray-500 mt-4 '}>
+                        {t('notAvailable')}
+                    </p>)}
                 </div>
             </div>
             <div className={'lg:col-span-2 text-sm'}>
@@ -102,7 +107,7 @@ export default function ProductDetails({
             {product.relatedProducts &&
                 <div className={'lg:col-span-2'}>
                     <h2 className={'text-2xl font-bold mb-4'}>{t('relatedProducts')}</h2>
-                    <RelatedProducts products={product.relatedProducts}/>
+                    <RelatedProducts products={product.relatedProducts} labels={false}/>
                 </div>
             }
         </div>

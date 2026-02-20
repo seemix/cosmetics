@@ -38,6 +38,7 @@
     "quantity": "cantitate",
     "addToCart": "Adaugă in coş",
     "alreadyInCart": "Deja în coș",
+    "notAvailable": "nu este disponibil",
     "article": "Cod produs",
     "shortArticle": "Cod",
     "relatedProducts": "Produse conexe",
@@ -110,6 +111,11 @@
     "orderEmailSent": "Informațiile au fost trimise la adresa de e-mail indicată de dumneavoastră.",
     "anyQuestions": "Aveți întrebări?",
     "contactUs": "Contactați-ne:"
+  },
+  "Account": {
+    "account": "Contul utilizatorului",
+    "orders": "Comenzile",
+    "favorites": "Favorite"
   },
   "Footer": {
     "info": "Informații",

@@ -39,7 +39,7 @@ export default async function BrandPage(props: propsType) {
     return (
         <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
             {products.length > 0 &&
-                <div className={'p-4 flex flex-col sm:flex-row gap-2 items-start sm:justify-between sm:items-center'}>
+                <div className={'flex flex-col sm:flex-row gap-2 items-start sm:justify-between sm:items-center'}>
                     <BreadCrumbs breadcrumbs={breadCrumbs}/>
                     <SortSelect/>
                 </div>}

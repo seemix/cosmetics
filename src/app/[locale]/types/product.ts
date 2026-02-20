@@ -36,6 +36,7 @@ export interface IProduct {
     article: string;
     wholesalePrice?: number;
     retailPrice: number;
+    unavailable?: boolean;
     shortDescription?: string;
     action?: boolean;
     bestSeller?: boolean;

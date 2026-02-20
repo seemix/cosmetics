@@ -1,5 +1,5 @@
-import type { CartAdapter } from '@/app/[locale]/services/cart/cart.adapter';
 import { create } from 'zustand';
+import type { CartAdapter } from '@/app/[locale]/services/cart/cart.adapter';
 import type { Cart, CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 interface CartState {

@@ -11,9 +11,7 @@ export default async function CheckoutPage() {
 
     return (
         <div className={'max-w-[1100px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4'}>
-            <div className={'p-4'}>
                 <BreadCrumbs breadcrumbs={breadCrumbs}/>
-            </div>
             <Invoice/>
             <CheckoutForm/>
         </div>

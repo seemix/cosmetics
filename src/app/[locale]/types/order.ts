@@ -1,6 +1,11 @@
-type itemsType = {
+export type OrderItemType = {
     id: string;
+    title: string;
+    subtitle: string;
+    slug: string;
+    price: number;
     quantity: number;
+    thumbnail: string;
 }
 
 export interface IShippingAddress {
@@ -12,6 +17,10 @@ export interface IShippingAddress {
 }
 
 export interface IOrder {
-    items: itemsType[];
+    id: string;
+    createdAt: string;
+    orderNumber: string;
+    total: number;
+    items: OrderItemType[];
     shippingAddress: IShippingAddress
 }

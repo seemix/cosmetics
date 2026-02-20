@@ -4,7 +4,7 @@ export default async function BreadCrumbs({ breadcrumbs }: { breadcrumbs: IBread
 
     return (
         <div className={`flex gap-1 md:gap-2 text-[.8em] text-dark font-(family-name:--font-roboto) tracking-normal
-                        items-center`}>
+                        items-center p-4`}>
             {breadcrumbs.length && breadcrumbs.map((item, index, array) =>
                 <p key={item.id} className={'flex items-center gap-2'}>
                     {item.title}

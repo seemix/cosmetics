@@ -14,9 +14,7 @@ export default async function BrandPage(props: propsType) {
             { id: brand?.id, title: brand?.title, slug: brand?.slug }];
 
     return (<div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
-            <div className={'p-4'}>
                 <BreadCrumbs breadcrumbs={breadCrumbs}/>
-            </div>
             <StaticPage content={brand?.description} title={brand?.title}/>
         </div>
     );

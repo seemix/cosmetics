@@ -5,6 +5,7 @@ import { axiosService } from '@/app/[locale]/services/axios.service';
 import { getErrorMessage } from '@/app/[locale]/services/getErrorMessage';
 import { mergeGuestCart } from '@/app/[locale]/services/cart/mergeGuestCart';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useFavoritesStore } from '@/app/[locale]/stores/favorites.store';
 import { guestCartAdapter } from '@/app/[locale]/services/cart/guestCart.adapter';
 
 type RegisterResult = {
@@ -12,6 +13,7 @@ type RegisterResult = {
 };
 
 type UserState = {
+    id: string;
     name: string;
     surname: string;
     email: string;
@@ -101,8 +103,9 @@ export const useAuthStore = create<AuthState>((set) => ({
             const { data } = await axiosService.get<{
                 user: UserState;
             }>('users/me');
-
             set({ user: data.user });
+            const fav = await axiosService.get('users/favorites/my');
+            useFavoritesStore.getState().setFavorites(fav.data);
         } catch (error) {
             set({ error: getErrorMessage(error) });
         } finally {
@@ -113,7 +116,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     logout: async () => {
         try {
             await axiosService.post('users/logout');
-            useCartStore.getState().init(guestCartAdapter(),'ru');
+            useCartStore.getState().init(guestCartAdapter(), 'ru');
             useCartStore.getState().adapter?.load('ru');
             set({ user: null, authChecked: false });
         } catch (error) {
