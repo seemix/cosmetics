@@ -15,12 +15,13 @@ export default function CheckoutForm() {
     const router = useRouter();
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
+    const t3 = useTranslations('Validation');
     const { user } = useAuthStore();
     const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
     const { clear } = useCartStore();
     const locale = useLocale();
 
-    const schema = checkoutSchema(t);
+    const schema = checkoutSchema(t3);
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
         defaultValues: {
             name: user?.name,
@@ -50,7 +51,7 @@ export default function CheckoutForm() {
                 reset();
                 clear().then();
                 router.push('/checkout/success');
-            }, 800);
+            }, 200);
         }
     }, [success, reset, router.push, orderNumber, clear]);
 

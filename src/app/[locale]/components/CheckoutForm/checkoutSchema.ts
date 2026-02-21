@@ -4,13 +4,25 @@ type Translator = (key: string) => string;
 
 export const checkoutSchema = (t: Translator) =>
     z.object({
-        name: z.string().min(2, t('incorrectFormat')),
-        surname: z.string().min(2, t('incorrectFormat')),
-        email: z.string().email(t('incorrectEmail')),
-        phone: z.string().min(8, t('incorrectFormat')),
-        city: z.string().min(3, t('incorrectFormat')),
-        street: z.string().min(3, t('incorrectFormat')),
-        comment: z.string().optional(),
+            name: z.string()
+                .min(1, t('fieldRequired'))
+                .min(2, t('fieldTooShort')),
+            surname: z.string()
+                .min(1, t('fieldRequired'))
+                .min(2, t('fieldTooShort')),
+            email: z.string()
+                .min(1, t('fieldRequired'))
+                .email(t('incorrectEmail')),
+            phone: z.string()
+                .min(1, t('fieldRequired'))
+                .regex(/^\d{8}$/, t('phoneMustBe8Digits')),
+            city: z.string()
+                .min(1, t('fieldRequired'))
+                .min(3, t('fieldTooShort')),
+            street: z.string()
+                .min(1, t('fieldRequired'))
+                .min(3, t('fieldTooShort')),
+            comment: z.string().optional(),
     });
 
-export type CheckoutFormData = z.infer<ReturnType<typeof checkoutSchema>>
+export type CheckoutFormData = z.infer<ReturnType<typeof checkoutSchema>>;

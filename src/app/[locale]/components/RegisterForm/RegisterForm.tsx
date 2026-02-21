@@ -12,7 +12,8 @@ import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 
 
 export default function RegisterForm() {
-    const t = useTranslations('RegisterForm');
+    const t = useTranslations('Validation');
+    const t2 = useTranslations('RegisterForm');
     const schema = useMemo(() => createRegisterSchema(t), [t]);
     const params = useParams();
     const {
@@ -34,9 +35,9 @@ export default function RegisterForm() {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}
-              className={'mx-auto my-4 w-full max-w-md border border-gray-300 bg-white p-6'}>
+              className={'mx-auto my-2 w-full max-w-md border border-gray-300 bg-white p-6'}>
             <h2 className={'mb-6 text-xl font-semibold text-gray-800 text-center'}>
-                {t('newUserRegistration')}
+                {t2('newUserRegistration')}
             </h2>
 
             <div className={'space-y-3'}>
@@ -44,7 +45,7 @@ export default function RegisterForm() {
                 {/* Name */}
                 <div>
                     <label htmlFor={'name'} className={'block text-xs font-medium'}>
-                        {t('name')}
+                        {t2('name')}
                     </label>
                     <input id={'name'}
                            {...register('name')}
@@ -62,7 +63,7 @@ export default function RegisterForm() {
                 {/* Surname */}
                 <div>
                     <label htmlFor={'surname'} className={'block text-xs font-medium'}>
-                        {t('surname')}
+                        {t2('surname')}
                     </label>
                     <input
                         id={'surname'}
@@ -101,7 +102,7 @@ export default function RegisterForm() {
                 {/* Phone */}
                 <div>
                     <label htmlFor={'phone'} className={'block text-xs font-medium'}>
-                        {t('phone')}
+                        {t2('phone')}
                     </label>
                     <input
                         id={'phone'}
@@ -121,7 +122,7 @@ export default function RegisterForm() {
                 {/* Password */}
                 <div>
                     <label htmlFor={'password'} className={'block text-xs font-medium'}>
-                        {t('password')}
+                        {t2('password')}
                     </label>
                     <input
                         id={'password'}
@@ -141,7 +142,7 @@ export default function RegisterForm() {
                 {/* Confirm password */}
                 <div>
                     <label htmlFor={'confirmPassword'} className={'block text-xs font-medium'}>
-                        {t('confirmPassword')}
+                        {t2('confirmPassword')}
                     </label>
                     <input
                         id={'confirmPassword'}
@@ -164,7 +165,7 @@ export default function RegisterForm() {
                     disabled={loading}
                     className={'mt-2 w-full border border-gray-800  px-4 py-2 cursor-pointer'}
             >
-                {loading ? <Loader/> : t('registration')}
+                {loading ? <Loader/> : t2('registration')}
             </button>
             {error && (
                 <p className={'mt-4 text-sm text-red-600'}>

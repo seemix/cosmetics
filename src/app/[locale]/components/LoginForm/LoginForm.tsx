@@ -15,7 +15,8 @@ import { useModal } from '@/app/[locale]/hooks/useModal';
 export default function LoginForm() {
 
     const t = useTranslations('RegisterForm');
-    const schema = createLoginSchema(t);
+    const t2 = useTranslations('Validation');
+    const schema = createLoginSchema(t2);
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({
         resolver: zodResolver(schema),
         mode: 'onSubmit'

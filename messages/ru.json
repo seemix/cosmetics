@@ -54,15 +54,12 @@
     "priceDESC": "по цене 9-0"
   },
   "RegisterForm": {
-    "newUserRegistration": "Регистрация нового пользователя",
+    "newUserRegistration": "Регистрация пользователя",
     "name": "Имя",
     "surname": "Фамилия",
     "phone": "Номер телефона",
     "password": "Пароль",
     "confirmPassword": "Повторите пароль",
-    "incorrectFormat": "Некорректный формат",
-    "incorrectEmail": "Некорректный формат email",
-    "passwordsDontMatch": "Пароли не совпадают",
     "registration": "Зарегистрироваться",
     "successfullyRegistered": "Спасибо за регистрацию в интернет-магазине",
     "checkEmail": "Для активации учётной записи проверьте электронную почту",
@@ -84,6 +81,15 @@
     "passwordHasChanged": "Пароль успешно изменён",
     "loginIntoAccount": "Войти в аккаунт",
     "saveChanges": "Сохранить изменения"
+  },
+  "Validation": {
+    "incorrectFormat": "Некорректный формат",
+    "incorrectEmail": "Некорректный формат email",
+    "passwordsDontMatch": "Пароли не совпадают",
+    "passwordTooShort": "Пароль слишком короткий",
+    "fieldRequired": "Обязательное поле",
+    "fieldTooShort": "Слишком коротко",
+    "phoneMustBe8Digits": "Введите 8 цифр"
   },
   "Cart": {
     "cart": "Корзина",

@@ -53,15 +53,12 @@
     "priceDESC": "preț descrescător"
   },
   "RegisterForm": {
-    "newUserRegistration": "Înregistrarea unui utilizator nou",
+    "newUserRegistration": "Înregistrarea unui utilizator",
     "name": "Prenume",
     "surname": "Nume",
     "phone": "Număr de telefon",
     "password": "Parolă",
     "confirmPassword": "Repetă parola",
-    "incorrectFormat": "Format incorect",
-    "incorrectEmail": "Format de email incorect",
-    "passwordsDontMatch": "Parolele nu coincid",
     "registration": "Înregistrare",
     "successfullyRegistered": "Vă mulțumim pentru înregistrarea în magazinul online",
     "checkEmail": "Pentru activarea contului, vă rugăm să verificați adresa de e-mail",
@@ -83,6 +80,15 @@
     "passwordHasChanged": "Parola a fost schimbată cu succes",
     "loginIntoAccount": "Login la contul",
     "saveChanges": "Salvați modificările"
+  },
+  "Validation": {
+    "incorrectFormat": "Format incorect",
+    "incorrectEmail": "Format de email incorect",
+    "passwordsDontMatch": "Parolele nu coincid",
+    "passwordTooShort": "Parola este prea scurtă",
+    "fieldRequired": "Câmp obligatoriu",
+    "fieldTooShort": "Prea scurt",
+    "phoneMustBe8Digits": "Introduceți 8 cifre"
   },
   "Cart": {
     "cart": "Coş",

@@ -12,9 +12,10 @@ import { type ProfileFormData, profileSchema } from '@/app/[locale]/components/P
 export default function ProfileForm() {
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
+    const t3 = useTranslations('Validation');
     const { user, loading, error, updateUserInfo } = useAuthStore();
 
-    const schema = profileSchema(t);
+    const schema = profileSchema(t3);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         defaultValues: {
             name: user?.name || '',
