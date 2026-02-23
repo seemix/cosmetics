@@ -1,6 +1,7 @@
 export { default as AddToCartButton } from './AddToCartButton/AddToCartButton';
 export { default as AlreadyInCartButton } from './AlreadyInCartButton/AlreadyInCartButton';
 export { default as AuthUserButton } from './Header/AuthUserButton';
+export { default as Brands } from './Brands/Brands';
 export { default as BrandCard } from './BrandCard/BrandCard';
 export { default as BreadCrumbs } from './BreadCrumbs/BreadCrumbs';
 export { default as Cart } from './Cart/Cart';
