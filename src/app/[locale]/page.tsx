@@ -1,8 +1,8 @@
 import { cookies } from 'next/headers';
+import { getTranslations } from 'next-intl/server';
 
 import { Brands, PostsSlider, RelatedProducts } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
-import { getTranslations } from 'next-intl/server';
 
 export default async function HomePage() {
     const cookieStore = await cookies();
