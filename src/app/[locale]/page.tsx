@@ -28,7 +28,7 @@ export default async function HomePage() {
     }).then(res => res.json());
 
     return (<div className={'w-full'}>
-        <PostsSlider slides={posts.docs}/>k
+        <PostsSlider slides={posts.docs}/>
         <div className={'mx-auto max-w-[1100px] mt-6'}>
             <h2 className={'font-semibold text-xl text-center'}>{t('brands')}</h2>
             <Brands brands={brands.docs}/>
