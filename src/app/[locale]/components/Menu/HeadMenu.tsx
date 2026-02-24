@@ -23,7 +23,7 @@ export default function HeadMenu() {
 							href={`${item.link}`}
 							className={`whitespace-nowrap text-sm p-2 text-dark transition-colors duration-300 
                                             tracking-normal sm:px-0 sm:py-0 sm:border-none sm:bg-transparent 
-                                            hover:underline]`}
+                                            hover:text-[var(--main)]`}
 						>
 							{t(item.name)}
 						</Link>
