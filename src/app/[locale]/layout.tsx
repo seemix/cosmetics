@@ -1,10 +1,10 @@
 import { Montserrat, Roboto } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
 import { CheckAuth, ClearAuthError, Footer, Header, ModalWindow } from '@/app/[locale]/components';
 import { routing } from '@/i18n/routing';
 import './globals.css';
-import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
 
 const roboto = Roboto({
     variable: '--font-roboto',
@@ -39,7 +39,7 @@ export default async function LocaleLayout({
         notFound();
     }
     const menu = await fetch(`${process.env.API_URL}/menu?locale=${locale}`,{
-        cache: 'force-cache'
+        cache: 'no-cache'
     }).then(res => res.json()) || [];
 
     return (
