@@ -5,14 +5,14 @@ export const headMenuData = [
     },
     {
         name: 'About',
-        link: 'pages/about-us',
+        link: '/pages/about-us',
     },
     {
         name: 'PaymentAndDelivery',
-        link: 'pages/payment-and-delivery',
+        link: '/pages/payment-and-delivery',
     },
     {
         name: 'Contacts',
-        link: 'pages/contacts',
+        link: '/pages/contacts',
     },
 ];
