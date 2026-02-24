@@ -10,18 +10,18 @@ export default async function Footer() {
 
     return (
         <footer className={'w-full bg-foreground'}>
-            <div className={`p-5 text-gray-50 text-sm flex flex-wrap gap-3 justify-center max-w-[1100px] text-gray-500 
+            <div className={`p-5 text-sm flex flex-wrap gap-3 max-w-[1100px] text-gray-500 
                             justify-evenly mx-auto`}>
                 <div className={'flex flex-col gap-2 p-2'}>
                     <p className={'tracking-normal uppercase mb-3'}>{t('Footer.info')}</p>
-                    <Link href={'/about-us'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                    <Link href={'/pages/about-us'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
                         {t('StaticPages.About')}
                     </Link>
-                    <Link href={'/payment-and-delivery'}
+                    <Link href={'/pages/payment-and-delivery'}
                           className={`hover:text-[var(--main)] transition-colors duration-300`}>
                         {t('StaticPages.PaymentAndDelivery')}
                     </Link>
-                    <Link href={'/partnership'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
+                    <Link href={'/pages/partnership'} className={`hover:text-[var(--main)] transition-colors duration-300`}>
                         {t('StaticPages.Partnership')}
                     </Link>
                 </div>
