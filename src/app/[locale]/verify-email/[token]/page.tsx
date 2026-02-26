@@ -1,7 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { assets } from '@/app/[locale]/assets/assets';
-import { LoginLinkButton } from '@/app/[locale]/components';
+import { ErrorComponent, LoginLinkButton } from '@/app/[locale]/components';
 
 export default async function VerifyEmailTokenPage(props: {
     params: Promise<{ token: string }>
@@ -13,7 +13,7 @@ export default async function VerifyEmailTokenPage(props: {
     });
     if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.errors[0].message || 'Something went wrong');
+        return <ErrorComponent error={data.errors?.[0]?.message || 'Something went wrong'}/>;
     }
 
     return (
