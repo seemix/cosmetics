@@ -8,6 +8,7 @@ export default async function ProtectedRoutes({ children }: { children: React.Re
     const { backendUrl } = assets;
     const cookieStore = await cookies();
     const token = cookieStore.get('payload-token')?.value;
+    console.log(`token= ${token}`);
 
     const res = await fetch(`${backendUrl}/api/users/me`, {
         headers: {
