@@ -16,8 +16,9 @@ export default function ForgotPasswordForm() {
 
     const { showModal } = useModal();
     const { forgotPassword, forgotPasswordEmailSent, loading } = useAuthStore();
-    const t = useTranslations('RegisterForm');
-    const schema = forgotPasswordSchema(t);
+    const t = useTranslations();
+    const t2 = useTranslations('Validation')
+    const schema = forgotPasswordSchema(t2);
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onSubmit',
         resolver: zodResolver(schema)
@@ -41,9 +42,9 @@ export default function ForgotPasswordForm() {
                     <CloseModalButton/>
                 </div>
                 <h2 className={'text-2xl font-semibold text-gray-800 text-center mb-2'}>
-                    {t('forgotPassword')}
+                    {t('RegisterForm.forgotPassword')}
                 </h2>
-                <h3 className={'mx-5 text-gray-500'}>{t('inputEmailForReset')}</h3>
+                <h3 className={'mx-5 text-gray-500'}>{t('RegisterForm.inputEmailForReset')}</h3>
                 <div className={'w-full bg-white p-5 shadow-lg border border-gray-100'}>
                     <form onSubmit={handleSubmit(submit)} className={'mx-auto bg-white'}>
                         <div className={'space-y-3 '}>
@@ -76,7 +77,7 @@ export default function ForgotPasswordForm() {
                                     hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
                                     font-(family-name:--font-roboto) w-full`}
                         >
-                            {loading ? <Loader/> : t('resetPassword')}
+                            {loading ? <Loader/> : t('RegisterForm.resetPassword')}
                         </button>
                     </form>
                 </div>
