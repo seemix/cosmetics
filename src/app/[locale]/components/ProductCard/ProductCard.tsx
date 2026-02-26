@@ -27,6 +27,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
         action,
         bestSeller
     } = product;
+    console.log(wholesalePrice);
     const { backendUrl, currency } = assets;
     const t = useTranslations('Catalog');
     const price = wholesalePrice || retailPrice;

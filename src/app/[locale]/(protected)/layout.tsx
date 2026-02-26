@@ -7,6 +7,7 @@ export default async function ProtectedRoutes({ children }: { children: React.Re
 
     const { backendUrl } = assets;
     const cookieStore = await cookies();
+
     const res = await fetch(`${backendUrl}/api/users/me`, {
         headers: {
             Cookie: cookieStore.toString()
