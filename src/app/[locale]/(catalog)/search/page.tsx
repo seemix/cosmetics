@@ -9,8 +9,9 @@ export default async function SearchPage(props: propsType) {
     const cookieStore = await cookies();
     const { locale } = await props.params;
     const { query } = await props.searchParams;
-    const t = await getTranslations();
+    if(!query) return <NoContent/>
 
+    const t = await getTranslations();
     const url = new URL(`${assets.backendUrl}/api/products/products-search`);
     url.search = new URLSearchParams({
         locale,
