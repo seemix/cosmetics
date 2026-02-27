@@ -1,17 +1,20 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+
 import { CartItem, ClearCart } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function CartWindow() {
 
     const { cart } = useCartStore();
+    const { user } = useAuthStore();
+    console.log(user?.wholesale);
     const cartId = cart?.id || '';
     const router = useRouter();
     const t = useTranslations('Cart');
@@ -50,14 +53,18 @@ export default function CartWindow() {
                     <div className={'text-sm flex flex-col'}>
                         <div className={'mt-2'}>
                             {t('subtotal')}
-                            : <p className={'text-green-500 text-[1.3em] mt-1 font-bold text-center'}>
+                            : <p className={`${user?.wholesale === true ? 'text-green-500' : 'text-[var(--main)]'} 
+                                             text-[1.3em] mt-1 font-bold text-center`}>
                             {cart?.subtotal} {assets.currency}
                         </p>
                         </div>
                     </div>
                 </div>
                 <button
-                    onClick={() => {router.push('/checkout'); hideModal();}}
+                    onClick={() => {
+                        router.push('/checkout');
+                        hideModal();
+                    }}
                     type={'button'}
                     className={`w-[80%] mx-auto border border-black p-2 transition-colors hover:border-[var(--main)] 
                                 hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}
