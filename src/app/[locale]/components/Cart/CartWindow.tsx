@@ -14,7 +14,6 @@ export default function CartWindow() {
 
     const { cart } = useCartStore();
     const { user } = useAuthStore();
-    console.log(user?.wholesale);
     const cartId = cart?.id || '';
     const router = useRouter();
     const t = useTranslations('Cart');
@@ -24,7 +23,7 @@ export default function CartWindow() {
         <div className={'grid grid-rows-[auto_1fr_auto] h-full'}>
             <div className={'bg-white w-full'}>
                 <h2 className={'text-2xl -mt-5 py-2 mx-2 text-center font-medium'}>
-                    Корзина
+                    {t('cart')}
                 </h2>
             </div>
 
