@@ -20,7 +20,7 @@ export default function ProductCardsGrid({ products }: { products: IProduct[] })
                     <motion.div key={product.id}
                                 layout
                                 exit={{ opacity: 0, height: 0, scale: .5, y: 10 }}
-                                className={'overflow-hidden'}>
+                                className={'overflow-hidden w-full'}>
                         <ProductCard product={product} index={i}/>
                     </motion.div>
                 )}

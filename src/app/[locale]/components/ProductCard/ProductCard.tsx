@@ -40,7 +40,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             transition={{ duration: .35, ease: 'easeInOut', delay: index * .25 }}
             viewport={{ once: true }}
-            className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[250px] mx-auto 
+            className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[250px] mx-auto
                         grid grid-rows-[auto_1fr_auto] h-full`}>
             <div className={'w-full aspect-[4/3] relative'}>
                 <Link href={`/product/${slug}`}>
