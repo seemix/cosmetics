@@ -5,10 +5,10 @@ import type { IProduct } from '@/app/[locale]/types/product';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
+// import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-import { Pagination, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { ProductCard } from '@/app/[locale]/components';
 
 export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
@@ -17,14 +17,14 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             className={'max-w-[90%] pb-6'}
             spaceBetween={20}
             navigation={true}
-            pagination={{ clickable: true }}
+            // pagination={{ clickable: true }}
             breakpoints={{
                 400: { slidesPerView: 1 },
                 600: { slidesPerView: 2 },
                 768: { slidesPerView: 3 },
                 1024: { slidesPerView: 4 },
             }}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation]}
         >
             {products.map((product,index) => <SwiperSlide key={product.id}>
                 <ProductCard product={product} index={index} labels={labels}/>
