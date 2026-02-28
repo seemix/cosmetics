@@ -14,7 +14,7 @@ import { ProductCard } from '@/app/[locale]/components';
 export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
     return (
         <Swiper
-            className={'max-w-[90%]'}
+            className={'max-w-[90%] pb-6'}
             spaceBetween={20}
             navigation={true}
             pagination={{ clickable: true }}
