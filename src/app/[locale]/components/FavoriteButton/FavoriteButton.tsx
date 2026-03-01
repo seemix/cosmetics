@@ -8,7 +8,6 @@ import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 export default function FavoriteButton({ productId }: { productId: string }) {
 
     const { favorites, removeFavorite, addFavorite } = useFavoritesStore();
-    console.log(favorites);
     const { user } = useAuthStore();
     const handleClick = () => {
         if (favorites.includes(productId)) {
