@@ -38,7 +38,7 @@ export const guestCartAdapter = (): CartAdapter => ({
         const filteredItems = items.filter(item => item.productId !== productId);
         localStorageService.save(filteredItems);
         if (!filteredItems.length) return null;
-        return await axiosService.post('guest', filteredItems).then(value => value.data);
+        return await axiosService.post('carts/guest', filteredItems).then(value => value.data);
 
     },
 
