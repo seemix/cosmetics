@@ -134,7 +134,7 @@ export default function CheckoutForm() {
                     <label htmlFor={'phone'} className={'block text-xs font-medium'}>
                         {t('phone')}
                     </label>
-                    <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
+                    <div className={`flex items-center mt-1 border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
                                     ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
                         <span className={'ml-2'}>+373</span>
