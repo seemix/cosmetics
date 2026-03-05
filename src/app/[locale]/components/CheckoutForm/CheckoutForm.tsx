@@ -10,6 +10,7 @@ import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components
 import { useCheckoutStore } from '@/app/[locale]/stores/checkout.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { assets } from '@/app/[locale]/assets/assets';
 
 export default function CheckoutForm() {
     const router = useRouter();
@@ -20,6 +21,8 @@ export default function CheckoutForm() {
     const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
     const { clear } = useCartStore();
     const locale = useLocale();
+    const { phoneCode } = assets;
+
 
     const schema = checkoutSchema(t3);
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
@@ -116,8 +119,8 @@ export default function CheckoutForm() {
                         className={`mt-1 w-full border border-gray-300 px-3 py-2 text-sm transition-all
                                     focus:outline-none 
                 ${user?.email
-                            ? 'bg-gray-100 cursor-default focus:ring-0' 
-                            : 'focus:ring-1 focus:ring-black'          
+                            ? 'bg-gray-100 cursor-default focus:ring-0'
+                            : 'focus:ring-1 focus:ring-black'
                         }
                 ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
@@ -137,7 +140,7 @@ export default function CheckoutForm() {
                     <div className={`flex items-center mt-1 border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
                                     ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                        <span className={'ml-2'}>+373</span>
+                        <span className={'ml-2'}>{phoneCode}</span>
                         <input type={'tel'} {...register('phone')} id={'phone'}
                                className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
                     </div>

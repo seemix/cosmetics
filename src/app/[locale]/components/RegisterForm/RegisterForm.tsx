@@ -9,6 +9,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { createRegisterSchema, type RegisterFormData } from './registerSchema';
 import { Loader } from '@/app/[locale]/components';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { assets } from '@/app/[locale]/assets/assets';
 
 
 export default function RegisterForm() {
@@ -27,6 +28,7 @@ export default function RegisterForm() {
 
     const { loading, error, register: registerUser } = useAuthStore();
     const router = useRouter();
+    const { phoneCode } = assets;
 
     const onSubmit = async (data: RegisterFormData) => {
         const res = await registerUser(data).then();
@@ -109,7 +111,7 @@ export default function RegisterForm() {
                     <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
                                     ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                        <span className={'ml-2'}>+373</span>
+                        <span className={'ml-2'}>{phoneCode}</span>
                         <input type={'tel'} {...register('phone')} id={'phone'}
                                className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
                     </div>

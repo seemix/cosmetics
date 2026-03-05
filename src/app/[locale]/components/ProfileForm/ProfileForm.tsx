@@ -8,12 +8,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from '@/app/[locale]/components';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { type ProfileFormData, profileSchema } from '@/app/[locale]/components/ProfileForm/profileSchema';
+import { assets } from '@/app/[locale]/assets/assets';
 
 export default function ProfileForm() {
     const t = useTranslations('RegisterForm');
     const t2 = useTranslations('Checkout');
     const t3 = useTranslations('Validation');
     const { user, loading, error, updateUserInfo } = useAuthStore();
+    const { phoneCode } = assets;
 
     const schema = profileSchema(t3);
     const { register, handleSubmit, formState: { errors }, setValue } = useForm({
@@ -22,7 +24,7 @@ export default function ProfileForm() {
             surname: user?.surname || '',
             phone: user?.phone || '',
             city: user?.city || '',
-            street: user?.street ||'',
+            street: user?.street || '',
         },
         resolver: zodResolver(schema),
         mode: 'onSubmit'
@@ -81,7 +83,7 @@ export default function ProfileForm() {
                     <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
                                     ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                        <span className={'ml-2'}>+373</span>
+                        <span className={'ml-2'}>{phoneCode}</span>
                         <input type={'tel'} {...register('phone')} id={'phone'}
                                className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
                     </div>
