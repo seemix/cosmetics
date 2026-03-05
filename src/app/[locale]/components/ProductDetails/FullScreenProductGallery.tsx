@@ -57,35 +57,38 @@ export default function ProductGalleryModal({
             >
                 ×
             </button>
-            <button
-                type={'button'}
-                aria-label={'Previous image'}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    mainSwiper?.slidePrev();
-                    setActiveIndex(Number(mainSwiper?.realIndex));
-                }}
-                className={`absolute left-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center
+            {images.length > 1 && (
+                <>
+                    <button
+                        type={'button'}
+                        aria-label={'Previous image'}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            mainSwiper?.slidePrev();
+                            setActiveIndex(Number(mainSwiper?.realIndex));
+                        }}
+                        className={`absolute left-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center
                             text-white text-8xl hover: transition-colors duration-300 hover:text-[var(--main)]
                              focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer`}
-            >
-                ‹
-            </button>
-
-            <button
-                type="button"
-                aria-label="Next image"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    mainSwiper?.slideNext();
-                    setActiveIndex(Number(mainSwiper?.realIndex));
-                }}
-                className={`absolute right-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center
+                    >
+                        ‹
+                    </button>
+                    <button
+                        type={'button'}
+                        aria-label={'Next image'}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            mainSwiper?.slideNext();
+                            setActiveIndex(Number(mainSwiper?.realIndex));
+                        }}
+                        className={`absolute right-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 flex items-center justify-center
                             text-white text-8xl hover: transition-colors duration-300 hover:text-[var(--main)]
                              focus:outline-none focus-visible:ring-2 focus-visible:ring-white cursor-pointer`}
-            >
-                ›
-            </button>
+                    >
+                        ›
+                    </button>
+                </>
+            )}
 
             {/* MAIN IMAGE */}
             <Swiper
@@ -109,7 +112,7 @@ export default function ProductGalleryModal({
                                 src={backendUrl + img.image.url}
                                 alt={img.image.alt || ''}
                                 placeholder={'blur'}
-                               blurDataURL={img.image.blurHash}
+                                blurDataURL={img.image.blurHash}
                                 fill
                                 className={'object-contain'}
                                 priority

@@ -78,13 +78,13 @@ export default function ProfileForm() {
                     <label htmlFor={'phone'} className={'block text-xs font-medium'}>
                         {t('phone')}
                     </label>
-                    <input
-                        id={'phone'}
-                        type={'tel'}
-                        {...register('phone')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
+                    <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
+                                    focus:outline-none focus:ring-black text-sm 
+                                    ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
+                        <span className={'ml-2'}>+373</span>
+                        <input type={'tel'} {...register('phone')} id={'phone'}
+                               className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
+                    </div>
                     <div className={'h-5'}>
                         {errors.phone && (
                             <p className={'mt-1 text-xs text-red-600'}>

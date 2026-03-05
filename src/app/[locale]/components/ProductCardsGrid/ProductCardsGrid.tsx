@@ -13,7 +13,7 @@ export default function ProductCardsGrid({ products }: { products: IProduct[] })
     useAuthPrices(user);
 
     return (
-        <div className={`grid w-full max-w-[1120px] grid-cols-[repeat(auto-fll,minmax(220px,1fr))] justify-items-start 
+        <div className={`grid w-full grid-cols-[repeat(auto-fll,minmax(220px,1fr))] justify-items-center 
                          gap-4 sm:grid-cols-[repeat(auto-fit,255px)] sm:justify-items-center`}>
             <AnimatePresence initial={false} mode={'popLayout'}>
                 {products.map((product, i) =>
