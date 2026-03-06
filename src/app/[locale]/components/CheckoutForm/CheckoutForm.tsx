@@ -135,7 +135,7 @@ export default function CheckoutForm() {
                 {/* Phone */}
                 <div>
                     <label htmlFor={'phone'} className={'block text-xs font-medium'}>
-                        {t2('phone')}
+                        {t('phone')}
                     </label>
                     <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
