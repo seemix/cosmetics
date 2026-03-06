@@ -135,13 +135,22 @@ export default function CheckoutForm() {
                 {/* Phone */}
                 <div>
                     <label htmlFor={'phone'} className={'block text-xs font-medium'}>
-                        {t('phone')}
+                        {t2('phone')}
                     </label>
-                    <div className={`flex items-center mt-1 border border-gray-300 focus:outline-none focus:ring-1 
+                    <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
                                     focus:outline-none focus:ring-black text-sm 
                                     ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
                         <span className={'ml-2'}>{phoneCode}</span>
-                        <input type={'tel'} {...register('phone')} id={'phone'}
+                        <input type={'tel'} {...register('phone',{
+                            pattern: {
+                                value: /^[0-9]{8}$/,
+                                message: 'Enter 8 digits'
+                            },
+                            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 8);
+                            }
+                        })} id={'phone'}
+                               inputMode={'numeric'} maxLength={8}
                                className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
                     </div>
                     <div className={'h-5'}>
