@@ -6,6 +6,7 @@ import { BrandCard } from '@/app/[locale]/components';
 import type { IBrand } from '@/app/[locale]/types/brand';
 
 export default function Brands({ brands }: { brands: IBrand[] }) {
+
     return (
         <Swiper
             className={'max-w-[90%] border-0'}
