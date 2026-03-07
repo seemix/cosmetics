@@ -115,7 +115,7 @@ export default function RegisterForm() {
                         <input type={'tel'} {...register('phone',{
                             pattern: {
                                 value: /^[0-9]{8}$/,
-                                message: 'Enter 8 digits'
+                                message: t('phoneMustBe8Digits')
                             },
                             onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                                 e.target.value = e.target.value.replace(/\D/g, '').slice(0, 8);
