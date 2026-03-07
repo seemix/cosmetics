@@ -57,8 +57,7 @@ export default function ProductDetails({
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
                     <div>
-                        <h2 className={'text-2xl lg:text-3xl font-bold leading-10 lg:leading-15 mt-3'}>
-                            {' '}
+                        <h2 className={'text-2xl lg:text-3xl font-bold leading-6 my-3'}>
                             {title}
                         </h2>
                         <h3 className={'text-md lg:text-[1.2em] leading-8 lg:leading-12'}>
@@ -67,7 +66,7 @@ export default function ProductDetails({
                     </div>
                     <Link href={`../brand/${brand?.slug}`} className={'w-28 aspect-video relative'}>
                         <Image
-                            className={'object-contain'}
+                            className={'object-contain coverfixed '}
                             src={backendUrl + brand?.logo.url}
                             alt={'brand logo'}
                             fill
