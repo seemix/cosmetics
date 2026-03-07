@@ -66,7 +66,7 @@ export default function ProductDetails({
                     </div>
                     <Link href={`../brand/${brand?.slug}`} className={'w-28 aspect-video relative'}>
                         <Image
-                            className={'object-contain coverfixed '}
+                            className={'object-contain cover fixed'}
                             src={backendUrl + brand?.logo.url}
                             alt={'brand logo'}
                             fill
