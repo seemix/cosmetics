@@ -21,7 +21,7 @@ export default function FavoriteButton({ productId }: { productId: string }) {
         <>
             {user && <button type={'button'}
                              onClick={handleClick}
-                             className={`absolute top-2 right-2 cursor-pointer text-[var(--main)] 
+                             className={`cursor-pointer text-[var(--main)] 
                             transition-colors duration-300 text-[1.8em] z-10`}>
                 {!favorites.includes(productId) ? <IoMdHeartEmpty/> : <IoMdHeart className={'text-[var(--main)]'}/>}
             </button>}

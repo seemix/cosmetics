@@ -50,7 +50,9 @@ export default function ProductDetails({
             <div className={'relative'}>
                 <ProductGallerySlider images={gallery}/>
                 <ProductLabels action={Boolean(product.action)} bestSeller={Boolean(product.bestSeller)}/>
-                <FavoriteButton productId={product.id}/>
+                <div className={'absolute top-7 right-3 z-5'}>
+                    <FavoriteButton productId={product.id}/>
+                </div>
             </div>
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>

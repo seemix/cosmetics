@@ -50,7 +50,9 @@ export default function ProductCard({ product, index = 0, labels = true }: {
                     {(action || bestSeller) && labels &&
                         <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
                 </Link>
-                <FavoriteButton productId={product.id}/>
+                <div className={'absolute top-2 right-2'}>
+                    <FavoriteButton productId={product.id}/>
+                </div>
             </div>
             <div className={'p-4 flex flex-col gap-2 bg-white'}>
                 <Link href={`/product/${slug}`}
