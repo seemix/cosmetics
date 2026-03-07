@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { CloseModalButton, ForgotPasswordForm, Loader } from '@/app/[locale]/components';
+import { CloseModalButton, ForgotPasswordForm, FormInput, Loader } from '@/app/[locale]/components';
 import { createLoginSchema, type LoginFormData } from '@/app/[locale]/components/LoginForm/loginSchema';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useModal } from '@/app/[locale]/hooks/useModal';
@@ -48,49 +48,16 @@ export default function LoginForm() {
             <div className={'w-full bg-white p-5 shadow-lg border border-gray-100'}>
                 <form onSubmit={handleSubmit(submit)} className={'mx-auto bg-white'}>
                     <div className={'space-y-3 '}>
-                        <div>
-                            <label htmlFor={'email'} className={'block text-sm font-medium text-gray-700 mb-1'}>
-                                E-mail
-                            </label>
-                            <input
-                                id={'email'}
-                                type={'email'}
-                                {...register('email', { required: true })}
-                                className={`w-full px-4 py-2 border border-gray-300 text-sm text-black 
-                                            focus:outline-none focus:ring-1 focus:ring-gray-800 
-                                        ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
-                                placeholder={'e-mail'}
-                            />
-                            <div className={'h-5'}>
-                                {errors.email && (
-                                    <p className={'mt-1 text-xs text-red-600'}>
-                                        {errors.email.message}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                        <FormInput label={'Email'}
+                                   register={register('email')}
+                                   id={'email'} type={'email'}
+                                   error={errors.email}/>
 
-                        <div>
-                            <label htmlFor={'password'} className={'block text-sm font-medium text-gray-700 mb-1'}>
-                                {t('password')}
-                            </label>
-                            <input
-                                id={'password'}
-                                type={'password'}
-                                {...register('password', { required: true })}
-                                className={`w-full px-4 py-2 text-sm border border-gray-300 focus:outline-none 
-                                        focus:ring-1 focus:ring-gray-800 
-                                        ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
-                                placeholder={'•••••••'}
-                            />
-                            <div className={'h-5'}>
-                                {errors.password && (
-                                    <p className={'mt-1 text-xs text-red-600'}>
-                                        {errors.password.message}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                        <FormInput label={t('password')}
+                                   register={register('password')}
+                                   id={'password'}
+                                   type={'password'}
+                                   error={errors.password}/>
 
                         <button
                             type={'submit'}
@@ -107,7 +74,9 @@ export default function LoginForm() {
                     {error && <p className={'text-red-500 text-center mt-3 font-bold text-sm'}>{error}</p>}
                 </div>
                 <div className={'flex justify-between w-full mt-5'}>
-                    <Link href={'/register'} className={'text-gray-900 text-sm ml-1 hover:underline'}>
+                    <Link href={'/register'}
+                          onClick={() => hideModal()}
+                          className={'text-gray-900 text-sm ml-1 hover:underline'}>
                         {t('registration')}
                     </Link>
                     <button onClick={() => showModal(<ForgotPasswordForm/>, 'zoom')}

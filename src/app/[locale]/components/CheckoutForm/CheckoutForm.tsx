@@ -6,12 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Loader } from '@/app/[locale]/components';
+import { FormInput, FormPhoneInput, Loader } from '@/app/[locale]/components';
 import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
 import { useCheckoutStore } from '@/app/[locale]/stores/checkout.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
-import { assets } from '@/app/[locale]/assets/assets';
 
 export default function CheckoutForm() {
     const router = useRouter();
@@ -21,8 +20,6 @@ export default function CheckoutForm() {
     const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
     const { clear } = useCartStore();
     const locale = useLocale();
-    const { phoneCode } = assets;
-
 
     const schema = checkoutSchema(t2);
     const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
@@ -71,146 +68,51 @@ export default function CheckoutForm() {
     return (
         <form className={'mt-3 mx-auto w-full max-w-lg px-3'} onSubmit={handleSubmit(onSubmit)}>
             <div className={'space-y-2 md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-5'}>
-                <div>
-                    <label htmlFor={'name'} className={'block text-xs font-medium'}>
-                        {t('RegisterForm.name')}
-                    </label>
-                    <input id={'name'}
-                           {...register('name')}
-                           className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
-                    <div className={'h-5'}>
-                        {errors.email && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.email.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
-                <div>
-                    <label htmlFor={'surname'} className={'block text-xs font-medium'}>
-                        {t('RegisterForm.surname')}
-                    </label>
-                    <input
-                        id={'surname'}
-                        {...register('surname')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.surname ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
-                    <div className={'h-5'}>
-                        {errors.surname && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.surname.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                <FormInput label={t('RegisterForm.name')}
+                           id={'name'}
+                           register={register('name')}
+                           error={errors.name}/>
+                <FormInput label={t('RegisterForm.surname')}
+                           id={'surname'}
+                           register={register('surname')}
+                           error={errors.surname}/>
                 {/* Email */}
-                <div>
-                    <label htmlFor={'email'} className={'block text-xs font-medium'}>
-                        Email
-                    </label>
-                    <input
-                        id={'email'}
-                        type={'email'}
-                        {...register('email')}
-                        readOnly={!!user?.email}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 text-sm transition-all
-                                    focus:outline-none 
-                ${user?.email
-                            ? 'bg-gray-100 cursor-default focus:ring-0'
-                            : 'focus:ring-1 focus:ring-black'
-                        }
-                ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
-                    <div className={'h-5'}>
-                        {errors.email && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.email.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                <FormInput label={'Email'}
+                           register={register('email')}
+                           id={'email'} type={'email'}
+                           error={errors.email}
+                           readOnly={!!user?.email}/>
+
                 {/* Phone */}
-                <div>
-                    <label htmlFor={'phone'} className={'block text-xs font-medium'}>
-                        {t('RegisterForm.phone')}
-                    </label>
-                    <div className={`flex items-center border border-gray-300 focus:outline-none focus:ring-1 
-                                    focus:outline-none focus:ring-black text-sm 
-                                    ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}>
-                        <span className={'ml-2'}>{phoneCode}</span>
-                        <input type={'tel'} {...register('phone',{
-                            pattern: {
-                                value: /^[0-9]{8}$/,
-                                message: t2('phoneMustBe8Digits')
-                            },
-                            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                                e.target.value = e.target.value.replace(/\D/g, '').slice(0, 8);
-                            }
-                        })} id={'phone'}
-                               inputMode={'numeric'} maxLength={8}
-                               className={`w-full flex px-1 py-2 focus:outline-none text-sm`}/>
-                    </div>
-                    <div className={'h-5'}>
-                        {errors.phone && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.phone.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                <FormPhoneInput label={t('RegisterForm.phone')}
+                                type={'tel'}
+                                register={register('phone', {
+                                    pattern: {
+                                        value: /^[0-9]{8}$/,
+                                        message: t2('phoneMustBe8Digits')
+                                    },
+                                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                                        e.target.value = e.target.value.replace(/\D/g, '')
+                                            .slice(0, 8);
+                                    }
+                                })}
+                                id={'phone'}
+                                error={errors.phone}/>
                 {/*City*/}
-                <div>
-                    <label htmlFor={'city'} className={'block text-xs font-medium'}>
-                        {t('Checkout.city')}
-                    </label>
-                    <input
-                        id={'city'}
-                        {...register('city')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.city ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
-                    <div className={'h-5'}>
-                        {errors.city && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.city.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                <FormInput label={t('Checkout.city')}
+                           register={register('city')}
+                           id={'city'}
+                           error={errors.city}/>
                 {/*Street*/}
-                <div>
-                    <label htmlFor={'street'} className={'block text-xs font-medium'}>
-                        {t('Checkout.street')}
-                    </label>
-                    <input
-                        id={'street'}
-                        {...register('street')}
-                        className={`mt-1 w-full border border-gray-300 px-3 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm ${errors.street ? 'border-red-500 focus:ring-red-500' : ''}`}
-                    />
-                    <div className={'h-5'}>
-                        {errors.street && (
-                            <p className={'mt-1 text-xs text-red-600'}>
-                                {errors.street.message}
-                            </p>
-                        )}
-                    </div>
-                </div>
+                <FormInput label={t('Checkout.street')}
+                           register={register('street')}
+                           id={'street'}
+                           error={errors.street}/>
                 {/*Comment*/}
                 <div className={'md:col-span-2'}>
-                    <label htmlFor={'comment'} className={'block text-xs font-medium'}>
-                        {t('Checkout.comment')}
-                    </label>
-                    <input
-                        id={'comment'}
-                        {...register('comment')}
-                        className={`w-full border border-gray-300 px-1 py-2 focus:outline-none focus:ring-1 
-                                    focus:ring-black text-sm`}
-                    />
+                    <FormInput label={t('Checkout.comment')} register={register('comment')} id={'comment'}/>
                 </div>
+
             </div>
             <div className={'w-full flex justify-center'}>
                 <button type={'submit'}
