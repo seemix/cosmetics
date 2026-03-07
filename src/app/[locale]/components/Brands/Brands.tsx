@@ -15,7 +15,7 @@ export default function Brands({ brands }: { brands: IBrand[] }) {
                 400: { slidesPerView: 1 },
                 600: { slidesPerView: 2 },
                 768: { slidesPerView: 3 },
-                1024: { slidesPerView: 4 },
+                1024: { slidesPerView: 3 },
             }}
         >
             {brands.map(brand => <SwiperSlide key={brand.id}>
