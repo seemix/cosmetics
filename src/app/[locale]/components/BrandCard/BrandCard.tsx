@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { IBrand } from '@/app/[locale]/types/brand';
+import type { IBrand } from '@/app/[locale]/types/brand';
 import { assets } from '@/app/[locale]/assets/assets';
 
 export default function BrandCard({ brand }: { brand: IBrand }) {
