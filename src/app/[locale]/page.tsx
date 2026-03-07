@@ -31,7 +31,7 @@ export default async function HomePage(props: propsType) {
 
     return (<div className={'w-full'}>
         <PostsSlider slides={posts.docs}/>
-        <div className={'mx-auto max-w-[1000px] mt-6'}>
+        <div className={'mx-auto max-w-[1100px] mt-6'}>
             <h2 className={'font-semibold text-xl text-center mb-4'}>{t('brands')}</h2>
             <Brands brands={brands.docs}/>
         </div>

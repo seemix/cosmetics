@@ -9,7 +9,7 @@ export default function Brands({ brands }: { brands: IBrand[] }) {
 
     return (
         <Swiper
-            className={'max-w-[90%] border-0'}
+            className={'max-w-[95%] border-0'}
             spaceBetween={20}
             centeredSlides={true}
             breakpoints={{
