@@ -11,7 +11,7 @@ export default function Invoice() {
     const { cart, loading } = useCartStore();
     const { showModal } = useModal();
     const t = useTranslations('Checkout');
-    if (!cart || !cart.items) return;
+    if (!cart || !cart?.items?.length) return;
 
     return (
         <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
