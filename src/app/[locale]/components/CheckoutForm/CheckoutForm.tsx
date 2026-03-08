@@ -18,7 +18,7 @@ export default function CheckoutForm() {
     const t2 = useTranslations('Validation');
     const { user } = useAuthStore();
     const { success, orderNumber, loading, error, createNewOrder } = useCheckoutStore();
-    const { clear } = useCartStore();
+    const { clear, cart } = useCartStore();
     const locale = useLocale();
 
     const schema = checkoutSchema(t2);
@@ -64,7 +64,7 @@ export default function CheckoutForm() {
             address: data.street
         }, locale, data.comment).then();
     };
-
+    if (!cart?.items?.length) return <h2 className={'text-center text-2xl'}>{t('Checkout.addItemsToCart')}</h2>;
     return (
         <form className={'mt-3 mx-auto w-full max-w-lg px-3'} onSubmit={handleSubmit(onSubmit)}>
             <div className={'space-y-2 md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-5'}>
