@@ -44,8 +44,9 @@ export default function ProductCard({ product, index = 0, labels = true }: {
                         grid grid-rows-[auto_1fr_auto] h-full`}>
             <div className={'w-full aspect-square relative'}>
                 <Link href={`/product/${slug}`}>
-                    <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0].image.alt} fill
+                    <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0]?.image?.alt || ''}
                            className={'object-cover relative'} placeholder={'blur'}
+                           fill
                            blurDataURL={gallery[0]?.image?.blurHash}/>
                     {(action || bestSeller) && labels &&
                         <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
