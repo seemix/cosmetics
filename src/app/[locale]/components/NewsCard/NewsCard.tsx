@@ -23,7 +23,7 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
             {/*<div className={'grid md:grid-cols-[auto_1fr] gap-4'}>*/}
             <Link href={`news//${slug}`}>
                 <div className={'w-full aspect-[1920/620] relative my-1'}>
-                    <Image src={`${backendUrl}${slide.sizes.medium.url}`} alt={`${slide.alt} || postImage`}
+                    <Image src={`${backendUrl}${slide.url}`} alt={`${slide.alt} || postImage`}
                            className={'object-cover object-center'}
                            fill/>
                 </div>
