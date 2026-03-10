@@ -1,7 +1,7 @@
 export const headMenuData = [
     {
-      name: 'News',
-      link: '/news',
+        name: 'News',
+        link: '/news',
     },
     {
         name: 'About',
@@ -10,6 +10,10 @@ export const headMenuData = [
     {
         name: 'PaymentAndDelivery',
         link: '/pages/payment-and-delivery',
+    },
+    {
+        name: 'Partnership',
+        link: '/pages/partnership',
     },
     {
         name: 'Contacts',
