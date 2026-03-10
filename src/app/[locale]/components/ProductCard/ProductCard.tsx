@@ -36,9 +36,9 @@ export default function ProductCard({ product, index = 0, labels = true }: {
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: 25, filter: 'blur(10px)' }}
+            initial={{ opacity: 0, x: 15, filter: 'blur(10px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-            transition={{ duration: .35, ease: 'easeInOut', delay: index * .25 }}
+            transition={{ duration: .2, ease: 'easeInOut', delay: index * .15 }}
             viewport={{ once: true }}
             className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[250px] mx-auto
                         grid grid-rows-[auto_1fr_auto] h-full`}>
