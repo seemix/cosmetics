@@ -30,7 +30,7 @@ export default function Pagination({ pagination }: { pagination: PaginationProps
     const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
     return (
-        <div className={'flex justify-between items-center w-full max-w-120 mx-auto mt-auto'}>
+        <div className={'flex justify-between items-center w-full max-w-120 mx-auto my-8'}>
             <div>
                 {hasPrevPage &&
                     <PaginationButton border={false} page={page - 1} label={<GrFormPrevious size={27}/>}
