@@ -36,17 +36,17 @@ export default function ProductCard({ product, index = 0, labels = true }: {
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: 15, filter: 'blur(10px)' }}
+            initial={{ opacity: 0, x: 5, filter: 'blur(10px)' }}
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-            transition={{ duration: .25, ease: 'easeInOut', delay: index * .05 }}
+            transition={{ duration: .2, ease: 'easeInOut', delay: index * .05 }}
             viewport={{ once: true }}
             className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[250px] mx-auto
                         grid grid-rows-[auto_1fr_auto] h-full`}>
             <div className={'w-full aspect-square relative'}>
                 <Link href={`/product/${slug}`}>
-                    <Image src={backendUrl + gallery[0].image.sizes.medium.url} alt={gallery[0].image.alt} fill
+                    <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0].image.alt} fill
                            className={'object-cover relative'} placeholder={'blur'}
-                           blurDataURL={gallery[0].image.blurHash}/>
+                           blurDataURL={gallery[0]?.image?.blurHash}/>
                     {(action || bestSeller) && labels &&
                         <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
                 </Link>
