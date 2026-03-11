@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 
 import 'swiper/css/pagination';
@@ -16,11 +16,11 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
     return (
         <div className={'w-full overflow-hidden'}>
             <Swiper
-                modules={[Pagination, Navigation]}
+                modules={[Pagination]}
                 autoplay={{ delay: 3000, disableOnInteraction: false, reverseDirection: false }}
                 loop={true}
                 pagination={{ clickable: true }}
-                navigation={true}
+               // navigation={true}
                 className={'w-full max-w-full'}
             >
                 {slides.map(slide => (

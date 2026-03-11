@@ -8,7 +8,7 @@ export default function Logo() {
         <Link href={'/'}>
             <div className={'flex gap-1 items-center'}>
                 <Image
-                    className={'ml-5 ml-5 w-18 lg:w-20 h-auto'}
+                    className={'ml-5 ml-5 w-13 sm:w-17 lg:w-20 h-auto'}
                     src={logo}
                     alt={'logo'}
                 />

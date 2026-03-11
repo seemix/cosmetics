@@ -48,7 +48,7 @@ export default function AuthUserButton() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -6, scale: .96 }}
                         transition={{ duration: .2 }}
-                        className={'absolute -right-20 mt-2 bg-white shadow-md z-12 w-50'}
+                        className={'absolute -right-20 -top-54 sm:top-7 mt-2 bg-white shadow-md z-12 w-50'}
                     >
                         <p className={'font-bold m-3'}>{t('RegisterForm.welcome')}, {user?.name}</p>
                         <Link

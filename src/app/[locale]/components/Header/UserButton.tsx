@@ -38,7 +38,7 @@ export default function UserButton() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -6, scale: 0.96 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute -right-10 mt-2 bg-white shadow-md z-12"
+                        className={'absolute -top-23 sm:top-7 -right-15 mt-2 bg-white shadow-md z-12'}
                     >
                         <Link
                             href={''}
