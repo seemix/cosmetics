@@ -1,7 +1,8 @@
-import { Logo } from '@/app/[locale]/components';
 import Link from 'next/link';
-import { assets } from '@/app/[locale]/assets/assets';
 import { FaPhoneSquareAlt } from 'react-icons/fa';
+
+import { assets } from '@/app/[locale]/assets/assets';
+import { Logo } from '@/app/[locale]/components';
 
 export default function HeaderLogo() {
   return (
