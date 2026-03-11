@@ -11,7 +11,7 @@ import {
 
 export default async function Header() {
     return (
-        <div className={'fixed bottom-0 left-0 sm:relative w-full'}>
+        <div className={'fixed bottom-0 left-0 sm:relative w-full z-20'}>
             <div className={'hidden sm:flex bg-gray-100 py-2 justify-evenly'}>
                 <div className={'flex px-4 gap-4 w-full lg:w-[1100px] justify-between'}>
                     <SocialIcons/>
