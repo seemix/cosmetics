@@ -11,10 +11,9 @@ export default function ProductCardsGrid({ products }: { products: IProduct[] })
 
     const { user } = useAuthStore();
     useAuthPrices(user);
-
     return (
-        <div className={`grid w-full grid-cols-[repeat(auto-fll,minmax(220px,1fr))] justify-items-center 
-                         gap-4 sm:grid-cols-[repeat(auto-fit,255px)] sm:justify-items-center`}>
+        <div className={`grid w-full  justify-items-center grid-cols-2 gap-3 
+                        sm:grid-cols-[repeat(auto-fit,255px)] sm:justify-items-center sm:gap-4`}>
             <AnimatePresence initial={false} mode={'popLayout'}>
                 {products.map((product, i) =>
                     <motion.div key={product.id}

@@ -13,8 +13,6 @@ import { assets } from '@/app/[locale]/assets/assets';
 import type { PostCard } from '@/app/[locale]/types/post-card';
 
 export default function PostsSlider({ slides }: { slides: PostCard[] }) {
-    // const t = useTranslations('StaticPages');
-
     return (
         <div className={'w-full overflow-hidden'}>
             <Swiper
@@ -27,14 +25,14 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
             >
                 {slides.map(slide => (
                     <SwiperSlide key={slide.id} className={'max-w-full mySwiper'}>
-                        <div className={'relative w-full h-[620px] overflow-hidden'}>
+                        <div className={'relative w-full aspect-[1920/620] overflow-hidden'}>
                             <Link href={`/news/${slide.slug}`}>
-                            <Image
-                                src={`${assets.backendUrl}${slide.slide.url}`}
-                                alt={slide.slide.alt}
-                                fill
-                                className={'object-cover'}
-                            />
+                                <Image
+                                    src={`${assets.backendUrl}${slide.slide.url}`}
+                                    alt={slide.slide.alt}
+                                    fill
+                                    className={'object-cover'}
+                                />
                             </Link>
                             {/*<motion.div*/}
                             {/*    initial={{ opacity: '0', y: -15 }}*/}

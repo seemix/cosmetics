@@ -47,7 +47,7 @@ export default function SortSelect() {
     };
 
     return (
-        <div className={'relative flex gap-2 text-sm self-center md:self-auto'} ref={ref}>
+        <div className={'relative flex gap-2 text-sm self-center md:self-auto mb-4 sm:mb-2'} ref={ref}>
             <span>{t('sort')}:</span>
             <motion.button
                 type={'button'}
@@ -58,7 +58,6 @@ export default function SortSelect() {
                 transition={{ duration: 0.25 }}
             >
                 <span className={'text-sm'}>{current.label}</span>
-
                 <motion.svg
                     aria-hidden={'true'}
                     focusable={'false'}

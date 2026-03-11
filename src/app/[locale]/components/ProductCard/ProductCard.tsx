@@ -40,7 +40,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
             whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
             transition={{ duration: .2, ease: 'easeInOut', delay: index * .05 }}
             viewport={{ once: true }}
-            className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[250px] mx-auto
+            className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[160px] mx-auto
                         grid grid-rows-[auto_1fr_auto] h-full`}>
             <div className={'w-full aspect-square relative'}>
                 <Link href={`/product/${slug}`}>
@@ -58,14 +58,14 @@ export default function ProductCard({ product, index = 0, labels = true }: {
             <div className={'p-4 flex flex-col gap-2 bg-white'}>
                 <Link href={`/product/${slug}`}
                       className={'transition-colors duration-300 hover:text-[var(--main)]'}>
-                    <p className={'text-lg font-bold'}>{title}</p>
+                    <p className={'text-md sm:text-lg font-bold'}>{title}</p>
                     <p className={'text-xs'}>{subtitle}</p>
                 </Link>
                 <div className={'flex justify-between mt-2 items-center'}>
-                    <p className={'text-gray-500 text-sm'}>{t('shortArticle')}: {article}</p>
+                    <p className={'text-gray-500 text-xs sm:text-sm'}>{t('shortArticle')}: {article}</p>
                     {!unavailable &&
                         <p className={`${wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'} 
-                                       font-bold text-[1.2em]`}>
+                                       font-bold text-[1em] sm:text-[1.2em]`}>
                             {price} {currency}
                         </p>}
                 </div>
@@ -74,7 +74,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
                 {!unavailable ? (
                     !inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>
                 ) : (
-                    <p className={'text-gray-500 text-lg text-center mb-2 font-semibold'}>
+                    <p className={'text-gray-500 text-md sm:text-lg text-center mb-2 font-semibold'}>
                         {t('notAvailable')}
                     </p>
                 )}

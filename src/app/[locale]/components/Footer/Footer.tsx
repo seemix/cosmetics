@@ -40,14 +40,14 @@ export default async function Footer() {
                           className={`text-dark flex items-center text-sm transition-colors duration-300 
                                             hover:text-[var(--main)]`}>
                         <FaPhoneSquareAlt className={'w-9 sm:w-5 h-auto mr-1'} />
-                        <p className={'hidden sm:block'}>{assets.phone}</p>
+                        <p>{assets.phone}</p>
                     </Link>
                     <Link href={assets.telegramLink}
-                          className={'flex transition-colors duration-300 hover:text-[var(--main)] text-dark'}>
+                          className={'flex transition-colors duration-300 hover:text-[var(--main)] text-dark items-center'}>
                         <FaTelegramPlane className={'w-9 sm:w-5 h-auto lg:w-4 mt-0 mr-2'} />Telegram
                     </Link>
                     <Link href={assets.instagramLink}
-                          className={`flex transition-colors duration-300 hover:text-[var(--main)] text-dark`}>
+                          className={`flex transition-colors duration-300 hover:text-[var(--main)] text-dark items-center`}>
                         <FaInstagram className={'w-9 sm:w-5 h-auto animate-fade-in mr-1'} /> Instagram
                     </Link>
 

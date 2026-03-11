@@ -23,6 +23,7 @@ export default async function BrandPage(props: propsType) {
 
     const response = await fetch(url, {
         credentials: 'include',
+        cache: 'no-cache',
         headers: {
             Cookie: cookieStore.toString(),
         }
