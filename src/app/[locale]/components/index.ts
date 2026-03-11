@@ -20,6 +20,7 @@ export { default as EmptyCart } from './Cart/EmptyCart';
 export { default as ErrorComponent } from './ErrorComponent/ErrorComponent';
 export { default as FavoriteButton } from './FavoriteButton/FavoriteButton';
 export { default as Header } from './Header/Header';
+export { default as HeaderLogo } from './Header/HeaderLogo';
 export { default as LanguageSwitcher } from './Header/LanguageSwitcher';
 export { default as Loader } from './Loader/Loader';
 export { default as UserButton } from './Header/UserButton';

@@ -9,7 +9,7 @@ export default async function Footer() {
     const t = await getTranslations();
 
     return (
-        <footer className={'w-full bg-foreground'}>
+        <footer className={'w-full bg-foreground pb-25 sm:pb-0'}>
             <div className={`p-5 text-sm flex flex-wrap gap-3 max-w-[1100px] text-gray-500 
                             justify-evenly mx-auto`}>
                 <div className={'flex flex-col gap-2 p-2'}>

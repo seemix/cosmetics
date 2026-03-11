@@ -21,15 +21,15 @@ export default async function Header() {
             </div>
             <header className={`bg-foreground w-full py-3 px-6 text-black flex justify-between sm:justify-center 
                                 items-center top-0 z-10`}>
-                <div className={`grid gap-1 grid-cols-[auto_1fr_auto] md:grid-cols-[auto_auto_1fr_auto]                                
-                                max-w-[1200px] w-full mx-auto`}>
+                <div className={`flex justify-between sm:grid gap-1 sm:grid-cols-[auto_1fr_auto] 
+                                md:grid-cols-[auto_auto_1fr_auto] max-w-[1200px] w-full mx-auto`}>
                     <div className={'flex gap-7 sm:gap-4 items-center justify-center'}>
                         <BurgerButton/>
                         <div className={'sm:hidden'}>
                             <LanguageSwitcher/>
                         </div>
                     </div>
-                    <div className={'justify-items-center lg:justify-items-start items-center'}>
+                    <div className={'hidden sm:block justify-items-center lg:justify-items-start items-center'}>
                         <Logo/>
                     </div>
                     <div className={'hidden md:flex justify-center items-end place-items-end -mb-5'}>

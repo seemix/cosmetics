@@ -2,7 +2,7 @@ import { Montserrat, Roboto } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
-import { CheckAuth, ClearAuthError, Footer, Header, ModalWindow } from '@/app/[locale]/components';
+import { CheckAuth, ClearAuthError, Footer, Header, HeaderLogo, ModalWindow } from '@/app/[locale]/components';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 
@@ -49,6 +49,7 @@ export default async function LocaleLayout({
         <div className={'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen min-w-0'}>
             <NextIntlClientProvider>
                 <MenuProvider initialMenu={menu}>
+                    <HeaderLogo/>
                     <Header/>
                     <CheckAuth/>
                     <ClearAuthError/>

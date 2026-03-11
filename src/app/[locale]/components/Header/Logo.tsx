@@ -14,12 +14,12 @@ export default function Logo() {
                 />
 
                 <div className={'flex flex-col items-center'}>
-                    <h1 className={`hidden sm:block text-sm sm:text-xl text-center lg:text-2xl 
+                    <h1 className={`text-sm sm:text-xl text-center lg:text-2xl 
                                 tracking-tight font-semibold sm:block`}>
                         NEXT LEVEL
                     </h1>
-                    <h2 className={`hidden sm:block text-xs sm:text-sm text-center font-(family-name:--font-roboto) 
-					            text-sm flex-none sm:flex`}>
+                    <h2 className={`text-xs sm:text-sm text-center font-(family-name:--font-roboto) 
+					                 text-sm flex-none sm:flex`}>
                         Barber supply
                     </h2>
                 </div>
