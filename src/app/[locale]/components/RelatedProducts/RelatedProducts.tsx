@@ -19,10 +19,10 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             navigation={true}
             pagination={{ clickable: true }}
             breakpoints={{
-                400: { slidesPerView: 1.5 },
-                600: { slidesPerView: 2.5 },
-                768: { slidesPerView: 3.5 },
-                1024: { slidesPerView: 4.5 },
+                400: { slidesPerView: 1.2 },
+                600: { slidesPerView: 2.3 },
+                768: { slidesPerView: 3.3 },
+                1024: { slidesPerView: 4.3 },
             }}
             modules={[Pagination]}
         >
