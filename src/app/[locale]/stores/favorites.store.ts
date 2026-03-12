@@ -7,7 +7,7 @@ interface IFavoritesStore {
     favoriteProducts: IProduct[];
 
     getMyFavorites: (userId?: string) => Promise<void>;
-    getFavouriteProducts: () => void;
+    getFavouriteProducts: (locale: string) => void;
     addFavorite: (productId: string, userId?: string) => Promise<void>;
     removeFavorite: (productId: string, userId?: string) => Promise<void>;
     setFavorites: (favorites: string[]) => void;
@@ -27,8 +27,8 @@ export const useFavoritesStore = create<IFavoritesStore>((set) => ({
         }
     },
 
-    async getFavouriteProducts() {
-        const { data } = await axiosService.get('users/favorites');
+    async getFavouriteProducts(locale: string) {
+        const { data } = await axiosService.get(`users/favorites?locale=${locale}`);
         set({ favoriteProducts: data.docs });
     },
 

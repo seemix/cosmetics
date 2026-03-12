@@ -1,17 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocale } from 'next-intl';
+import { useEffect } from 'react';
 
 import { useFavoritesStore } from '@/app/[locale]/stores/favorites.store';
 import { NoContent, ProductCardsGrid } from '@/app/[locale]/components';
 
 export default function MyFavorites() {
     const { favoriteProducts, getFavouriteProducts } = useFavoritesStore();
-
+    const locale = useLocale();
     useEffect(() => {
-        getFavouriteProducts();
-    }, [getFavouriteProducts]);
+        getFavouriteProducts(locale);
+    }, [getFavouriteProducts, locale]);
     if (!favoriteProducts) return null;
 
     return (
