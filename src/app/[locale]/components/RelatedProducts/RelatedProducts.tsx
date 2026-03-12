@@ -13,7 +13,7 @@ import type { IProduct } from '@/app/[locale]/types/product';
 export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
     return (
         <Swiper
-            className={'max-w-[90%] my-4'}
+            className={'max-w-[95%] my-4'}
             spaceBetween={20}
             navigation={true}
             breakpoints={{
@@ -25,7 +25,7 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
         >
             {products.map((product,index) => <SwiperSlide key={product.id}
                                                                         className={'flex h-auto'}>
-                <ProductCard product={product} index={index} labels={labels}/>
+             <div className={'h-111'}><ProductCard product={product} index={index} labels={labels}/></div>
             </SwiperSlide>)}
         </Swiper>
     );
