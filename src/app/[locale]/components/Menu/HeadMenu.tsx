@@ -21,7 +21,7 @@ export default function HeadMenu() {
                             onClick={hideModal}
                             data-bubble={'true'}
                             href={`${item.link}`}
-                            className={`whitespace-nowrap text-md sm:text-sm text-dark transition-colors py-3 sm:py-1
+                            className={`whitespace-nowrap text-md sm:text-sm text-dark transition-colors py-2 sm:py-1
             							duration-300 tracking-normal hover:text-[var(--main)] inline-block`}
                         >
                             {t(item.name)}
