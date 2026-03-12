@@ -26,7 +26,7 @@ export default function AuthUserButton() {
 
     const userLogout = () => {
         logout().then();
-        router.refresh()
+        router.push('/');
     }
 
     return (
