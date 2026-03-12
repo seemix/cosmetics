@@ -18,8 +18,12 @@ export default function Pagination({ pagination }: { pagination: PaginationProps
     const changePage = (page: number) => {
         const params = new URLSearchParams(searchParams.toString());
         params.set('page', page.toString());
-        router.replace(`${pathname}?${params.toString()}`);
-        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+        const newUrl = `${pathname}?${params.toString()}`;
+        router.push(newUrl, { scroll: false });
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     };
 
     let startPage = Math.max(1, page - 2);
