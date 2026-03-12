@@ -2,7 +2,6 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 // import 'swiper/css/pagination';
@@ -17,16 +16,15 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             className={'max-w-[90%] my-4'}
             spaceBetween={20}
             navigation={true}
-            pagination={{ clickable: true }}
             breakpoints={{
                 400: { slidesPerView: 1.2 },
                 600: { slidesPerView: 2.3 },
                 768: { slidesPerView: 3.3 },
                 1024: { slidesPerView: 4.3 },
             }}
-            modules={[Pagination]}
         >
-            {products.map((product,index) => <SwiperSlide key={product.id}>
+            {products.map((product,index) => <SwiperSlide key={product.id}
+                                                                        className={'flex h-auto'}>
                 <ProductCard product={product} index={index} labels={labels}/>
             </SwiperSlide>)}
         </Swiper>
