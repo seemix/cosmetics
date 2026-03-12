@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { GrFormPrevious } from 'react-icons/gr';
 import { GrFormNext } from 'react-icons/gr';
@@ -20,11 +21,14 @@ export default function Pagination({ pagination }: { pagination: PaginationProps
         params.set('page', page.toString());
         const newUrl = `${pathname}?${params.toString()}`;
         router.push(newUrl, { scroll: false });
+    };
+
+    useEffect(() => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-    };
+    }, [page]);
 
     let startPage = Math.max(1, page - 2);
     const endPage = Math.min(totalPages, startPage + 4);
@@ -54,6 +58,5 @@ export default function Pagination({ pagination }: { pagination: PaginationProps
                 }
             </div>
         </div>
-    )
-        ;
+    );
 }
