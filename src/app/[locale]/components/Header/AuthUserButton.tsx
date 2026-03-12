@@ -24,8 +24,8 @@ export default function AuthUserButton() {
     const { logout } = useAuthStore();
     const { user } = useAuthStore();
 
-    const userLogout = () => {
-        logout().then();
+    const userLogout =async () => {
+        await logout();
         router.push('/');
     }
 
