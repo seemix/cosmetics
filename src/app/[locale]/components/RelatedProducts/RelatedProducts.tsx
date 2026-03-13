@@ -25,7 +25,7 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
         >
             {products.map((product,index) => <SwiperSlide key={product.id}
                                                                         className={'flex h-auto'}>
-             <div className={'h-117'}><ProductCard product={product} index={index} labels={labels}/></div>
+             <div className={'h-118'}><ProductCard product={product} index={index} labels={labels}/></div>
             </SwiperSlide>)}
         </Swiper>
     );

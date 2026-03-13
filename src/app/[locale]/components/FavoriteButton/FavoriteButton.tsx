@@ -1,6 +1,6 @@
 'use client';
 
-import { IoMdHeart, IoMdHeartEmpty } from 'react-icons/io';
+import { IoMdHeartEmpty, IoMdHeart } from 'react-icons/io';
 
 import { useFavoritesStore } from '@/app/[locale]/stores/favorites.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
@@ -23,7 +23,8 @@ export default function FavoriteButton({ productId }: { productId: string }) {
                              onClick={handleClick}
                              className={`cursor-pointer text-[var(--main)] 
                             transition-colors duration-300 text-[1.8em] z-10`}>
-                {!favorites.includes(productId) ? <IoMdHeartEmpty/> : <IoMdHeart className={'text-[var(--main)]'}/>}
+                {favorites.length > 0 && !favorites.includes(productId) ? <IoMdHeartEmpty/> :
+                    <IoMdHeart className={'text-[var(--main)]'}/>}
             </button>}
         </>
     );
