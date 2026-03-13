@@ -17,15 +17,15 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             spaceBetween={20}
             navigation={true}
             breakpoints={{
-                400: { slidesPerView: 1.2 },
-                600: { slidesPerView: 2.3 },
-                768: { slidesPerView: 3.3 },
+                400: { slidesPerView: 1.8 },
+                600: { slidesPerView: 3.3 },
+                768: { slidesPerView: 3.9 },
                 1024: { slidesPerView: 4.3 },
             }}
         >
             {products.map((product,index) => <SwiperSlide key={product.id}
                                                                         className={'flex h-auto'}>
-             <div className={'h-118'}><ProductCard product={product} index={index} labels={labels}/></div>
+             <div className={'h-119 w-60'}><ProductCard product={product} index={index} labels={labels}/></div>
             </SwiperSlide>)}
         </Swiper>
     );

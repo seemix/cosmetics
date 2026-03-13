@@ -10,21 +10,20 @@ export default function Brands({ brands }: { brands: IBrand[] }) {
 
     return (
         <Swiper
-            className={'max-w-[95%]'}
+            className={'max-w-[1100px] w-fit mx-auto'}
             spaceBetween={20}
-            centeredSlides={false}
-            slidesPerView={'auto'}
-            navigation={true}
             watchOverflow={true}
+            centeredSlides={true}
+            initialSlide={1}
             breakpoints={{
-                400: { slidesPerView: 1 },
-                600: { slidesPerView: 2 },
+                400: { slidesPerView: 2.7 },
+                600: { slidesPerView: 3 },
                 768: { slidesPerView: 3 },
                 1024: { slidesPerView: 3 },
             }}
             modules={[Navigation]}
         >
-            {brands.map(brand => <SwiperSlide key={brand.id} style={{ width: '250px' }}>
+            {brands.map(brand => <SwiperSlide key={brand.id} style={{width: 150, height: 120}}>
                 <BrandCard brand={brand}/>
             </SwiperSlide>)}
         </Swiper>

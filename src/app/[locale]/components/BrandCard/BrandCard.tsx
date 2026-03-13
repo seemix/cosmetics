@@ -10,8 +10,8 @@ export default function BrandCard({ brand }: { brand: IBrand }) {
     const { backendUrl } = assets;
 
     return (
-        <div className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] mx-auto 
-                         flex flex-col`}>
+        <div className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] h-full
+                         flex flex-col mx-auto`}>
             <div className={'w-full aspect-[30/9] relative'}>
                 <Link href={`/brands/${slug}`}>
                     <Image src={`${backendUrl}${logo.url}`} alt={logo.alt} fill
@@ -19,7 +19,7 @@ export default function BrandCard({ brand }: { brand: IBrand }) {
                     />
                 </Link>
             </div>
-            <h4 className={'text-center text-lg'}>{title}</h4>
+            <h4 className={'text-center text-md mt-5'}>{title}</h4>
         </div>
     );
 }
