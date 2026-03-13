@@ -10,7 +10,7 @@ export default function Brands({ brands }: { brands: IBrand[] }) {
 
     return (
         <Swiper
-            className={'max-w-[1100px] w-fit mx-auto'}
+            className={'max-w-[1100px] mx-auto'}
             spaceBetween={20}
             watchOverflow={true}
             centeredSlides={true}
