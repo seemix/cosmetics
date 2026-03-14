@@ -43,6 +43,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                         <Image
                                             src={`${assets.backendUrl}${slide.slide.url}`}
                                             alt={slide.slide.alt || 'Desktop slide'}
+                                            loading={'eager'}
                                             fill
                                             priority
                                             sizes={'100vw'}

@@ -42,19 +42,19 @@ export default function ProductCard({ product, index = 0, labels = true }: {
             viewport={{ once: true }}
             className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[160px] mx-auto
                         grid grid-rows-[auto_1fr_auto] h-full`}>
-            <div className={'w-full aspect-square relative'}>
-                <Link href={`/product/${slug}`}>
+            <Link href={`/product/${slug}`}>
+                <div className={'w-full aspect-square relative'}>
                     <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0]?.image?.alt || ''}
                            className={'object-cover relative'} placeholder={'blur'}
                            fill
                            blurDataURL={gallery[0]?.image?.blurHash}/>
                     {(action || bestSeller) && labels &&
                         <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
-                </Link>
-                <div className={'absolute top-2 right-2'}>
-                    <FavoriteButton productId={product.id}/>
+                    <div className={'absolute top-2 right-2'}>
+                        <FavoriteButton productId={product.id}/>
+                    </div>
                 </div>
-            </div>
+            </Link>
             <div className={'p-4 flex flex-col gap-2 bg-white'}>
                 <Link href={`/product/${slug}`}
                       className={'transition-colors duration-300 hover:text-[var(--main)]'}>
