@@ -1,9 +1,11 @@
 import { Montserrat, Roboto } from 'next/font/google';
 import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
+
 import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
 import { CheckAuth, ClearAuthError, Footer, Header, HeaderLogo, ModalWindow } from '@/app/[locale]/components';
-import { routing } from '@/i18n/routing';
+
 import './globals.css';
 
 const roboto = Roboto({

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 import { useTranslations } from 'next-intl';
@@ -9,24 +10,21 @@ import { MdLogout } from 'react-icons/md';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { LuClipboardList } from 'react-icons/lu';
 import { FaChalkboardUser } from 'react-icons/fa6';
-import Link from 'next/link';
 
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
-import { useRouter } from 'next/navigation';
 
 export default function AuthUserButton() {
 
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
     useClickOutside(ref, () => setOpen(false), open);
-    const router = useRouter();
     const t = useTranslations();
     const { logout } = useAuthStore();
     const { user } = useAuthStore();
 
     const userLogout =async () => {
         await logout();
-        router.push('/');
+      //  router.refresh();
     }
 
     return (

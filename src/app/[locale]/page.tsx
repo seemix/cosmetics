@@ -26,7 +26,8 @@ export default async function HomePage(props: propsType) {
     const bestsellers = await fetch(`${backendUrl}/api/products/bestsellers?locale=${locale}`, {
         headers: {
             Cookie: cookieStore.toString()
-        }
+        },
+        cache: 'no-store'
     }).then(res => res.json());
 
     return (
