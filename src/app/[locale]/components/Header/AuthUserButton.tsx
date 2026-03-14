@@ -19,8 +19,7 @@ export default function AuthUserButton() {
     const [open, setOpen] = useState(false);
     useClickOutside(ref, () => setOpen(false), open);
     const t = useTranslations();
-    const { logout } = useAuthStore();
-    const { user } = useAuthStore();
+    const { logout, user } = useAuthStore();
 
     const userLogout = async () => {
         await logout();
