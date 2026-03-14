@@ -15,7 +15,7 @@ export default async function ProtectedRoutes({ children }: { children: React.Re
     });
     const body = await res.json();
     if (!body?.user) {
-        redirect('/login');
+        redirect('/');
     }
 
     return (
