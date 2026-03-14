@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FormInput, FormPhoneInput, Loader } from '@/app/[locale]/components';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { type ProfileFormData, profileSchema } from '@/app/[locale]/components/ProfileForm/profileSchema';
+import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
 
 export default function ProfileForm() {
     const t = useTranslations();
@@ -39,6 +40,8 @@ export default function ProfileForm() {
     const onSubmit = (data: ProfileFormData) => {
         updateUserInfo(data).then();
     };
+
+    useAuthPrices(user);
 
     return (
         <form className={'mt-3 mx-auto w-full max-w-lg px-3'} onSubmit={handleSubmit(onSubmit)}>

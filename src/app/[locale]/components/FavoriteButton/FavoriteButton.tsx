@@ -13,8 +13,7 @@ export default function FavoriteButton({ productId }: { productId: string }) {
 
     useEffect(() => {
         if (favorites.includes(productId)) setFavorite(true);
-    }, [productId, favorites.includes]);
-
+    }, []);
     // const isFavorite = favorites.includes(productId);
 
     const handleClick = (e: React.MouseEvent) => {

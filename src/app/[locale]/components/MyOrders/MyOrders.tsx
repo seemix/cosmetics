@@ -8,9 +8,12 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import type { IOrder } from '@/app/[locale]/types/order';
 import { SingleOrderItem } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
+import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 
 export default function MyOrders({ orders }: { orders: IOrder[] }) {
     const [openIds, setOpenIds] = useState<string[]>([]);
+    const { user } = useAuthStore();
     const t = useTranslations('Checkout');
 
     const toggle = (id: string) => {
@@ -28,6 +31,8 @@ export default function MyOrders({ orders }: { orders: IOrder[] }) {
         month: '2-digit',
         year: 'numeric',
     });
+
+    useAuthPrices(user);
 
     return (
         <div className={'w-full md:w-2xl max-w-[95%] mx-auto space-y-2 my-2'}>
