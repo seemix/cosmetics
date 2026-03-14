@@ -8,8 +8,8 @@ import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import type { IOrder } from '@/app/[locale]/types/order';
 import { SingleOrderItem } from '@/app/[locale]/components';
 import { assets } from '@/app/[locale]/assets/assets';
-import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { useLogoutRefresh } from '@/app/[locale]/hooks/useLogoutRefresh';
 
 export default function MyOrders({ orders }: { orders: IOrder[] }) {
     const [openIds, setOpenIds] = useState<string[]>([]);
@@ -32,7 +32,7 @@ export default function MyOrders({ orders }: { orders: IOrder[] }) {
         year: 'numeric',
     });
 
-    useAuthPrices(user);
+    useLogoutRefresh(user);
 
     return (
         <div className={'w-full md:w-2xl max-w-[95%] mx-auto space-y-2 my-2'}>

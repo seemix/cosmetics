@@ -6,15 +6,15 @@ import { useEffect } from 'react';
 
 import { useFavoritesStore } from '@/app/[locale]/stores/favorites.store';
 import { NoContent, ProductCardsGrid } from '@/app/[locale]/components';
-import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { useLogoutRefresh } from '@/app/[locale]/hooks/useLogoutRefresh';
 
 export default function MyFavorites() {
     const { favoriteProducts, getFavouriteProducts } = useFavoritesStore();
     const { user } = useAuthStore();
     const locale = useLocale();
 
-    useAuthPrices(user);
+    useLogoutRefresh(user);
 
     useEffect(() => {
         getFavouriteProducts(locale);
