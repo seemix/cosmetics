@@ -22,10 +22,9 @@ export default function AuthUserButton() {
     const { logout } = useAuthStore();
     const { user } = useAuthStore();
 
-    const userLogout =async () => {
+    const userLogout = async () => {
         await logout();
-      //  router.refresh();
-    }
+    };
 
     return (
         <div className={'relative'} ref={ref}>
