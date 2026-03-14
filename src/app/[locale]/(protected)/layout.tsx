@@ -7,17 +7,13 @@ export default async function ProtectedRoutes({ children }: { children: React.Re
 
     const { backendUrl } = assets;
     const cookieStore = await cookies();
-    const token = cookieStore.get('payload-token')?.value;
 
     const res = await fetch(`${backendUrl}/api/users/me`, {
-        headers: {
-            'Cookie': `payload-token=${token}`,
-            'Content-Type': 'application/json',
-        },
+        headers: { Cookie: cookieStore.toString() },
         credentials: 'include',
         cache: 'no-store'
-    });
-    const body = await res.json();
+    }).then(res => res.json());
+    const { body } = res;
     if (!body?.user) {
         redirect('/login');
     }
