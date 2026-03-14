@@ -7,14 +7,15 @@ import { useFavoritesStore } from '@/app/[locale]/stores/favorites.store';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 
 export default function FavoriteButton({ productId }: { productId: string }) {
-    const [isFavorite, setFavorite] = useState(false);
+    const [mounted, setMounted] = useState(false);
     const { favorites, removeFavorite, addFavorite } = useFavoritesStore();
     const { user } = useAuthStore();
 
      useEffect(() => {
-         if(favorites.includes(productId)) setFavorite(true);
-         else setFavorite(false);
-    }, [favorites.includes, productId]);
+        setMounted(true);
+    }, []);
+
+    const isFavorite = favorites.includes(productId);
 
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault();
@@ -25,7 +26,8 @@ export default function FavoriteButton({ productId }: { productId: string }) {
         }
     };
 
-    //if (!mounted || !user) return null;
+    if (!mounted || !user) return null;
+
     return (
         <button
             type={'button'}
