@@ -30,6 +30,8 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                     <div className="relative w-full aspect-square">
                                         <Image
                                             src={`${assets.backendUrl}${slide['square-slide'].url}`}
+                                            placeholder={'blur'}
+                                            blurDataURL={slide['square-slide'].blurHash}
                                             alt={slide.slide.alt || 'Mobile slide'}
                                             fill
                                             priority
@@ -43,6 +45,8 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                         <Image
                                             src={`${assets.backendUrl}${slide.slide.url}`}
                                             alt={slide.slide.alt || 'Desktop slide'}
+                                            placeholder={'blur'}
+                                            blurDataURL={slide.slide.blurHash}
                                             loading={'eager'}
                                             fill
                                             priority
