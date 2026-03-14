@@ -12,8 +12,8 @@ export default async function ProtectedRoutes({ children }: { children: React.Re
         headers: { Cookie: cookieStore.toString() },
         credentials: 'include',
         cache: 'no-store'
-    }).then(res => res.json());
-    const { body } = res;
+    });
+    const body = await res.json();
     if (!body?.user) {
         redirect('/login');
     }
