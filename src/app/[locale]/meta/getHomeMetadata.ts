@@ -22,14 +22,14 @@ export function getHomeMetadata(locale: string): Metadata {
         keywords: current.keywords,
         alternates: {
             languages: {
-                'ru-MD': '/ru',
-                'ro-MD': '/ro',
+                'ru': '/ru',
+                'ro': '/ro',
             },
         },
         openGraph: {
             title: current.title,
             description: current.description,
-            locale: locale === 'ru' ? 'ru_MD' : 'ro_MD',
+            locale: locale === 'ru' ? 'ru' : 'ro',
             type: 'website',
             siteName: 'Next Level Barber Supply',
             images: [{ url: '/logo1.webp', alt: 'site_logo' }]

@@ -22,19 +22,19 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                 pagination={{ clickable: true }}
                 className={'w-full max-w-full'}
             >
-                {slides.map(slide => (
+                {slides.map((slide, index) => (
                     <SwiperSlide key={slide.id} className={'w-full'}>
                         <Link href={`/news/${slide.slug}`} className={'block w-full'}>
                             <div className={'relative w-full overflow-hidden'}>
                                 <div className={'block sm:hidden'}>
-                                    <div className="relative w-full aspect-square">
+                                    <div className={'relative w-full aspect-square'}>
                                         <Image
                                             src={`${assets.backendUrl}${slide['square-slide'].url}`}
                                             placeholder={'blur'}
                                             blurDataURL={slide['square-slide'].blurHash}
                                             alt={slide.slide.alt || 'Mobile slide'}
                                             fill
-                                            priority
+                                            priority={index === 0}
                                             sizes={'100vw'}
                                             className={'object-cover'}
                                         />
