@@ -7,5 +7,4 @@ export const assets = {
 	phone: '+37361033551',
 	instagramLink: 'https://instagram.com/nextlvlbarber.md',
 	telegramLink: 'https://t.me/nextlvlbarber',
-
 };
