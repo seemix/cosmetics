@@ -7,7 +7,7 @@ export function getProductMetadata(product: IProduct, locale: string): Metadata 
         return { title: 'Product Not Found' };
     }
 
-    const { frontendUrl } = assets;
+    const { frontendUrl, backendUrl } = assets;
     const title = `${product.title} | Next Level Shop`;
 
     // Очищення опису від HTML тегів та обмеження довжини
@@ -36,7 +36,7 @@ export function getProductMetadata(product: IProduct, locale: string): Metadata 
             type: 'website',
             images: [
                 {
-                    url: product?.gallery[0]?.image.url || '/logo1.webp',
+                    url: `${backendUrl}/${product?.gallery[0]?.image.url}` || '/logo1.webp',
                     width: 1000,
                     height: 1000,
                     alt: product.title,
