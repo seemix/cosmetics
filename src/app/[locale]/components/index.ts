@@ -64,6 +64,7 @@ export { default as SingleOrderItem } from './MyOrders/SingleOrderItem';
 export { default as SingleSearchItem } from './SearchComponent/SingleSearchItem';
 export { default as SortSelect } from './SortSelect/SortSelect';
 export { default as StaticPage } from './StaticPage/StaticPage';
+export { default as Success } from './LoginForm/Success';
 export { default as UserButtonWrapper } from './Header/UserButtonWrapper';
 export { default as VerifyEmail } from './VerifyEmail/VerifyEmail';
 export { default as Quantity } from './ProductDetails/Quantity';

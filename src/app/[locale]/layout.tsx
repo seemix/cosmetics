@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
 import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
+import { getHomeMetadata } from '@/app/[locale]/meta/getHomeMetadata';
 import { CheckAuth, ClearAuthError, Footer, Header, HeaderLogo, ModalWindow } from '@/app/[locale]/components';
 
 import './globals.css';
@@ -19,15 +20,13 @@ const montSerrat = Montserrat({
     preload: true,
 });
 
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-    icons: {
-        icon: '/favicon.png',
-        shortcut: '/favicon.png',
-        apple: '/favicon.png',
-    },
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    return getHomeMetadata(locale);
 }
+
 
 export default async function LocaleLayout({
                                                children,
@@ -40,7 +39,7 @@ export default async function LocaleLayout({
     if (!hasLocale(routing.locales, locale)) {
         notFound();
     }
-    const menu = await fetch(`${process.env.API_URL}/menu?locale=${locale}`,{
+    const menu = await fetch(`${process.env.API_URL}/menu?locale=${locale}`, {
         cache: 'no-cache'
     }).then(res => res.json()) || [];
 

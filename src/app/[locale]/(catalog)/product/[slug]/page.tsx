@@ -33,6 +33,8 @@ export default async function ProductPage(props: {
         slug: product?.slug
     };
 
+
+
     return (
         <div className={'mx-auto max-w-[1100px] p-4 w-full flex flex-col gap-3'}>
             {product ?

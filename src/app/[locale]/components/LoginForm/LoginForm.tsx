@@ -3,11 +3,11 @@
 import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-import { CloseModalButton, ForgotPasswordForm, FormInput, Loader } from '@/app/[locale]/components';
+import { CloseModalButton, ForgotPasswordForm, FormInput, Loader, Success } from '@/app/[locale]/components';
 import { createLoginSchema, type LoginFormData } from '@/app/[locale]/components/LoginForm/loginSchema';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useModal } from '@/app/[locale]/hooks/useModal';
@@ -27,12 +27,14 @@ export default function LoginForm() {
     const submit = async (data: LoginFormData) => {
         await login(data.email, data.password);
     };
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         if (user) {
+            setSuccess(true);
             setTimeout(() => {
                 hideModal();
-            }, 800);
+            }, 1050);
         }
     }, [hideModal, user]);
 
@@ -62,11 +64,14 @@ export default function LoginForm() {
                         <button
                             type={'submit'}
                             aria-label={'login-button'}
-                            className={`cursor-pointer transition-colors duration-300 border-1 border-black p-2 
-                                    hover:border-[var(--main)] hover:text-[var(--main)] flex gap-2 justify-center
-                                    font-(family-name:--font-roboto) w-full`}
+                            className={`cursor-pointer transition-colors duration-300 border p-2
+                                        flex gap-2 justify-center w-full font-(family-name:--font-roboto)
+                                         ${success
+                                ? 'border-green-500 hover:border-green-500'
+                                : 'border-black hover:border-[var(--main)] hover:text-[var(--main)]'
+                            }`}
                         >
-                            {loading ? <Loader/> : t('login')}
+                            {loading ? <Loader /> : success ? <Success /> : t('login')}
                         </button>
                     </div>
                 </form>
