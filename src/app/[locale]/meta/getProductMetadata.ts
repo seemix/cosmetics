@@ -25,8 +25,8 @@ export function getProductMetadata(product: IProduct, locale: string): Metadata 
         alternates: {
             canonical: productUrl,
             languages: {
-                'ru-MD': `${frontendUrl}/ru/products/${product.slug}`,
-                'ro-MD': `${frontendUrl}/ro/products/${product.slug}`,
+                'ru-MD': `${frontendUrl}/ru/product/${product.slug}`,
+                'ro-MD': `${frontendUrl}/ro/product/${product.slug}`,
             },
         },
         openGraph: {
