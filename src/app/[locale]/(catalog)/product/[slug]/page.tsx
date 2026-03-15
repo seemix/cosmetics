@@ -1,10 +1,26 @@
 import { cookies } from 'next/headers';
 
+import type { Metadata } from 'next';
 import { BreadCrumbs, NoContent, ProductDetails } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { buildCategoryChain } from '@/app/[locale]/services/buildCategoryChain';
 import { assets } from '@/app/[locale]/assets/assets';
+import { getProductMetadata } from '@/app/[locale]/meta/getProductMetadata';
 
+export async function generateMetadata(props: {
+    params: Promise<{ locale: string; slug: string }>;
+}): Promise<Metadata> {
+    const { locale, slug } = await props.params;
+    const { backendUrl } = assets;
+
+    const response = await fetch(
+        `${backendUrl}/api/products?where[slug][equals]=${slug}&locale=${locale}`
+    ).then((res) => res.json());
+
+    const product: IProduct = response.docs[0];
+
+    return getProductMetadata(product, locale);
+}
 export default async function ProductPage(props: {
     params: Promise<{ locale: string; slug: string }>;
 }) {
@@ -32,8 +48,6 @@ export default async function ProductPage(props: {
         title: product?.title,
         slug: product?.slug
     };
-
-
 
     return (
         <div className={'mx-auto max-w-[1100px] p-4 w-full flex flex-col gap-3'}>

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: ['/admin', '/cart', '/checkout'], // Закриваємо технічні сторінки
+            disallow: ['/admin', '/cart', '/checkout'],
         },
         sitemap: 'https://nextlevelshop.md/sitemap.xml',
     };

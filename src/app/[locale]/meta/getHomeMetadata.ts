@@ -32,6 +32,7 @@ export function getHomeMetadata(locale: string): Metadata {
             locale: locale === 'ru' ? 'ru_MD' : 'ro_MD',
             type: 'website',
             siteName: 'Next Level Barber Supply',
+            images: [{ url: '/logo1.webp', alt: 'site_logo' }]
         },
         icons: {
             icon: '/favicon.png',
