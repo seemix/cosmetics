@@ -11,6 +11,7 @@ import { ProductCard } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';
 import { useAuthPrices } from '@/app/[locale]/hooks/useAuthPrices';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
+import { Navigation } from 'swiper/modules';
 
 export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
     const { user } = useAuthStore();
@@ -21,6 +22,7 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
             className={'max-w-[98%] my-4'}
             spaceBetween={20}
             navigation={true}
+            modules={[Navigation]}
             breakpoints={{
                 320: { slidesPerView: 1.5 },
                 400: { slidesPerView: 1.8 },
@@ -31,7 +33,9 @@ export default function RelatedProducts({ products, labels }: { products: IProdu
         >
             {products.map((product, index) => <SwiperSlide key={product.id}
                                                            className={'flex h-auto'}>
-                <div className={'h-119'}><ProductCard product={product} index={index} labels={labels}/></div>
+                <div className={'h-119'}>
+                    <ProductCard product={product} index={index} labels={labels}/>
+                </div>
             </SwiperSlide>)}
         </Swiper>
     );

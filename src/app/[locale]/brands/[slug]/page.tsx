@@ -13,7 +13,7 @@ export default async function BrandPage(props: propsType) {
 
     const { products } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`, {
         credentials: 'include',
-        cache: 'no-store',
+        cache: 'no-cache',
         headers: {
             Cookie: cookieStore.toString(),
         }
