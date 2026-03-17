@@ -10,15 +10,18 @@ export default async function BrandPage(props: propsType) {
     const { slug, locale } = await props.params;
     const cookieStore = await cookies();
     const { backendUrl } = assets;
-    const brand = await fetch(`${backendUrl}/api/brands/${slug}?locale=${locale}`)
-        .then(res => res.json());
+
     const { products } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`, {
+        credentials: 'include',
+        cache: 'no-store',
         headers: {
             Cookie: cookieStore.toString(),
-        },
-        credentials: 'include'
-    })
+        }
+    }).then(res => res.json());
+
+    const brand = await fetch(`${backendUrl}/api/brands/${slug}?locale=${locale}`)
         .then(res => res.json());
+
     const breadCrumbs =
         [
             { id: '1', title: t('brands'), slug: 'brands' },
