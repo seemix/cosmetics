@@ -10,7 +10,7 @@ export default async function BrandPage(props: propsType) {
     const { backendUrl } = assets;
     const brand = await fetch(`${backendUrl}/api/brands/${slug}?locale=${locale}`)
         .then(res => res.json());
-    const { docs } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`)
+    const { products } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`)
         .then(res => res.json());
     const breadCrumbs =
         [
@@ -22,7 +22,7 @@ export default async function BrandPage(props: propsType) {
             <BreadCrumbs breadcrumbs={breadCrumbs}/>
             <StaticPage content={brand?.description} title={brand?.title}/>
             {/*<h2 className={'font-semibold text-xl text-center'}>{t('bestsellers')}</h2>*/}
-            <RelatedProducts products={docs} labels={true}/>
+            <RelatedProducts products={products} labels={true}/>
         </div>
     );
 }
