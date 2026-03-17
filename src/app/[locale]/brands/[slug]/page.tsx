@@ -10,7 +10,7 @@ export default async function BrandPage(props: propsType) {
     const { backendUrl } = assets;
     const brand = await fetch(`${backendUrl}/api/brands/${slug}?locale=${locale}`)
         .then(res => res.json());
-    const { docs } = await fetch(`${backendUrl}/api/products/products-brand${slug}?locale=${locale}`)
+    const { docs } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`)
         .then(res => res.json());
     const breadCrumbs =
         [
