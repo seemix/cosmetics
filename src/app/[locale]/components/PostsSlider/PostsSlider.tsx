@@ -18,7 +18,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
         <div className={'w-full overflow-hidden'}>
             <Swiper
                 modules={[Pagination, Autoplay]}
-                autoplay={{ delay: 3000, disableOnInteraction: false, reverseDirection: false }}
+                autoplay={{ delay: 5000, disableOnInteraction: false, reverseDirection: false }}
                 loop={true}
                 pagination={{ clickable: true }}
                 className={'w-full max-w-full'}
