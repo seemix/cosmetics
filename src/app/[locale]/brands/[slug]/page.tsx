@@ -12,10 +12,11 @@ export default async function BrandPage(props: propsType) {
     const { backendUrl } = assets;
     const brand = await fetch(`${backendUrl}/api/brands/${slug}?locale=${locale}`)
         .then(res => res.json());
-    const { products } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`,{
+    const { products } = await fetch(`${backendUrl}/api/products/products-brand/${slug}?locale=${locale}`, {
         headers: {
             Cookie: cookieStore.toString(),
-        }
+        },
+        credentials: 'include'
     })
         .then(res => res.json());
     const breadCrumbs =
