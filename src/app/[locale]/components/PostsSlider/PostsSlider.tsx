@@ -4,15 +4,16 @@ import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { Pagination } from 'swiper/modules';
+
 import 'swiper/css';
-
 import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
+import 'swiper/css/navigation';
 import { assets } from '@/app/[locale]/assets/assets';
 import type { PostCard } from '@/app/[locale]/types/post-card';
 
 export default function PostsSlider({ slides }: { slides: PostCard[] }) {
+
     return (
         <div className={'w-full overflow-hidden'}>
             <Swiper
@@ -24,7 +25,8 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={slide.id} className={'w-full'}>
-                        <Link href={`/news/${slide.slug}`} className={'block w-full'}>
+                        <Link href={slide.customLink ? `/${slide.customLink}` : `/news/${slide.slug}`}
+                            className={'block w-full'}>
                             <div className={'relative w-full overflow-hidden'}>
                                 <div className={'block sm:hidden'}>
                                     <div className={'relative w-full aspect-square'}>

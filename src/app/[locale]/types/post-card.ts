@@ -4,6 +4,7 @@ export type PostCard = {
     id: string;
     title: string;
     slug: string;
+    customLink?: string;
     excerpt: string;
     slide: {
         alt: string;

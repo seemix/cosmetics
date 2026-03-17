@@ -6,8 +6,7 @@ import Link from 'next/link';
 
 export default async function NewsCard({ post, locale }: { post: PostCard, locale: string }) {
 
-  //  const t = await getTranslations('StaticPages');
-    const { title, slide, slug } = post;
+    const { title, slide, slug, customLink } = post;
     const { backendUrl } = assets;
     const date = new Date(post.createdAt);
     const formattedDate = new Intl.DateTimeFormat(locale, {
@@ -20,25 +19,13 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
                 <p className={'text-gray-500 text-right text-sm'}>{formattedDate}</p>
                 <h3 className={'text-xl text-center mb-4 font-semibold'}>{title}</h3>
             </div>
-            {/*<div className={'grid md:grid-cols-[auto_1fr] gap-4'}>*/}
-            <Link href={`news//${slug}`}>
+            <Link href={customLink ? `/${customLink}` : `/news/${slug}`}>
                 <div className={'w-full aspect-[1920/620] relative my-1'}>
                     <Image src={`${backendUrl}${slide.url}`} alt={`${slide.alt} || postImage`}
                            className={'object-cover object-center'}
                            fill/>
                 </div>
             </Link>
-            {/*<p>{excerpt}</p>*/}
-            {/*</div>*/}
-            {/*<div className={'w-full flex justify-end -mt-3'}>*/}
-            {/*    <Link href={`news//${slug}`}>*/}
-            {/*<button type={'button'}*/}
-            {/*        className={`border border-black p-2 transition-colors hover:border-[var(--main)] */}
-            {/*                        hover:text-[var(--main)] cursor-pointer mt-4 mb-3`}>*/}
-            {/*    {t('readMore')}*/}
-            {/*</button>*/}
-            {/*</Link>*/}
-            {/*</div>*/}
         </div>
     );
 }
