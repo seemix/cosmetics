@@ -15,16 +15,8 @@ export default async function AboutUsPage(props: propsType) {
     }).toString();
     const { title, content } = await fetch(url).then(res => res.json());
     const breadCrumbs = [
-        {
-            id: '0',
-            title: t('Main'),
-            slug: 'home'
-        },
-        {
-            id: '1',
-            title: title,
-            slug: slug
-        }
+        { id: '0', title: t('Main'), slug: '/' },
+        { id: '1', title: title, slug: '' }
     ];
 
     return (

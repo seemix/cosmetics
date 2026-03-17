@@ -46,7 +46,7 @@ export default async function ProductPage(props: {
     categoriesChain[2] = {
         id: product?.id,
         title: product?.title,
-        slug: product?.slug
+        slug: ''
     };
 
     return (

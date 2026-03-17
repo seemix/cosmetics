@@ -6,10 +6,10 @@ export function buildCategoryChain(
 ): IBreadcrumb[] {
     if (!category) return [];
 
-    const toItem = ({ id, title, slug }: ProductCategory): IBreadcrumb => ({
+    const toItem = ({ id, title }: ProductCategory): IBreadcrumb => ({
         id,
         title,
-        slug,
+        slug: '',
     });
 
     return [

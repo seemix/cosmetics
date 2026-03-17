@@ -32,9 +32,9 @@ export default async function BrandPage(props: propsType) {
     const { products, brand, pagination } = response;
 
     const breadCrumbs = [
-        { id: '0', title: t('Catalog.catalog'), slug: 'catalog' },
+        { id: '0', title: t('Catalog.catalog'), slug: '../catalog' },
         { id: '1', title: t('CatalogMenu.brands'), slug: 'brands' },
-        { id: brand?.id, title: brand?.title, slug: brand?.slug }
+        { id: brand?.id, title: brand?.title, slug: '' }
     ];
 
     return (

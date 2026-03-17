@@ -7,9 +7,12 @@ export default async function BreadCrumbs({ breadcrumbs }: { breadcrumbs: IBread
                         items-center p-4`}>
             {breadcrumbs.length && breadcrumbs.map((item, index, array) =>
                 <p key={item.id} className={'flex items-center gap-2'}>
-                    {item.title}
+                    {/*{item.slug ? <Link href={item.slug}*/}
+                    {/*                   className={'hover:text-gray-900 hover:underline'}>*/}
+                        {item.title}
+                    {/*</Link> : item.title}*/}
                     {index !== array.length - 1 &&
-                        <svg className={'w-3 h-3 rtl:rotate-180 text-body'} aria-hidden="true"
+                        <svg className={'w-3 h-3 rtl:rotate-180 text-body'} aria-hidden={'true'}
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path
                                 stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
