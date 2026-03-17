@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Pagination } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -17,7 +17,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
     return (
         <div className={'w-full overflow-hidden'}>
             <Swiper
-                modules={[Pagination]}
+                modules={[Pagination, Autoplay]}
                 autoplay={{ delay: 3000, disableOnInteraction: false, reverseDirection: false }}
                 loop={true}
                 pagination={{ clickable: true }}
@@ -26,7 +26,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                 {slides.map((slide, index) => (
                     <SwiperSlide key={slide.id} className={'w-full'}>
                         <Link href={slide.customLink ? `/${slide.customLink}` : `/news/${slide.slug}`}
-                            className={'block w-full'}>
+                              className={'block w-full'}>
                             <div className={'relative w-full overflow-hidden'}>
                                 <div className={'block sm:hidden'}>
                                     <div className={'relative w-full aspect-square'}>
