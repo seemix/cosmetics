@@ -9,7 +9,7 @@ const SearchBar = () => {
     const { showModal } = useModal();
 
     return (
-        <button type={'button'} className={'cursor-pointer'}
+        <button type={'button'} className={'cursor-pointer'} aria-label={'search'}
                 onClick={() => {
                     showModal(<SearchComponent/>, 'zoom');
                 }}>

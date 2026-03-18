@@ -20,7 +20,7 @@ export default function BrandCard({ brand }: { brand: IBrand }) {
                     />
                 </div>
             </Link>
-            <h4 className={'text-center text-base sm:text-md mt-5 mb-3'}>{title}</h4>
+            <h3 className={'text-center text-base sm:text-md mt-5 mb-3'}>{title}</h3>
         </div>
     );
 }
