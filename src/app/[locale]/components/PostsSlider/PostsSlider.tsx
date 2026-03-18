@@ -23,7 +23,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                 pagination={{ clickable: true }}
                 className={'w-full max-w-full'}
             >
-                {slides.map((slide, index) => (
+                {slides.map(slide => (
                     <SwiperSlide key={slide.id} className={'w-full'}>
                         <Link href={slide.customLink ? `/${slide.customLink}` : `/news/${slide.slug}`}
                               className={'block w-full'}>
@@ -37,7 +37,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                             alt={slide.slide.alt || 'Mobile slide'}
                                             quality={100}
                                             fill
-                                            priority={index === 0}
+                                            priority
                                             sizes={'100vw'}
                                             className={'object-cover'}
                                         />
