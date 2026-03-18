@@ -46,6 +46,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
                 <div className={'w-full aspect-square relative'}>
                     <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0]?.image?.alt || ''}
                            className={'object-cover relative'} placeholder={'blur'}
+                           quality={95}
                            fill
                            blurDataURL={gallery[0]?.image?.blurHash}/>
                     {(action || bestSeller) && labels &&

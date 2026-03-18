@@ -112,6 +112,7 @@ export default function ProductGalleryModal({
                                 src={backendUrl + img.image.url}
                                 alt={img.image.alt || ''}
                                 placeholder={'blur'}
+                                quality={95}
                                 blurDataURL={img.image.blurHash}
                                 fill
                                 className={'object-contain'}
@@ -148,6 +149,7 @@ export default function ProductGalleryModal({
                                     alt={img.image.alt || ''}
                                     width={90}
                                     height={90}
+                                    quality={95}
                                     onClick={e => e.stopPropagation()}
                                     className={`object-contain border transition-colors
                                               ${

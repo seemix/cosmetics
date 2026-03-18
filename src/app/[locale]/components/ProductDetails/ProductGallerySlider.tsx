@@ -67,6 +67,7 @@ export default function ProductGallerySlider({
                                         width={90}
                                         height={90}
                                         placeholder={'empty'}
+                                        quality={95}
                                         src={backendUrl + img.image.sizes.thumbnail.url}
                                         alt={img.image.alt || ''}
                                         className={`

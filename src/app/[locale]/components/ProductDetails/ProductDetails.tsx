@@ -68,6 +68,7 @@ export default function ProductDetails({
                         <Image
                             className={'object-cover object-center fixed'}
                             src={backendUrl + brand?.logo.url}
+                            quality={95}
                             alt={'brand logo'}
                             fill
                         />

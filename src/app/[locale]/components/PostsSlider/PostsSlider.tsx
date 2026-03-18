@@ -35,7 +35,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
                                             placeholder={'blur'}
                                             blurDataURL={slide['square-slide'].blurHash}
                                             alt={slide.slide.alt || 'Mobile slide'}
-                                            quality={90}
+                                            quality={100}
                                             fill
                                             priority={index === 0}
                                             sizes={'100vw'}

@@ -23,6 +23,7 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
                 <div className={'w-full aspect-[1920/620] relative my-1'}>
                     <Image src={`${backendUrl}${slide.url}`} alt={`${slide.alt} || postImage`}
                            className={'object-cover object-center'}
+                           quality={95}
                            fill/>
                 </div>
             </Link>

@@ -21,6 +21,7 @@ export const richTextImagePathConverter: JSXConverters<UploadNode> = {
             <div className={'my-3 flex justify-center'}>
                 <Image
                     src={fullSrc}
+                    quality={95}
                     alt={node.value?.alt || 'image'}
                     width={node.value?.width || 500}
                     height={node.value?.height || 400}

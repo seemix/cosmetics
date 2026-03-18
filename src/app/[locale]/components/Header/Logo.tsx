@@ -11,6 +11,7 @@ export default function Logo() {
                     className={'ml-5 ml-5 w-13 sm:w-17 lg:w-20 h-auto'}
                     src={logo}
                     alt={'logo'}
+                    quality={95}
                 />
 
                 <div className={'flex flex-col items-center'}>

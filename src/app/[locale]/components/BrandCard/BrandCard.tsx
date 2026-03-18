@@ -16,6 +16,7 @@ export default function BrandCard({ brand }: { brand: IBrand }) {
                 <div className={'w-full aspect-[30/9] relative'}>
                     <Image src={`${backendUrl}${logo.url}`} alt={logo.alt} fill
                            className={'object-cover'}
+                           quality={95}
                     />
                 </div>
             </Link>

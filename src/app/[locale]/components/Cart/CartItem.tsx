@@ -27,7 +27,7 @@ export default function CartItem({ cartId, product }: { cartId?: string, product
 
     return (
         <div className={'grid grid-cols-[auto_1fr_auto_auto] m-2 gap-2 border-b border-gray-300'}>
-            <Image src={`${backendUrl}${product.thumbnail}`} alt={product.title} width={80} height={80}/>
+            <Image src={`${backendUrl}${product.thumbnail}`} alt={product.title} width={80} height={80} quality={95}/>
             <Link href={`../product/${product.slug}`} onClick={hideModal}
                         className={'transition-colors duration-300 hover:text-[var(--main)]'}>
                 <p>{product.title}</p>

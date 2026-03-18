@@ -13,7 +13,7 @@ export default function SingleOrderItem({ item, index }: { item: OrderItemType, 
             <td>
                 <Link href={`/product/${item.slug}`}
                       className={'flex gap-2 items-center  group'}>
-                    <Image src={`${backendUrl}${item.thumbnail}`} width={70} height={70} alt={item.title}/>
+                    <Image src={`${backendUrl}${item.thumbnail}`} width={70} height={70} alt={item.title} quality={95}/>
                     <div>
                         <p className={'transition-colors duration-300 group-hover:text-[var(--main)]'}>{item.title}</p>
                         <p className={`transition-colors duration-300 text-sm text-gray-400 
