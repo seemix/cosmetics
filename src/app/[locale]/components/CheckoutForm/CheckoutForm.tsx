@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { MdOutlineCheckBox } from 'react-icons/md';
 
 import { FormInput, FormPhoneInput, Loader } from '@/app/[locale]/components';
 import { type CheckoutFormData, checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
@@ -22,7 +23,7 @@ export default function CheckoutForm() {
     const locale = useLocale();
 
     const schema = checkoutSchema(t2);
-    const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({
+    const { register, handleSubmit, watch, formState: { errors }, setValue, reset } = useForm({
         defaultValues: {
             name: user?.name,
             surname: user?.surname,
@@ -54,6 +55,7 @@ export default function CheckoutForm() {
             }, 200);
         }
     }, [success, reset, router.push, orderNumber, clear]);
+    const selectedPayment = watch('paymentType');
 
     const onSubmit = (data: CheckoutFormData) => {
         createNewOrder({
@@ -62,9 +64,10 @@ export default function CheckoutForm() {
             phone: data.phone,
             city: data.city,
             address: data.street
-        }, locale, data.comment).then();
+        }, locale, data.paymentType, data.comment).then();
     };
     if (!cart?.items?.length) return <h2 className={'text-center text-2xl'}>{t('Checkout.addItemsToCart')}</h2>;
+
     return (
         <form className={'mt-3 mx-auto w-full max-w-lg px-3'} onSubmit={handleSubmit(onSubmit)}>
             <div className={'space-y-2 md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-5'}>
@@ -98,6 +101,53 @@ export default function CheckoutForm() {
                                 })}
                                 id={'phone'}
                                 error={errors.phone}/>
+                {/*Payment Selector*/}
+                <div className={'md:col-span-2'}>
+                    <label className={'block text-xs font-medium'}>
+                        {t('Checkout.paymentMethod')}
+                    </label>
+
+                    <div className={'grid grid-cols-1 md:grid-cols-2 gap-2'}>
+                        {['cash', 'transfer'].map((method) => {
+                            const isChecked = selectedPayment === method;
+
+                            return (
+                                <label key={method} className={'w-full cursor-pointer'}>
+                                    <input
+                                        type={'radio'}
+                                        value={method}
+                                        {...register('paymentType')}
+                                        className={'sr-only'}
+                                    />
+
+                                    <div className={`w-full border p-3 text-sm transition-all flex items-center 
+                                                    justify-center text-center relative 
+                                                     ${!isChecked ? `hover:text-[var(--main)] 
+                                                    transition-colors duration-300 hover:border-[var(--main)]` : ''}
+                                                    ${isChecked
+                                        ? 'border-black'
+                                        : 'bg-transparent border-gray-300 text-gray-600 hover:border-gray-400'} 
+                                         ${errors.paymentType ? 'border-red-500 bg-red-50' : ''}`}
+                                    >
+                                        <span className={'text-xs'}>
+                                            {method === 'cash' ? t('Checkout.cashCourier') : t('Checkout.transfer')}
+                                        </span>
+                                        {isChecked && <MdOutlineCheckBox size={20}
+                                                                         className={'ml-2 absolute top-1 right-0 w-8'}/>}
+                                    </div>
+                                </label>
+                            );
+                        })}
+                    </div>
+
+                    <div className={'h-5'}>
+                        {errors.paymentType && (
+                            <p className={'mt-1 text-xs text-red-600'}>
+                                {errors.paymentType.message}
+                            </p>
+                        )}
+                    </div>
+                </div>
                 {/*City*/}
                 <FormInput label={t('Checkout.city')}
                            register={register('city')}

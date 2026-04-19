@@ -11,7 +11,13 @@ interface ICheckoutStore {
     loading: boolean;
     success: boolean;
 
-    createNewOrder: (shippingAddress: IShippingAddress, locale: string, comment?: string) => Promise<void>;
+    createNewOrder: (shippingAddress: {
+        name: `${string} ${string}`;
+        email: string;
+        phone: string;
+        city: string;
+        address: string
+    }, locale: string, paymentType: 'cash' | 'transfer', comment?: string | undefined) => Promise<void>;
     clearOrder: () => void;
 }
 
@@ -21,7 +27,7 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
         success: false,
         orderNumber: '',
 
-        createNewOrder: async (shippingAddress: IShippingAddress, locale: string, comment?: string,) => {
+        createNewOrder: async (shippingAddress: IShippingAddress, locale: string, paymentType: 'cash' | 'transfer', comment?: string,) => {
             try {
                 set({ loading: true });
                 const { cart } = useCartStore.getState();
@@ -29,7 +35,7 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
                     return { product: item.id, quantity: item.quantity };
                 });
                 const { data } = await axiosService.post(`/orders/create?locale=${locale}`, {
-                    items, shippingAddress, comment
+                    items, shippingAddress, comment, paymentType
                 });
                 set({ success: data.success, orderNumber: data.order.orderNumber });
             } catch (error) {
