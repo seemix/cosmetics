@@ -103,7 +103,7 @@ export default function CheckoutForm() {
                                 error={errors.phone}/>
                 {/*Payment Selector*/}
                 <div className={'md:col-span-2'}>
-                    <label className={'block text-xs font-medium'}>
+                    <label htmlFor={'paymentType'} className={'block text-xs font-medium'}>
                         {t('Checkout.paymentMethod')}
                     </label>
 
@@ -120,14 +120,15 @@ export default function CheckoutForm() {
                                         className={'sr-only'}
                                     />
 
-                                    <div className={`w-full border p-3 text-sm transition-all flex items-center 
-                                                    justify-center text-center relative 
-                                                     ${!isChecked ? `hover:text-[var(--main)] 
-                                                    transition-colors duration-300 hover:border-[var(--main)]` : ''}
-                                                    ${isChecked
-                                        ? 'border-black'
-                                        : 'bg-transparent border-gray-300 text-gray-600 hover:border-gray-400'} 
-                                         ${errors.paymentType ? 'border-red-500 bg-red-50' : ''}`}
+                                    <div className={`w-full border p-3 text-sm transition-all duration-300 flex 
+                                                    items-center justify-center text-center relative 
+                                        ${errors.paymentType
+                                        ? 'border-red-500 bg-red-50'
+                                        : isChecked
+                                            ? 'border-black text-black'
+                                            : 'bg-transparent border-gray-300 text-gray-600 hover:text-[var(--main)] ' +
+                                            'hover:border-[var(--main)]'
+                                    }`}
                                     >
                                         <span className={'text-xs'}>
                                             {method === 'cash' ? t('Checkout.cashCourier') : t('Checkout.transfer')}
