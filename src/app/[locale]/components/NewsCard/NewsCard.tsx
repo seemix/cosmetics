@@ -20,11 +20,35 @@ export default async function NewsCard({ post, locale }: { post: PostCard, local
                 <h3 className={'text-xl text-center mb-4 font-semibold'}>{title}</h3>
             </div>
             <Link href={customLink ? `/${customLink}` : `/news/${slug}`}>
-                <div className={'w-full aspect-[1920/620] relative my-1'}>
-                    <Image src={`${backendUrl}${slide.url}`} alt={`${slide.alt} || postImage`}
-                           className={'object-cover object-center'}
-                           quality={95}
-                           fill/>
+                <div className={'block sm:hidden'}>
+                    <div className={'relative w-full aspect-square'}>
+                        <Image
+                            src={`${backendUrl}${post['square-slide'].url}`}
+                            placeholder={'blur'}
+                            blurDataURL={post['square-slide'].blurHash}
+                            alt={slide.alt || 'Mobile slide'}
+                            quality={100}
+                            fill
+                            priority
+                            sizes={'100vw'}
+                            className={'object-cover'}
+                        />
+                    </div>
+                </div>
+                <div className={'hidden sm:block'}>
+                    <div className={'relative w-full aspect-[1920/620]'}>
+                        <Image
+                            src={`${backendUrl}${slide.url}`}
+                            alt={slide.alt || 'Desktop slide'}
+                            placeholder={'blur'}
+                            blurDataURL={slide.blurHash}
+                            loading={'eager'}
+                            fill
+                            priority
+                            sizes={'100vw'}
+                            className={'object-cover'}
+                        />
+                    </div>
                 </div>
             </Link>
         </div>
