@@ -8,7 +8,7 @@ export default function StaticPage({ title, content }: { title: string, content:
         <div className={'w-full mx-auto max-w-full'}>
             <h2 className={'text-2xl my-4 text-center font-semibold'}>{title}</h2>
             <div
-                className={`prose max-w-none prose-img:max-w-full  prose-img:h-auto  prose-table:block 
+                className={`prose max-w-none prose-img:max-w-full prose-img:h-auto prose-table:block 
                             prose-table:overflow-x-auto break-words`}>
                 <RichText
                     data={content}

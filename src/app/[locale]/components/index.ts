@@ -9,6 +9,7 @@ export { default as ClearAuthError } from './ClearAuthError/ClearAuthError';
 export { default as ClearCart } from './Cart/ClearCart';
 export { default as CartWindow } from './Cart/CartWindow';
 export { default as CartItem } from './Cart/CartItem';
+export { default as ContentAccordion } from './ContentAccordion/ContentAccordion';
 export { default as ConfirmResetMessage } from './ForgotPasswordForm/ConfirmResetMessage';
 export { default as CheckAuth } from './CheckAuth/CheckAuth';
 export { default as CheckoutForm } from './CheckoutForm/CheckoutForm';
