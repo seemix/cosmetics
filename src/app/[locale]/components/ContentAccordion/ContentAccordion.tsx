@@ -36,8 +36,8 @@ export default function ContentAccordion({ content, logo }: {
     return (
         <div className={'w-full mx-auto max-w-full border-1 border-gray-300 p-4 bg-white'}>
             <div className={'flex justify-center'}>
-                <Image alt={'brand-logo'} src={`${assets.backendUrl}${logo}`} width={180} height={101}
-                       className={'aspect-16/9 mb-4'}/>
+                <Image alt={'brand-logo'} src={`${assets.backendUrl}${logo}`} width={190} height={190}
+                       className={'aspect-square mb-4'}/>
             </div>
 
             <div
@@ -84,8 +84,8 @@ export default function ContentAccordion({ content, logo }: {
                             <button
                                 type={'button'}
                                 onClick={() => setIsOpen(!isOpen)}
-                                className={`mt-3 text-blue-600 hover:text-blue-800 font-medium transition-colors 
-                                            cursor-pointer inline-flex items-center gap-1 focus:outline-none`}
+                                className={`mt-3 h font-medium transition-colors  cursor-pointer inline-flex 
+                                            items-center gap-1 focus:outline-none`}
                             >
                                 {isOpen ? t('collapse') : t('readMore')}
 
