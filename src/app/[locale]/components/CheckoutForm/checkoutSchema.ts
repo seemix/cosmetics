@@ -17,8 +17,9 @@ export const checkoutSchema = (t: Translator) =>
             .min(1, t('fieldRequired'))
             .regex(/^\d{8}$/, t('phoneMustBe8Digits')),
         paymentType: z.enum(['cash', 'transfer'] as const, {
-           error: t('fieldRequired'),
+            error: t('fieldRequired'),
         }),
+        SRL: z.string().min(5,  t('fieldTooShort')).max(80),
         city: z.string()
             .min(1, t('fieldRequired'))
             .min(3, t('fieldTooShort')),

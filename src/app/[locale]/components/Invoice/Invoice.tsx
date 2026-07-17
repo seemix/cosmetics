@@ -60,6 +60,16 @@ export default function Invoice() {
                         className={'py-4 text-right pt-4 text-center border-t'}>{cart.subtotal} {assets.currency}
                     </td>
                 </tr>
+                <tr>
+                    <td colSpan={5} className={'py-3 text-center border-t'}>
+                        <b>🚚 {t('shipping')}:</b>
+                        {cart.subtotal < assets.freeShippingThreshold ? t('companyTariff') :
+                            <>
+                                <span className={'font-bold text-green-500'}> {t('freeShipping')}</span>
+                                <small><i> ({t('freeShippingThreshold')})</i></small>
+                            </>}
+                    </td>
+                </tr>
                 </tfoot>
             </table>
         </div>

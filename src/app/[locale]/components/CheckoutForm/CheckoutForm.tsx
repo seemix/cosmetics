@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MdOutlineCheckBox } from 'react-icons/md';
@@ -58,14 +59,15 @@ export default function CheckoutForm() {
     const selectedPayment = watch('paymentType');
 
     const onSubmit = (data: CheckoutFormData) => {
-        createNewOrder({
-            name: `${data.name} ${data.surname}`,
-            email: data.email,
-            phone: data.phone,
-            city: data.city,
-            address: data.street
-        }, locale, data.paymentType, data.comment).then();
-    };
+            createNewOrder({
+                name: `${data.name} ${data.surname}`,
+                email: data.email,
+                phone: data.phone,
+                city: data.city,
+                address: data.street,
+            }, locale, data.paymentType, data.SRL, data.comment).then();
+        };
+
     if (!cart?.items?.length) return <h2 className={'text-center text-2xl'}>{t('Checkout.addItemsToCart')}</h2>;
 
     return (
@@ -141,7 +143,7 @@ export default function CheckoutForm() {
                         })}
                     </div>
 
-                    <div className={'h-5'}>
+                    <div className={'h-4'}>
                         {errors.paymentType && (
                             <p className={'mt-1 text-xs text-red-600'}>
                                 {errors.paymentType.message}
@@ -149,6 +151,34 @@ export default function CheckoutForm() {
                         )}
                     </div>
                 </div>
+                <AnimatePresence>
+                    {selectedPayment === 'transfer' && (
+                        <motion.div
+                            key={'srl-field-container'}
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{
+                                height: 'auto',
+                                opacity: 1,
+                                transition: { height: { duration: 0.3 }, opacity: { duration: 0.2, delay: 0.05 } }
+                            }}
+                            exit={{
+                                height: 0,
+                                opacity: 0,
+                                transition: { height: { duration: 0.2 }, opacity: { duration: 0.15 } }
+                            }}
+                            className={'md:col-span-2 overflow-hidden'}
+                        >
+                            <div className={'pb-2 px-1 w-[95%]'}>
+                                <FormInput
+                                    label={'SRL'}
+                                    register={register('SRL')}
+                                    id={'SRL'}
+                                    error={errors.SRL}
+                                />
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 {/*City*/}
                 <FormInput label={t('Checkout.city')}
                            register={register('city')}

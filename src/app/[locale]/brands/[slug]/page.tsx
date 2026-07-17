@@ -44,8 +44,9 @@ export default async function BrandPage(props: propsType) {
         ];
 
 
-    return (<div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
-            <BreadCrumbs breadcrumbs={breadCrumbs}/>
+    return (
+        <div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
+            {/*<BreadCrumbs breadcrumbs={breadCrumbs}/>*/}
             <ContentAccordion content={brand.description} logo={brand.logo.url}/>
             {products.length > 0 &&
                 <div className={'flex flex-col sm:flex-row gap-2 items-start sm:justify-between sm:items-center'}>

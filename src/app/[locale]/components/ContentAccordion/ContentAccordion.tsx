@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { RichText } from '@payloadcms/richtext-lexical/react';
+import { useTranslations } from 'next-intl';
 import type { SerializedEditorState } from 'lexical';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -13,19 +14,10 @@ export default function ContentAccordion({ content, logo }: {
     content: SerializedEditorState,
     logo: string
 }) {
+    const t = useTranslations('Catalog');
     const [isOpen, setIsOpen] = useState(false);
-    // 1. Безпечно дістаємо масив дітей (абзаців)
     const childrenNodes = content?.root?.children || [];
     const hasMoreContent = childrenNodes.length > 1;
-
-
-    if (!content || !content.root) {
-        return (
-            <div className="w-full mx-auto max-w-full">
-                <h2 className="text-2xl my-4 text-center font-semibold">{title}</h2>
-            </div>
-        );
-    }
 
     const previewContent: SerializedEditorState = {
         root: {
@@ -42,15 +34,15 @@ export default function ContentAccordion({ content, logo }: {
     };
 
     return (
-        <div className="w-full mx-auto max-w-full border-1 border-gray-300 p-4 bg-white">
+        <div className={'w-full mx-auto max-w-full border-1 border-gray-300 p-4 bg-white'}>
             <div className={'flex justify-center'}>
                 <Image alt={'brand-logo'} src={`${assets.backendUrl}${logo}`} width={180} height={101}
                        className={'aspect-16/9 mb-4'}/>
             </div>
 
             <div
-                className="prose max-w-none prose-img:max-w-full prose-img:h-auto prose-table:block
-                   prose-table:overflow-x-auto break-words"
+                className={`prose max-w-none prose-img:max-w-full prose-img:h-auto prose-table:block
+                            prose-table:overflow-x-auto break-words`}
             >
                 {!hasMoreContent ? (
                     <RichText data={content} converters={richTextImagePathConverter}/>
@@ -61,7 +53,7 @@ export default function ContentAccordion({ content, logo }: {
                         <AnimatePresence initial={false}>
                             {isOpen && (
                                 <motion.div
-                                    key="accordion-content"
+                                    key={'accordion-content'}
                                     initial={{ height: 0, opacity: 0 }}
                                     animate={{
                                         height: 'auto',
@@ -79,23 +71,23 @@ export default function ContentAccordion({ content, logo }: {
                                             opacity: { duration: 0.2 },
                                         }
                                     }}
-                                    className="overflow-hidden"
+                                    className={'overflow-hidden'}
                                 >
-                                    <div className="pt-4">
+                                    <div className={'pt-4'}>
                                         <RichText data={remainingContent} converters={richTextImagePathConverter}/>
                                     </div>
                                 </motion.div>
                             )}
                         </AnimatePresence>
 
-                        {/* Кнопка "Read more" */}
                         <div className={'flex w-full justify-center'}>
                             <button
                                 type={'button'}
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="mt-3 text-blue-600 hover:text-blue-800 font-medium transition-colors cursor-pointer inline-flex items-center gap-1 focus:outline-none"
+                                className={`mt-3 text-blue-600 hover:text-blue-800 font-medium transition-colors 
+                                            cursor-pointer inline-flex items-center gap-1 focus:outline-none`}
                             >
-                                {isOpen ? 'Show less' : 'Read more'}
+                                {isOpen ? t('collapse') : t('readMore')}
 
                                 <motion.span
                                     animate={{ rotate: isOpen ? 180 : 0 }}
