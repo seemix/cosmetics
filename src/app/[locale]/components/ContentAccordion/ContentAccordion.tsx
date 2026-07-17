@@ -34,10 +34,15 @@ export default function ContentAccordion({ content, logo }: {
     };
 
     return (
-        <div className={'w-full mx-auto max-w-full border-1 border-gray-300 p-4 bg-white'}>
+        <div className={'w-full mx-auto max-w-full border-1 border-gray-300 p-3 bg-white'}>
             <div className={'flex justify-center'}>
-                <Image alt={'brand-logo'} src={`${assets.backendUrl}${logo}`} width={190} height={190}
-                       className={'aspect-square mb-4'}/>
+                <Image
+                    alt={'brand-logo'}
+                    src={`${assets.backendUrl}${logo}`}
+                    width={220}
+                    height={124}
+                    className={'aspect-video object-cover'}
+                />
             </div>
 
             <div
