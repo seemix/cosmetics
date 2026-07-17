@@ -62,7 +62,7 @@ export default function Invoice() {
                 </tr>
                 <tr>
                     <td colSpan={5} className={'py-3 text-center border-t'}>
-                        <b>🚚 {t('shipping')}:</b>
+                        <b> {t('shipping')} : </b>
                         {cart.subtotal < assets.freeShippingThreshold ? t('companyTariff') :
                             <>
                                 <span className={'font-bold text-green-500'}> {t('freeShipping')}</span>
