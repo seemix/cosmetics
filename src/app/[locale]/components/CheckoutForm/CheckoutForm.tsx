@@ -168,7 +168,7 @@ export default function CheckoutForm() {
                             }}
                             className={'md:col-span-2 overflow-hidden'}
                         >
-                            <div className={'pb-2 px-1 w-[95%]'}>
+                            <div className={'pb-2 px-1 w-[95%] mx-0'}>
                                 <FormInput
                                     label={'SRL'}
                                     register={register('SRL')}
