@@ -28,8 +28,8 @@ export default async function ProductPage(props: {
     const { locale, slug } = await props.params;
     const cookieStore = await cookies();
     const { backendUrl } = assets;
-    const response = await fetch(
-        `${backendUrl}/api/products?where[slug][equals]=${slug}&locale=${locale}`, {
+    const product = await fetch(
+        `${backendUrl}/api/products/${slug}?locale=${locale}`, {
             credentials: 'include',
             headers: {
                 Cookie: cookieStore.toString(),
@@ -37,7 +37,7 @@ export default async function ProductPage(props: {
         }
     ).then((res) => res.json());
 
-    const product: IProduct = response.docs[0];
+
     const firstCategory = product.categories && product.categories.length > 0
         ? product.categories[0]
         : null;

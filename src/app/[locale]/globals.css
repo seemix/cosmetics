@@ -153,3 +153,7 @@ button:active {
     --swiper-navigation-color: var(--main);
     --swiper-navigation-size: 50px;
 }
+
+.over-lined {
+    text-decoration: line-through;
+}

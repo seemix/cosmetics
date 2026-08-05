@@ -29,6 +29,9 @@ export default function ProductDetails({
     const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
 
     const {
+        id,
+        action,
+        bestSeller,
         gallery,
         article,
         shortDescription,
@@ -37,8 +40,10 @@ export default function ProductDetails({
         subtitle,
         retailPrice,
         wholesalePrice,
+        discountPrice,
         unavailable,
         brand,
+        relatedProducts,
     } = product;
     const { currency, backendUrl } = assets;
     const [value, setValue] = useState<number>(1);
@@ -49,15 +54,15 @@ export default function ProductDetails({
         <div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
             <div className={'relative'}>
                 <ProductGallerySlider images={gallery}/>
-                <ProductLabels action={Boolean(product.action)} bestSeller={Boolean(product.bestSeller)}/>
+                <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>
                 <div className={'absolute top-7 right-3 z-5'}>
-                    <FavoriteButton productId={product.id}/>
+                    <FavoriteButton productId={id}/>
                 </div>
             </div>
             <div>
                 <div className={'flex gap-4 items-center w-full justify-between'}>
                     <div>
-                        <h2 className={'text-2xl lg:text-3xl font-bold leading-10 my-3'}>
+                        <h2 className={'text-2xl lg:text-[1.6em] font-bold leading-10 my-3'}>
                             {title}
                         </h2>
                         <h3 className={'text-md lg:text-[1.2em] leading-8 lg:leading-12'}>
@@ -79,26 +84,41 @@ export default function ProductDetails({
                 </h4>
                 <p className={'text-[.95em] mt-2'}>{shortDescription}</p>
                 <div className={'w-full flex flex-col items-center lg:items-start'}>
-                    {!unavailable && <div className={'mt-2 flex items-center'}>
-						<span className={`${wholesalePrice ? 'text-xl' : 'text-2xl'} 
-						                   font-bold text-[var(--main)] leading-15`}>
-							{retailPrice} {currency}
-						</span>
-                        {wholesalePrice && (
-                            <span className={'text-2xl font-bold text-green-500 leading-15 ml-4'}>
-							{wholesalePrice} {currency}
-						</span>
+                    {!unavailable && <div className={'w-full flex flex-col items-center lg:items-start'}>
+                        {!unavailable && (
+                            <div className={'mt-2 flex items-center gap-2'}>
+                                <span
+                                    className={`font-semibold text-[var(--main)] 
+                                    ${wholesalePrice ? 'text-lg  text-[var(--main)]' : 'text-2xl'}`}>
+                                 {retailPrice} {currency}
+                                </span>
+
+                                {wholesalePrice && (
+                                    <span
+                                        className={discountPrice ? 'line-through text-gray-400 font-semibold text-lg' :
+                                            'text-2xl font-bold text-green-500'}>
+                                  {wholesalePrice} {currency}
+                                 </span>
+                                )}
+
+                                {discountPrice && (
+                                    <span className={'text-2xl font-bold text-green-500'}>
+                                {discountPrice} {currency}
+                              </span>
+                                )}
+                            </div>
                         )}
                     </div>}
+
                     {!unavailable ? (
-                        <div className={'flex gap-4 mt-2 items-end'}>
+                        <div className={'flex gap-4 mt-4 items-end'}>
                             {!inCart ? (<><Quantity value={value} setValue={setValue}/>
                                     <AddToCartButton productId={product.id} quantity={value}/></>) :
                                 (<>
                                     <div className={'w-0 lg:w-30'}></div>
                                     <AlreadyInCartButton/>
                                 </>)}
-                        </div>) : (<p className={'text-xl font-semibold text-gray-500 mt-4 '}>
+                        </div>) : (<p className={'text-xl font-semibold text-gray-500 mt-4'}>
                         {t('notAvailable')}
                     </p>)}
                 </div>
@@ -106,10 +126,10 @@ export default function ProductDetails({
             <div className={'lg:col-span-2 text-sm'}>
                 {description && <RichText data={description} className={'description-text'}/>}
             </div>
-            {product.relatedProducts &&
+            {relatedProducts &&
                 <div className={'lg:col-span-2'}>
                     <h2 className={'text-2xl font-bold mb-4'}>{t('relatedProducts')}</h2>
-                    <RelatedProducts products={product.relatedProducts} labels={false}/>
+                    <RelatedProducts products={relatedProducts} labels={false}/>
                 </div>
             }
         </div>

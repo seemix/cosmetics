@@ -23,6 +23,7 @@ export default function ProductCard({ product, index = 0, labels = true }: {
         gallery,
         retailPrice,
         wholesalePrice,
+        discountPrice,
         unavailable,
         action,
         bestSeller
@@ -56,30 +57,49 @@ export default function ProductCard({ product, index = 0, labels = true }: {
                     </div>
                 </div>
             </Link>
-            <div className={'p-4 flex flex-col gap-2 bg-white'}>
+            <div className={'p-2 flex flex-col gap-2 bg-white'}>
                 <Link href={`/product/${slug}`}
                       className={'transition-colors duration-300 hover:text-[var(--main)]'}>
-                    <p className={'text-md sm:text-lg font-bold'}>{title}</p>
+                    <p className={'text-base font-bold'}>{title}</p>
                     <p className={'text-xs'}>{subtitle}</p>
                 </Link>
-                <div className={'flex justify-between mt-2 items-center'}>
+
+            </div>
+            <div>
+                <div className={'flex justify-between items-center px-3'}>
                     <p className={'text-gray-500 text-xs sm:text-sm'}>{t('shortArticle')}: {article}</p>
-                    {!unavailable &&
-                        <p className={`${wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'} 
-                                       font-bold text-[1em] sm:text-[1.2em]`}>
-                            {price} {currency}
-                        </p>}
+                    {!unavailable && (
+                        discountPrice ? (
+                            <div>
+                                <p className={'text-gray-400 over-lined text-sm sm:text-[.9em]'}>
+                                    {wholesalePrice || price} {currency}
+                                </p>
+                                <p className={'text-green-500 font-bold text-[1em] sm:text-[1.2em]'}>
+                                    {discountPrice} {currency}
+                                </p>
+
+                            </div>
+                        ) : (
+                            <p
+                                className={`${
+                                    wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'
+                                } font-bold text-[1em] sm:text-[1.2em]`}
+                            >
+                                {wholesalePrice || price} {currency}
+                            </p>
+                        )
+                    )}
+                </div>
+                <div className={'my-3 w-full flex justify-center px-4'}>
+                    {!unavailable ? (
+                        !inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>
+                    ) : (
+                        <p className={'text-gray-500 text-md sm:text-lg text-center mb-2 font-semibold'}>
+                            {t('notAvailable')}
+                        </p>
+                    )}
                 </div>
             </div>
-            <div className={'mb-3 mx-auto'}>
-                {!unavailable ? (
-                    !inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>
-                ) : (
-                    <p className={'text-gray-500 text-md sm:text-lg text-center mb-2 font-semibold'}>
-                        {t('notAvailable')}
-                    </p>
-                )}
-            </div>
         </motion.div>
-    );
+    )
 }

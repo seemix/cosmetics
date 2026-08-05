@@ -37,7 +37,7 @@ export default async function HomePage(props: propsType) {
             <Brands brands={brands.docs}/>
             <div className={'max-w-[1100px] mx-auto mt-6'}>
                 <h2 className={'font-semibold text-xl text-center'}>{t('bestsellers')}</h2>
-                <RelatedProducts products={bestsellers.docs} labels={false}/>
+                <RelatedProducts products={bestsellers.products} labels={false}/>
             </div>
         </div>);
 }
