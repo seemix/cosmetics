@@ -95,6 +95,7 @@ export const useAuthStore = create<AuthState>((set) => ({
             set({ user: data.user, authChecked: true });
             const mergedCart = await mergeGuestCart();
             useCartStore.getState().setCart(mergedCart?.cart);
+            useCartStore.setState({ promoCode: '' });
 
             return true;
 
@@ -127,6 +128,7 @@ export const useAuthStore = create<AuthState>((set) => ({
             await axiosService.post('users/logout');
             useCartStore.getState().init(guestCartAdapter(), 'ru');
             useCartStore.getState().adapter?.load('ru');
+            useCartStore.setState({ promoCode: '' });
             set({ user: null, authChecked: false });
         } catch (error) {
             set({ error: getErrorMessage(error) });
@@ -153,7 +155,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         }
     },
 
-    updateUserInfo: async(userInfo ) => {
+    updateUserInfo: async (userInfo) => {
         try {
             set({ loading: true });
             await axiosService.patch('users/update', userInfo);

@@ -8,11 +8,10 @@ import { Cart, Loader } from '@/app/[locale]/components';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
 export default function Invoice() {
-    const { cart, loading } = useCartStore();
+    const { cart, loading, promoCode } = useCartStore();
     const { showModal } = useModal();
     const t = useTranslations('Checkout');
     if (!cart || !cart?.items?.length) return;
-
     return (
         <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
             {loading && <Loader/>}
@@ -46,18 +45,40 @@ export default function Invoice() {
                             <div className={'text-xs text-gray-500 leading-tight'}>{item.subtitle}</div>
                         </td>
                         <td className={'py-3 text-center'}>{item.quantity}</td>
-                        <td className={'py-3 text-right'}>{item.price}</td>
+                        <td className={'py-3 text-right'}>{item.regularPrice || item.price}</td>
                         <td className={'py-3 text-right font-medium'}>
-                            {item.price * item.quantity}
+                            {item.regularPrice ? item.regularPrice * item.quantity : item.price * item.quantity}
                         </td>
                     </tr>
                 ))}
                 </tbody>
                 <tfoot>
+                {cart.promoDiscount && cart.promoDiscount > 0 && <>
+                    <tr className={'text-base'}>
+                        <td colSpan={2} className={'text-right text-gray-500 uppercase border-t'}>
+                            <i>{t('sum')}</i>
+                        </td>
+                        <td colSpan={3}
+                            className={'text-right text-center border-t over-lined text-gray-500'}>
+                            <i>{cart.preSubtotal} {assets.currency}</i>
+                        </td>
+                    </tr>
+                    <tr className={'text-base'}>
+                        <td colSpan={2} className={'text-right uppercase'}>
+                            {t('discount')}
+                            <pre className={'text-gray-500 text-sm'}>Promo: {promoCode}</pre>
+                        </td>
+                        <td colSpan={3}
+                            className={'text-right text-center'}>
+                            {cart.promoDiscount} {assets.currency}
+                        </td>
+                    </tr>
+                </>}
                 <tr className={'font-bold text-base'}>
                     <td colSpan={2} className={'py-4 text-right uppercase pt-4 border-t'}>{t('total')}</td>
                     <td colSpan={3}
-                        className={'py-4 text-right pt-4 text-center border-t'}>{cart.subtotal} {assets.currency}
+                        className={'py-4 text-right pt-4 text-center border-t'}>
+                        {cart.subtotal} {assets.currency}
                     </td>
                 </tr>
                 <tr>

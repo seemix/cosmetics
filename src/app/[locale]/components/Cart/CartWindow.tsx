@@ -52,10 +52,18 @@ export default function CartWindow() {
                     <div className={'text-sm flex flex-col'}>
                         <div className={'mt-2'}>
                             {t('subtotal')}
-                            : <p className={`${user?.wholesale === true ? 'text-green-500' : 'text-[var(--main)]'} 
-                                             text-[1.3em] mt-1 font-bold text-center`}>
-                            {cart?.subtotal} {assets.currency}
-                        </p>
+                            :
+                            <p className={`${user?.wholesale === true ? 'text-green-500' : 'text-[var(--main)]'}`}>
+                                {cart?.preSubtotal &&
+                                    <span
+                                        className={'over-lined text-gray-500 text-[1.1em] font-normal mr-2'}>
+                                        <i>{cart.preSubtotal}</i>
+                                    </span>}
+                                <span className={'text-[1.3em] mt-1 font-bold text-center'}>
+                                    {cart?.subtotal} {assets.currency}
+                                </span>
+                            </p>
+
                         </div>
                     </div>
                 </div>

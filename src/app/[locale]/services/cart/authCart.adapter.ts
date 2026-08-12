@@ -8,26 +8,26 @@ export const authCartAdapter = (): CartAdapter => ({
         return data;
     },
 
-    async addItem(item: CartItemId): Promise<Cart> {
+    async addItem(item: CartItemId, promoCode?: string): Promise<Cart> {
         const { data } = await axiosService.post<{ cart: Cart }>(
             'carts/add-item',
-            item
+            { item, promoCode }
         );
         return data.cart;
     },
 
-    async updateQty(item: CartItemId): Promise<Cart> {
+    async updateQty(item: CartItemId, promoCode?: string): Promise<Cart> {
         const { data } = await axiosService.patch<{ cart: Cart }>(
             'carts/update-item',
-            item
+            { item, promoCode }
         );
         return data.cart;
     },
 
-    async removeItem(cartId: string, productId: string): Promise<Cart> {
+    async removeItem(cartId: string, productId: string, promoCode?: string): Promise<Cart> {
         const { data } = await axiosService.post<{ cart: Cart }>(
             'carts/remove-item',
-            { cartId, productId }
+            { cartId, productId, promoCode }
         );
         return data.cart;
     },

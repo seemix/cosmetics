@@ -4,11 +4,11 @@ export interface CartAdapter {
 
     load(locale: string): Promise<Cart>;
 
-    addItem(item: CartItemId): Promise<Cart>;
+    addItem(item: CartItemId, promoCode?: string): Promise<Cart>;
 
-    updateQty(item: CartItemId): Promise<Cart>;
+    updateQty(item: CartItemId, promoCode?: string): Promise<Cart>;
 
-    removeItem(cartId: string, productId: string): Promise<Cart>;
+    removeItem(cartId: string, productId: string, promoCode?: string): Promise<Cart>;
 
     clear(): Promise<void>;
 }

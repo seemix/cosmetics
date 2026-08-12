@@ -9,11 +9,14 @@ export type CartItem = {
     subtitle: string;
     slug: string;
     price: number;
+    regularPrice?: number;
     quantity: number;
     thumbnail: string;
 }
 export type Cart = {
     id?: string;
     items: CartItem[]
-    subtotal: number
+    subtotal: number,
+    preSubtotal?: number,
+    promoDiscount?: number,
 }

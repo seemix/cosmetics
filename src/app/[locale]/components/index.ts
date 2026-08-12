@@ -56,6 +56,7 @@ export { default as ProductDetails } from './ProductDetails/ProductDetails';
 export { default as ProductLabels } from './ProductLabels/ProductLabels';
 export { default as ProductGallerySlider } from './ProductDetails/ProductGallerySlider';
 export { default as ProfileForm } from './ProfileForm/ProfileForm';
+export { default as PromoCodeForm } from './PromoCodeForm/PromoCodeForm';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
 export { default as RelatedProducts } from './RelatedProducts/RelatedProducts';
 export { default as SearchBar } from './Header/SearchBar';

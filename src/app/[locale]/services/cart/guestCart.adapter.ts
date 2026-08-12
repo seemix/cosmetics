@@ -5,13 +5,13 @@ import type { CartItemId } from '@/app/[locale]/services/cart/cart.types';
 
 export const guestCartAdapter = (): CartAdapter => ({
 
-    async load(locale: string) {
+    async load(locale: string, promoCode?: string) {
         const items = localStorageService.get();
         if (!items.length) return null;
-        return await axiosService.post(`carts/guest?locale=${locale}`, items).then(value => value.data);
+        return await axiosService.post(`carts/guest?locale=${locale}`, { items, promoCode }).then(value => value.data.cart);
     },
 
-    async addItem(itemToAdd: CartItemId) {
+    async addItem(itemToAdd: CartItemId, promoCode?: string) {
         const items = localStorageService.get();
         const existingItem = items?.find(item => item.productId === itemToAdd.productId);
         if (existingItem) {
@@ -20,30 +20,27 @@ export const guestCartAdapter = (): CartAdapter => ({
             items.push(itemToAdd);
         }
         localStorageService.save(items);
-        return await axiosService.post('carts/guest', items).then(value => value.data);
-
+        return await axiosService.post('carts/guest', { items, promoCode }).then(value => value.data.cart);
     },
 
-    async updateQty(itemToUpdate: CartItemId) {
+    async updateQty(itemToUpdate: CartItemId, promoCode?: string) {
         const items = localStorageService.get();
         const index = items.findIndex(item => item.productId === itemToUpdate.productId);
         items[index].quantity = itemToUpdate.quantity;
         localStorageService.save(items);
-        return await axiosService.post('carts/guest', items).then(value => value.data);
+        return await axiosService.post('carts/guest', { items, promoCode }).then(value => value.data.cart);
 
     },
 
-    async removeItem(_, productId: string) {
+    async removeItem(_, productId: string, promoCode?: string) {
         const items = localStorageService.get();
         const filteredItems = items.filter(item => item.productId !== productId);
         localStorageService.save(filteredItems);
         if (!filteredItems.length) return null;
-        return await axiosService.post('carts/guest', filteredItems).then(value => value.data);
-
+        return await axiosService.post('carts/guest', { items: filteredItems, promoCode }).then(value => value.data.cart);
     },
 
     async clear() {
         return localStorageService.clear();
     },
-
 });

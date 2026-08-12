@@ -1,6 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 
-import { BreadCrumbs, CheckoutForm, Invoice } from '@/app/[locale]/components';
+import { BreadCrumbs, CheckoutForm, Invoice, PromoCodeForm } from '@/app/[locale]/components';
 
 export default async function CheckoutPage() {
     const t = await getTranslations();
@@ -13,6 +13,7 @@ export default async function CheckoutPage() {
         <div className={'max-w-[1100px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4'}>
                 <BreadCrumbs breadcrumbs={breadCrumbs}/>
             <Invoice/>
+            <PromoCodeForm/>
             <CheckoutForm/>
         </div>
     );

@@ -18,7 +18,7 @@ export default function AddToCartButton({ productId, quantity = 1 }: { productId
 				         text-[.85em] md:text-[.95em] px-2 py-2 md:px-3 hover:border-[var(--main)] 
 				         hover:text-[var(--main)] flex gap-2 justify-center w-full sm:min-w-[180px]`}
         >
-             <PiShoppingCartSimple className={'text-lg sm:text-[1.3em]'}/>
+            {itemLoading !== productId && <PiShoppingCartSimple className={'text-lg sm:text-[1.3em]'}/>}
             {itemLoading === productId ? <Loader/> : t('addToCart')}
         </button>
     );

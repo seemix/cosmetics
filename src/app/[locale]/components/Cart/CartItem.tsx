@@ -14,6 +14,7 @@ interface ICartItem {
     subtitle: string;
     slug: string;
     price: number;
+    regularPrice?: number;
     quantity: number;
     thumbnail: string;
 }
@@ -32,7 +33,7 @@ export default function CartItem({ cartId, product }: { cartId?: string, product
                         className={'transition-colors duration-300 hover:text-[var(--main)]'}>
                 <p>{product.title}</p>
                 <p className={'text-xs hover:text-[var(--main)]'}> {product.subtitle}</p>
-                <p className={'text-center text-xl font-medium'}>{product.price} {currency}</p>
+                <p className={'text-center text-xl font-medium'}>{product.regularPrice || product.price} {currency}</p>
             </Link>
             <div className={'flex flex-col items-center gap-4 sm:flex-row'}>
                 <div className={'place-self-center'}>
