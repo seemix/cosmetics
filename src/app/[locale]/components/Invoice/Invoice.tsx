@@ -13,7 +13,7 @@ export default function Invoice() {
     const t = useTranslations('Checkout');
     if (!cart || !cart?.items?.length) return;
     return (
-        <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-5'}>
+        <div className={'max-w-[95%] mx-auto p-3 bg-white border border-gray-300 shadow my-2'}>
             {loading && <Loader/>}
             <div className={'flex gap-4 justify-center items-center w-full'}>
                 <h2 className={'text-lg  text-center font-bold uppercase tracking-wider text-black'}>

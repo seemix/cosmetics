@@ -141,7 +141,8 @@
   "PromoCodeForm": {
     "promoCode": "промокод",
     "apply": "применить",
-    "fieldRequired": "обязательное поле"
+    "fieldRequired": "обязательное поле",
+    "promoError": "Промокод истёк или недействителен"
   },
   "Footer": {
     "info": "Информация",

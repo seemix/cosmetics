@@ -8,6 +8,7 @@ interface CartState {
     adapter: CartAdapter | null;
     cart: Cart | null;
     promoCode?: string;
+    promoError?: string;
     loading: boolean;
     promoLoading: boolean;
     itemLoading: string | null;
@@ -35,6 +36,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     cart: null,
     loading: false,
     promoLoading: false,
+    promoError: '',
     promoCode: '',
     itemLoading: null,
     error: null,
@@ -64,7 +66,7 @@ export const useCartStore = create<CartState>((set, get) => ({
         set({ itemLoading: null });
     },
 
-    async removeItem(productId: string, cartId: string, ) {
+    async removeItem(productId: string, cartId: string,) {
         const prev = get().cart;
         set({
             cart: {
@@ -94,13 +96,13 @@ export const useCartStore = create<CartState>((set, get) => ({
                     })
                 }),
         };
-        set({ promoLoading: true });
+        set({ promoLoading: true, promoError: '' });
         try {
             const { data } = await axiosService.post('/carts/promo', payload);
             set({ cart: data || null, promoCode, error: null });
         } catch (e) {
             get()?.adapter?.load(locale).then(cart => set({ cart: cart }));
-            set({ error: getErrorMessage(e), promoCode: '' });
+            set({ promoError: getErrorMessage(e), promoCode: '' });
         } finally {
             set({ promoLoading: false });
         }

@@ -57,7 +57,7 @@ export default function CartWindow() {
                                 {cart?.preSubtotal &&
                                     <span
                                         className={'over-lined text-gray-500 text-[1.1em] font-normal mr-2'}>
-                                        <i>{cart.preSubtotal}</i>
+                                        <i>{cart.preSubtotal} {assets.currency}</i>
                                     </span>}
                                 <span className={'text-[1.3em] mt-1 font-bold text-center'}>
                                     {cart?.subtotal} {assets.currency}

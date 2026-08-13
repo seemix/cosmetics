@@ -17,6 +17,7 @@ interface ICheckoutStore {
         phone: string;
         city: string;
         address: string;
+        promoCode?: string;
     }, locale: string, paymentType: 'cash' | 'transfer', SRL?: string, comment?: string | undefined) => Promise<void>;
     clearOrder: () => void;
 }
@@ -35,7 +36,7 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
                     return { product: item.id, quantity: item.quantity };
                 });
                 const { data } = await axiosService.post(`/orders/create?locale=${locale}`, {
-                    items, shippingAddress, paymentType, SRL, comment
+                    items, shippingAddress, paymentType, SRL, comment, promoCode: useCartStore.getState().promoCode
                 });
                 set({ success: data.success, orderNumber: data.order.orderNumber });
             } catch (error) {
