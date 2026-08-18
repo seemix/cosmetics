@@ -141,7 +141,8 @@
     "promoCode": "cod promoțional",
     "apply": "aplică",
     "fieldRequired": "câmp obligatoriu",
-    "promoError": "Codul promoțional a expirat sau este invalid"
+    "promoError": "Codul promoțional a expirat sau este invalid",
+    "noDiscount": "Pentru a beneficia de reducere, adăugați în coș produsele care corespund criteriilor codului promoțional."
   },
   "Footer": {
     "info": "Informații",

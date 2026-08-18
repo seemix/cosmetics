@@ -28,7 +28,7 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
         success: false,
         orderNumber: '',
 
-        createNewOrder: async (shippingAddress: IShippingAddress, locale: string, paymentType: 'cash' | 'transfer', SRL?:string, comment?: string,) => {
+        createNewOrder: async (shippingAddress: IShippingAddress, locale: string, paymentType: 'cash' | 'transfer', SRL?: string, comment?: string,) => {
             try {
                 set({ loading: true });
                 const { cart } = useCartStore.getState();

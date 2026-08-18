@@ -28,6 +28,8 @@ interface CartState {
 
     applyPromoCode(promoCode: string, locale: string): Promise<void>;
 
+    deletePromoCode(locale: string): void;
+
     clear(): Promise<void>;
 }
 
@@ -103,6 +105,22 @@ export const useCartStore = create<CartState>((set, get) => ({
         } catch (e) {
             get()?.adapter?.load(locale).then(cart => set({ cart: cart }));
             set({ promoError: getErrorMessage(e), promoCode: '' });
+        } finally {
+            set({ promoLoading: false });
+        }
+    },
+
+    async deletePromoCode(locale: string = 'ru') {
+        const { adapter } = get();
+        if (!adapter) return;
+
+        set({ promoLoading: true, promoError: '', promoCode: '' });
+
+        try {
+            const cart = await adapter.load(locale);
+            set({ cart, promoError: '' });
+        } catch (e) {
+            set({ error: getErrorMessage(e) });
         } finally {
             set({ promoLoading: false });
         }

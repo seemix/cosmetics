@@ -75,8 +75,9 @@ export default function PromoCodeForm() {
                             <button
                                 type={'submit'}
                                 disabled={promoLoading}
-                                className={`border border-gray-800 w-[50%] md:w-[40%] px-4 py-1 cursor-pointer h-9 mt-[20px]
-                                        hover:text-[var(--main)] transition-colors duration-300 hover:border-[var(--main)]`}
+                                className={`border border-gray-800 w-[50%] md:w-[40%] px-4 py-1 cursor-pointer h-9 
+                                            mt-[20px] hover:text-[var(--main)] transition-colors duration-300 
+                                            hover:border-[var(--main)]`}
                             >
                                 {promoLoading ? <Loader/> : t('apply')}
                             </button>
@@ -87,7 +88,7 @@ export default function PromoCodeForm() {
                             <AnimatePresence>
                                 {showError && promoError && (
                                     <motion.p
-                                        key="promo-error"
+                                        key={'promo-error'}
                                         initial={{ opacity: 0, y: -5 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -5 }}

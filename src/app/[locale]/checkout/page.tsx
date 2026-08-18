@@ -10,8 +10,8 @@ export default async function CheckoutPage() {
     ];
 
     return (
-        <div className={'max-w-[1100px] w-full lg:w-[1100px] mx-auto flex flex-col gap-4'}>
-                <BreadCrumbs breadcrumbs={breadCrumbs}/>
+        <div className={'max-w-[1100px] w-full mx-auto flex flex-col gap-4 px-4'}>
+            <BreadCrumbs breadcrumbs={breadCrumbs}/>
             <Invoice/>
             <PromoCodeForm/>
             <CheckoutForm/>
