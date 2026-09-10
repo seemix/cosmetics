@@ -113,7 +113,8 @@ export default function ProductGallerySlider({
                                 }
                             >
                                 <Image
-                                    src={backendUrl + img.image.sizes.medium.url}
+                                    // src={backendUrl + img.image.sizes.medium.url}
+                                    src={backendUrl + img.image.url}
                                     alt={img.image.alt || ''}
                                     placeholder={'blur'}
                                     blurDataURL={img.image.blurHash}
