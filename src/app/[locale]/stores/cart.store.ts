@@ -24,7 +24,7 @@ interface CartState {
 
     updateQty(item: CartItemId): Promise<void>;
 
-    removeItem(productId: string, cartId?: string): Promise<void>;
+    removeItem(cartId: string | undefined, productId: string): Promise<void>;
 
     applyPromoCode(promoCode: string, locale: string): Promise<void>;
 
@@ -68,16 +68,20 @@ export const useCartStore = create<CartState>((set, get) => ({
         set({ itemLoading: null });
     },
 
-    async removeItem(productId: string, cartId: string,) {
+    // Argument order matches `CartAdapter.removeItem` and the `CartItem` call site: cartId first.
+    async removeItem(cartId: string | undefined, productId: string) {
         const prev = get().cart;
+        if (!prev) return;
+
+        // Optimistic update: drop the item locally, roll back if the request fails.
         set({
             cart: {
-                ...prev!,
-                items: prev!.items.filter(i => i.id !== productId),
+                ...prev,
+                items: prev.items.filter(i => i.id !== productId),
             },
         });
         try {
-            const cart = await get().adapter?.removeItem(productId, cartId, get().promoCode);
+            const cart = await get().adapter?.removeItem(cartId as string, productId, get().promoCode);
             set({ cart });
         } catch (e) {
             console.log(e);

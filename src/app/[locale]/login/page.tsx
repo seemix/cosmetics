@@ -13,5 +13,5 @@ export default function LoginPage() {
      showModal(<LoginForm/>, 'zoom');
     }, [showModal]);
 
-    return
+    return null;
 }

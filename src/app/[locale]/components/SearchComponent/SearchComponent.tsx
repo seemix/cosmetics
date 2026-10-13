@@ -18,7 +18,7 @@ export default function SearchComponent() {
     const { hideModal } = useModal();
     const locale = useLocale();
     const searchSubmit = () => {
-        router.push(`/search?query=${inputValue}`);
+        router.push(`/search?query=${encodeURIComponent(inputValue)}`);
         hideModal();
     };
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -26,7 +26,7 @@ export default function SearchComponent() {
             e.preventDefault();
 
             if (inputValue.length > 2) {
-                router.push(`/search?query=${inputValue}`);
+                router.push(`/search?query=${encodeURIComponent(inputValue)}`);
                 hideModal();
             }
         }

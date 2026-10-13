@@ -11,24 +11,17 @@ export default async function HomePage(props: propsType) {
     const { backendUrl } = assets;
     const t = await getTranslations('CatalogMenu');
 
-    const posts = await fetch(`${backendUrl}/api/posts?locale=${locale}`, {
-        headers: {
-            Cookie: cookieStore.toString()
-        }
-    }).then(res => res.json());
+    const headers = { Cookie: cookieStore.toString() };
 
-    const brands = await fetch(`${backendUrl}/api/brands`, {
-        headers: {
-            Cookie: cookieStore.toString()
-        }
-    }).then(res => res.json());
-
-    const bestsellers = await fetch(`${backendUrl}/api/products/bestsellers?locale=${locale}`, {
-        headers: {
-            Cookie: cookieStore.toString()
-        },
-        cache: 'no-store'
-    }).then(res => res.json());
+    // The three requests are independent, so they run in parallel instead of sequentially.
+    const [posts, brands, bestsellers] = await Promise.all([
+        fetch(`${backendUrl}/api/posts?locale=${locale}`, { headers }).then(res => res.json()),
+        fetch(`${backendUrl}/api/brands`, { headers }).then(res => res.json()),
+        fetch(`${backendUrl}/api/products/bestsellers?locale=${locale}`, {
+            headers,
+            cache: 'no-store'
+        }).then(res => res.json()),
+    ]);
 
     return (
         <div className={'w-full'}>

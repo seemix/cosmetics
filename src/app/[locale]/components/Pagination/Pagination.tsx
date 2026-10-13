@@ -23,6 +23,8 @@ export default function Pagination({ pagination }: { pagination: PaginationProps
         router.push(newUrl, { scroll: false });
     };
 
+    // `page` is listed on purpose: switching page scrolls back to the top.
+    // biome-ignore lint/correctness/useExhaustiveDependencies: page is the trigger, not a value used inside.
     useEffect(() => {
         window.scrollTo({
             top: 0,

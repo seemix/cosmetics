@@ -16,16 +16,11 @@
 @theme inline {
     --color-background: var(--background);
     --color-foreground: var(--foreground);
-    --font-roboto: var(--font-roboto);
-    --font-montserrat: var(--font-montserrat);
-}
-
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
     --color-main: var(--main);
     --color-dark: var(--dark);
     --color-black: var(--black);
+    --font-roboto: var(--font-roboto);
+    --font-montserrat: var(--font-montserrat);
 }
 
 body {
@@ -33,13 +28,10 @@ body {
     letter-spacing: .06em;
 }
 
-button:active {
+/* `.simple-button` is excluded here instead of overriding the transform with `!important`. */
+button:not(.simple-button):active {
     transform: translateY(2px) scale(0.99);
     transition: all .15s ease-in;
-}
-
-.simple-button:active {
-    transform: none !important;
 }
 
 .loader {

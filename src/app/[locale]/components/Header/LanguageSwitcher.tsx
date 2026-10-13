@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
 	const currentLocale = useLocale();
 	const pathname = usePathname();
 	const router = useRouter();
-	const [isPending, startTransition] = useTransition();
+	const [, startTransition] = useTransition();
 	const [open, setOpen] = useState(false);
 
 	const ref = useRef<HTMLDivElement>(null);

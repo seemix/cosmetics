@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 
@@ -16,11 +16,11 @@ type SortOption = {
 export default function SortSelect() {
     const [open, setOpen] = useState(false);
     const t = useTranslations('Catalog');
-    const options: SortOption[] = [
+    const options: SortOption[] = useMemo(() => [
         { label: t('default'), value: 'default' },
         { label: t('priceASC'), value: 'price-asc' },
         { label: t('priceDESC'), value: 'price-desc' },
-    ];
+    ], [t]);
     const [current, setCurrent] = useState<SortOption>(options[0]);
 
     const ref = useRef<HTMLDivElement>(null);
@@ -30,10 +30,11 @@ export default function SortSelect() {
     const pathname = usePathname();
     const { replace } = useRouter();
 
+    const sortParam = searchParams.get('sort');
+
     useEffect(() => {
-        setCurrent(searchParams.get('sort') === 'default' ? options[0] :
-            options.find(o => o.value === searchParams.get('sort')) ?? options[0]);
-    }, [searchParams.get('sort')]);
+        setCurrent(options.find(o => o.value === sortParam) ?? options[0]);
+    }, [sortParam, options]);
 
     const handleUpdateQuery = (name: string, value: string) => {
         const params = new URLSearchParams(searchParams.toString());
