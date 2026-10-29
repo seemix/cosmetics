@@ -1,6 +1,15 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import CatalogMenu from '@/components/Menu/CatalogMenu/CatalogMenu';
+import { pageMetadata } from '@/lib/seo/metadata';
+import type { PageProps } from '@/types/page-props';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+	const { locale } = await props.params;
+	const t = await getTranslations('Catalog');
+	return pageMetadata({ locale, path: '/catalog', title: t('catalog') });
+}
 
 export default async function CatalogPage() {
 	const t = await getTranslations();

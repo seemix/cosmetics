@@ -10,7 +10,7 @@ import { MenuProvider } from '@/components/Menu/MenuContext';
 import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { routing } from '@/i18n/routing';
 import { getMenu } from '@/lib/api/queries';
-import { getHomeMetadata } from '@/lib/seo/getHomeMetadata';
+import { getSiteMetadata } from '@/lib/seo/getHomeMetadata';
 
 import './globals.css';
 
@@ -33,7 +33,7 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
 	const { locale } = await params;
-	return getHomeMetadata(locale);
+	return getSiteMetadata(locale);
 }
 
 export default async function LocaleLayout({

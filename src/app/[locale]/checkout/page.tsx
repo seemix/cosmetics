@@ -1,9 +1,22 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import CheckoutForm from '@/components/CheckoutForm/CheckoutForm';
 import Invoice from '@/components/Invoice/Invoice';
 import PromoCodeForm from '@/components/PromoCodeForm/PromoCodeForm';
+import { pageMetadata } from '@/lib/seo/metadata';
+import type { PageProps } from '@/types/page-props';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+	const { locale } = await props.params;
+	const t = await getTranslations('Cart');
+	return pageMetadata({
+		locale,
+		path: '/checkout',
+		title: t('checkouting'),
+		noindex: true,
+	});
+}
 
 export default async function CheckoutPage() {
 	const t = await getTranslations();

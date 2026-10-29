@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import ContentAccordion from '@/components/ContentAccordion/ContentAccordion';
@@ -6,7 +7,20 @@ import Pagination from '@/components/Pagination/Pagination';
 import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
 import SortSelect from '@/components/SortSelect/SortSelect';
 import { getBrand, getBrandProducts } from '@/lib/api/queries';
+import { pageMetadata } from '@/lib/seo/metadata';
 import { firstParam, type PageProps } from '@/types/page-props';
+
+export async function generateMetadata(
+	props: PageProps<{ slug: string }>,
+): Promise<Metadata> {
+	const { locale, slug } = await props.params;
+	const brand = await getBrand(slug, locale);
+	return pageMetadata({
+		locale,
+		path: `/brand/${slug}`,
+		title: brand?.title ?? slug,
+	});
+}
 
 export default async function BrandPage(props: PageProps<{ slug: string }>) {
 	const t = await getTranslations();
@@ -14,11 +28,12 @@ export default async function BrandPage(props: PageProps<{ slug: string }>) {
 	const searchParams = await props.searchParams;
 
 	const [{ products, pagination }, brand] = await Promise.all([
-		getBrandProducts(slug, {
+		getBrandProducts(
+			slug,
 			locale,
-			sort: firstParam(searchParams.sort),
-			page: firstParam(searchParams.page),
-		}),
+			firstParam(searchParams.sort),
+			firstParam(searchParams.page),
+		),
 		getBrand(slug, locale),
 	]);
 

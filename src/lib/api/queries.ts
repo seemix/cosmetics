@@ -121,10 +121,11 @@ export const getProduct = cache(async (slug: string, locale: string) =>
 	}),
 );
 
-type ListQuery = { locale: string; sort?: string; page?: string };
+// Primitive arguments only: React `cache()` compares arguments by identity,
+// so an options object would never hit the cache shared with generateMetadata.
 
 export const getCategoryProducts = cache(
-	async (slug: string, { locale, sort, page }: ListQuery) => {
+	async (slug: string, locale: string, sort?: string, page?: string) => {
 		const res = await serverFetch<ProductListResponse>(
 			`products/products-category/${slug}`,
 			{
@@ -137,7 +138,7 @@ export const getCategoryProducts = cache(
 );
 
 export const getBrandProducts = cache(
-	async (slug: string, { locale, sort, page }: ListQuery) => {
+	async (slug: string, locale: string, sort?: string, page?: string) => {
 		const res = await serverFetch<ProductListResponse>(
 			`products/products-brand/${slug}`,
 			{
@@ -150,7 +151,7 @@ export const getBrandProducts = cache(
 );
 
 export const searchProducts = cache(
-	async (query: string, { locale, page }: Omit<ListQuery, 'sort'>) => {
+	async (query: string, locale: string, page?: string) => {
 		const res = await serverFetch<ProductListResponse>(
 			'products/products-search',
 			{ params: { locale, q: query, page }, withCookies: true },
@@ -158,6 +159,31 @@ export const searchProducts = cache(
 		return res ?? EMPTY_PRODUCT_LIST;
 	},
 );
+
+type SlugDoc = { slug: string; updatedAt?: string };
+
+/** Slugs of a public collection for the sitemap (refreshed hourly). */
+export async function listSlugs(
+	collection: 'products' | 'posts' | 'pages' | 'brands' | 'categories',
+	params: Record<string, string> = {},
+): Promise<SlugDoc[]> {
+	try {
+		const res = await serverFetch<Paginated<SlugDoc>>(collection, {
+			params: {
+				limit: 0,
+				depth: 0,
+				'select[slug]': 'true',
+				'select[updatedAt]': 'true',
+				...params,
+			},
+			revalidate: 3600,
+		});
+		return res?.docs ?? [];
+	} catch (error) {
+		console.error(`Failed to list ${collection} for the sitemap`, error);
+		return [];
+	}
+}
 
 export const getMyOrders = cache(async (locale: string) => {
 	const res = await serverFetch<OrdersResponse>('orders/my', {

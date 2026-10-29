@@ -1,10 +1,17 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
 import Brands from '@/components/Brands/Brands';
 import PostsSlider from '@/components/PostsSlider/PostsSlider';
 import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
 import { getBestsellers, getBrands, getPosts } from '@/lib/api/queries';
+import { getHomeMetadata } from '@/lib/seo/getHomeMetadata';
 import type { PageProps } from '@/types/page-props';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+	const { locale } = await props.params;
+	return getHomeMetadata(locale);
+}
 
 export default async function HomePage(props: PageProps) {
 	const { locale } = await props.params;

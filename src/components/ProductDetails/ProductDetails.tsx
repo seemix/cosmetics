@@ -57,11 +57,11 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 			<div>
 				<div className={'flex gap-4 items-center w-full justify-between'}>
 					<div>
-						<h2
+						<h1
 							className={'text-2xl lg:text-[1.6em] font-bold leading-10 my-3'}
 						>
 							{title}
-						</h2>
+						</h1>
 						<h3 className={'text-md lg:text-[1.2em] leading-8 lg:leading-12'}>
 							{subtitle}
 						</h3>

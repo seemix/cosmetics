@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
-import { assets } from '@/config/assets';
+import { env } from '@/config/env';
+import {
+	localizedAlternates,
+	localizedUrl,
+	ogLocale,
+} from '@/lib/seo/metadata';
 
 const seoData = {
 	ru: {
@@ -20,42 +25,50 @@ const seoData = {
 	},
 };
 
-export function getHomeMetadata(locale: string): Metadata {
-	const current = seoData[locale as keyof typeof seoData] || seoData.ro;
-	const { frontendUrl } = assets;
+const seoFor = (locale: string) =>
+	seoData[locale as keyof typeof seoData] || seoData.ro;
 
+/**
+ * Site-wide defaults set by the locale layout. Deliberately without a canonical URL:
+ * child pages inherit layout metadata, and a shared canonical would mark every page
+ * as a duplicate of the home page.
+ */
+export function getSiteMetadata(locale: string): Metadata {
+	const current = seoFor(locale);
 	return {
+		metadataBase: new URL(env.siteUrl),
 		title: current.title,
 		description: current.description,
-		keywords: current.keywords,
-
-		alternates: {
-			canonical: `${frontendUrl}/${locale}`,
-			languages: {
-				ru: `${frontendUrl}/ru`,
-				ro: `${frontendUrl}/ro`,
-				'x-default': frontendUrl,
-			},
-		},
-
 		openGraph: {
 			title: current.title,
 			description: current.description,
-			locale: locale === 'ru' ? 'ru_RU' : 'ro_MD',
+			locale: ogLocale(locale),
 			type: 'website',
 			siteName: 'Next Level Barber Supply',
-			images: [
-				{
-					url: `${frontendUrl}/logo1.webp`,
-					alt: 'site_logo',
-				},
-			],
+			images: [{ url: '/logo1.webp', alt: 'site_logo' }],
 		},
-
 		icons: {
 			icon: '/favicon.png',
 			shortcut: '/favicon.png',
 			apple: '/favicon.png',
 		},
+	};
+}
+
+/** Home page: the defaults plus keywords, canonical and hreflang. */
+export function getHomeMetadata(locale: string): Metadata {
+	const current = seoFor(locale);
+	const site = getSiteMetadata(locale);
+	return {
+		...site,
+		keywords: current.keywords,
+		alternates: {
+			...localizedAlternates(locale),
+			languages: {
+				...localizedAlternates(locale).languages,
+				'x-default': env.siteUrl,
+			},
+		},
+		openGraph: { ...site.openGraph, url: localizedUrl(locale) },
 	};
 }

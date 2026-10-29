@@ -14,18 +14,18 @@ export default function Logo() {
 				/>
 
 				<div className={'flex flex-col items-center'}>
-					<h1
+					<p
 						className={`text-sm sm:text-xl text-center lg:text-2xl 
                                 tracking-tight font-semibold sm:block`}
 					>
 						NEXT LEVEL
-					</h1>
-					<h2
+					</p>
+					<p
 						className={`text-xs sm:text-sm text-center font-(family-name:--font-roboto) 
 					                 text-sm flex-none sm:flex`}
 					>
 						Barber supply
-					</h2>
+					</p>
 				</div>
 			</div>
 		</Link>

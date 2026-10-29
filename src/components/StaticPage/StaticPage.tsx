@@ -12,7 +12,7 @@ export default function StaticPage({
 }) {
 	return (
 		<div className={'w-full mx-auto max-w-full'}>
-			<h2 className={'text-2xl my-4 text-center font-semibold'}>{title}</h2>
+			<h1 className={'text-2xl my-4 text-center font-semibold'}>{title}</h1>
 			<div className={'max-w-none break-words'}>
 				<RichText data={content} converters={richTextImagePathConverter} />
 			</div>

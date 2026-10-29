@@ -1,10 +1,18 @@
+import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NewsCard from '@/components/NewsCard/NewsCard';
 import Pagination from '@/components/Pagination/Pagination';
 import { getPosts } from '@/lib/api/queries';
+import { pageMetadata } from '@/lib/seo/metadata';
 import { firstParam, type PageProps } from '@/types/page-props';
 import type { PaginationProps } from '@/types/pagination';
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+	const { locale } = await props.params;
+	const t = await getTranslations('StaticPages');
+	return pageMetadata({ locale, path: '/news', title: t('News') });
+}
 
 export default async function NewsPage(props: PageProps) {
 	const t = await getTranslations('StaticPages');
