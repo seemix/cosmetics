@@ -40,7 +40,7 @@ export default function PromoCodeForm() {
         applyPromoCode(data.promoCode, locale).then();
     };
 
-    if (!cart || !cart?.items?.length) return null;
+    if (!cart?.items?.length) return null;
 
     const isVisible = !promoCode;
 

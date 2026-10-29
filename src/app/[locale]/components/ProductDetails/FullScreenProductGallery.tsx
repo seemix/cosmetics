@@ -34,19 +34,10 @@ export default function ProductGalleryModal({
         }
     }, [initialIndex, mainSwiper]);
 
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') {
-                hideModal();
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [hideModal]);
-
     return (
-        <div className={'fixed inset-0 z-50 flex flex-col'} onClick={hideModal} aria-hidden={'true'}>
+        // Backdrop click closes the gallery; Escape is handled by ModalWindow.
+        // biome-ignore lint/a11y/noStaticElementInteractions: mouse-only shortcut, keyboard users have Escape and the close button.
+        <div className={'fixed inset-0 z-50 flex flex-col'} onClick={hideModal} role={'presentation'}>
             {/* CLOSE */}
             <button
                 type={'button'}

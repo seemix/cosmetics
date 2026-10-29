@@ -4,7 +4,7 @@ import type { PostCard } from '@/app/[locale]/types/post-card';
 import { assets } from '@/app/[locale]/assets/assets';
 import Link from 'next/link';
 
-export default async function NewsCard({ post, locale }: { post: PostCard, locale: string }) {
+export default function NewsCard({ post, locale }: { post: PostCard, locale: string }) {
 
     const { title, slide, slug, customLink } = post;
     const { backendUrl } = assets;

@@ -29,7 +29,8 @@ export default function AuthUserButton() {
         <div className={'relative'} ref={ref}>
             <button
                 type={'button'}
-                aria-label={'search'}
+                aria-label={'user menu'}
+                aria-expanded={open}
                 onClick={() => setOpen(!open)}
                 className={`flex items-center justify-center gap-4 transition-colors duration-300 
                                         hover:text-[var(--main)] cursor-pointer ${open ? 'text-[var(--main)]' : ''}`}

@@ -9,7 +9,7 @@ import {
     SocialIcons, UserButtonWrapper,
 } from '@/app/[locale]/components';
 
-export default async function Header() {
+export default function Header() {
     return (
         <div className={'fixed bottom-0 left-0 sm:relative w-full z-20'}>
             <div className={'hidden sm:flex bg-gray-100 py-2 justify-evenly'}>

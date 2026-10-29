@@ -26,13 +26,20 @@ export default function ModalWindow() {
     const { open, appearance, content, hideModal } = useModal();
 
     useEffect(() => {
-        if (open) {
-            document.body.style.overflow = 'hidden';
-        }
+        if (!open) return;
+        document.body.style.overflow = 'hidden';
+        // Focus goes back to the element that opened the modal once it closes.
+        const opener = document.activeElement as HTMLElement | null;
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') hideModal();
+        };
+        document.addEventListener('keydown', onKeyDown);
         return () => {
             document.body.style.overflow = '';
+            document.removeEventListener('keydown', onKeyDown);
+            opener?.focus?.();
         };
-    }, [open]);
+    }, [open, hideModal]);
 
     return (
         <AnimatePresence>
@@ -57,6 +64,8 @@ export default function ModalWindow() {
                         }`}
                     >
                         <motion.div
+                            role={'dialog'}
+                            aria-modal={'true'}
                             initial={'hidden'}
                             animate={'visible'}
                             exit={'hidden'}

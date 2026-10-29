@@ -55,8 +55,7 @@ export default function MenuItem({
                             transition={{ duration: 0.35 }}
                             className={'pl-4 pb-3 space-y-6 overflow-hidden'}
                         >
-                            {item.sub?.length &&
-                                item.sub.map((child) => (
+                            {item.sub?.map((child) => (
                                     <div key={child.id}>
                                         <Link href={child.uri} onClick={hideModal}>{child.title}</Link>
                                     </div>

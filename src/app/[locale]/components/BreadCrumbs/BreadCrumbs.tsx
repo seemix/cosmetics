@@ -1,6 +1,6 @@
 import type { IBreadcrumb } from '@/app/[locale]/types/breadcrumb';
 
-export default async function BreadCrumbs({ breadcrumbs }: { breadcrumbs: IBreadcrumb[] }) {
+export default function BreadCrumbs({ breadcrumbs }: { breadcrumbs: IBreadcrumb[] }) {
 
     return (
         <div className={`flex gap-1 md:gap-2 text-[.8em] text-dark font-(family-name:--font-roboto) tracking-normal

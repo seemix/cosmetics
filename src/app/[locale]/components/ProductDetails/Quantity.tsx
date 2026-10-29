@@ -41,6 +41,7 @@ export default function Quantity({ value, setValue }: QuantityProps) {
                 <input
                     type={'text'}
                     inputMode={'numeric'}
+                    aria-label={'quantity'}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}

@@ -41,7 +41,8 @@ export default function CartItem({ cartId, product }: { cartId?: string, product
                 </div>
                 <button onClick={() => removeItem(cartId as string, product.id)}
                         className={`cursor-pointer transition-colors duration-300 hover:text-[var(--main)]`}
-                        type={'button'}>
+                        type={'button'}
+                        aria-label={'remove from cart'}>
                     <GoTrash className={'w-5 h-auto mx-2'}/>
                 </button>
             </div>

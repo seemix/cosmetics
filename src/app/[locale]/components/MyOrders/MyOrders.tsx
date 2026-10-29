@@ -11,6 +11,15 @@ import { assets } from '@/app/[locale]/assets/assets';
 import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { useLogoutRefresh } from '@/app/[locale]/hooks/useLogoutRefresh';
 
+// `dd.mm.yyyy, hh:mm` for both site locales.
+const dateFormatter = new Intl.DateTimeFormat('uk-UA', {
+    minute: '2-digit',
+    hour: '2-digit',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+});
+
 export default function MyOrders({ orders }: { orders: IOrder[] }) {
     const [openIds, setOpenIds] = useState<string[]>([]);
     const { user } = useAuthStore();
@@ -23,14 +32,6 @@ export default function MyOrders({ orders }: { orders: IOrder[] }) {
                 : [...prev, id]
         );
     };
-
-    const dateFormatter = new Intl.DateTimeFormat('uk-UA', {
-        minute: '2-digit',
-        hour: '2-digit',
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-    });
 
     useLogoutRefresh(user);
 
@@ -48,7 +49,7 @@ export default function MyOrders({ orders }: { orders: IOrder[] }) {
                             <div className={'text-gray-400'}>
                                 📅 <small>{dateFormatter.format(new Date(order.createdAt))}</small>
                             </div>
-                            <div className={'text-sm'}>{t('sum')} {order.total} MDL</div>
+                            <div className={'text-sm'}>{t('sum')} {order.total} {assets.currency}</div>
                         </div>
                         <motion.div
                             animate={{ rotate: openIds.includes(order.id) ? 180 : 0 }}

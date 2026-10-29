@@ -45,10 +45,7 @@ export default function ContentAccordion({ content, logo }: {
                 />
             </div>
 
-            <div
-                className={`prose max-w-none prose-img:max-w-full prose-img:h-auto prose-table:block
-                            prose-table:overflow-x-auto break-words`}
-            >
+            <div className={'max-w-none break-words'}>
                 {!hasMoreContent ? (
                     <RichText data={content} converters={richTextImagePathConverter}/>
                 ) : (
@@ -89,7 +86,7 @@ export default function ContentAccordion({ content, logo }: {
                             <button
                                 type={'button'}
                                 onClick={() => setIsOpen(!isOpen)}
-                                className={`mt-3 h font-medium transition-colors  cursor-pointer inline-flex 
+                                className={`mt-3 font-medium transition-colors  cursor-pointer inline-flex 
                                             items-center gap-1 focus:outline-none`}
                             >
                                 {isOpen ? t('collapse') : t('readMore')}

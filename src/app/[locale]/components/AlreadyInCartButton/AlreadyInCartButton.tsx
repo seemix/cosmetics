@@ -13,7 +13,7 @@ export default function AlreadyInCartButton() {
         <button
             onClick={() => showModal(<Cart/>, 'right')}
             type={'button'}
-            aria-label={'add-to-cart'}
+            aria-label={'open cart'}
             className={`group cursor-pointer transition-colors duration-300 border-1 border-green-500 text-green-500  
                         text-[.85em] md:text-[.95em] px-2 py-2 md:px-3 hover:border-[var(--main)] 
                         hover:text-[var(--main)] flex gap-2 justify-center w-full`}

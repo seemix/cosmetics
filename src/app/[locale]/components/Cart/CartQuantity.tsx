@@ -43,6 +43,7 @@ export default function CartQuantity({ productId, quantity = 1 }: { productId: s
                 <input
                     type={'text'}
                     inputMode={'numeric'}
+                    aria-label={'quantity'}
                     value={value}
                     onChange={onChange}
                     onBlur={onBlur}

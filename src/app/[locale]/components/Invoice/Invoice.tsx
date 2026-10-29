@@ -11,10 +11,10 @@ export default function Invoice() {
     const { cart, loading, promoCode } = useCartStore();
     const { showModal } = useModal();
     const t = useTranslations();
-    if (!cart || !cart?.items?.length) return null;
+    if (!cart?.items?.length) return null;
 
     return (
-        <div className={'w-[95%] md:max-w-[600px] border-red border-1 mx-auto p-3 bg-white border border-gray-300 shadow my-2'}>
+        <div className={'w-[95%] md:max-w-[600px] mx-auto p-3 bg-white border border-gray-300 shadow my-2'}>
             {loading && <Loader/>}
             <div className={'flex gap-4 justify-center items-center mb-4'}>
                 <h2 className={'text-lg text-center font-bold uppercase tracking-wider text-black'}>
