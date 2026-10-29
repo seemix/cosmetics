@@ -2,8 +2,6 @@
 
 import { AnimatePresence, motion } from 'motion/react';
 import ProductCard from '@/components/ProductCard/ProductCard';
-import { useAuthPrices } from '@/hooks/useAuthPrices';
-import { useAuthStore } from '@/stores/auth.store';
 import type { IProduct } from '@/types/product';
 
 export default function ProductCardsGrid({
@@ -11,8 +9,6 @@ export default function ProductCardsGrid({
 }: {
 	products: IProduct[];
 }) {
-	const { user } = useAuthStore();
-	useAuthPrices(user);
 	return (
 		<div
 			className={`grid w-full  justify-items-center grid-cols-2 gap-3 

@@ -1,20 +1,30 @@
 import { apiClient } from '@/lib/api/client';
-import type { CartAdapter } from '@/lib/cart/cart.adapter';
-import type { CartItemId } from '@/lib/cart/cart.types';
+import type { CartAdapter, CartRequest } from '@/lib/cart/cart.adapter';
+import type { Cart, CartItemId } from '@/lib/cart/cart.types';
 import { localStorageService } from '@/lib/cart/localStorage.service';
 
+/** Prices the locally stored items on the backend; nothing is persisted there. */
+async function priceItems(
+	items: CartItemId[],
+	{ locale, promoCode }: CartRequest,
+): Promise<Cart | null> {
+	if (!items.length) return null;
+	const { data } = await apiClient.post<{ cart: Cart }>(
+		'carts/guest',
+		{ items, promoCode },
+		{ params: { locale } },
+	);
+	return data.cart;
+}
+
 export const guestCartAdapter = (): CartAdapter => ({
-	async load(locale: string, promoCode?: string) {
-		const items = localStorageService.get();
-		if (!items.length) return null;
-		return await apiClient
-			.post(`carts/guest?locale=${locale}`, { items, promoCode })
-			.then((value) => value.data.cart);
+	async load(locale) {
+		return priceItems(localStorageService.get(), { locale });
 	},
 
-	async addItem(itemToAdd: CartItemId, promoCode?: string) {
+	async addItem(itemToAdd, request) {
 		const items = localStorageService.get();
-		const existingItem = items?.find(
+		const existingItem = items.find(
 			(item) => item.productId === itemToAdd.productId,
 		);
 		if (existingItem) {
@@ -23,34 +33,32 @@ export const guestCartAdapter = (): CartAdapter => ({
 			items.push(itemToAdd);
 		}
 		localStorageService.save(items);
-		return await apiClient
-			.post('carts/guest', { items, promoCode })
-			.then((value) => value.data.cart);
+		return priceItems(items, request);
 	},
 
-	async updateQty(itemToUpdate: CartItemId, promoCode?: string) {
+	async updateQty(itemToUpdate, request) {
 		const items = localStorageService.get();
-		const index = items.findIndex(
+		const existingItem = items.find(
 			(item) => item.productId === itemToUpdate.productId,
 		);
-		items[index].quantity = itemToUpdate.quantity;
+		if (existingItem) {
+			existingItem.quantity = itemToUpdate.quantity;
+		} else {
+			items.push(itemToUpdate);
+		}
 		localStorageService.save(items);
-		return await apiClient
-			.post('carts/guest', { items, promoCode })
-			.then((value) => value.data.cart);
+		return priceItems(items, request);
 	},
 
-	async removeItem(_, productId: string, promoCode?: string) {
-		const items = localStorageService.get();
-		const filteredItems = items.filter((item) => item.productId !== productId);
-		localStorageService.save(filteredItems);
-		if (!filteredItems.length) return null;
-		return await apiClient
-			.post('carts/guest', { items: filteredItems, promoCode })
-			.then((value) => value.data.cart);
+	async removeItem(_cartId, productId, request) {
+		const items = localStorageService
+			.get()
+			.filter((item) => item.productId !== productId);
+		localStorageService.save(items);
+		return priceItems(items, request);
 	},
 
 	async clear() {
-		return localStorageService.clear();
+		localStorageService.clear();
 	},
 });

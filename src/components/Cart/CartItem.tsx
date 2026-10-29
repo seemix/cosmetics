@@ -27,7 +27,7 @@ export default function CartItem({
 	product: ICartItem;
 }) {
 	const { hideModal } = useModal();
-	const { removeItem } = useCartStore();
+	const removeItem = useCartStore((s) => s.removeItem);
 
 	return (
 		<div

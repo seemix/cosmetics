@@ -9,8 +9,8 @@ import { IoMdHeartEmpty } from 'react-icons/io';
 import { LuClipboardList } from 'react-icons/lu';
 import { MdLogout } from 'react-icons/md';
 import { PiUserCheck } from 'react-icons/pi';
+import { useShallow } from 'zustand/react/shallow';
 import { useClickOutside } from '@/hooks/useClickOutside';
-
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function AuthUserButton() {
@@ -18,7 +18,9 @@ export default function AuthUserButton() {
 	const [open, setOpen] = useState(false);
 	useClickOutside(ref, () => setOpen(false), open);
 	const t = useTranslations();
-	const { logout, user } = useAuthStore();
+	const { logout, user } = useAuthStore(
+		useShallow((s) => ({ logout: s.logout, user: s.user })),
+	);
 
 	const userLogout = async () => {
 		await logout();

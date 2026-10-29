@@ -13,17 +13,14 @@ import Quantity from '@/components/ProductDetails/Quantity';
 import ProductLabels from '@/components/ProductLabels/ProductLabels';
 import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
 import { assets } from '@/config/assets';
-import { useAuthPrices } from '@/hooks/useAuthPrices';
-import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 import type { IProduct } from '@/types/product';
 
 export default function ProductDetails({ product }: { product: IProduct }) {
 	const t = useTranslations('Catalog');
-	const { cart } = useCartStore();
-	const { user } = useAuthStore();
-
-	const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
+	const inCart = useCartStore(
+		(s) => s.cart?.items?.some((item) => item.id === product.id) ?? false,
+	);
 
 	const {
 		id,
@@ -44,8 +41,6 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 	} = product;
 	const { currency, backendUrl } = assets;
 	const [value, setValue] = useState<number>(1);
-
-	useAuthPrices(user);
 
 	return (
 		<div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>

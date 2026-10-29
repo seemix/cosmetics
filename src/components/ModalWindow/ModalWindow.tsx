@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect } from 'react';
 
-import { useModal } from '@/hooks/useModal';
+import { useModalStore } from '@/stores/modal.store';
 
 const PANEL_WIDTH = 500;
 
@@ -23,7 +23,7 @@ export default function ModalWindow() {
 		},
 	};
 
-	const { open, appearance, content, hideModal } = useModal();
+	const { open, appearance, content, hideModal } = useModalStore();
 
 	useEffect(() => {
 		if (!open) return;

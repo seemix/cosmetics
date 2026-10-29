@@ -1,13 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useLocale } from 'next-intl';
 
 import { useCartStore } from '@/stores/cart.store';
 
 export default function PromoBage() {
-	const { promoCode, deletePromoCode } = useCartStore();
-	const locale = useLocale();
+	const promoCode = useCartStore((s) => s.promoCode);
+	const deletePromoCode = useCartStore((s) => s.deletePromoCode);
 
 	return (
 		<AnimatePresence>
@@ -30,7 +29,7 @@ export default function PromoBage() {
 					</span>
 					<button
 						type={'button'}
-						onClick={() => deletePromoCode(locale)}
+						onClick={() => deletePromoCode()}
 						aria-label={'delete promo'}
 						className={`inline-flex items-center justify-center hover:text-red-500 transition-colors 
                                     cursor-pointer`}

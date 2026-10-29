@@ -8,7 +8,7 @@ import { useCartStore } from '@/stores/cart.store';
 export default function ClearCart() {
 	const t = useTranslations('Cart');
 	const [showConfirm, setShowConfirm] = useState(false);
-	const { clear } = useCartStore();
+	const clear = useCartStore((s) => s.clear);
 
 	return (
 		<div className={'ml-0 lg:ml-2 relative'}>

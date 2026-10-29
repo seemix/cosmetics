@@ -3,6 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
 import ErrorComponent from '@/components/ErrorComponent/ErrorComponent';
 import FormInput from '@/components/FormInput/FormInput';
 import Loader from '@/components/Loader/Loader';
@@ -13,7 +14,14 @@ import { useAuthStore } from '@/stores/auth.store';
 export default function SetNewPassword({ token }: { token: string }) {
 	const t = useTranslations('RegisterForm');
 	const schema = createNewPasswordSchema(t);
-	const { loading, resetPassword, error, passwordHasReset } = useAuthStore();
+	const { loading, resetPassword, error, passwordHasReset } = useAuthStore(
+		useShallow((s) => ({
+			loading: s.loading,
+			resetPassword: s.resetPassword,
+			error: s.error,
+			passwordHasReset: s.passwordHasReset,
+		})),
+	);
 	const {
 		register,
 		handleSubmit,

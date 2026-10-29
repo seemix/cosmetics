@@ -5,6 +5,6 @@ import UserButton from '@/components/Header/UserButton';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function UserButtonWrapper() {
-	const { user } = useAuthStore();
-	return <>{user?.name ? <AuthUserButton /> : <UserButton />}</>;
+	const isLoggedIn = useAuthStore((s) => Boolean(s.user?.name));
+	return <>{isLoggedIn ? <AuthUserButton /> : <UserButton />}</>;
 }

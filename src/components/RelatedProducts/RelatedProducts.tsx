@@ -9,8 +9,6 @@ import 'swiper/css/navigation';
 
 import { Navigation } from 'swiper/modules';
 import ProductCard from '@/components/ProductCard/ProductCard';
-import { useAuthPrices } from '@/hooks/useAuthPrices';
-import { useAuthStore } from '@/stores/auth.store';
 import type { IProduct } from '@/types/product';
 
 export default function RelatedProducts({
@@ -20,9 +18,6 @@ export default function RelatedProducts({
 	products: IProduct[];
 	labels: boolean;
 }) {
-	const { user } = useAuthStore();
-	useAuthPrices(user);
-
 	return (
 		<Swiper
 			className={'max-w-[98%] my-4'}

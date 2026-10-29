@@ -2,9 +2,10 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'motion/react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
 import FormInput from '@/components/FormInput/FormInput';
 import Loader from '@/components/Loader/Loader';
 import { useCartStore } from '@/stores/cart.store';
@@ -22,8 +23,15 @@ export default function PromoCodeForm() {
 		mode: 'onSubmit',
 	});
 	const { applyPromoCode, promoLoading, promoCode, cart, promoError } =
-		useCartStore();
-	const locale = useLocale();
+		useCartStore(
+			useShallow((s) => ({
+				applyPromoCode: s.applyPromoCode,
+				promoLoading: s.promoLoading,
+				promoCode: s.promoCode,
+				cart: s.cart,
+				promoError: s.promoError,
+			})),
+		);
 
 	// Локальний стан для контролю відображення помилки
 	const [showError, setShowError] = useState(false);
@@ -42,7 +50,7 @@ export default function PromoCodeForm() {
 	}, [promoError]);
 
 	const onSubmit = (data: PromoFormData) => {
-		applyPromoCode(data.promoCode, locale).then();
+		applyPromoCode(data.promoCode);
 	};
 
 	if (!cart?.items?.length) return null;

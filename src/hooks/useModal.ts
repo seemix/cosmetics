@@ -1,6 +1,11 @@
+import { useShallow } from 'zustand/react/shallow';
 import { useModalStore } from '@/stores/modal.store';
 
-export const useModal = () => {
-	const { open, appearance, content, showModal, hideModal } = useModalStore();
-	return { open, appearance, content, showModal, hideModal };
-};
+/**
+ * Modal actions only. They are stable, so components that just open or close
+ * a modal don't re-render whenever the modal state changes.
+ */
+export const useModal = () =>
+	useModalStore(
+		useShallow((s) => ({ showModal: s.showModal, hideModal: s.hideModal })),
+	);

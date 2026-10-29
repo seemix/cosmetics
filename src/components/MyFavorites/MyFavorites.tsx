@@ -3,18 +3,19 @@
 import { motion } from 'motion/react';
 import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import NoContent from '@/components/NoContent/NoContent';
 import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
-import { useLogoutRefresh } from '@/hooks/useLogoutRefresh';
-import { useAuthStore } from '@/stores/auth.store';
 import { useFavoritesStore } from '@/stores/favorites.store';
 
 export default function MyFavorites() {
-	const { favoriteProducts, getFavouriteProducts } = useFavoritesStore();
-	const { user } = useAuthStore();
+	const { favoriteProducts, getFavouriteProducts } = useFavoritesStore(
+		useShallow((s) => ({
+			favoriteProducts: s.favoriteProducts,
+			getFavouriteProducts: s.getFavouriteProducts,
+		})),
+	);
 	const locale = useLocale();
-
-	useLogoutRefresh(user);
 
 	useEffect(() => {
 		getFavouriteProducts(locale);

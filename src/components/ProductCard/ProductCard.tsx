@@ -38,9 +38,10 @@ export default function ProductCard({
 	const { backendUrl, currency } = assets;
 	const t = useTranslations('Catalog');
 	const price = wholesalePrice || retailPrice;
-	const { cart } = useCartStore();
-
-	const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
+	// Boolean selector: the card re-renders only when this product enters or leaves the cart.
+	const inCart = useCartStore(
+		(s) => s.cart?.items?.some((item) => item.id === product.id) ?? false,
+	);
 
 	return (
 		<motion.div

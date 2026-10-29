@@ -12,7 +12,7 @@ export default function CartQuantity({
 	quantity: number;
 }) {
 	const [value, setValue] = useState(quantity);
-	const { updateQty } = useCartStore();
+	const updateQty = useCartStore((s) => s.updateQty);
 
 	const decrease = () => {
 		const next = Math.max(1, value - 1);

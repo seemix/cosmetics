@@ -1,60 +1,61 @@
 import { create } from 'zustand';
 import { apiClient } from '@/lib/api/client';
+import type { Paginated } from '@/types/api';
 import type { IProduct } from '@/types/product';
 
 interface IFavoritesStore {
+	/** Ids of the user's favourite products. */
 	favorites: string[];
 	favoriteProducts: IProduct[];
 
-	getMyFavorites: (userId?: string) => Promise<void>;
-	getFavouriteProducts: (locale: string) => void;
+	getFavouriteProducts: (locale: string) => Promise<void>;
 	addFavorite: (productId: string, userId?: string) => Promise<void>;
 	removeFavorite: (productId: string, userId?: string) => Promise<void>;
 	setFavorites: (favorites: string[]) => void;
-	setFavoriteProducts: (products: IProduct[]) => void;
 }
 
 export const useFavoritesStore = create<IFavoritesStore>((set) => ({
 	favorites: [],
 	favoriteProducts: [],
 
-	async getMyFavorites(userId?: string) {
-		if (!userId) {
-			return;
-		} else {
-			const { data } = await apiClient.get('users/favorites/my');
-			set({ favorites: data });
+	async getFavouriteProducts(locale) {
+		try {
+			const { data } = await apiClient.get<Paginated<IProduct>>(
+				'users/favorites',
+				{ params: { locale } },
+			);
+			set({ favoriteProducts: data.docs });
+		} catch (error) {
+			console.error(error);
 		}
 	},
 
-	async getFavouriteProducts(locale: string) {
-		const { data } = await apiClient.get(`users/favorites?locale=${locale}`);
-		set({ favoriteProducts: data.docs });
-	},
-
-	async addFavorite(productId: string, userId?: string) {
+	async addFavorite(productId, userId) {
 		if (!userId) return;
-		await apiClient.post('users/favorites', { id: productId });
-		set((state) => ({ favorites: [...state.favorites, productId] }));
+		try {
+			await apiClient.post('users/favorites', { id: productId });
+			set((state) => ({ favorites: [...state.favorites, productId] }));
+		} catch (error) {
+			console.error(error);
+		}
 	},
 
-	async removeFavorite(productId: string, userId?: string) {
+	async removeFavorite(productId, userId) {
 		if (!userId) return;
-		await apiClient.delete(`users/favorites/${productId}`);
-
-		set((state) => ({
-			favorites: state.favorites.filter((f) => f !== productId),
-			favoriteProducts: state.favoriteProducts.filter(
-				(p) => p.id !== productId,
-			),
-		}));
+		try {
+			await apiClient.delete(`users/favorites/${productId}`);
+			set((state) => ({
+				favorites: state.favorites.filter((f) => f !== productId),
+				favoriteProducts: state.favoriteProducts.filter(
+					(p) => p.id !== productId,
+				),
+			}));
+		} catch (error) {
+			console.error(error);
+		}
 	},
 
-	setFavoriteProducts(products: IProduct[]) {
-		set({ favoriteProducts: products });
-	},
-
-	setFavorites(favorites: string[]) {
+	setFavorites(favorites) {
 		set({ favorites });
 	},
 }));

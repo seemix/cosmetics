@@ -1,8 +1,10 @@
 import { IoCloseSharp } from 'react-icons/io5';
 import { useModal } from '@/hooks/useModal';
+import { useModalStore } from '@/stores/modal.store';
 
 export default function CloseModalButton() {
-	const { appearance, hideModal } = useModal();
+	const { hideModal } = useModal();
+	const appearance = useModalStore((s) => s.appearance);
 
 	return (
 		<div

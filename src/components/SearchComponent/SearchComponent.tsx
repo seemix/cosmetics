@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { TfiSearch } from 'react-icons/tfi';
+import { useShallow } from 'zustand/react/shallow';
 import Loader from '@/components/Loader/Loader';
 import CloseModalButton from '@/components/ModalWindow/CloseModalButton';
 import SingleSearchItem from '@/components/SearchComponent/SingleSearchItem';
@@ -13,7 +14,13 @@ import { useSearchStore } from '@/stores/search.store';
 
 export default function SearchComponent() {
 	const [inputValue, setInputValue] = useState('');
-	const { fastSearch, loading, items } = useSearchStore();
+	const { fastSearch, loading, items } = useSearchStore(
+		useShallow((s) => ({
+			fastSearch: s.fastSearch,
+			loading: s.loading,
+			items: s.items,
+		})),
+	);
 	const t = useTranslations('Header');
 	const router = useRouter();
 	const { hideModal } = useModal();

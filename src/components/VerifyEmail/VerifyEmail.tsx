@@ -3,10 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function VerifyEmail() {
-	const { pendingName, pendingEmail } = useAuthStore();
+	const { pendingName, pendingEmail } = useAuthStore(
+		useShallow((s) => ({
+			pendingName: s.pendingName,
+			pendingEmail: s.pendingEmail,
+		})),
+	);
 	const t = useTranslations('RegisterForm');
 	const router = useRouter();
 

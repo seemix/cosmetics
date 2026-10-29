@@ -7,7 +7,7 @@ import CloseModalButton from '@/components/ModalWindow/CloseModalButton';
 import { useCartStore } from '@/stores/cart.store';
 
 export default function Cart() {
-	const { cart } = useCartStore();
+	const cart = useCartStore((s) => s.cart);
 	const items = cart?.items;
 
 	return (

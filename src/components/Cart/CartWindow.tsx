@@ -12,8 +12,8 @@ import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 
 export default function CartWindow() {
-	const { cart } = useCartStore();
-	const { user } = useAuthStore();
+	const cart = useCartStore((s) => s.cart);
+	const user = useAuthStore((s) => s.user);
 	const cartId = cart?.id || '';
 	const router = useRouter();
 	const t = useTranslations('Cart');

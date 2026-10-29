@@ -4,26 +4,23 @@ import { getErrorMessage } from '@/lib/api/errors';
 import { useCartStore } from '@/stores/cart.store';
 import type { IShippingAddress } from '@/types/order';
 
+export type PaymentType = 'cash' | 'transfer';
+
+export type NewOrder = {
+	shippingAddress: IShippingAddress;
+	paymentType: PaymentType;
+	/** Company name, required for bank transfer. */
+	SRL?: string;
+	comment?: string;
+};
+
 interface ICheckoutStore {
-	error?: string | null;
-	orderNumber?: string;
+	error: string | null;
+	orderNumber: string;
 	loading: boolean;
 	success: boolean;
 
-	createNewOrder: (
-		shippingAddress: {
-			name: `${string} ${string}`;
-			email: string;
-			phone: string;
-			city: string;
-			address: string;
-			promoCode?: string;
-		},
-		locale: string,
-		paymentType: 'cash' | 'transfer',
-		SRL?: string,
-		comment?: string | undefined,
-	) => Promise<void>;
+	createNewOrder: (order: NewOrder, locale: string) => Promise<void>;
 	clearOrder: () => void;
 }
 
@@ -33,27 +30,25 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
 	success: false,
 	orderNumber: '',
 
-	createNewOrder: async (
-		shippingAddress: IShippingAddress,
-		locale: string,
-		paymentType: 'cash' | 'transfer',
-		SRL?: string,
-		comment?: string,
-	) => {
+	createNewOrder: async (order, locale) => {
+		set({ loading: true, error: null });
 		try {
-			set({ loading: true });
-			const { cart } = useCartStore.getState();
-			const items = cart?.items.map((item) => {
-				return { product: item.id, quantity: item.quantity };
-			});
-			const { data } = await apiClient.post(`/orders/create?locale=${locale}`, {
-				items,
-				shippingAddress,
-				paymentType,
-				SRL,
-				comment,
-				promoCode: useCartStore.getState().promoCode,
-			});
+			const { cart, promoCode } = useCartStore.getState();
+			const { data } = await apiClient.post<{
+				success: boolean;
+				order: { orderNumber: string };
+			}>(
+				'orders/create',
+				{
+					...order,
+					items: cart?.items.map((item) => ({
+						product: item.id,
+						quantity: item.quantity,
+					})),
+					promoCode,
+				},
+				{ params: { locale } },
+			);
 			set({ success: data.success, orderNumber: data.order.orderNumber });
 		} catch (error) {
 			set({ error: getErrorMessage(error) });
@@ -61,7 +56,6 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
 			set({ loading: false });
 		}
 	},
-	clearOrder: () => {
-		set({ success: false });
-	},
+
+	clearOrder: () => set({ success: false }),
 }));

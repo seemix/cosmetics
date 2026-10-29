@@ -7,7 +7,7 @@ import { useCartStore } from '@/stores/cart.store';
 
 export default function CartButton() {
 	const { showModal } = useModal();
-	const { cart } = useCartStore();
+	const count = useCartStore((s) => s.cart?.items?.length ?? 0);
 
 	return (
 		<button
@@ -20,7 +20,7 @@ export default function CartButton() {
 				size={29}
 				className={`text-black transition-colors duration-300 hover:text-[var(--main)] cursor-pointer`}
 			/>
-			{cart?.items?.length ? (
+			{count ? (
 				<div className={'absolute -top-3 -right-2'}>
 					<div
 						className={`relative bg-[var(--main)] text-black rounded-full 
@@ -30,7 +30,7 @@ export default function CartButton() {
 							className={`ml-[1px] absolute top-1/2 left-1/2 transform 
                                               -translate-x-1/2 -translate-y-1/2`}
 						>
-							{cart.items.length >= 9 ? '9+' : cart.items.length}
+							{count >= 9 ? '9+' : count}
 						</span>
 					</div>
 				</div>

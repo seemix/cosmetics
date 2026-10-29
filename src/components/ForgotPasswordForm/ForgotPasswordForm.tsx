@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 import { type FieldValues, type SubmitHandler, useForm } from 'react-hook-form';
 import { IoMdArrowBack } from 'react-icons/io';
+import { useShallow } from 'zustand/react/shallow';
 import ConfirmResetMessage from '@/components/ForgotPasswordForm/ConfirmResetMessage';
 import { forgotPasswordSchema } from '@/components/ForgotPasswordForm/forgotPasswordSchema';
 import FormInput from '@/components/FormInput/FormInput';
@@ -16,7 +17,13 @@ import { useAuthStore } from '@/stores/auth.store';
 
 export default function ForgotPasswordForm() {
 	const { showModal } = useModal();
-	const { forgotPassword, forgotPasswordEmailSent, loading } = useAuthStore();
+	const { forgotPassword, forgotPasswordEmailSent, loading } = useAuthStore(
+		useShallow((s) => ({
+			forgotPassword: s.forgotPassword,
+			forgotPasswordEmailSent: s.forgotPasswordEmailSent,
+			loading: s.loading,
+		})),
+	);
 	const t = useTranslations();
 	const t2 = useTranslations('Validation');
 	const schema = forgotPasswordSchema(t2);

@@ -2,14 +2,14 @@
 
 import { useTranslations } from 'next-intl';
 import Cart from '@/components/Cart/Cart';
-import Loader from '@/components/Loader/Loader';
 import PromoBage from '@/components/PromoBage/PromoBage';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
 import { useCartStore } from '@/stores/cart.store';
 
 export default function Invoice() {
-	const { cart, loading, promoCode } = useCartStore();
+	const cart = useCartStore((s) => s.cart);
+	const promoCode = useCartStore((s) => s.promoCode);
 	const { showModal } = useModal();
 	const t = useTranslations();
 	if (!cart?.items?.length) return null;
@@ -20,7 +20,6 @@ export default function Invoice() {
 				'w-[95%] md:max-w-[600px] mx-auto p-3 bg-white border border-gray-300 shadow my-2'
 			}
 		>
-			{loading && <Loader />}
 			<div className={'flex gap-4 justify-center items-center mb-4'}>
 				<h2
 					className={

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
 import ForgotPasswordForm from '@/components/ForgotPasswordForm/ForgotPasswordForm';
 import FormInput from '@/components/FormInput/FormInput';
 import Loader from '@/components/Loader/Loader';
@@ -30,7 +31,14 @@ export default function LoginForm() {
 		resolver: zodResolver(schema),
 		mode: 'onSubmit',
 	});
-	const { login, loading, user, error } = useAuthStore();
+	const { login, loading, user, error } = useAuthStore(
+		useShallow((s) => ({
+			login: s.login,
+			loading: s.loading,
+			user: s.user,
+			error: s.error,
+		})),
+	);
 	const { hideModal, showModal } = useModal();
 
 	const submit = async (data: LoginFormData) => {

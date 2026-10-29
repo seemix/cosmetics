@@ -3,11 +3,17 @@
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { assets } from '@/config/assets';
 import { useCheckoutStore } from '@/stores/checkout.store';
 
 export default function OrderSuccessfullyCreated() {
-	const { orderNumber, clearOrder } = useCheckoutStore();
+	const { orderNumber, clearOrder } = useCheckoutStore(
+		useShallow((s) => ({
+			orderNumber: s.orderNumber,
+			clearOrder: s.clearOrder,
+		})),
+	);
 	// const router = useRouter();
 	const t = useTranslations('Checkout');
 

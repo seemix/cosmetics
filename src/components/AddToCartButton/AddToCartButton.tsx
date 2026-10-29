@@ -13,7 +13,8 @@ export default function AddToCartButton({
 	quantity: number;
 }) {
 	const t = useTranslations('Catalog');
-	const { addItem, itemLoading } = useCartStore();
+	const addItem = useCartStore((s) => s.addItem);
+	const isLoading = useCartStore((s) => s.itemLoading === productId);
 
 	return (
 		<button
@@ -24,10 +25,10 @@ export default function AddToCartButton({
 				         text-[.85em] md:text-[.95em] px-2 py-2 md:px-3 hover:border-[var(--main)] 
 				         hover:text-[var(--main)] flex gap-2 justify-center w-full sm:min-w-[180px]`}
 		>
-			{itemLoading !== productId && (
+			{!isLoading && (
 				<PiShoppingCartSimple className={'text-lg sm:text-[1.3em]'} />
 			)}
-			{itemLoading === productId ? <Loader /> : t('addToCart')}
+			{isLoading ? <Loader /> : t('addToCart')}
 		</button>
 	);
 }

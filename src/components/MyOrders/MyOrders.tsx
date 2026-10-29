@@ -6,8 +6,6 @@ import { useState } from 'react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import SingleOrderItem from '@/components/MyOrders/SingleOrderItem';
 import { assets } from '@/config/assets';
-import { useLogoutRefresh } from '@/hooks/useLogoutRefresh';
-import { useAuthStore } from '@/stores/auth.store';
 import type { IOrder } from '@/types/order';
 
 // `dd.mm.yyyy, hh:mm` for both site locales.
@@ -21,7 +19,6 @@ const dateFormatter = new Intl.DateTimeFormat('uk-UA', {
 
 export default function MyOrders({ orders }: { orders: IOrder[] }) {
 	const [openIds, setOpenIds] = useState<string[]>([]);
-	const { user } = useAuthStore();
 	const t = useTranslations('Checkout');
 
 	const toggle = (id: string) => {
@@ -31,8 +28,6 @@ export default function MyOrders({ orders }: { orders: IOrder[] }) {
 				: [...prev, id],
 		);
 	};
-
-	useLogoutRefresh(user);
 
 	return (
 		<div className={'w-full md:w-2xl max-w-[95%] mx-auto space-y-2 my-2'}>

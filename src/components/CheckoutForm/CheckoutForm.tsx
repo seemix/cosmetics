@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdOutlineCheckBox } from 'react-icons/md';
+import { useShallow } from 'zustand/react/shallow';
 import {
 	type CheckoutFormData,
 	checkoutSchema,
@@ -22,10 +23,20 @@ export default function CheckoutForm() {
 	const router = useRouter();
 	const t = useTranslations();
 	const t2 = useTranslations('Validation');
-	const { user } = useAuthStore();
+	const user = useAuthStore((s) => s.user);
 	const { success, orderNumber, loading, error, createNewOrder } =
-		useCheckoutStore();
-	const { clear, cart } = useCartStore();
+		useCheckoutStore(
+			useShallow((s) => ({
+				success: s.success,
+				orderNumber: s.orderNumber,
+				loading: s.loading,
+				error: s.error,
+				createNewOrder: s.createNewOrder,
+			})),
+		);
+	const { clear, cart } = useCartStore(
+		useShallow((s) => ({ clear: s.clear, cart: s.cart })),
+	);
 	const locale = useLocale();
 
 	const schema = checkoutSchema(t2);
@@ -60,30 +71,32 @@ export default function CheckoutForm() {
 	}, [user, setValue]);
 
 	useEffect(() => {
-		if (success && orderNumber) {
-			setTimeout(() => {
-				reset();
-				clear().then();
-				router.push('/checkout/success');
-			}, 200);
-		}
-	}, [success, reset, router.push, orderNumber, clear]);
+		if (!success || !orderNumber) return;
+		const timer = setTimeout(() => {
+			reset();
+			clear();
+			router.push('/checkout/success');
+		}, 200);
+		return () => clearTimeout(timer);
+	}, [success, reset, router, orderNumber, clear]);
 	const selectedPayment = watch('paymentType');
 
 	const onSubmit = (data: CheckoutFormData) => {
 		createNewOrder(
 			{
-				name: `${data.name} ${data.surname}`,
-				email: data.email,
-				phone: data.phone,
-				city: data.city,
-				address: data.street,
+				shippingAddress: {
+					name: `${data.name} ${data.surname}`,
+					email: data.email,
+					phone: data.phone,
+					city: data.city,
+					address: data.street,
+				},
+				paymentType: data.paymentType,
+				SRL: data.SRL,
+				comment: data.comment,
 			},
 			locale,
-			data.paymentType,
-			data.SRL,
-			data.comment,
-		).then();
+		);
 	};
 
 	if (!cart?.items?.length)

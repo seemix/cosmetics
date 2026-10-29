@@ -5,6 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { useShallow } from 'zustand/react/shallow';
 import FormInput from '@/components/FormInput/FormInput';
 import FormPhoneInput from '@/components/FormPhoneInput/FormPhoneInput';
 import Loader from '@/components/Loader/Loader';
@@ -25,7 +26,17 @@ export default function RegisterForm() {
 		mode: 'onSubmit',
 	});
 
-	const { loading, error, register: registerUser } = useAuthStore();
+	const {
+		loading,
+		error,
+		register: registerUser,
+	} = useAuthStore(
+		useShallow((s) => ({
+			loading: s.loading,
+			error: s.error,
+			register: s.register,
+		})),
+	);
 	const router = useRouter();
 
 	const onSubmit = async (data: RegisterFormData) => {

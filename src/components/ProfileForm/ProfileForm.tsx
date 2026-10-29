@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { useShallow } from 'zustand/react/shallow';
 import FormInput from '@/components/FormInput/FormInput';
 import FormPhoneInput from '@/components/FormPhoneInput/FormPhoneInput';
 import Loader from '@/components/Loader/Loader';
@@ -12,13 +12,19 @@ import {
 	type ProfileFormData,
 	profileSchema,
 } from '@/components/ProfileForm/profileSchema';
-import { useLogoutRefresh } from '@/hooks/useLogoutRefresh';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function ProfileForm() {
 	const t = useTranslations();
 	const t2 = useTranslations('Validation');
-	const { user, loading, error, updateUserInfo } = useAuthStore();
+	const { user, loading, error, updateUserInfo } = useAuthStore(
+		useShallow((s) => ({
+			user: s.user,
+			loading: s.loading,
+			error: s.error,
+			updateUserInfo: s.updateUserInfo,
+		})),
+	);
 
 	const schema = profileSchema(t2);
 	const {
@@ -49,8 +55,6 @@ export default function ProfileForm() {
 	const onSubmit = (data: ProfileFormData) => {
 		updateUserInfo(data).then();
 	};
-
-	useLogoutRefresh(user);
 
 	return (
 		<form
