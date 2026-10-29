@@ -4,18 +4,8 @@ import CartQuantity from '@/components/Cart/CartQuantity';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
 import { Link } from '@/i18n/navigation';
+import type { CartItem as CartItemData } from '@/lib/cart/cart.types';
 import { useCartStore } from '@/stores/cart.store';
-
-interface ICartItem {
-	id: string;
-	title: string;
-	subtitle: string;
-	slug: string;
-	price: number;
-	regularPrice?: number;
-	quantity: number;
-	thumbnail: string;
-}
 
 const { backendUrl, currency } = assets;
 
@@ -24,7 +14,7 @@ export default function CartItem({
 	product,
 }: {
 	cartId?: string;
-	product: ICartItem;
+	product: CartItemData;
 }) {
 	const { hideModal } = useModal();
 	const removeItem = useCartStore((s) => s.removeItem);

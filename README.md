@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Level Shop — frontend
 
-## Getting Started
+Storefront of [nextlevelshop.md](https://nextlevelshop.md): Next.js 16 (App Router, Turbopack), React 19,
+next-intl (ru/ro), Zustand, Tailwind CSS 4. Content, catalog, cart and orders come from the Payload CMS
+backend (`cosmetics-backend`).
 
-First, run the development server:
+## Requirements
+
+- Node.js ≥ 20.9 (`.nvmrc` pins 24)
+- A running backend (local `http://localhost:3000` or the production API)
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env    # adjust URLs
+npm run dev             # http://localhost:3001
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Variable | Where | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_SERVER_URL` | build time, client + server | Backend origin; REST API at `<url>/api`, media URLs |
+| `NEXT_PUBLIC_SITE_URL` | build time | Public origin of the site: canonical URLs, hreflang, sitemap |
+| `API_URL` | runtime, server only, optional | API root for the menu request (e.g. an internal address); defaults to `<NEXT_PUBLIC_SERVER_URL>/api` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Values are validated in `src/config/env.ts`. `NEXT_PUBLIC_*` are inlined at build time, so a change needs a rebuild.
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Script | |
+|---|---|
+| `npm run dev` | Dev server on port 3001 |
+| `npm run build` / `npm start` | Production build / server |
+| `npm run check` | Biome: lint, formatting, import order |
+| `npm run lint` / `npm run format` | Biome lint only / format in place |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm test` | Vitest unit tests (`tests/`) |
+| `npm run test:e2e` | Playwright smoke and visual tests (`e2e/`) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### End-to-end tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The Playwright tests are read-only (no login, no orders), so they can run against the production API.
+Build with the backend you want to test, then run the tests; Playwright starts `next start -p 3101` itself:
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_SERVER_URL=https://admin.nextlevelshop.md NEXT_PUBLIC_SITE_URL=http://localhost:3101 npm run build
+NEXT_PUBLIC_SERVER_URL=https://admin.nextlevelshop.md npm run test:e2e
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Visual snapshots live in `e2e/visual.spec.ts-snapshots/` (rendered on Windows). After an intended visual
+change, refresh them with `npm run test:e2e -- e2e/visual.spec.ts --update-snapshots`. Sample slugs are in
+`e2e/fixtures.ts` and can be overridden with `E2E_*` variables.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Structure
+
+```
+src/
+  app/[locale]/        routes only (pages, layouts, metadata); (protected) = account pages
+  app/robots.ts, sitemap.ts
+  components/          UI components, one folder per component
+  config/              env validation, shop constants (currency, phone, links)
+  hooks/               client hooks (modal actions, session refresh, click outside)
+  i18n/                next-intl routing and locale-aware Link/router
+  lib/api/             server data layer (serverFetch + cached queries) and browser client
+  lib/cart/            guest (localStorage) and authenticated cart adapters
+  lib/seo/             page metadata helpers
+  stores/              Zustand stores
+  types/               shared types, API response shapes
+messages/              ru.json, ro.json
+```
+
+### Conventions
+
+- Server data goes through `src/lib/api/queries.ts`. Queries are wrapped in React `cache()` and take
+  primitive arguments, so `generateMetadata` and the page share one request.
+- Editorial content (menu, posts, pages, brands) is cached for 5 minutes. Product data carries
+  per-customer (wholesale) prices, so it's fetched with the visitor's cookies and never cached.
+- Internal links and navigation use `@/i18n/navigation`, not `next/link` / `next/navigation`.
+- Components read stores through selectors (`useCartStore((s) => s.cart)`), never the whole store.

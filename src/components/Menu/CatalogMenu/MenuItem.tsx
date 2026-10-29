@@ -69,12 +69,25 @@ export default function MenuItem({
 				</AnimatePresence>
 			</div>
 
-			{/* DESKTOP */}
+			{/* DESKTOP: opens on hover, or on keyboard focus (Tab into the item, Escape closes). */}
 			<motion.div
+				role={'button'}
+				tabIndex={0}
+				aria-haspopup={'true'}
+				aria-expanded={isOpen}
 				className={`hidden md:flex items-center gap-1 relative uppercase text-lg 
                             font-semibold tracking-[0.05em] cursor-pointer`}
 				onHoverStart={() => setOpenItem(item.id)}
 				onHoverEnd={() => setOpenItem(null)}
+				onFocus={() => setOpenItem(item.id)}
+				onBlur={(e) => {
+					if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+						setOpenItem(null);
+					}
+				}}
+				onKeyDown={(e) => {
+					if (e.key === 'Escape') setOpenItem(null);
+				}}
 				animate={{
 					color: isOpen ? 'var(--main)' : 'black',
 				}}

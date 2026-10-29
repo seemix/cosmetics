@@ -128,3 +128,21 @@ test('search passes the page number to the backend', async ({ page }) => {
 	await page.goto(`/ru/search?query=${sample.query}&page=2`);
 	await expect(page.getByText('Ничего не найдено')).toBeVisible();
 });
+
+test('catalog menu opens from the keyboard', async ({ page, isMobile }) => {
+	test.skip(isMobile, 'desktop menu');
+	await page.goto('/ru');
+	await page
+		.locator('header nav [role="button"]', { hasText: 'Бренды' })
+		.focus();
+	await expect(
+		page
+			.locator('header nav a[href*="/brand/"]')
+			.filter({ visible: true })
+			.first(),
+	).toBeVisible();
+	await page.keyboard.press('Escape');
+	await expect(
+		page.locator('header nav a[href*="/brand/"]').filter({ visible: true }),
+	).toHaveCount(0);
+});
