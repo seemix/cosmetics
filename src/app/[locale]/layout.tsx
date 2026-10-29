@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Montserrat, Roboto } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
@@ -11,21 +12,22 @@ import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { routing } from '@/i18n/routing';
 import { getMenu } from '@/lib/api/queries';
 import { getSiteMetadata } from '@/lib/seo/getHomeMetadata';
-
 import './globals.css';
 
+// next/font needs literal options. Subsets: Cyrillic for ru, Latin Extended for Romanian (ă, â, î, ș, ț).
+
+/** Secondary face, applied via `font-(family-name:--font-roboto)`. */
 const roboto = Roboto({
 	variable: '--font-roboto',
-	subsets: ['latin'],
+	subsets: ['latin', 'latin-ext', 'cyrillic'],
+	preload: false,
 });
 
-const montSerrat = Montserrat({
+/** Body face. */
+const montserrat = Montserrat({
 	variable: '--font-montserrat',
-	subsets: ['latin'],
-	preload: true,
+	subsets: ['latin', 'latin-ext', 'cyrillic'],
 });
-
-import type { Metadata } from 'next';
 
 export async function generateMetadata({
 	params,
@@ -50,10 +52,8 @@ export default async function LocaleLayout({
 	const menu = await getMenu(locale);
 
 	return (
-		<html lang={locale}>
-			<body
-				className={`${roboto.className} ${montSerrat.className} antialiased`}
-			>
+		<html lang={locale} className={`${roboto.variable} ${montserrat.variable}`}>
+			<body className={`${montserrat.className} antialiased`}>
 				<div
 					className={
 						'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen min-w-0'

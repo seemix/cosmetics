@@ -19,8 +19,6 @@
 	--color-main: var(--main);
 	--color-dark: var(--dark);
 	--color-black: var(--black);
-	--font-roboto: var(--font-roboto);
-	--font-montserrat: var(--font-montserrat);
 }
 
 body {
