@@ -13,7 +13,7 @@ for (const { name, path } of pages) {
 
 test('unknown product shows the empty state', async ({ page }) => {
 	await page.goto('/ru/product/__does-not-exist__');
-	await expect(page.locator('header')).toBeVisible();
+	await expect(page.getByText('Ничего не найдено')).toBeVisible();
 	await expect(page.getByText('Something went wrong')).toHaveCount(0);
 });
 
@@ -109,4 +109,18 @@ test('sorting updates the url', async ({ page }) => {
 		.click();
 	await page.getByRole('button', { name: 'по цене 0-9' }).click();
 	await expect(page).toHaveURL(/sort=price-asc/);
+});
+
+test('unknown brand shows the empty state instead of crashing', async ({
+	page,
+}) => {
+	await page.goto('/ru/brand/__does-not-exist__');
+	await expect(page.getByText('Ничего не найдено')).toBeVisible();
+	await expect(page.getByText('Something went wrong')).toHaveCount(0);
+});
+
+test('search passes the page number to the backend', async ({ page }) => {
+	// The sample query fits on one page, so page 2 must be empty.
+	await page.goto(`/ru/search?query=${sample.query}&page=2`);
+	await expect(page.getByText('Ничего не найдено')).toBeVisible();
 });

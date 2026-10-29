@@ -2,25 +2,23 @@ import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NewsCard from '@/components/NewsCard/NewsCard';
 import Pagination from '@/components/Pagination/Pagination';
-import { assets } from '@/config/assets';
+import { getPosts } from '@/lib/api/queries';
+import { firstParam, type PageProps } from '@/types/page-props';
 import type { PaginationProps } from '@/types/pagination';
-import type { PostCard } from '@/types/post-card';
-import type { propsType } from '@/types/server-component-params';
 
-export default async function NewsPage(props: propsType) {
+export default async function NewsPage(props: PageProps) {
 	const t = await getTranslations('StaticPages');
 	const { locale } = await props.params;
-	const resp = await fetch(
-		`${assets.backendUrl}/api/posts?locale=${locale}`,
-	).then((res) => res.json());
+	const searchParams = await props.searchParams;
+	const resp = await getPosts(locale, firstParam(searchParams.page));
 
 	const pagination: PaginationProps = {
-		page: resp.page,
-		hasPrevPage: resp.hasPrevPage,
-		hasNextPage: resp.hasNextPage,
-		totalPages: resp.totalPages,
-		limit: resp.limit,
-		totalDocs: resp.totalDocs,
+		page: resp?.page ?? 1,
+		hasPrevPage: resp?.hasPrevPage ?? false,
+		hasNextPage: resp?.hasNextPage ?? false,
+		totalPages: resp?.totalPages ?? 0,
+		limit: resp?.limit ?? 0,
+		totalDocs: resp?.totalDocs ?? 0,
 	};
 	const breadCrumbs = [
 		{ id: '0', title: t('Main'), slug: 'main' },
@@ -36,7 +34,7 @@ export default async function NewsPage(props: propsType) {
 			<div className={'mt-3'}>
 				<BreadCrumbs breadcrumbs={breadCrumbs} />
 			</div>
-			{resp.docs.map((doc: PostCard) => (
+			{resp?.docs.map((doc) => (
 				<NewsCard key={doc.id} post={doc} locale={locale} />
 			))}
 			{pagination.totalPages > 1 && <Pagination pagination={pagination} />}

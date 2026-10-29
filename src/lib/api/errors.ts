@@ -12,7 +12,6 @@ export function getErrorMessage(error: unknown): string {
 			error.response?.data?.error ??
 			'Unknown error'
 		);
-		// return error.response.data
 	}
 	return 'Unknown error';
 }

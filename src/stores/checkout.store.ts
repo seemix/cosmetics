@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { axiosService } from '@/lib/axios.service';
-import { getErrorMessage } from '@/lib/getErrorMessage';
+import { apiClient } from '@/lib/api/client';
+import { getErrorMessage } from '@/lib/api/errors';
 import { useCartStore } from '@/stores/cart.store';
 import type { IShippingAddress } from '@/types/order';
 
@@ -46,17 +46,14 @@ export const useCheckoutStore = create<ICheckoutStore>((set) => ({
 			const items = cart?.items.map((item) => {
 				return { product: item.id, quantity: item.quantity };
 			});
-			const { data } = await axiosService.post(
-				`/orders/create?locale=${locale}`,
-				{
-					items,
-					shippingAddress,
-					paymentType,
-					SRL,
-					comment,
-					promoCode: useCartStore.getState().promoCode,
-				},
-			);
+			const { data } = await apiClient.post(`/orders/create?locale=${locale}`, {
+				items,
+				shippingAddress,
+				paymentType,
+				SRL,
+				comment,
+				promoCode: useCartStore.getState().promoCode,
+			});
 			set({ success: data.success, orderNumber: data.order.orderNumber });
 		} catch (error) {
 			set({ error: getErrorMessage(error) });

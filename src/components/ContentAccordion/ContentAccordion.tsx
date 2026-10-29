@@ -13,7 +13,7 @@ export default function ContentAccordion({
 	content,
 	logo,
 }: {
-	content: SerializedEditorState;
+	content?: SerializedEditorState;
 	logo: string;
 }) {
 	const t = useTranslations('Catalog');
@@ -21,19 +21,13 @@ export default function ContentAccordion({
 	const childrenNodes = content?.root?.children || [];
 	const hasMoreContent = childrenNodes.length > 1;
 
-	const previewContent: SerializedEditorState = {
+	// The first paragraph is always visible, the rest expands on demand.
+	const slice = (start: number, end?: number): SerializedEditorState => ({
 		root: {
-			...content.root,
-			children: childrenNodes.slice(0, 1),
+			...(content as SerializedEditorState).root,
+			children: childrenNodes.slice(start, end),
 		},
-	};
-
-	const remainingContent: SerializedEditorState = {
-		root: {
-			...content.root,
-			children: childrenNodes.slice(1),
-		},
-	};
+	});
 
 	return (
 		<div
@@ -53,11 +47,13 @@ export default function ContentAccordion({
 
 			<div className={'max-w-none break-words'}>
 				{!hasMoreContent ? (
-					<RichText data={content} converters={richTextImagePathConverter} />
+					content && (
+						<RichText data={content} converters={richTextImagePathConverter} />
+					)
 				) : (
 					<div>
 						<RichText
-							data={previewContent}
+							data={slice(0, 1)}
 							converters={richTextImagePathConverter}
 						/>
 
@@ -90,7 +86,7 @@ export default function ContentAccordion({
 								>
 									<div className={'pt-4'}>
 										<RichText
-											data={remainingContent}
+											data={slice(1)}
 											converters={richTextImagePathConverter}
 										/>
 									</div>

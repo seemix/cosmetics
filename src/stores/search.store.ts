@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
 
 import type { IProduct } from '@/types/product';
 
@@ -22,7 +22,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
 
 	fastSearch: async (q: string, locale: string = 'ru') => {
 		set({ loading: true, error: null });
-		const { data } = await axiosService.get('products/products-search', {
+		const { data } = await apiClient.get('products/products-search', {
 			params: { q, locale },
 		});
 		set({ items: data, loading: false });

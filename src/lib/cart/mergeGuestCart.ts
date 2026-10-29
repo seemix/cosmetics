@@ -1,4 +1,4 @@
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
 import { localStorageService } from '@/lib/cart/localStorage.service';
 
 export const mergeGuestCart = async () => {
@@ -9,7 +9,7 @@ export const mergeGuestCart = async () => {
 		product: { id: item.productId },
 		quantity: item.quantity,
 	}));
-	const mergedCart = await axiosService.post('carts/merge', {
+	const mergedCart = await apiClient.post('carts/merge', {
 		items: normalizedItems,
 	});
 	localStorageService.clear();

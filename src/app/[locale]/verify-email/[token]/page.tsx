@@ -1,23 +1,17 @@
 import { getTranslations } from 'next-intl/server';
 import ErrorComponent from '@/components/ErrorComponent/ErrorComponent';
 import LoginLinkButton from '@/components/LoginLinkButton/LoginLinkButton';
-import { assets } from '@/config/assets';
+import { verifyEmail } from '@/lib/api/queries';
 
 export default async function VerifyEmailTokenPage(props: {
 	params: Promise<{ token: string }>;
 }) {
 	const { token } = await props.params;
 	const t = await getTranslations();
-	const res = await fetch(`${assets.backendUrl}/api/users/verify/${token}`, {
-		method: 'POST',
-	});
-	if (!res.ok) {
-		const data = await res.json();
-		return (
-			<ErrorComponent
-				error={data.errors?.[0]?.message || 'Something went wrong'}
-			/>
-		);
+	const result = await verifyEmail(token);
+
+	if (!result.ok) {
+		return <ErrorComponent error={result.message || 'Something went wrong'} />;
 	}
 
 	return (

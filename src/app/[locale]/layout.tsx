@@ -9,6 +9,7 @@ import HeaderLogo from '@/components/Header/HeaderLogo';
 import { MenuProvider } from '@/components/Menu/MenuContext';
 import ModalWindow from '@/components/ModalWindow/ModalWindow';
 import { routing } from '@/i18n/routing';
+import { getMenu } from '@/lib/api/queries';
 import { getHomeMetadata } from '@/lib/seo/getHomeMetadata';
 
 import './globals.css';
@@ -46,10 +47,7 @@ export default async function LocaleLayout({
 	if (!hasLocale(routing.locales, locale)) {
 		notFound();
 	}
-	const menu =
-		(await fetch(`${process.env.API_URL}/menu?locale=${locale}`, {
-			cache: 'no-cache',
-		}).then((res) => res.json())) || [];
+	const menu = await getMenu(locale);
 
 	return (
 		<html lang={locale}>

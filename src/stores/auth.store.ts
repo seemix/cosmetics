@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
 import type { RegisterFormData } from '@/components/RegisterForm/registerSchema';
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
+import { getErrorMessage } from '@/lib/api/errors';
 import { guestCartAdapter } from '@/lib/cart/guestCart.adapter';
 import { mergeGuestCart } from '@/lib/cart/mergeGuestCart';
-import { getErrorMessage } from '@/lib/getErrorMessage';
 import { useCartStore } from '@/stores/cart.store';
 import { useFavoritesStore } from '@/stores/favorites.store';
 
@@ -66,7 +66,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 		set({ loading: true, error: null });
 
 		try {
-			const { data: res } = await axiosService.post<{
+			const { data: res } = await apiClient.post<{
 				doc: { email: string; name: string };
 			}>('users', data);
 
@@ -88,7 +88,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 		set({ loading: true, error: null });
 
 		try {
-			const { data } = await axiosService.post<{
+			const { data } = await apiClient.post<{
 				user: UserState;
 			}>('users/login', { email, password });
 
@@ -108,11 +108,11 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 	checkAuth: async () => {
 		try {
-			const { data } = await axiosService.get<{
+			const { data } = await apiClient.get<{
 				user: UserState;
 			}>('users/me');
 			set({ user: data.user });
-			const fav = await axiosService.get('users/favorites/my');
+			const fav = await apiClient.get('users/favorites/my');
 			useFavoritesStore.getState().setFavorites(fav.data);
 		} catch (error) {
 			set({ error: getErrorMessage(error) });
@@ -123,7 +123,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 	logout: async () => {
 		try {
-			await axiosService.post('users/logout');
+			await apiClient.post('users/logout');
 			useCartStore.getState().init(guestCartAdapter(), 'ru');
 			useCartStore.getState().adapter?.load('ru');
 			useCartStore.setState({ promoCode: '' });
@@ -136,7 +136,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 	forgotPassword: async (email: string) => {
 		try {
 			set({ loading: true, error: null });
-			await axiosService.post('users/forgot-password', { email });
+			await apiClient.post('users/forgot-password', { email });
 			set({ forgotPasswordEmailSent: true, loading: false });
 		} catch (error) {
 			set({ error: getErrorMessage(error) });
@@ -146,7 +146,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 	resetPassword: async (token: string, password: string) => {
 		try {
 			set({ loading: true });
-			await axiosService.post('users/reset-password', { token, password });
+			await apiClient.post('users/reset-password', { token, password });
 			set({ loading: false, passwordHasReset: true });
 		} catch (error) {
 			set({ error: getErrorMessage(error), loading: false });
@@ -156,8 +156,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 	updateUserInfo: async (userInfo) => {
 		try {
 			set({ loading: true });
-			await axiosService.patch('users/update', userInfo);
-			const { data } = await axiosService.get<{
+			await apiClient.patch('users/update', userInfo);
+			const { data } = await apiClient.get<{
 				user: UserState;
 			}>('users/me');
 			set({ user: data.user });

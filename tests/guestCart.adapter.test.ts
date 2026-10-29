@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const post = vi.fn();
-vi.mock('@/lib/axios.service', () => ({
-	axiosService: { post: (...args: unknown[]) => post(...args) },
+vi.mock('@/lib/api/client', () => ({
+	apiClient: { post: (...args: unknown[]) => post(...args) },
 }));
 
 import { guestCartAdapter } from '@/lib/cart/guestCart.adapter';

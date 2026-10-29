@@ -1,4 +1,4 @@
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
 import type { CartAdapter } from '@/lib/cart/cart.adapter';
 import type { CartItemId } from '@/lib/cart/cart.types';
 import { localStorageService } from '@/lib/cart/localStorage.service';
@@ -7,7 +7,7 @@ export const guestCartAdapter = (): CartAdapter => ({
 	async load(locale: string, promoCode?: string) {
 		const items = localStorageService.get();
 		if (!items.length) return null;
-		return await axiosService
+		return await apiClient
 			.post(`carts/guest?locale=${locale}`, { items, promoCode })
 			.then((value) => value.data.cart);
 	},
@@ -23,7 +23,7 @@ export const guestCartAdapter = (): CartAdapter => ({
 			items.push(itemToAdd);
 		}
 		localStorageService.save(items);
-		return await axiosService
+		return await apiClient
 			.post('carts/guest', { items, promoCode })
 			.then((value) => value.data.cart);
 	},
@@ -35,7 +35,7 @@ export const guestCartAdapter = (): CartAdapter => ({
 		);
 		items[index].quantity = itemToUpdate.quantity;
 		localStorageService.save(items);
-		return await axiosService
+		return await apiClient
 			.post('carts/guest', { items, promoCode })
 			.then((value) => value.data.cart);
 	},
@@ -45,7 +45,7 @@ export const guestCartAdapter = (): CartAdapter => ({
 		const filteredItems = items.filter((item) => item.productId !== productId);
 		localStorageService.save(filteredItems);
 		if (!filteredItems.length) return null;
-		return await axiosService
+		return await apiClient
 			.post('carts/guest', { items: filteredItems, promoCode })
 			.then((value) => value.data.cart);
 	},

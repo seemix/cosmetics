@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
 import type { IProduct } from '@/types/product';
 
 interface IFavoritesStore {
@@ -22,25 +22,25 @@ export const useFavoritesStore = create<IFavoritesStore>((set) => ({
 		if (!userId) {
 			return;
 		} else {
-			const { data } = await axiosService.get('users/favorites/my');
+			const { data } = await apiClient.get('users/favorites/my');
 			set({ favorites: data });
 		}
 	},
 
 	async getFavouriteProducts(locale: string) {
-		const { data } = await axiosService.get(`users/favorites?locale=${locale}`);
+		const { data } = await apiClient.get(`users/favorites?locale=${locale}`);
 		set({ favoriteProducts: data.docs });
 	},
 
 	async addFavorite(productId: string, userId?: string) {
 		if (!userId) return;
-		await axiosService.post('users/favorites', { id: productId });
+		await apiClient.post('users/favorites', { id: productId });
 		set((state) => ({ favorites: [...state.favorites, productId] }));
 	},
 
 	async removeFavorite(productId: string, userId?: string) {
 		if (!userId) return;
-		await axiosService.delete(`users/favorites/${productId}`);
+		await apiClient.delete(`users/favorites/${productId}`);
 
 		set((state) => ({
 			favorites: state.favorites.filter((f) => f !== productId),

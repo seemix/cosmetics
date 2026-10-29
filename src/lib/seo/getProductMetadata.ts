@@ -3,7 +3,7 @@ import { assets } from '@/config/assets';
 import type { IProduct } from '@/types/product';
 
 export function getProductMetadata(
-	product: IProduct,
+	product: IProduct | null,
 	locale: string,
 ): Metadata {
 	if (!product) {

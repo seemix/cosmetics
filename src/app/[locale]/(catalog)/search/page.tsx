@@ -1,33 +1,23 @@
-import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NoContent from '@/components/NoContent/NoContent';
 import Pagination from '@/components/Pagination/Pagination';
 import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
-import { assets } from '@/config/assets';
-import type { propsType } from '@/types/server-component-params';
+import { searchProducts } from '@/lib/api/queries';
+import { firstParam, type PageProps } from '@/types/page-props';
 
-export default async function SearchPage(props: propsType) {
-	const cookieStore = await cookies();
+export default async function SearchPage(props: PageProps) {
 	const { locale } = await props.params;
-	const { query } = await props.searchParams;
+	const searchParams = await props.searchParams;
+	const query = firstParam(searchParams.query);
 	if (!query) return <NoContent />;
 
 	const t = await getTranslations();
-	const url = new URL(`${assets.backendUrl}/api/products/products-search`);
-	url.search = new URLSearchParams({
+	const { products, pagination } = await searchProducts(query, {
 		locale,
-		q: query as string,
-	}).toString();
+		page: firstParam(searchParams.page),
+	});
 
-	const response = await fetch(url, {
-		credentials: 'include',
-		headers: new Headers({
-			Cookie: cookieStore.toString(),
-		}),
-	}).then((res) => res.json());
-
-	const { products, pagination } = response;
 	const searchResults = `${t('Catalog.searchResults')} '${query}'`;
 	const breadCrumbs = [
 		{ id: '0', title: t('Catalog.catalog'), slug: 'catalog' },
@@ -37,7 +27,7 @@ export default async function SearchPage(props: propsType) {
 	return (
 		<div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
 			<BreadCrumbs breadcrumbs={breadCrumbs} />
-			{products?.length < 1 ? (
+			{products.length < 1 ? (
 				<NoContent />
 			) : (
 				<ProductCardsGrid products={products} />

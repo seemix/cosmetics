@@ -1,8 +1,8 @@
 import { create } from 'zustand';
-import { axiosService } from '@/lib/axios.service';
+import { apiClient } from '@/lib/api/client';
+import { getErrorMessage } from '@/lib/api/errors';
 import type { CartAdapter } from '@/lib/cart/cart.adapter';
 import type { Cart, CartItemId } from '@/lib/cart/cart.types';
-import { getErrorMessage } from '@/lib/getErrorMessage';
 
 interface CartState {
 	adapter: CartAdapter | null;
@@ -108,7 +108,7 @@ export const useCartStore = create<CartState>((set, get) => ({
 		};
 		set({ promoLoading: true, promoError: '' });
 		try {
-			const { data } = await axiosService.post('/carts/promo', payload);
+			const { data } = await apiClient.post('/carts/promo', payload);
 			set({ cart: data || null, promoCode, error: null });
 		} catch (e) {
 			get()

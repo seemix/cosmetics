@@ -2,31 +2,26 @@ import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NoContent from '@/components/NoContent/NoContent';
 import StaticPage from '@/components/StaticPage/StaticPage';
-import { assets } from '@/config/assets';
-import type { propsType } from '@/types/server-component-params';
+import { getPage } from '@/lib/api/queries';
+import type { PageProps } from '@/types/page-props';
 
-export default async function AboutUsPage(props: propsType) {
+export default async function ContentPage(props: PageProps<{ slug: string }>) {
 	const { slug, locale } = await props.params;
-	const { backendUrl } = assets;
 	const t = await getTranslations('StaticPages');
+	const page = await getPage(slug, locale);
 
-	const url = new URL(`${backendUrl}/api/pages/${slug}`);
-	url.search = new URLSearchParams({
-		locale,
-	}).toString();
-	const { title, content } = await fetch(url).then((res) => res.json());
 	const breadCrumbs = [
 		{ id: '0', title: t('Main'), slug: '/' },
-		{ id: '1', title: title, slug: '' },
+		{ id: '1', title: page?.title ?? '', slug: '' },
 	];
 
 	return (
 		<div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
 			<BreadCrumbs breadcrumbs={breadCrumbs} />
-			{!content ? (
+			{!page?.content ? (
 				<NoContent />
 			) : (
-				<StaticPage content={content} title={title} />
+				<StaticPage content={page.content} title={page.title} />
 			)}
 		</div>
 	);

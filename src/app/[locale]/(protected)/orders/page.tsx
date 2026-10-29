@@ -1,27 +1,18 @@
-import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import MyOrders from '@/components/MyOrders/MyOrders';
-import { assets } from '@/config/assets';
-import type { propsType } from '@/types/server-component-params';
+import { getMyOrders } from '@/lib/api/queries';
+import type { PageProps } from '@/types/page-props';
 
-export default async function OrdersPage(props: propsType) {
+export default async function OrdersPage(props: PageProps) {
 	const { locale } = await props.params;
 	const t = await getTranslations('Account');
 	const breadCrumbs = [
 		{ id: '0', title: t('account'), slug: 'main' },
 		{ id: '1', title: t('orders'), slug: 'orders' },
 	];
-	const cookieStore = await cookies();
-	const { docs } = await fetch(
-		`${assets.backendUrl}/api/orders/my?locale=${locale}`,
-		{
-			headers: {
-				Cookie: cookieStore.toString(),
-			},
-		},
-	).then((res) => res.json());
+	const orders = await getMyOrders(locale);
 
 	return (
 		<div
@@ -30,7 +21,7 @@ export default async function OrdersPage(props: propsType) {
 			}
 		>
 			<BreadCrumbs breadcrumbs={breadCrumbs} />
-			<MyOrders orders={docs} />
+			<MyOrders orders={orders} />
 		</div>
 	);
 }

@@ -1,38 +1,31 @@
-import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NoContent from '@/components/NoContent/NoContent';
 import Pagination from '@/components/Pagination/Pagination';
 import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
 import SortSelect from '@/components/SortSelect/SortSelect';
-import { assets } from '@/config/assets';
-import type { propsType } from '@/types/server-component-params';
+import { getCategoryProducts } from '@/lib/api/queries';
+import { firstParam, type PageProps } from '@/types/page-props';
 
-export default async function CategoryPage(props: propsType) {
+export default async function CategoryPage(
+	props: PageProps<{ slug: string[] }>,
+) {
 	const { locale, slug } = await props.params;
-	const { sort, page } = await props.searchParams;
+	const searchParams = await props.searchParams;
 	const t = await getTranslations('Catalog');
-	const { backendUrl } = assets;
-	const cookieStore = await cookies();
 
-	const url = new URL(`${backendUrl}/api/products/products-category/${slug}`);
-	url.search = new URLSearchParams({
-		locale,
-		sort: sort?.toString() || '',
-		page: page?.toString() || '1',
-	}).toString();
-
-	const response = await fetch(url, {
-		credentials: 'include',
-		headers: {
-			Cookie: cookieStore.toString(),
+	// Same value as the former `${slug}` interpolation of the catch-all segment.
+	const { products, categories, pagination } = await getCategoryProducts(
+		slug.join(','),
+		{
+			locale,
+			sort: firstParam(searchParams.sort),
+			page: firstParam(searchParams.page),
 		},
-	}).then((res) => res.json());
-
-	const { products, categories, pagination } = response;
+	);
 	const breadCrumbs = [
 		{ id: '0', title: t('catalog'), slug: '../catalog' },
-		...(response.categories || []),
+		...(categories || []),
 	];
 
 	return (

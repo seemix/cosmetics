@@ -1,12 +1,7 @@
 'use client';
 
 import { createContext, useContext } from 'react';
-import type { IMenuItem } from '@/types/catalog-menu';
-
-export type MenuData = {
-	categories: IMenuItem[];
-	brands: IMenuItem[];
-};
+import type { MenuData } from '@/types/api';
 
 const MenuContext = createContext<MenuData | null>(null);
 

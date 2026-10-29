@@ -1,25 +1,18 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-
-import { assets } from '@/config/assets';
+import { redirect } from '@/i18n/navigation';
+import { getCurrentUser } from '@/lib/api/queries';
 
 export default async function ProtectedRoutes({
 	children,
+	params,
 }: {
 	children: React.ReactNode;
+	params: Promise<{ locale: string }>;
 }) {
-	const { backendUrl } = assets;
-	const cookieStore = await cookies();
+	const { locale } = await params;
+	const user = await getCurrentUser();
 
-	const res = await fetch(`${backendUrl}/api/users/me`, {
-		headers: { Cookie: cookieStore.toString() },
-		credentials: 'include',
-		cache: 'no-store',
-	});
-	const body = await res.json();
-	if (!body?.user) {
-		redirect('/');
-	}
+	// Guests go to the home page of their current locale (decision D4).
+	if (!user) return redirect({ href: '/', locale });
 
 	return <>{children}</>;
 }

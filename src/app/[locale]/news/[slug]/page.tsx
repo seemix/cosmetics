@@ -2,26 +2,29 @@ import { getTranslations } from 'next-intl/server';
 import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import NoContent from '@/components/NoContent/NoContent';
 import StaticPage from '@/components/StaticPage/StaticPage';
-import { assets } from '@/config/assets';
-import type { propsType } from '@/types/server-component-params';
+import { getPost } from '@/lib/api/queries';
+import type { PageProps } from '@/types/page-props';
 
-export default async function SinglePostPage(props: propsType) {
+export default async function SinglePostPage(
+	props: PageProps<{ slug: string }>,
+) {
 	const { locale, slug } = await props.params;
 	const t = await getTranslations('StaticPages');
-
-	const { title, content } = await fetch(
-		`${assets.backendUrl}/api/posts/${slug}?locale=${locale}`,
-	).then((res) => res.json());
+	const post = await getPost(slug, locale);
 
 	const breadCrumbs = [
 		{ id: '0', title: t('News'), slug: 'news' },
-		{ id: '1', title: title, slug: slug },
+		{ id: '1', title: post?.title ?? '', slug: slug },
 	];
 
 	return (
 		<div className={'w-full flex max-w-[1100px] p-4 flex-col gap-3'}>
 			<BreadCrumbs breadcrumbs={breadCrumbs} />
-			{!title ? <NoContent /> : <StaticPage content={content} title={title} />}
+			{!post?.title ? (
+				<NoContent />
+			) : (
+				<StaticPage content={post.content} title={post.title} />
+			)}
 		</div>
 	);
 }
