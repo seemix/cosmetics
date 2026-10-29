@@ -1,64 +1,86 @@
 'use client';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { GrFormPrevious } from 'react-icons/gr';
-import { GrFormNext } from 'react-icons/gr';
-
-import type { PaginationProps } from '@/types/pagination';
+import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import PaginationButton from '@/components/Pagination/PaginationButton';
+import type { PaginationProps } from '@/types/pagination';
 
-export default function Pagination({ pagination }: { pagination: PaginationProps }) {
+export default function Pagination({
+	pagination,
+}: {
+	pagination: PaginationProps;
+}) {
+	const { page, hasPrevPage, hasNextPage, totalPages } = pagination;
 
-    const { page, hasPrevPage, hasNextPage, totalPages } = pagination;
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
 
-    const router = useRouter();
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
+	const changePage = (page: number) => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.set('page', page.toString());
+		const newUrl = `${pathname}?${params.toString()}`;
+		router.push(newUrl, { scroll: false });
+	};
 
-    const changePage = (page: number) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('page', page.toString());
-        const newUrl = `${pathname}?${params.toString()}`;
-        router.push(newUrl, { scroll: false });
-    };
+	// `page` is listed on purpose: switching page scrolls back to the top.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: page is the trigger, not a value used inside.
+	useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	}, [page]);
 
-    // `page` is listed on purpose: switching page scrolls back to the top.
-    // biome-ignore lint/correctness/useExhaustiveDependencies: page is the trigger, not a value used inside.
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }, [page]);
+	let startPage = Math.max(1, page - 2);
+	const endPage = Math.min(totalPages, startPage + 4);
+	if (endPage - startPage < 4) {
+		startPage = Math.max(1, endPage - 4);
+	}
+	const pages = Array.from(
+		{ length: endPage - startPage + 1 },
+		(_, i) => startPage + i,
+	);
 
-    let startPage = Math.max(1, page - 2);
-    const endPage = Math.min(totalPages, startPage + 4);
-    if (endPage - startPage < 4) {
-        startPage = Math.max(1, endPage - 4);
-    }
-    const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
-
-    return (
-        <div className={'flex justify-between items-center w-full max-w-120 mx-auto my-8'}>
-            <div>
-                {hasPrevPage &&
-                    <PaginationButton border={false} page={page - 1} label={<GrFormPrevious size={27}/>}
-                                      changePageAction={changePage}/>
-                }
-            </div>
-            <div className={'flex gap-3'}>
-                {pages.map(p =>
-                (<PaginationButton  key={p} currentPage={page} border={true} label={p} page={p}
-                                    changePageAction={changePage}/>))
-            }
-            </div>
-            <div>
-                {hasNextPage &&
-                    <PaginationButton border={false} page={page + 1} label={<GrFormNext size={27}/>}
-                                      changePageAction={changePage}/>
-                }
-            </div>
-        </div>
-    );
+	return (
+		<div
+			className={
+				'flex justify-between items-center w-full max-w-120 mx-auto my-8'
+			}
+		>
+			<div>
+				{hasPrevPage && (
+					<PaginationButton
+						border={false}
+						page={page - 1}
+						label={<GrFormPrevious size={27} />}
+						changePageAction={changePage}
+					/>
+				)}
+			</div>
+			<div className={'flex gap-3'}>
+				{pages.map((p) => (
+					<PaginationButton
+						key={p}
+						currentPage={page}
+						border={true}
+						label={p}
+						page={p}
+						changePageAction={changePage}
+					/>
+				))}
+			</div>
+			<div>
+				{hasNextPage && (
+					<PaginationButton
+						border={false}
+						page={page + 1}
+						label={<GrFormNext size={27} />}
+						changePageAction={changePage}
+					/>
+				)}
+			</div>
+		</div>
+	);
 }

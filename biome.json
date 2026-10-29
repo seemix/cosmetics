@@ -10,7 +10,10 @@
 		"includes": [
 			"**",
 			"!**/*.png",
-			"!e2e/**/*-snapshots"
+			"!e2e/**/*-snapshots",
+			"!docs",
+			"!messages",
+			"!tsconfig.json"
 		]
 	},
 	"formatter": {

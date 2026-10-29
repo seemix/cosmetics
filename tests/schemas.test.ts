@@ -21,14 +21,26 @@ describe('checkoutSchema', () => {
 
 	it('requires SRL of 5..80 chars for a bank transfer', () => {
 		const schema = checkoutSchema(t);
-		const short = schema.safeParse({ ...order, paymentType: 'transfer', SRL: 'abc' });
+		const short = schema.safeParse({
+			...order,
+			paymentType: 'transfer',
+			SRL: 'abc',
+		});
 		expect(short.success).toBe(false);
 		expect(short.error?.issues[0].path).toEqual(['SRL']);
-		expect(schema.safeParse({ ...order, paymentType: 'transfer', SRL: 'SRL Company' }).success).toBe(true);
+		expect(
+			schema.safeParse({
+				...order,
+				paymentType: 'transfer',
+				SRL: 'SRL Company',
+			}).success,
+		).toBe(true);
 	});
 
 	it('rejects a phone that is not 8 digits', () => {
-		expect(checkoutSchema(t).safeParse({ ...order, phone: '123' }).success).toBe(false);
+		expect(
+			checkoutSchema(t).safeParse({ ...order, phone: '123' }).success,
+		).toBe(false);
 	});
 });
 
@@ -44,6 +56,9 @@ describe('registerSchema', () => {
 			locale: 'ru',
 		});
 		expect(res.success).toBe(false);
-		expect(res.error?.issues[0]).toMatchObject({ path: ['confirmPassword'], message: 'passwordsDontMatch' });
+		expect(res.error?.issues[0]).toMatchObject({
+			path: ['confirmPassword'],
+			message: 'passwordsDontMatch',
+		});
 	});
 });

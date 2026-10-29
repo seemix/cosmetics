@@ -1,38 +1,42 @@
-import type { CartAdapter } from '@/lib/cart/cart.adapter';
-import type { CartItemId, Cart } from '@/lib/cart/cart.types';
 import { axiosService } from '@/lib/axios.service';
+import type { CartAdapter } from '@/lib/cart/cart.adapter';
+import type { Cart, CartItemId } from '@/lib/cart/cart.types';
 
 export const authCartAdapter = (): CartAdapter => ({
-    async load(locale: string): Promise<Cart> {
-        const { data } = await axiosService.get<Cart>(`carts/me?locale=${locale}`);
-        return data;
-    },
+	async load(locale: string): Promise<Cart> {
+		const { data } = await axiosService.get<Cart>(`carts/me?locale=${locale}`);
+		return data;
+	},
 
-    async addItem(item: CartItemId, promoCode?: string): Promise<Cart> {
-        const { data } = await axiosService.post<{ cart: Cart }>(
-            'carts/add-item',
-            { item, promoCode }
-        );
-        return data.cart;
-    },
+	async addItem(item: CartItemId, promoCode?: string): Promise<Cart> {
+		const { data } = await axiosService.post<{ cart: Cart }>('carts/add-item', {
+			item,
+			promoCode,
+		});
+		return data.cart;
+	},
 
-    async updateQty(item: CartItemId, promoCode?: string): Promise<Cart> {
-        const { data } = await axiosService.patch<{ cart: Cart }>(
-            'carts/update-item',
-            { item, promoCode }
-        );
-        return data.cart;
-    },
+	async updateQty(item: CartItemId, promoCode?: string): Promise<Cart> {
+		const { data } = await axiosService.patch<{ cart: Cart }>(
+			'carts/update-item',
+			{ item, promoCode },
+		);
+		return data.cart;
+	},
 
-    async removeItem(cartId: string, productId: string, promoCode?: string): Promise<Cart> {
-        const { data } = await axiosService.post<{ cart: Cart }>(
-            'carts/remove-item',
-            { cartId, productId, promoCode }
-        );
-        return data.cart;
-    },
+	async removeItem(
+		cartId: string,
+		productId: string,
+		promoCode?: string,
+	): Promise<Cart> {
+		const { data } = await axiosService.post<{ cart: Cart }>(
+			'carts/remove-item',
+			{ cartId, productId, promoCode },
+		);
+		return data.cart;
+	},
 
-    async clear(): Promise<void> {
-        return await axiosService.post('carts/clear');
-    }
+	async clear(): Promise<void> {
+		return await axiosService.post('carts/clear');
+	},
 });

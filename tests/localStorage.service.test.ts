@@ -14,7 +14,9 @@ describe('localStorageService', () => {
 
 	it('saves and clears items', () => {
 		localStorageService.save([{ productId: 'p1', quantity: 2 }]);
-		expect(localStorageService.get()).toEqual([{ productId: 'p1', quantity: 2 }]);
+		expect(localStorageService.get()).toEqual([
+			{ productId: 'p1', quantity: 2 },
+		]);
 		localStorageService.clear();
 		expect(localStorageService.get()).toEqual([]);
 	});

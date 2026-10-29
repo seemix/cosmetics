@@ -26,7 +26,9 @@ describe('guestCartAdapter', () => {
 		const adapter = guestCartAdapter();
 		await adapter.addItem({ productId: 'p1', quantity: 1 });
 		await adapter.addItem({ productId: 'p1', quantity: 2 });
-		expect(localStorageService.get()).toEqual([{ productId: 'p1', quantity: 3 }]);
+		expect(localStorageService.get()).toEqual([
+			{ productId: 'p1', quantity: 3 },
+		]);
 		expect(post).toHaveBeenLastCalledWith(
 			expect.stringContaining('carts/guest'),
 			expect.objectContaining({ items: [{ productId: 'p1', quantity: 3 }] }),
@@ -42,7 +44,9 @@ describe('guestCartAdapter', () => {
 		await adapter.updateQty({ productId: 'p2', quantity: 5 });
 		expect(localStorageService.get()[1].quantity).toBe(5);
 		await adapter.removeItem('', 'p1');
-		expect(localStorageService.get()).toEqual([{ productId: 'p2', quantity: 5 }]);
+		expect(localStorageService.get()).toEqual([
+			{ productId: 'p2', quantity: 5 },
+		]);
 		expect(await adapter.removeItem('', 'p2')).toBeNull();
 	});
 

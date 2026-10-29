@@ -4,7 +4,8 @@ export const assets = {
 	currency: 'MDL',
 	phoneCode: '+373',
 	freeShippingThreshold: 2000,
-	backendUrl: process.env.NEXT_PUBLIC_SERVER_URL || 'https://admin.nextlevelshop.md',
+	backendUrl:
+		process.env.NEXT_PUBLIC_SERVER_URL || 'https://admin.nextlevelshop.md',
 	frontendUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://nextlevelshop.md',
 	phone: '+37361033551',
 	instagramLink: 'https://instagram.com/nextlvlbarber.md',

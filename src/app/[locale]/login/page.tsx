@@ -1,17 +1,15 @@
 'use client';
 
 import { useEffect } from 'react';
+import LoginForm from '@/components/LoginForm/LoginForm';
 import { useModal } from '@/hooks/useModal';
 
-import LoginForm from '@/components/LoginForm/LoginForm';
-
 export default function LoginPage() {
+	const { showModal } = useModal();
 
-    const { showModal } = useModal();
+	useEffect(() => {
+		showModal(<LoginForm />, 'zoom');
+	}, [showModal]);
 
-    useEffect(() => {
-     showModal(<LoginForm/>, 'zoom');
-    }, [showModal]);
-
-    return null;
+	return null;
 }

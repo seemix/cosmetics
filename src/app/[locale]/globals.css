@@ -1,151 +1,162 @@
 @import "tailwindcss";
 
 :root {
-    --background: #fcfbfb;
-    --foreground: #ededed;
-    --main: #fdad00;
-    --dark: #6e6e6e;
-    --black: #151515;
+	--background: #fcfbfb;
+	--foreground: #ededed;
+	--main: #fdad00;
+	--dark: #6e6e6e;
+	--black: #151515;
 }
 
 [data-theme="dark"] {
-    --background: #fcfbfb;
-    --foreground: #ededed;
+	--background: #fcfbfb;
+	--foreground: #ededed;
 }
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-main: var(--main);
-    --color-dark: var(--dark);
-    --color-black: var(--black);
-    --font-roboto: var(--font-roboto);
-    --font-montserrat: var(--font-montserrat);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-main: var(--main);
+	--color-dark: var(--dark);
+	--color-black: var(--black);
+	--font-roboto: var(--font-roboto);
+	--font-montserrat: var(--font-montserrat);
 }
 
 body {
-    background: var(--background);
-    letter-spacing: .06em;
+	background: var(--background);
+	letter-spacing: 0.06em;
 }
 
 /* `.simple-button` is excluded here instead of overriding the transform with `!important`. */
 button:not(.simple-button):active {
-    transform: translateY(2px) scale(0.99);
-    transition: all .15s ease-in;
+	transform: translateY(2px) scale(0.99);
+	transition: all 0.15s ease-in;
 }
 
 .loader {
-    position: relative;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: inline-block;
-    border-top: 4px solid #0f0f0f;
-    border-right: 4px solid transparent;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+	position: relative;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 4px solid #0f0f0f;
+	border-right: 4px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
 }
 
 .loader::after {
-    content: '';
-    box-sizing: border-box;
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border-bottom: 4px solid var(--main, #ff6600);
-    border-left: 4px solid transparent;
+	content: "";
+	box-sizing: border-box;
+	position: absolute;
+	inset: 0;
+	border-radius: 50%;
+	border-bottom: 4px solid var(--main, #ff6600);
+	border-left: 4px solid transparent;
 }
 
 @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
-
 .description-text h1 {
-    font-size: 1.875rem; /* text-3xl */
-    font-weight: 700;    /* font-bold */
-    line-height: 1.25;   /* leading-tight */
-    margin-top: 1.5rem;  /* mt-6 */
-    margin-bottom: 1rem; /* mb-4 */
+	font-size: 1.875rem; /* text-3xl */
+	font-weight: 700; /* font-bold */
+	line-height: 1.25; /* leading-tight */
+	margin-top: 1.5rem; /* mt-6 */
+	margin-bottom: 1rem; /* mb-4 */
 }
 
 .description-text h2 {
-    font-size: 1.5rem;   /* text-2xl */
-    font-weight: 600;    /* font-semibold */
-    line-height: 1.25;   /* leading-tight */
-    margin-top: 1.5rem;  /* mt-6 */
-    margin-bottom: 0.75rem; /* mb-3 */
+	font-size: 1.5rem; /* text-2xl */
+	font-weight: 600; /* font-semibold */
+	line-height: 1.25; /* leading-tight */
+	margin-top: 1.5rem; /* mt-6 */
+	margin-bottom: 0.75rem; /* mb-3 */
 }
 
 .description-text h3 {
-    font-size: 1.25rem;  /* text-xl */
-    font-weight: 600;
-    line-height: 1.375;  /* leading-snug */
-    margin-top: 1.25rem; /* mt-5 */
-    margin-bottom: 0.75rem;
+	font-size: 1.25rem; /* text-xl */
+	font-weight: 600;
+	line-height: 1.375; /* leading-snug */
+	margin-top: 1.25rem; /* mt-5 */
+	margin-bottom: 0.75rem;
 }
 
 .description-text h4 {
-    font-size: 1.125rem; /* text-lg */
-    font-weight: 500;    /* font-medium */
-    line-height: 1.375;
-    margin-top: 1rem;    /* mt-4 */
-    margin-bottom: 0.5rem; /* mb-2 */
+	font-size: 1.125rem; /* text-lg */
+	font-weight: 500; /* font-medium */
+	line-height: 1.375;
+	margin-top: 1rem; /* mt-4 */
+	margin-bottom: 0.5rem; /* mb-2 */
 }
 
 .description-text h5 {
-    font-size: 1rem;     /* text-base */
-    font-weight: 500;
-    line-height: 1.5;    /* leading-normal */
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+	font-size: 1rem; /* text-base */
+	font-weight: 500;
+	line-height: 1.5; /* leading-normal */
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
 }
 
 .description-text h6 {
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500;
-    line-height: 1.5;
-    margin-top: 0.75rem; /* mt-3 */
-    margin-bottom: 0.5rem;
-    color: #4b5563;      /* text-gray-600 */
+	font-size: 0.875rem; /* text-sm */
+	font-weight: 500;
+	line-height: 1.5;
+	margin-top: 0.75rem; /* mt-3 */
+	margin-bottom: 0.5rem;
+	color: #4b5563; /* text-gray-600 */
 }
 
 /* md: (≥768px) */
 @media (min-width: 768px) {
-    .description-text h1 { font-size: 2.25rem; }   /* text-4xl */
-    .description-text h2 { font-size: 1.875rem; } /* text-3xl */
-    .description-text h3 { font-size: 1.5rem; }   /* text-2xl */
-    .description-text h4 { font-size: 1.25rem; }  /* text-xl */
-    .description-text h5 { font-size: 1.125rem; } /* text-lg */
-    .description-text h6 { font-size: 1rem; }     /* text-base */
+	.description-text h1 {
+		font-size: 2.25rem;
+	} /* text-4xl */
+	.description-text h2 {
+		font-size: 1.875rem;
+	} /* text-3xl */
+	.description-text h3 {
+		font-size: 1.5rem;
+	} /* text-2xl */
+	.description-text h4 {
+		font-size: 1.25rem;
+	} /* text-xl */
+	.description-text h5 {
+		font-size: 1.125rem;
+	} /* text-lg */
+	.description-text h6 {
+		font-size: 1rem;
+	} /* text-base */
 }
 
 .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    border-radius: 100%; /* Робимо прямокутними */
-    background: var(--main);
-    transition: all 0.3s ease;
-    opacity: 1;
+	width: 12px;
+	height: 12px;
+	border-radius: 100%; /* Робимо прямокутними */
+	background: var(--main);
+	transition: all 0.3s ease;
+	opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-    width: 12px; /* Ефект розтягування */
-    height: 12px;
-    background: var(--main);
-    opacity: 1;
+	width: 12px; /* Ефект розтягування */
+	height: 12px;
+	background: var(--main);
+	opacity: 1;
 }
 
 .swiper {
-    --swiper-navigation-color: var(--main);
-    --swiper-navigation-size: 50px;
+	--swiper-navigation-color: var(--main);
+	--swiper-navigation-size: 50px;
 }
 
 .over-lined {
-    text-decoration: line-through;
+	text-decoration: line-through;
 }

@@ -6,18 +6,18 @@ import Invoice from '@/components/Invoice/Invoice';
 import PromoCodeForm from '@/components/PromoCodeForm/PromoCodeForm';
 
 export default async function CheckoutPage() {
-    const t = await getTranslations();
-    const breadCrumbs = [
-        { id: '0', title: t('StaticPages.Main'), slug: 'main' },
-        { id: '1', title: t('Cart.checkouting'), slug: 'checkout' }
-    ];
+	const t = await getTranslations();
+	const breadCrumbs = [
+		{ id: '0', title: t('StaticPages.Main'), slug: 'main' },
+		{ id: '1', title: t('Cart.checkouting'), slug: 'checkout' },
+	];
 
-    return (
-        <div className={'max-w-[1100px] w-full mx-auto flex flex-col gap-4 px-4'}>
-            <BreadCrumbs breadcrumbs={breadCrumbs}/>
-            <Invoice/>
-            <PromoCodeForm/>
-            <CheckoutForm/>
-        </div>
-    );
+	return (
+		<div className={'max-w-[1100px] w-full mx-auto flex flex-col gap-4 px-4'}>
+			<BreadCrumbs breadcrumbs={breadCrumbs} />
+			<Invoice />
+			<PromoCodeForm />
+			<CheckoutForm />
+		</div>
+	);
 }

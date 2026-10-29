@@ -1,108 +1,136 @@
 'use client';
 
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { motion } from 'motion/react';
 
 import AddToCartButton from '@/components/AddToCartButton/AddToCartButton';
 import AlreadyInCartButton from '@/components/AlreadyInCartButton/AlreadyInCartButton';
 import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
 import ProductLabels from '@/components/ProductLabels/ProductLabels';
-import type { IProduct } from '@/types/product';
 import { assets } from '@/config/assets';
 import { useCartStore } from '@/stores/cart.store';
+import type { IProduct } from '@/types/product';
 
-export default function ProductCard({ product, index = 0, labels = true }: {
-    product: IProduct,
-    index: number,
-    labels?: boolean
+export default function ProductCard({
+	product,
+	index = 0,
+	labels = true,
+}: {
+	product: IProduct;
+	index: number;
+	labels?: boolean;
 }) {
-    const {
-        title,
-        subtitle,
-        article,
-        slug,
-        gallery,
-        retailPrice,
-        wholesalePrice,
-        discountPrice,
-        unavailable,
-        action,
-        bestSeller
-    } = product;
-    const { backendUrl, currency } = assets;
-    const t = useTranslations('Catalog');
-    const price = wholesalePrice || retailPrice;
-    const { cart } = useCartStore();
+	const {
+		title,
+		subtitle,
+		article,
+		slug,
+		gallery,
+		retailPrice,
+		wholesalePrice,
+		discountPrice,
+		unavailable,
+		action,
+		bestSeller,
+	} = product;
+	const { backendUrl, currency } = assets;
+	const t = useTranslations('Catalog');
+	const price = wholesalePrice || retailPrice;
+	const { cart } = useCartStore();
 
-    const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
+	const inCart = cart?.items?.some((item) => item.id === product.id) as boolean;
 
-    return (
-        <motion.div
-            initial={{ opacity: 0, x: 5, filter: 'blur(10px)' }}
-            whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-            transition={{ duration: .2, ease: 'easeInOut', delay: index * .05 }}
-            viewport={{ once: true }}
-            className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[160px] mx-auto
-                        grid grid-rows-[auto_1fr_auto] h-full`}>
-            <Link href={`/product/${slug}`}>
-                <div className={'w-full aspect-square relative'}>
-                    <Image src={backendUrl + gallery[0]?.image?.sizes?.medium?.url} alt={gallery[0]?.image?.alt || ''}
-                           className={'object-cover relative'} placeholder={'blur'}
-                           quality={95}
-                           fill
-                           blurDataURL={gallery[0]?.image?.blurHash}/>
-                    {(action || bestSeller) && labels &&
-                        <ProductLabels action={Boolean(action)} bestSeller={Boolean(bestSeller)}/>}
-                    <div className={'absolute top-2 right-2'}>
-                        <FavoriteButton productId={product.id}/>
-                    </div>
-                </div>
-            </Link>
-            <div className={'p-2 flex flex-col gap-2 bg-white'}>
-                <Link href={`/product/${slug}`}
-                      className={'transition-colors duration-300 hover:text-[var(--main)]'}>
-                    <p className={'text-base font-bold'}>{title}</p>
-                    <p className={'text-xs'}>{subtitle}</p>
-                </Link>
-
-            </div>
-            <div>
-                <div className={'flex justify-between items-center px-3'}>
-                    <p className={'text-gray-500 text-xs sm:text-sm'}>{t('shortArticle')}: {article}</p>
-                    {!unavailable && (
-                        discountPrice ? (
-                            <div>
-                                <p className={'text-gray-400 over-lined text-sm sm:text-[.9em]'}>
-                                    {wholesalePrice || price} {currency}
-                                </p>
-                                <p className={'text-green-500 font-bold text-[1em] sm:text-[1.2em]'}>
-                                    {discountPrice} {currency}
-                                </p>
-
-                            </div>
-                        ) : (
-                            <p
-                                className={`${
-                                    wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'
-                                } font-bold text-[1em] sm:text-[1.2em]`}
-                            >
-                                {wholesalePrice || price} {currency}
-                            </p>
-                        )
-                    )}
-                </div>
-                <div className={'my-3 w-full flex justify-center px-4'}>
-                    {!unavailable ? (
-                        !inCart ? <AddToCartButton productId={product.id} quantity={1}/> : <AlreadyInCartButton/>
-                    ) : (
-                        <p className={'text-gray-500 text-md sm:text-lg text-center mb-2 font-semibold'}>
-                            {t('notAvailable')}
-                        </p>
-                    )}
-                </div>
-            </div>
-        </motion.div>
-    )
+	return (
+		<motion.div
+			initial={{ opacity: 0, x: 5, filter: 'blur(10px)' }}
+			whileInView={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+			transition={{ duration: 0.2, ease: 'easeInOut', delay: index * 0.05 }}
+			viewport={{ once: true }}
+			className={`bg-white shadow-[0_2px_12px_rgba(0,0,0,0.1)] w-full max-w-[320px] min-w-[160px] mx-auto
+                        grid grid-rows-[auto_1fr_auto] h-full`}
+		>
+			<Link href={`/product/${slug}`}>
+				<div className={'w-full aspect-square relative'}>
+					<Image
+						src={backendUrl + gallery[0]?.image?.sizes?.medium?.url}
+						alt={gallery[0]?.image?.alt || ''}
+						className={'object-cover relative'}
+						placeholder={'blur'}
+						quality={95}
+						fill
+						blurDataURL={gallery[0]?.image?.blurHash}
+					/>
+					{(action || bestSeller) && labels && (
+						<ProductLabels
+							action={Boolean(action)}
+							bestSeller={Boolean(bestSeller)}
+						/>
+					)}
+					<div className={'absolute top-2 right-2'}>
+						<FavoriteButton productId={product.id} />
+					</div>
+				</div>
+			</Link>
+			<div className={'p-2 flex flex-col gap-2 bg-white'}>
+				<Link
+					href={`/product/${slug}`}
+					className={'transition-colors duration-300 hover:text-[var(--main)]'}
+				>
+					<p className={'text-base font-bold'}>{title}</p>
+					<p className={'text-xs'}>{subtitle}</p>
+				</Link>
+			</div>
+			<div>
+				<div className={'flex justify-between items-center px-3'}>
+					<p className={'text-gray-500 text-xs sm:text-sm'}>
+						{t('shortArticle')}: {article}
+					</p>
+					{!unavailable &&
+						(discountPrice ? (
+							<div>
+								<p
+									className={'text-gray-400 over-lined text-sm sm:text-[.9em]'}
+								>
+									{wholesalePrice || price} {currency}
+								</p>
+								<p
+									className={
+										'text-green-500 font-bold text-[1em] sm:text-[1.2em]'
+									}
+								>
+									{discountPrice} {currency}
+								</p>
+							</div>
+						) : (
+							<p
+								className={`${
+									wholesalePrice ? 'text-green-500' : 'text-[var(--main)]'
+								} font-bold text-[1em] sm:text-[1.2em]`}
+							>
+								{wholesalePrice || price} {currency}
+							</p>
+						))}
+				</div>
+				<div className={'my-3 w-full flex justify-center px-4'}>
+					{!unavailable ? (
+						!inCart ? (
+							<AddToCartButton productId={product.id} quantity={1} />
+						) : (
+							<AlreadyInCartButton />
+						)
+					) : (
+						<p
+							className={
+								'text-gray-500 text-md sm:text-lg text-center mb-2 font-semibold'
+							}
+						>
+							{t('notAvailable')}
+						</p>
+					)}
+				</div>
+			</div>
+		</motion.div>
+	);
 }

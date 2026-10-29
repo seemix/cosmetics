@@ -2,7 +2,8 @@
 export const sample = {
 	category: process.env.E2E_CATEGORY || 'powder',
 	brand: process.env.E2E_BRAND || 'uppercut-deluxe',
-	product: process.env.E2E_PRODUCT || 'uppercut-scull-dust-styling-powder-ltd-2026',
+	product:
+		process.env.E2E_PRODUCT || 'uppercut-scull-dust-styling-powder-ltd-2026',
 	post: process.env.E2E_POST || 'clay-spray',
 	page: process.env.E2E_PAGE || 'about-us',
 	query: process.env.E2E_QUERY || 'wax',

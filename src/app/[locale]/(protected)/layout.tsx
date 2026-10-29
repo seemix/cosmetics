@@ -3,24 +3,23 @@ import { redirect } from 'next/navigation';
 
 import { assets } from '@/config/assets';
 
-export default async function ProtectedRoutes({ children }: { children: React.ReactNode }) {
+export default async function ProtectedRoutes({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	const { backendUrl } = assets;
+	const cookieStore = await cookies();
 
-    const { backendUrl } = assets;
-    const cookieStore = await cookies();
+	const res = await fetch(`${backendUrl}/api/users/me`, {
+		headers: { Cookie: cookieStore.toString() },
+		credentials: 'include',
+		cache: 'no-store',
+	});
+	const body = await res.json();
+	if (!body?.user) {
+		redirect('/');
+	}
 
-    const res = await fetch(`${backendUrl}/api/users/me`, {
-        headers: { Cookie: cookieStore.toString() },
-        credentials: 'include',
-        cache: 'no-store'
-    });
-    const body = await res.json();
-    if (!body?.user) {
-        redirect('/');
-    }
-
-    return (
-        <>
-            {children}
-        </>
-    );
+	return <>{children}</>;
 }

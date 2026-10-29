@@ -7,36 +7,43 @@ import 'swiper/css';
 // import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
+import { Navigation } from 'swiper/modules';
 import ProductCard from '@/components/ProductCard/ProductCard';
-import type { IProduct } from '@/types/product';
 import { useAuthPrices } from '@/hooks/useAuthPrices';
 import { useAuthStore } from '@/stores/auth.store';
-import { Navigation } from 'swiper/modules';
+import type { IProduct } from '@/types/product';
 
-export default function RelatedProducts({ products, labels }: { products: IProduct[], labels: boolean }) {
-    const { user } = useAuthStore();
-    useAuthPrices(user);
+export default function RelatedProducts({
+	products,
+	labels,
+}: {
+	products: IProduct[];
+	labels: boolean;
+}) {
+	const { user } = useAuthStore();
+	useAuthPrices(user);
 
-    return (
-        <Swiper
-            className={'max-w-[98%] my-4'}
-            spaceBetween={20}
-            navigation={true}
-            modules={[Navigation]}
-            breakpoints={{
-                320: { slidesPerView: 1.5 },
-                400: { slidesPerView: 1.8 },
-                600: { slidesPerView: 3.3 },
-                768: { slidesPerView: 3.9 },
-                1024: { slidesPerView: 4.3 },
-            }}
-        >
-            {products.map((product, index) => <SwiperSlide key={product.id}
-                                                           className={'flex h-auto'}>
-                <div className={'h-119'}>
-                    <ProductCard product={product} index={index} labels={labels}/>
-                </div>
-            </SwiperSlide>)}
-        </Swiper>
-    );
+	return (
+		<Swiper
+			className={'max-w-[98%] my-4'}
+			spaceBetween={20}
+			navigation={true}
+			modules={[Navigation]}
+			breakpoints={{
+				320: { slidesPerView: 1.5 },
+				400: { slidesPerView: 1.8 },
+				600: { slidesPerView: 3.3 },
+				768: { slidesPerView: 3.9 },
+				1024: { slidesPerView: 4.3 },
+			}}
+		>
+			{products.map((product, index) => (
+				<SwiperSlide key={product.id} className={'flex h-auto'}>
+					<div className={'h-119'}>
+						<ProductCard product={product} index={index} labels={labels} />
+					</div>
+				</SwiperSlide>
+			))}
+		</Swiper>
+	);
 }

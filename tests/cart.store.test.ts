@@ -15,7 +15,9 @@ const item = (id: string) => ({
 function adapter(overrides: Partial<CartAdapter> = {}): CartAdapter {
 	return {
 		load: vi.fn().mockResolvedValue({ items: [item('a')], subtotal: 10 }),
-		addItem: vi.fn().mockResolvedValue({ items: [item('a'), item('b')], subtotal: 20 }),
+		addItem: vi
+			.fn()
+			.mockResolvedValue({ items: [item('a'), item('b')], subtotal: 20 }),
 		updateQty: vi.fn().mockResolvedValue({ items: [item('a')], subtotal: 10 }),
 		removeItem: vi.fn().mockResolvedValue({ items: [], subtotal: 0 }),
 		clear: vi.fn().mockResolvedValue(undefined),
@@ -25,7 +27,12 @@ function adapter(overrides: Partial<CartAdapter> = {}): CartAdapter {
 
 describe('cart store', () => {
 	beforeEach(() => {
-		useCartStore.setState({ adapter: null, cart: null, promoCode: '', itemLoading: null });
+		useCartStore.setState({
+			adapter: null,
+			cart: null,
+			promoCode: '',
+			itemLoading: null,
+		});
 	});
 
 	it('adds an item through the adapter and resets the loading flag', async () => {
@@ -38,7 +45,9 @@ describe('cart store', () => {
 	it('rolls back an optimistic removal when the request fails', async () => {
 		const prev = { items: [item('a'), item('b')], subtotal: 20 };
 		useCartStore.setState({
-			adapter: adapter({ removeItem: vi.fn().mockRejectedValue(new Error('network')) }),
+			adapter: adapter({
+				removeItem: vi.fn().mockRejectedValue(new Error('network')),
+			}),
 			cart: prev,
 		});
 		vi.spyOn(console, 'log').mockImplementation(() => {});

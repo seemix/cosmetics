@@ -54,7 +54,9 @@ export default function LanguageSwitcher() {
 						animate={{ opacity: 1, y: 0, scale: 1 }}
 						exit={{ opacity: 0, y: -6, scale: 0.96 }}
 						transition={{ duration: 0.2 }}
-						className={'absolute -top-22 sm:top-5 -right-2 mt-2 bg-white shadow-md z-12'}
+						className={
+							'absolute -top-22 sm:top-5 -right-2 mt-2 bg-white shadow-md z-12'
+						}
 					>
 						{locales.map(({ code, label }) => (
 							<button

@@ -21,7 +21,9 @@ for (const { name, path } of pages) {
 		await expect(page).toHaveScreenshot(`${name}.png`, {
 			fullPage: true,
 			// The hero slider on the home page autoplays, so it is masked there.
-			mask: name.startsWith('home') ? [page.locator('main .swiper').first()] : [],
+			mask: name.startsWith('home')
+				? [page.locator('main .swiper').first()]
+				: [],
 		});
 	});
 }

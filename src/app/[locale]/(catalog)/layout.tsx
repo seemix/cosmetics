@@ -3,7 +3,5 @@ export default async function CatalogLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return (
-		<>{children}</>
-	);
+	return <>{children}</>;
 }
