@@ -9,6 +9,7 @@ import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
 import ProductLabels from '@/components/ProductLabels/ProductLabels';
 import { assets } from '@/config/assets';
 import { Link } from '@/i18n/navigation';
+import { isPurchasable } from '@/lib/productAvailability';
 import { useCartStore } from '@/stores/cart.store';
 import type { IProduct } from '@/types/product';
 
@@ -30,13 +31,13 @@ export default function ProductCard({
 		retailPrice,
 		wholesalePrice,
 		discountPrice,
-		unavailable,
 		action,
 		bestSeller,
 	} = product;
 	const { backendUrl, currency } = assets;
 	const t = useTranslations('Catalog');
 	const price = wholesalePrice || retailPrice;
+	const purchasable = isPurchasable(product);
 	// Boolean selector: the card re-renders only when this product enters or leaves the cart.
 	const inCart = useCartStore(
 		(s) => s.cart?.items?.some((item) => item.id === product.id) ?? false,
@@ -87,7 +88,7 @@ export default function ProductCard({
 					<p className={'text-gray-500 text-xs sm:text-sm'}>
 						{t('shortArticle')}: {article}
 					</p>
-					{!unavailable &&
+					{purchasable &&
 						(discountPrice ? (
 							<div>
 								<p
@@ -114,7 +115,7 @@ export default function ProductCard({
 						))}
 				</div>
 				<div className={'my-3 w-full flex justify-center px-4'}>
-					{!unavailable ? (
+					{purchasable ? (
 						!inCart ? (
 							<AddToCartButton productId={product.id} quantity={1} />
 						) : (

@@ -13,6 +13,7 @@ import ProductLabels from '@/components/ProductLabels/ProductLabels';
 import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
 import { assets } from '@/config/assets';
 import { Link } from '@/i18n/navigation';
+import { isPurchasable } from '@/lib/productAvailability';
 import { useCartStore } from '@/stores/cart.store';
 import type { IProduct } from '@/types/product';
 
@@ -35,12 +36,12 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 		retailPrice,
 		wholesalePrice,
 		discountPrice,
-		unavailable,
 		brand,
 		relatedProducts,
 	} = product;
 	const { currency, backendUrl } = assets;
 	const [value, setValue] = useState<number>(1);
+	const purchasable = isPurchasable(product);
 
 	return (
 		<div className={'grid grid-cols-[1fr] lg:grid-cols-[auto_1fr] gap-6'}>
@@ -84,9 +85,9 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 				</h4>
 				<p className={'text-[.95em] mt-2'}>{shortDescription}</p>
 				<div className={'w-full flex flex-col items-center lg:items-start'}>
-					{!unavailable && (
+					{purchasable && (
 						<div className={'w-full flex flex-col items-center lg:items-start'}>
-							{!unavailable && (
+							{purchasable && (
 								<div className={'mt-2 flex items-center gap-2'}>
 									<span
 										className={`font-semibold text-[var(--main)] 
@@ -117,7 +118,7 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 						</div>
 					)}
 
-					{!unavailable ? (
+					{purchasable ? (
 						<div className={'flex gap-4 mt-4 items-end'}>
 							{!inCart ? (
 								<>

@@ -24,13 +24,14 @@ export default function CheckoutForm() {
 	const t = useTranslations();
 	const t2 = useTranslations('Validation');
 	const user = useAuthStore((s) => s.user);
-	const { success, orderNumber, loading, error, createNewOrder } =
+	const { success, orderNumber, loading, error, stockIssues, createNewOrder } =
 		useCheckoutStore(
 			useShallow((s) => ({
 				success: s.success,
 				orderNumber: s.orderNumber,
 				loading: s.loading,
 				error: s.error,
+				stockIssues: s.stockIssues,
 				createNewOrder: s.createNewOrder,
 			})),
 		);
@@ -279,6 +280,28 @@ export default function CheckoutForm() {
 				</button>
 			</div>
 			{error && <p className={'mt-4 text-sm text-red-600'}>{error}</p>}
+			{stockIssues && (
+				<div className={'mt-4 text-sm text-red-600'} role={'alert'}>
+					<p>{t('Checkout.insufficientStock')}</p>
+					<ul className={'mt-2 list-disc pl-5'}>
+						{stockIssues.map((issue) => (
+							<li key={issue.product}>
+								{cart.items.find((item) => item.id === issue.product)?.title ??
+									t('Checkout.product')}
+								: {t('Checkout.requested', { count: issue.requested })}
+								{issue.available !== undefined &&
+									`, ${
+										issue.available > 0
+											? t('Checkout.availableApprox', {
+													count: issue.available,
+												})
+											: t('Catalog.notAvailable')
+									}`}
+							</li>
+						))}
+					</ul>
+				</div>
+			)}
 		</form>
 	);
 }

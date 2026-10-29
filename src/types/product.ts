@@ -37,7 +37,10 @@ export interface IProduct {
 	wholesalePrice?: number;
 	retailPrice: number;
 	discountPrice?: number;
+	/** Manual "not sold" flag from the admin panel; independent of stock. */
 	unavailable?: boolean;
+	/** Stock on the web warehouse is positive (always true when stock control is off). */
+	inStock?: boolean;
 	shortDescription?: string;
 	action?: boolean;
 	bestSeller?: boolean;
