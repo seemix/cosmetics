@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { assets } from '@/app/[locale]/assets/assets';
+import { assets } from '@/config/assets';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const { frontendUrl } = assets;

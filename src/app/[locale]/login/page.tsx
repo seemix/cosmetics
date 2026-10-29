@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useModal } from '@/app/[locale]/hooks/useModal';
+import { useModal } from '@/hooks/useModal';
 
-import { LoginForm } from '@/app/[locale]/components';
+import LoginForm from '@/components/LoginForm/LoginForm';
 
 export default function LoginPage() {
 

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import type { CartAdapter } from '@/app/[locale]/services/cart/cart.adapter';
-import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import type { CartAdapter } from '@/lib/cart/cart.adapter';
+import { useCartStore } from '@/stores/cart.store';
 
 const item = (id: string) => ({
 	id,

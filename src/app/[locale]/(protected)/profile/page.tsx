@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { BreadCrumbs, ProfileForm } from '@/app/[locale]/components';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import ProfileForm from '@/components/ProfileForm/ProfileForm';
 
 export default async function ProfilePage() {
 

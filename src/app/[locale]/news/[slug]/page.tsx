@@ -1,7 +1,9 @@
 import { getTranslations } from 'next-intl/server';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
-import { assets } from '@/app/[locale]/assets/assets';
-import { BreadCrumbs, NoContent, StaticPage } from '@/app/[locale]/components';
+import type { propsType } from '@/types/server-component-params';
+import { assets } from '@/config/assets';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import NoContent from '@/components/NoContent/NoContent';
+import StaticPage from '@/components/StaticPage/StaticPage';
 
 export default async function SinglePostPage(props: propsType) {
     const { locale, slug } = await props.params;

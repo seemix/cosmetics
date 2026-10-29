@@ -1,10 +1,12 @@
 import { getTranslations } from 'next-intl/server';
 
-import { assets } from '@/app/[locale]/assets/assets';
-import { BreadCrumbs, NewsCard, Pagination } from '@/app/[locale]/components';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
-import type { PostCard } from '@/app/[locale]/types/post-card';
-import type { PaginationProps } from '@/app/[locale]/types/pagination';
+import { assets } from '@/config/assets';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import NewsCard from '@/components/NewsCard/NewsCard';
+import Pagination from '@/components/Pagination/Pagination';
+import type { propsType } from '@/types/server-component-params';
+import type { PostCard } from '@/types/post-card';
+import type { PaginationProps } from '@/types/pagination';
 
 export default async function NewsPage(props: propsType) {
     const t = await getTranslations('StaticPages');

@@ -2,9 +2,10 @@ import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
 
-import { BreadCrumbs, MyOrders } from '@/app/[locale]/components';
-import { assets } from '@/app/[locale]/assets/assets';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import MyOrders from '@/components/MyOrders/MyOrders';
+import { assets } from '@/config/assets';
+import type { propsType } from '@/types/server-component-params';
 
 export default async function OrdersPage(props: propsType) {
     const { locale } = await props.params;

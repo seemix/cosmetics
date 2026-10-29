@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { checkoutSchema } from '@/app/[locale]/components/CheckoutForm/checkoutSchema';
-import { createRegisterSchema } from '@/app/[locale]/components/RegisterForm/registerSchema';
+import { checkoutSchema } from '@/components/CheckoutForm/checkoutSchema';
+import { createRegisterSchema } from '@/components/RegisterForm/registerSchema';
 
 const t = (key: string) => key;
 

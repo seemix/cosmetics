@@ -1,4 +1,4 @@
-import { SetNewPassword } from '@/app/[locale]/components';
+import SetNewPassword from '@/components/SetNewPassword/SetNewPassword';
 
 export default async function ResetPasswordPage(props: { params: Promise<{ token: string }> }) {
 

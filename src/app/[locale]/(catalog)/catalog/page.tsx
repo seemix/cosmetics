@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
-import { BreadCrumbs, CatalogMenu } from '@/app/[locale]/components';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import CatalogMenu from '@/components/Menu/CatalogMenu/CatalogMenu';
 
 export default async function CatalogPage() {
     const t = await getTranslations();

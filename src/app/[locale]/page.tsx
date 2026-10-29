@@ -1,9 +1,11 @@
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
-import { Brands, PostsSlider, RelatedProducts } from '@/app/[locale]/components';
-import { assets } from '@/app/[locale]/assets/assets';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
+import Brands from '@/components/Brands/Brands';
+import PostsSlider from '@/components/PostsSlider/PostsSlider';
+import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
+import { assets } from '@/config/assets';
+import type { propsType } from '@/types/server-component-params';
 
 export default async function HomePage(props: propsType) {
     const cookieStore = await cookies();

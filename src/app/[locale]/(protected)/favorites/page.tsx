@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
-import { BreadCrumbs, MyFavorites } from '@/app/[locale]/components';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import MyFavorites from '@/components/MyFavorites/MyFavorites';
 
 export default async function FavoritesPage() {
     const t = await getTranslations();

@@ -1,4 +1,5 @@
-import { BreadCrumbs, RegisterForm } from '@/app/[locale]/components';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import RegisterForm from '@/components/RegisterForm/RegisterForm';
 import { getTranslations } from 'next-intl/server';
 
 export default async function Register() {

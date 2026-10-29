@@ -1,9 +1,12 @@
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
-import { assets } from '@/app/[locale]/assets/assets';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
-import { BreadCrumbs, NoContent, Pagination, ProductCardsGrid } from '@/app/[locale]/components';
+import { assets } from '@/config/assets';
+import type { propsType } from '@/types/server-component-params';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import NoContent from '@/components/NoContent/NoContent';
+import Pagination from '@/components/Pagination/Pagination';
+import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
 
 export default async function SearchPage(props: propsType) {
     const cookieStore = await cookies();

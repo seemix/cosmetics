@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { ErrorComponent } from '@/app/[locale]/components';
+import ErrorComponent from '@/components/ErrorComponent/ErrorComponent';
 
 interface ErrorProps {
     error: Error;

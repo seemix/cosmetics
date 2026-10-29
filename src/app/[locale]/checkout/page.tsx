@@ -1,6 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 
-import { BreadCrumbs, CheckoutForm, Invoice, PromoCodeForm } from '@/app/[locale]/components';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import CheckoutForm from '@/components/CheckoutForm/CheckoutForm';
+import Invoice from '@/components/Invoice/Invoice';
+import PromoCodeForm from '@/components/PromoCodeForm/PromoCodeForm';
 
 export default async function CheckoutPage() {
     const t = await getTranslations();

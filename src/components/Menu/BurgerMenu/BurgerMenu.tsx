@@ -1,0 +1,23 @@
+import CatalogMenu from '@/components/Menu/CatalogMenu/CatalogMenu';
+import CloseModalButton from '@/components/ModalWindow/CloseModalButton';
+import HeadMenu from '@/components/Menu/HeadMenu';
+import SocialIcons from '@/components/Header/SocialIcons';
+
+export default function BurgerMenu() {
+    return (
+        <div className={'h-full px-5 grid grid-rows-[auto_1fr_auto] relative bg-white min-h-dvh'}>
+            <div className={'-mr-5'}><CloseModalButton/></div>
+            <div className={'mt-5'}>
+                <div className={'block sm:hidden'}>
+                    <HeadMenu/>
+                </div>
+                <div className={'ml-5'}>
+                    <CatalogMenu/>
+                </div>
+            </div>
+            <div className={'mb-10 flex w-full justify-center'}>
+                <SocialIcons/>
+            </div>
+        </div>
+    );
+}

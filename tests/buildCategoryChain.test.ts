@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildCategoryChain } from '@/app/[locale]/services/buildCategoryChain';
+import { buildCategoryChain } from '@/lib/buildCategoryChain';
 
 describe('buildCategoryChain', () => {
 	it('returns an empty chain without a category', () => {

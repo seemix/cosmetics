@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const post = vi.fn();
-vi.mock('@/app/[locale]/services/axios.service', () => ({
+vi.mock('@/lib/axios.service', () => ({
 	axiosService: { post: (...args: unknown[]) => post(...args) },
 }));
 
-import { guestCartAdapter } from '@/app/[locale]/services/cart/guestCart.adapter';
-import { localStorageService } from '@/app/[locale]/services/cart/localStorage.service';
+import { guestCartAdapter } from '@/lib/cart/guestCart.adapter';
+import { localStorageService } from '@/lib/cart/localStorage.service';
 
 const cart = { items: [], subtotal: 0 };
 

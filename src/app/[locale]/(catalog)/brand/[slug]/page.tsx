@@ -1,14 +1,14 @@
 import { cookies } from 'next/headers';
 import { getTranslations } from 'next-intl/server';
 
-import type { propsType } from '@/app/[locale]/types/server-component-params';
-import { assets } from '@/app/[locale]/assets/assets';
-import {
-    BreadCrumbs,
-    ContentAccordion, NoContent, Pagination,
-    ProductCardsGrid,
-    SortSelect,
-} from '@/app/[locale]/components';
+import type { propsType } from '@/types/server-component-params';
+import { assets } from '@/config/assets';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import ContentAccordion from '@/components/ContentAccordion/ContentAccordion';
+import NoContent from '@/components/NoContent/NoContent';
+import Pagination from '@/components/Pagination/Pagination';
+import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
+import SortSelect from '@/components/SortSelect/SortSelect';
 
 export default async function BrandPage(props: propsType) {
     const t = await getTranslations();

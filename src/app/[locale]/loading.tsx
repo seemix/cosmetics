@@ -1,4 +1,4 @@
-import { MainLoader } from '@/app/[locale]/components';
+import MainLoader from '@/components/MainLoader/MainLoader';
 
 export default function LoadingPage() {
   return <MainLoader/>

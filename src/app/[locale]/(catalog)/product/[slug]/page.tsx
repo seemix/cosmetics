@@ -1,11 +1,13 @@
 import { cookies } from 'next/headers';
 
 import type { Metadata } from 'next';
-import { BreadCrumbs, NoContent, ProductDetails } from '@/app/[locale]/components';
-import type { IProduct } from '@/app/[locale]/types/product';
-import { buildCategoryChain } from '@/app/[locale]/services/buildCategoryChain';
-import { assets } from '@/app/[locale]/assets/assets';
-import { getProductMetadata } from '@/app/[locale]/meta/getProductMetadata';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import NoContent from '@/components/NoContent/NoContent';
+import ProductDetails from '@/components/ProductDetails/ProductDetails';
+import type { IProduct } from '@/types/product';
+import { buildCategoryChain } from '@/lib/buildCategoryChain';
+import { assets } from '@/config/assets';
+import { getProductMetadata } from '@/lib/seo/getProductMetadata';
 
 export async function generateMetadata(props: {
     params: Promise<{ locale: string; slug: string }>;

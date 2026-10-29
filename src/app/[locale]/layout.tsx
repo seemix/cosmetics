@@ -3,9 +3,14 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 
-import { MenuProvider } from '@/app/[locale]/components/Menu/MenuContext';
-import { getHomeMetadata } from '@/app/[locale]/meta/getHomeMetadata';
-import { CheckAuth, ClearAuthError, Footer, Header, HeaderLogo, ModalWindow } from '@/app/[locale]/components';
+import { MenuProvider } from '@/components/Menu/MenuContext';
+import { getHomeMetadata } from '@/lib/seo/getHomeMetadata';
+import CheckAuth from '@/components/CheckAuth/CheckAuth';
+import ClearAuthError from '@/components/ClearAuthError/ClearAuthError';
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import HeaderLogo from '@/components/Header/HeaderLogo';
+import ModalWindow from '@/components/ModalWindow/ModalWindow';
 
 import './globals.css';
 

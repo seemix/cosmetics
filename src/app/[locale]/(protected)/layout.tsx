@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { assets } from '@/app/[locale]/assets/assets';
+import { assets } from '@/config/assets';
 
 export default async function ProtectedRoutes({ children }: { children: React.ReactNode }) {
 

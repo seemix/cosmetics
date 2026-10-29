@@ -1,4 +1,4 @@
-import { OrderSuccessfullyCreated } from '@/app/[locale]/components';
+import OrderSuccessfullyCreated from '@/components/OrderSuccessfullyCreated/OrderSuccessfullyCreated';
 
 export default function OrderCreatedPage() {
     return <OrderSuccessfullyCreated/>;

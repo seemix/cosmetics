@@ -1,8 +1,12 @@
 import { cookies } from 'next/headers';
 
-import { BreadCrumbs, NoContent, Pagination, ProductCardsGrid, SortSelect } from '@/app/[locale]/components';
-import { assets } from '@/app/[locale]/assets/assets';
-import type { propsType } from '@/app/[locale]/types/server-component-params';
+import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
+import NoContent from '@/components/NoContent/NoContent';
+import Pagination from '@/components/Pagination/Pagination';
+import ProductCardsGrid from '@/components/ProductCardsGrid/ProductCardsGrid';
+import SortSelect from '@/components/SortSelect/SortSelect';
+import { assets } from '@/config/assets';
+import type { propsType } from '@/types/server-component-params';
 import { getTranslations } from 'next-intl/server';
 
 export default async function CategoryPage(props: propsType) {

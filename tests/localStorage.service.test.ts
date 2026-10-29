@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { localStorageService } from '@/app/[locale]/services/cart/localStorage.service';
+import { localStorageService } from '@/lib/cart/localStorage.service';
 
 describe('localStorageService', () => {
 	beforeEach(() => localStorage.clear());
