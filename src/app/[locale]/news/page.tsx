@@ -21,8 +21,8 @@ export default async function NewsPage(props: PageProps) {
 		totalDocs: resp?.totalDocs ?? 0,
 	};
 	const breadCrumbs = [
-		{ id: '0', title: t('Main'), slug: 'main' },
-		{ id: '1', title: t('News'), slug: 'news' },
+		{ id: '0', title: t('Main'), href: '/' },
+		{ id: '1', title: t('News') },
 	];
 
 	return (
@@ -34,8 +34,8 @@ export default async function NewsPage(props: PageProps) {
 			<div className={'mt-3'}>
 				<BreadCrumbs breadcrumbs={breadCrumbs} />
 			</div>
-			{resp?.docs.map((doc) => (
-				<NewsCard key={doc.id} post={doc} locale={locale} />
+			{resp?.docs.map((doc, index) => (
+				<NewsCard key={doc.id} post={doc} locale={locale} eager={index === 0} />
 			))}
 			{pagination.totalPages > 1 && <Pagination pagination={pagination} />}
 		</div>

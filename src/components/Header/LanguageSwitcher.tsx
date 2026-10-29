@@ -1,19 +1,18 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { usePathname, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { useRef, useState, useTransition } from 'react';
 import { useClickOutside } from '@/hooks/useClickOutside';
-
-const locales = [
-	{ code: 'ru', label: 'RU' },
-	{ code: 'ro', label: 'RO' },
-];
+import { usePathname, useRouter } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 
 export default function LanguageSwitcher() {
 	const currentLocale = useLocale();
+	// Locale-less path; next-intl adds the target locale back.
 	const pathname = usePathname();
+	const searchParams = useSearchParams();
 	const router = useRouter();
 	const [, startTransition] = useTransition();
 	const [open, setOpen] = useState(false);
@@ -24,11 +23,12 @@ export default function LanguageSwitcher() {
 	useClickOutside(ref, () => setOpen(false), open);
 
 	const changeLocale = (newLocale: string) => {
-		const segments = pathname.split('/');
-		segments[1] = newLocale;
-
+		// Query (search, sort, page) is kept on the translated page (decision D5).
+		const query = searchParams.toString();
 		startTransition(() => {
-			router.replace(segments.join('/'));
+			router.replace(query ? `${pathname}?${query}` : pathname, {
+				locale: newLocale,
+			});
 		});
 
 		setOpen(false);
@@ -58,7 +58,7 @@ export default function LanguageSwitcher() {
 							'absolute -top-22 sm:top-5 -right-2 mt-2 bg-white shadow-md z-12'
 						}
 					>
-						{locales.map(({ code, label }) => (
+						{routing.locales.map((code) => (
 							<button
 								type={'button'}
 								key={code}
@@ -66,7 +66,7 @@ export default function LanguageSwitcher() {
 								className={`block px-4 py-2 md:text-sm w-full text-left hover:bg-gray-100 
 								            hover:text-[var(--main)] cursor-pointer`}
 							>
-								{label}
+								{code.toUpperCase()}
 							</button>
 						))}
 					</motion.div>

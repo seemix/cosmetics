@@ -1,12 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { CiLogin } from 'react-icons/ci';
 import { PiUser } from 'react-icons/pi';
+import DropdownItem from '@/components/Header/DropdownItem';
 import LoginForm from '@/components/LoginForm/LoginForm';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useModal } from '@/hooks/useModal';
@@ -42,30 +42,22 @@ export default function UserButton() {
 							'absolute -top-23 sm:top-7 -right-15 mt-2 bg-white shadow-md z-12'
 						}
 					>
-						<Link
-							href={''}
-							type={'button'}
+						<DropdownItem
 							onClick={() => {
 								showModal(<LoginForm />, 'zoom');
 								setOpen(false);
 							}}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.95em]
-                                    hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
+							icon={<CiLogin size={20} />}
 						>
-							<CiLogin size={20} />
 							{t('login')}
-						</Link>
-
-						<Link
+						</DropdownItem>
+						<DropdownItem
 							href={'/register'}
 							onClick={() => setOpen(false)}
-							type={'button'}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 text-[.95em]
-                                    hover:text-[var(--main)] transition-colors duration-300 cursor-pointer text-black`}
+							icon={<AiOutlineUserAdd size={20} />}
 						>
-							<AiOutlineUserAdd size={20} />
 							{t('register')}
-						</Link>
+						</DropdownItem>
 					</motion.div>
 				)}
 			</AnimatePresence>

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
@@ -31,7 +30,7 @@ export default function OrderSuccessfullyCreated() {
 			<p className={'mb-3 font-semibold'}>{t('anyQuestions')}</p>
 			<p>
 				👉 {t('contactUs')}
-				<Link href={`tel:${assets.phone}`}>{assets.phone}</Link>
+				<a href={`tel:${assets.phone}`}>{assets.phone}</a>
 			</p>
 		</div>
 	);

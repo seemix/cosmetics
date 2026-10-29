@@ -5,8 +5,8 @@ import ProfileForm from '@/components/ProfileForm/ProfileForm';
 export default async function ProfilePage() {
 	const t = await getTranslations('Account');
 	const breadCrumbs = [
-		{ id: '0', title: t('account'), slug: 'main' },
-		{ id: '1', title: t('profile'), slug: 'orders' },
+		{ id: '0', title: t('account') },
+		{ id: '1', title: t('profile') },
 	];
 
 	return (

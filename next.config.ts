@@ -3,7 +3,8 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const nextConfig: NextConfig = {
 	images: {
-		qualities: [75, 95, 100],
+		// Every image is served at quality 80 (decision D3); other values snap to it.
+		qualities: [80],
 		remotePatterns: [
 			{
 				protocol: 'https',
@@ -11,6 +12,7 @@ const nextConfig: NextConfig = {
 				port: '',
 				pathname: '/**',
 			},
+			// Absolute image URLs inside rich-text content.
 			{
 				protocol: 'https',
 				hostname: 'barbercompany.com',

@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import type React from 'react';
 import { useEffect, useState } from 'react';
@@ -10,6 +9,7 @@ import Loader from '@/components/Loader/Loader';
 import CloseModalButton from '@/components/ModalWindow/CloseModalButton';
 import SingleSearchItem from '@/components/SearchComponent/SingleSearchItem';
 import { useModal } from '@/hooks/useModal';
+import { useRouter } from '@/i18n/navigation';
 import { useSearchStore } from '@/stores/search.store';
 
 export default function SearchComponent() {
@@ -43,7 +43,7 @@ export default function SearchComponent() {
 	useEffect(() => {
 		const handler = setTimeout(() => {
 			if (inputValue.length > 2) {
-				fastSearch(inputValue, locale).then();
+				fastSearch(inputValue, locale);
 			}
 		}, 500);
 		return () => clearTimeout(handler);

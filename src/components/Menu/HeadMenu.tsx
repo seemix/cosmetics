@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useModal } from '@/hooks/useModal';
+import { Link } from '@/i18n/navigation';
 import { headMenuData } from './headMenuData';
 
 export default function HeadMenu() {

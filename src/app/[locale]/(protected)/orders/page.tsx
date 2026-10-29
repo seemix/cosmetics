@@ -9,8 +9,8 @@ export default async function OrdersPage(props: PageProps) {
 	const { locale } = await props.params;
 	const t = await getTranslations('Account');
 	const breadCrumbs = [
-		{ id: '0', title: t('account'), slug: 'main' },
-		{ id: '1', title: t('orders'), slug: 'orders' },
+		{ id: '0', title: t('account'), href: '/profile' },
+		{ id: '1', title: t('orders') },
 	];
 	const orders = await getMyOrders(locale);
 

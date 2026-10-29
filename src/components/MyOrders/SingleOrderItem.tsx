@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 import type { OrderItemType } from '@/types/order';
 
 export default function SingleOrderItem({
@@ -25,7 +25,6 @@ export default function SingleOrderItem({
 						width={70}
 						height={70}
 						alt={item.title}
-						quality={95}
 					/>
 					<div>
 						<p

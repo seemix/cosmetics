@@ -13,8 +13,8 @@ export default async function SinglePostPage(
 	const post = await getPost(slug, locale);
 
 	const breadCrumbs = [
-		{ id: '0', title: t('News'), slug: 'news' },
-		{ id: '1', title: post?.title ?? '', slug: slug },
+		{ id: '0', title: t('News'), href: '/news' },
+		{ id: '1', title: post?.title ?? '' },
 	];
 
 	return (

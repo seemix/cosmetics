@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'motion/react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,6 +16,7 @@ import {
 import Success from '@/components/LoginForm/Success';
 import CloseModalButton from '@/components/ModalWindow/CloseModalButton';
 import { useModal } from '@/hooks/useModal';
+import { Link } from '@/i18n/navigation';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function LoginForm() {
@@ -46,13 +46,12 @@ export default function LoginForm() {
 	};
 	const [success, setSuccess] = useState(false);
 
+	// Shows the success checkmark briefly, then closes the modal.
 	useEffect(() => {
-		if (user) {
-			setSuccess(true);
-			setTimeout(() => {
-				hideModal();
-			}, 1050);
-		}
+		if (!user) return;
+		setSuccess(true);
+		const timer = setTimeout(hideModal, 1050);
+		return () => clearTimeout(timer);
 	}, [hideModal, user]);
 
 	return (

@@ -1,5 +1,6 @@
 export type IBreadcrumb = {
 	id: string;
 	title: string;
-	slug: string;
+	/** Locale-less path; the crumb is plain text without it. */
+	href?: string;
 };

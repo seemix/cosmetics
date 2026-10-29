@@ -12,22 +12,28 @@ export default function CartQuantity({
 	quantity: number;
 }) {
 	const [value, setValue] = useState(quantity);
+	// Follow quantity changes coming from the store (merge after login, another tab action).
+	const [prevQuantity, setPrevQuantity] = useState(quantity);
+	if (quantity !== prevQuantity) {
+		setPrevQuantity(quantity);
+		setValue(quantity);
+	}
 	const updateQty = useCartStore((s) => s.updateQty);
 
 	const decrease = () => {
 		const next = Math.max(1, value - 1);
 		setValue(next);
-		updateQty({ productId, quantity: next }).then();
+		updateQty({ productId, quantity: next });
 	};
 
 	const increase = () => {
 		const next = value + 1;
 		setValue(next);
-		updateQty({ productId, quantity: next }).then();
+		updateQty({ productId, quantity: next });
 	};
 
 	const onBlur = () => {
-		updateQty({ productId, quantity: value }).then();
+		updateQty({ productId, quantity: value });
 	};
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value.replace(/\D/g, '');

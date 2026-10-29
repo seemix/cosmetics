@@ -8,8 +8,8 @@ import PromoCodeForm from '@/components/PromoCodeForm/PromoCodeForm';
 export default async function CheckoutPage() {
 	const t = await getTranslations();
 	const breadCrumbs = [
-		{ id: '0', title: t('StaticPages.Main'), slug: 'main' },
-		{ id: '1', title: t('Cart.checkouting'), slug: 'checkout' },
+		{ id: '0', title: t('StaticPages.Main'), href: '/' },
+		{ id: '1', title: t('Cart.checkouting') },
 	];
 
 	return (

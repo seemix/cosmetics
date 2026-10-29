@@ -1,9 +1,9 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useShallow } from 'zustand/react/shallow';
+import { useRouter } from '@/i18n/navigation';
 import { useAuthStore } from '@/stores/auth.store';
 
 export default function VerifyEmail() {
@@ -18,7 +18,7 @@ export default function VerifyEmail() {
 
 	useEffect(() => {
 		if (!pendingName || !pendingEmail) {
-			router.replace('../'); // або router.push
+			router.replace('/');
 		}
 	}, [pendingName, pendingEmail, router]);
 

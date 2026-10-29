@@ -24,8 +24,12 @@ export default async function CategoryPage(
 		},
 	);
 	const breadCrumbs = [
-		{ id: '0', title: t('catalog'), slug: '../catalog' },
-		...(categories || []),
+		{ id: '0', title: t('catalog'), href: '/catalog' },
+		...(categories ?? []).map(({ id, title, slug }) => ({
+			id,
+			title,
+			href: `/category/${slug}`,
+		})),
 	];
 
 	return (

@@ -1,11 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { usePathname, useRouter } from '@/i18n/navigation';
 
 type SortOption = {
 	label: string;
@@ -15,15 +16,11 @@ type SortOption = {
 export default function SortSelect() {
 	const [open, setOpen] = useState(false);
 	const t = useTranslations('Catalog');
-	const options: SortOption[] = useMemo(
-		() => [
-			{ label: t('default'), value: 'default' },
-			{ label: t('priceASC'), value: 'price-asc' },
-			{ label: t('priceDESC'), value: 'price-desc' },
-		],
-		[t],
-	);
-	const [current, setCurrent] = useState<SortOption>(options[0]);
+	const options: SortOption[] = [
+		{ label: t('default'), value: 'default' },
+		{ label: t('priceASC'), value: 'price-asc' },
+		{ label: t('priceDESC'), value: 'price-desc' },
+	];
 
 	const ref = useRef<HTMLDivElement>(null);
 	useClickOutside(ref, () => setOpen(false), open);
@@ -32,11 +29,9 @@ export default function SortSelect() {
 	const pathname = usePathname();
 	const { replace } = useRouter();
 
-	const sortParam = searchParams.get('sort');
-
-	useEffect(() => {
-		setCurrent(options.find((o) => o.value === sortParam) ?? options[0]);
-	}, [sortParam, options]);
+	// Derived from the URL, so back/forward navigation keeps the label in sync.
+	const current =
+		options.find((o) => o.value === searchParams.get('sort')) ?? options[0];
 
 	const handleUpdateQuery = (name: string, value: string) => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -46,7 +41,6 @@ export default function SortSelect() {
 			params.delete(name);
 		}
 		replace(`${pathname}?${params.toString()}`, { scroll: false });
-		setCurrent(options.find((o) => o.value === value) ?? options[0]);
 	};
 
 	return (

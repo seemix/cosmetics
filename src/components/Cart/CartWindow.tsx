@@ -1,13 +1,12 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-
 import CartItem from '@/components/Cart/CartItem';
 import ClearCart from '@/components/Cart/ClearCart';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
+import { useRouter } from '@/i18n/navigation';
 import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 

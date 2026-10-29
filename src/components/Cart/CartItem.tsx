@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { GoTrash } from 'react-icons/go';
 import CartQuantity from '@/components/Cart/CartQuantity';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
+import { Link } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart.store';
 
 interface ICartItem {
@@ -40,10 +40,9 @@ export default function CartItem({
 				alt={product.title}
 				width={80}
 				height={80}
-				quality={95}
 			/>
 			<Link
-				href={`../product/${product.slug}`}
+				href={`/product/${product.slug}`}
 				onClick={hideModal}
 				className={'transition-colors duration-300 hover:text-[var(--main)]'}
 			>

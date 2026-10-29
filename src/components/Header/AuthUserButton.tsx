@@ -1,7 +1,6 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import { FaChalkboardUser } from 'react-icons/fa6';
@@ -10,6 +9,7 @@ import { LuClipboardList } from 'react-icons/lu';
 import { MdLogout } from 'react-icons/md';
 import { PiUserCheck } from 'react-icons/pi';
 import { useShallow } from 'zustand/react/shallow';
+import DropdownItem from '@/components/Header/DropdownItem';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import { useAuthStore } from '@/stores/auth.store';
 
@@ -22,9 +22,7 @@ export default function AuthUserButton() {
 		useShallow((s) => ({ logout: s.logout, user: s.user })),
 	);
 
-	const userLogout = async () => {
-		await logout();
-	};
+	const close = () => setOpen(false);
 
 	return (
 		<div className={'relative'} ref={ref}>
@@ -53,54 +51,33 @@ export default function AuthUserButton() {
 						<p className={'font-bold m-3'}>
 							{t('RegisterForm.welcome')}, {user?.name}
 						</p>
-						<Link
+						<DropdownItem
 							href={'/orders'}
-							type={'button'}
-							onClick={() => {
-								setOpen(false);
-							}}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
-                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
-                                        cursor-pointer text-black`}
+							onClick={close}
+							icon={<LuClipboardList size={20} className={'mr-2'} />}
 						>
-							<LuClipboardList size={20} className={'mr-2'} />
 							{t('RegisterForm.orders')}
-						</Link>
-						<Link
+						</DropdownItem>
+						<DropdownItem
 							href={'/profile'}
-							type={'button'}
-							onClick={() => {
-								setOpen(false);
-							}}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
-                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
-                                        cursor-pointer text-black`}
+							onClick={close}
+							icon={<FaChalkboardUser size={20} className={'mr-2'} />}
 						>
-							<FaChalkboardUser size={20} className={'mr-2'} />
 							{t('RegisterForm.profile')}
-						</Link>
-						<Link
+						</DropdownItem>
+						<DropdownItem
 							href={'/favorites'}
-							onClick={() => setOpen(false)}
-							type={'button'}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
-                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
-                                        cursor-pointer text-black`}
+							onClick={close}
+							icon={<IoMdHeartEmpty size={24} className={'mr-1'} />}
 						>
-							<IoMdHeartEmpty size={24} className={'mr-1'} />
 							{t('Account.favorites')}
-						</Link>
-						<Link
-							href={''}
-							onClick={userLogout}
-							type={'button'}
-							className={`flex items-center gap-1 px-4 py-2 w-full text-left hover:bg-gray-100 
-                                        text-[.95em] hover:text-[var(--main)] transition-colors duration-300 
-                                        cursor-pointer text-black`}
+						</DropdownItem>
+						<DropdownItem
+							onClick={logout}
+							icon={<MdLogout size={20} className={'mr-2'} />}
 						>
-							<MdLogout size={20} className={'mr-2'} />
 							{t('RegisterForm.logout')}
-						</Link>
+						</DropdownItem>
 					</motion.div>
 				)}
 			</AnimatePresence>

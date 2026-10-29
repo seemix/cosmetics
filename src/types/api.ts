@@ -1,4 +1,3 @@
-import type { IBreadcrumb } from '@/types/breadcrumb';
 import type { IMenuItem } from '@/types/catalog-menu';
 import type { IOrder } from '@/types/order';
 import type { PaginationProps } from '@/types/pagination';
@@ -13,7 +12,7 @@ export type ProductListResponse = {
 	products: IProduct[];
 	pagination: PaginationProps;
 	/** Category chain, only returned by the category endpoint. */
-	categories?: IBreadcrumb[];
+	categories?: { id: string; title: string; slug: string }[];
 };
 
 export type MenuData = {

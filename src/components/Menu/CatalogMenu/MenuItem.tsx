@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'motion/react';
-import Link from 'next/link';
 import { useModal } from '@/hooks/useModal';
+import { Link } from '@/i18n/navigation';
 import type { IMenuItem } from '@/types/catalog-menu';
 
 export default function MenuItem({

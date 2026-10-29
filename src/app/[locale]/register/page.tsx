@@ -5,8 +5,8 @@ import RegisterForm from '@/components/RegisterForm/RegisterForm';
 export default async function Register() {
 	const t = await getTranslations();
 	const breadCrumbs = [
-		{ id: '0', title: t('StaticPages.Main'), slug: 'account' },
-		{ id: '1', title: t('RegisterForm.newUserRegistration'), slug: 'register' },
+		{ id: '0', title: t('StaticPages.Main'), href: '/' },
+		{ id: '1', title: t('RegisterForm.newUserRegistration') },
 	];
 	return (
 		<div

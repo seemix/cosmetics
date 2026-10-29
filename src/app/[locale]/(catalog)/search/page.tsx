@@ -20,8 +20,8 @@ export default async function SearchPage(props: PageProps) {
 
 	const searchResults = `${t('Catalog.searchResults')} '${query}'`;
 	const breadCrumbs = [
-		{ id: '0', title: t('Catalog.catalog'), slug: 'catalog' },
-		{ id: '2', title: searchResults, slug: searchResults },
+		{ id: '0', title: t('Catalog.catalog'), href: '/catalog' },
+		{ id: '2', title: searchResults },
 	];
 
 	return (

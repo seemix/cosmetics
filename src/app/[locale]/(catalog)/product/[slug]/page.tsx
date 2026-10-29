@@ -30,7 +30,7 @@ export default async function ProductPage(props: Props) {
 
 	const categoriesChain = [
 		...buildCategoryChain(product.categories?.[0]),
-		{ id: product.id, title: product.title, slug: '' },
+		{ id: product.id, title: product.title },
 	];
 
 	return (

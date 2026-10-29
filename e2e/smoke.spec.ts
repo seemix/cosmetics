@@ -28,11 +28,15 @@ test('language switch keeps the query string', async ({ page, isMobile }) => {
 	test.skip(isMobile, 'switcher is in the desktop top bar');
 	await page.goto(`/ru/search?query=${sample.query}`);
 	await page
-		.locator('div.hidden.sm:flex')
-		.getByRole('button', { name: 'RU' })
+		.getByRole('button', { name: 'RU', exact: true })
+		.filter({ visible: true })
 		.click();
 	await page.getByRole('button', { name: 'RO', exact: true }).click();
-	await expect(page).toHaveURL(new RegExp(`/ro/search?query=${sample.query}`));
+	await expect(page).toHaveURL(
+		(url) =>
+			url.pathname === '/ro/search' &&
+			url.searchParams.get('query') === sample.query,
+	);
 });
 
 test('search modal opens from the header', async ({ page }) => {

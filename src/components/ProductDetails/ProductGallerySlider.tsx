@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Mousewheel, Thumbs, Zoom } from 'swiper/modules';
+import { Mousewheel, Zoom } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -30,20 +30,11 @@ export default function ProductGallerySlider({
 			className={`grid ${images.length > 1 ? 'grid-cols-[100px_1fr]' : 'grid-cols-[auto_1fr]'} 
                         max-w-[650px] gap-5 mx-auto`}
 		>
-			{/* Thumbnails */}
+			{/* Thumbnails: scroll independently, clicks drive the main slider. */}
 			<Swiper
-				onSwiper={(swiper) => {
-					setMainSwiper(swiper);
-					setActiveIndex(activeIndex);
-				}}
-				onSlideChange={(swiper) => {
-					setActiveIndex(swiper.activeIndex);
-				}}
-				initialSlide={activeIndex}
 				direction={'vertical'}
 				slidesPerView={'auto'}
 				spaceBetween={12}
-				zoom={{ maxRatio: 2.5 }}
 				mousewheel
 				modules={[Mousewheel]}
 				className={`h-[420px] w-auto [&_.swiper-wrapper]:flex [&_.swiper-wrapper]:justify-center
@@ -58,16 +49,12 @@ export default function ProductGallerySlider({
 									type={'button'}
 									aria-label={'product-gallery-thumbnails'}
 									className={'simple aspect-square cursor-pointer'}
-									onClick={() => {
-										setActiveIndex(i);
-										mainSwiper?.slideTo(i);
-									}}
+									onClick={() => mainSwiper?.slideTo(i)}
 								>
 									<Image
 										width={90}
 										height={90}
 										placeholder={'empty'}
-										quality={95}
 										src={backendUrl + img.image.sizes.thumbnail.url}
 										alt={img.image.alt || ''}
 										className={`
@@ -85,15 +72,12 @@ export default function ProductGallerySlider({
 					))}
 			</Swiper>
 
-			{/* Main image */}
+			{/* Main image: the single source of the active index (thumbnails, full screen). */}
 			<Swiper
-				onSwiper={(swiper) => {
-					setMainSwiper(swiper);
-					setActiveIndex(activeIndex);
-				}}
+				onSwiper={setMainSwiper}
+				onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
 				zoom
-				initialSlide={activeIndex}
-				modules={[Zoom, Thumbs]}
+				modules={[Zoom]}
 				className={'w-full max-w-[450px] lg:max-w-[380px] overflow-hidden'}
 			>
 				{images.map((img) => (
@@ -116,8 +100,8 @@ export default function ProductGallerySlider({
 								}
 							>
 								<Image
-									// src={backendUrl + img.image.sizes.medium.url}
 									src={backendUrl + img.image.url}
+									sizes={'(min-width: 1024px) 380px, 450px'}
 									alt={img.image.alt || ''}
 									placeholder={'blur'}
 									blurDataURL={img.image.blurHash}

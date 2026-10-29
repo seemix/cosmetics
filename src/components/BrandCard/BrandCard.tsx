@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 import type { IBrand } from '@/types/brand';
 
 export default function BrandCard({ brand }: { brand: IBrand }) {
@@ -18,8 +18,8 @@ export default function BrandCard({ brand }: { brand: IBrand }) {
 						src={`${backendUrl}${logo.url}`}
 						alt={logo.alt}
 						fill
+						sizes={'190px'}
 						className={'object-cover'}
-						quality={95}
 					/>
 				</div>
 			</Link>

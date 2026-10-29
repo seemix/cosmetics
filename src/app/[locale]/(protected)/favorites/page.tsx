@@ -6,9 +6,9 @@ import MyFavorites from '@/components/MyFavorites/MyFavorites';
 export default async function FavoritesPage() {
 	const t = await getTranslations();
 	const breadCrumbs = [
-		{ id: '0', title: t('StaticPages.Main'), slug: '/' },
-		{ id: '1', title: t('Account.account'), slug: '' },
-		{ id: '2', title: t('Account.favorites'), slug: '' },
+		{ id: '0', title: t('StaticPages.Main'), href: '/' },
+		{ id: '1', title: t('Account.account'), href: '/profile' },
+		{ id: '2', title: t('Account.favorites') },
 	];
 	return (
 		<div className={'max-w-[1100px] w-full p-4'}>

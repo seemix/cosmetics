@@ -1,13 +1,11 @@
 'use client';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Link } from '@/i18n/navigation';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-
-import 'swiper/css/navigation';
+import ArtDirectedImage from '@/components/ArtDirectedImage/ArtDirectedImage';
 import { assets } from '@/config/assets';
 import type { PostCard } from '@/types/post-card';
 
@@ -25,7 +23,7 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
 				pagination={{ clickable: true }}
 				className={'w-full max-w-full'}
 			>
-				{slides.map((slide) => (
+				{slides.map((slide, index) => (
 					<SwiperSlide key={slide.id} className={'w-full'}>
 						<Link
 							href={
@@ -36,36 +34,18 @@ export default function PostsSlider({ slides }: { slides: PostCard[] }) {
 							className={'block w-full'}
 						>
 							<div className={'relative w-full overflow-hidden'}>
-								<div className={'block sm:hidden'}>
-									<div className={'relative w-full aspect-square'}>
-										<Image
-											src={`${assets.backendUrl}${slide['square-slide'].url}`}
-											placeholder={'blur'}
-											blurDataURL={slide['square-slide'].blurHash}
-											alt={slide.slide.alt || 'Mobile slide'}
-											quality={100}
-											fill
-											priority
-											sizes={'100vw'}
-											className={'object-cover'}
-										/>
-									</div>
-								</div>
-								<div className={'hidden sm:block'}>
-									<div className={'relative w-full aspect-[1920/620]'}>
-										<Image
-											src={`${assets.backendUrl}${slide.slide.url}`}
-											alt={slide.slide.alt || 'Desktop slide'}
-											placeholder={'blur'}
-											blurDataURL={slide.slide.blurHash}
-											loading={'eager'}
-											fill
-											priority
-											sizes={'100vw'}
-											className={'object-cover'}
-										/>
-									</div>
-								</div>
+								<ArtDirectedImage
+									mobile={{
+										...slide['square-slide'],
+										url: `${assets.backendUrl}${slide['square-slide'].url}`,
+									}}
+									desktop={{
+										...slide.slide,
+										url: `${assets.backendUrl}${slide.slide.url}`,
+									}}
+									alt={slide.slide.alt || 'Slide'}
+									eager={index === 0}
+								/>
 							</div>
 						</Link>
 					</SwiperSlide>

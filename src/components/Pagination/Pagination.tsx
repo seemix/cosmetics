@@ -1,9 +1,10 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { GrFormNext, GrFormPrevious } from 'react-icons/gr';
 import PaginationButton from '@/components/Pagination/PaginationButton';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import type { PaginationProps } from '@/types/pagination';
 
 export default function Pagination({

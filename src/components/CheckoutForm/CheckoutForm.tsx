@@ -2,7 +2,6 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AnimatePresence, motion } from 'motion/react';
-import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -15,6 +14,7 @@ import {
 import FormInput from '@/components/FormInput/FormInput';
 import FormPhoneInput from '@/components/FormPhoneInput/FormPhoneInput';
 import Loader from '@/components/Loader/Loader';
+import { useRouter } from '@/i18n/navigation';
 import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 import { useCheckoutStore } from '@/stores/checkout.store';

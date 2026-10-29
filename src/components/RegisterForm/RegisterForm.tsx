@@ -40,7 +40,7 @@ export default function RegisterForm() {
 	const router = useRouter();
 
 	const onSubmit = async (data: RegisterFormData) => {
-		const res = await registerUser(data).then();
+		const res = await registerUser(data);
 		if (res.success) {
 			router.push('/verify-email');
 		}

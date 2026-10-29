@@ -53,7 +53,7 @@ export default function ProfileForm() {
 	}, [user, setValue]);
 
 	const onSubmit = (data: ProfileFormData) => {
-		updateUserInfo(data).then();
+		updateUserInfo(data);
 	};
 
 	return (

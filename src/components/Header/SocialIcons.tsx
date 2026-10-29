@@ -1,11 +1,10 @@
-import Link from 'next/link';
 import { FaInstagram, FaPhoneSquareAlt, FaTelegramPlane } from 'react-icons/fa';
 import { assets } from '@/config/assets';
 
 export default function SocialIcons() {
 	return (
 		<div className={'flex gap-8 sm:gap-4'}>
-			<Link
+			<a
 				aria-label={'Telegram'}
 				href={assets.telegramLink}
 				className={
@@ -13,8 +12,8 @@ export default function SocialIcons() {
 				}
 			>
 				<FaTelegramPlane className={'w-9 sm:w-5 h-auto lg:w-4 mt-0'} />
-			</Link>
-			<Link
+			</a>
+			<a
 				aria-label={'Instagram'}
 				href={assets.instagramLink}
 				className={
@@ -22,8 +21,8 @@ export default function SocialIcons() {
 				}
 			>
 				<FaInstagram className={'w-9 sm:w-5 h-auto animate-fade-in'} />
-			</Link>
-			<Link
+			</a>
+			<a
 				aria-label={'Phone'}
 				href={`tel:${assets.phone}`}
 				className={`text-dark flex items-center text-sm transition-colors duration-300 
@@ -31,7 +30,7 @@ export default function SocialIcons() {
 			>
 				<FaPhoneSquareAlt className={'w-9 sm:w-5 h-auto'} />
 				<p className={'hidden sm:block'}>{assets.phone}</p>
-			</Link>
+			</a>
 		</div>
 	);
 }

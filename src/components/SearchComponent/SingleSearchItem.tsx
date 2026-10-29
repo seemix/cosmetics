@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
+import { Link } from '@/i18n/navigation';
 import type { IProduct } from '@/types/product';
 
 export default function SingleSearchItem({ product }: { product: IProduct }) {
@@ -22,7 +22,6 @@ export default function SingleSearchItem({ product }: { product: IProduct }) {
 				width={80}
 				height={80}
 				alt={title}
-				quality={95}
 			/>
 			<Link href={`/product/${slug}`} onClick={hideModal}>
 				<div className={'hover:underline'}>

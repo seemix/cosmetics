@@ -23,13 +23,9 @@ export default async function BrandPage(props: PageProps<{ slug: string }>) {
 	]);
 
 	const breadCrumbs = [
-		{ id: '0', title: t('Catalog.catalog'), slug: '../catalog' },
-		{ id: '1', title: t('CatalogMenu.brands'), slug: 'brands' },
-		{
-			id: brand?.id ?? slug,
-			title: brand?.title ?? '',
-			slug: brand?.slug ?? slug,
-		},
+		{ id: '0', title: t('Catalog.catalog'), href: '/catalog' },
+		{ id: '1', title: t('CatalogMenu.brands') },
+		{ id: brand?.id ?? slug, title: brand?.title ?? '' },
 	];
 
 	return (

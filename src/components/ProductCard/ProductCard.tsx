@@ -2,14 +2,13 @@
 
 import { motion } from 'motion/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-
 import AddToCartButton from '@/components/AddToCartButton/AddToCartButton';
 import AlreadyInCartButton from '@/components/AlreadyInCartButton/AlreadyInCartButton';
 import FavoriteButton from '@/components/FavoriteButton/FavoriteButton';
 import ProductLabels from '@/components/ProductLabels/ProductLabels';
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart.store';
 import type { IProduct } from '@/types/product';
 
@@ -59,8 +58,8 @@ export default function ProductCard({
 						alt={gallery[0]?.image?.alt || ''}
 						className={'object-cover relative'}
 						placeholder={'blur'}
-						quality={95}
 						fill
+						sizes={'(min-width: 640px) 320px, 66vw'}
 						blurDataURL={gallery[0]?.image?.blurHash}
 					/>
 					{(action || bestSeller) && labels && (

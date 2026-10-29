@@ -2,7 +2,6 @@
 
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import AddToCartButton from '@/components/AddToCartButton/AddToCartButton';
@@ -13,6 +12,7 @@ import Quantity from '@/components/ProductDetails/Quantity';
 import ProductLabels from '@/components/ProductLabels/ProductLabels';
 import RelatedProducts from '@/components/RelatedProducts/RelatedProducts';
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 import { useCartStore } from '@/stores/cart.store';
 import type { IProduct } from '@/types/product';
 
@@ -67,15 +67,15 @@ export default function ProductDetails({ product }: { product: IProduct }) {
 						</h3>
 					</div>
 					<Link
-						href={`../brand/${brand?.slug}`}
+						href={`/brand/${brand?.slug}`}
 						className={'w-28 aspect-video relative'}
 					>
 						<Image
 							className={'object-cover object-center fixed'}
 							src={backendUrl + brand?.logo.url}
-							quality={95}
 							alt={'brand logo'}
 							fill
+							sizes={'112px'}
 						/>
 					</Link>
 				</div>

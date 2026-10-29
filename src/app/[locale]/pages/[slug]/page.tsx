@@ -11,8 +11,8 @@ export default async function ContentPage(props: PageProps<{ slug: string }>) {
 	const page = await getPage(slug, locale);
 
 	const breadCrumbs = [
-		{ id: '0', title: t('Main'), slug: '/' },
-		{ id: '1', title: page?.title ?? '', slug: '' },
+		{ id: '0', title: t('Main'), href: '/' },
+		{ id: '1', title: page?.title ?? '' },
 	];
 
 	return (

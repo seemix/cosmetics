@@ -1,8 +1,7 @@
-import Link from 'next/link';
 import { getTranslations } from 'next-intl/server';
 import { FaInstagram, FaPhoneSquareAlt, FaTelegramPlane } from 'react-icons/fa';
-
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 
 export default async function Footer() {
 	const t = await getTranslations();
@@ -53,15 +52,15 @@ export default async function Footer() {
 					<p className={'tracking-normal uppercase mb-3'}>
 						{t('Header.contacts')}
 					</p>
-					<Link
+					<a
 						href={`tel:${assets.phone}`}
 						className={`text-dark flex items-center text-sm transition-colors duration-300 
                                             hover:text-[var(--main)]`}
 					>
 						<FaPhoneSquareAlt className={'w-9 sm:w-5 h-auto mr-1'} />
 						<p>{assets.phone}</p>
-					</Link>
-					<Link
+					</a>
+					<a
 						href={assets.telegramLink}
 						className={
 							'flex transition-colors duration-300 hover:text-[var(--main)] text-dark items-center'
@@ -69,14 +68,14 @@ export default async function Footer() {
 					>
 						<FaTelegramPlane className={'w-9 sm:w-5 h-auto lg:w-4 mt-0 mr-2'} />
 						Telegram
-					</Link>
-					<Link
+					</a>
+					<a
 						href={assets.instagramLink}
 						className={`flex transition-colors duration-300 hover:text-[var(--main)] text-dark items-center`}
 					>
 						<FaInstagram className={'w-9 sm:w-5 h-auto animate-fade-in mr-1'} />{' '}
 						Instagram
-					</Link>
+					</a>
 				</div>
 			</div>
 			<div

@@ -1,3 +1,4 @@
+import { Link } from '@/i18n/navigation';
 import type { IBreadcrumb } from '@/types/breadcrumb';
 
 export default function BreadCrumbs({
@@ -6,18 +7,31 @@ export default function BreadCrumbs({
 	breadcrumbs: IBreadcrumb[];
 }) {
 	return (
-		<div
+		<nav
+			aria-label={'breadcrumbs'}
 			className={`flex gap-1 md:gap-2 text-[.8em] text-dark font-(family-name:--font-roboto) tracking-normal
                         items-center p-4`}
 		>
-			{breadcrumbs.length &&
-				breadcrumbs.map((item, index, array) => (
-					<p key={item.id} className={'flex items-center gap-2'}>
-						{/*{item.slug ? <Link href={item.slug}*/}
-						{/*                   className={'hover:text-gray-900 hover:underline'}>*/}
-						{item.title}
-						{/*</Link> : item.title}*/}
-						{index !== array.length - 1 && (
+			{breadcrumbs.map((item, index, array) => {
+				const isLast = index === array.length - 1;
+				return (
+					<p
+						key={`${item.id}-${item.title}`}
+						className={'flex items-center gap-2'}
+					>
+						{item.href && !isLast ? (
+							<Link
+								href={item.href}
+								className={'hover:text-gray-900 hover:underline'}
+							>
+								{item.title}
+							</Link>
+						) : (
+							<span aria-current={isLast ? 'page' : undefined}>
+								{item.title}
+							</span>
+						)}
+						{!isLast && (
 							<svg
 								className={'w-3 h-3 rtl:rotate-180 text-body'}
 								aria-hidden={'true'}
@@ -37,7 +51,8 @@ export default function BreadCrumbs({
 							</svg>
 						)}
 					</p>
-				))}
-		</div>
+				);
+			})}
+		</nav>
 	);
 }

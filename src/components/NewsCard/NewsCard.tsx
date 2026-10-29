@@ -1,14 +1,17 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import ArtDirectedImage from '@/components/ArtDirectedImage/ArtDirectedImage';
 import { assets } from '@/config/assets';
+import { Link } from '@/i18n/navigation';
 import type { PostCard } from '@/types/post-card';
 
 export default function NewsCard({
 	post,
 	locale,
+	eager = false,
 }: {
 	post: PostCard;
 	locale: string;
+	/** The first card is above the fold. */
+	eager?: boolean;
 }) {
 	const { title, slide, slug, customLink } = post;
 	const { backendUrl } = assets;
@@ -28,36 +31,15 @@ export default function NewsCard({
 				<h3 className={'text-xl text-center mb-4 font-semibold'}>{title}</h3>
 			</div>
 			<Link href={customLink ? `/${customLink}` : `/news/${slug}`}>
-				<div className={'block sm:hidden'}>
-					<div className={'relative w-full aspect-square'}>
-						<Image
-							src={`${backendUrl}${post['square-slide'].url}`}
-							placeholder={'blur'}
-							blurDataURL={post['square-slide'].blurHash}
-							alt={slide.alt || 'Mobile slide'}
-							quality={100}
-							fill
-							priority
-							sizes={'100vw'}
-							className={'object-cover'}
-						/>
-					</div>
-				</div>
-				<div className={'hidden sm:block'}>
-					<div className={'relative w-full aspect-[1920/620]'}>
-						<Image
-							src={`${backendUrl}${slide.url}`}
-							alt={slide.alt || 'Desktop slide'}
-							placeholder={'blur'}
-							blurDataURL={slide.blurHash}
-							loading={'eager'}
-							fill
-							priority
-							sizes={'100vw'}
-							className={'object-cover'}
-						/>
-					</div>
-				</div>
+				<ArtDirectedImage
+					mobile={{
+						...post['square-slide'],
+						url: `${backendUrl}${post['square-slide'].url}`,
+					}}
+					desktop={{ ...slide, url: `${backendUrl}${slide.url}` }}
+					alt={slide.alt || 'Slide'}
+					eager={eager}
+				/>
 			</Link>
 		</div>
 	);
