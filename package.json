@@ -14,17 +14,17 @@
 		"test:e2e": "playwright test"
 	},
 	"dependencies": {
-		"@hookform/resolvers": "^5.9.2",
+		"@hookform/resolvers": "^6.0.2",
 		"@payloadcms/richtext-lexical": "^3.92.1",
 		"axios": "^1.21.0",
-		"framer-motion": "^12.43.0",
+		"motion": "^14.7.1",
 		"next": "^16.4.3",
 		"next-intl": "^4.14.9",
 		"react": "^19.3.1",
 		"react-dom": "^19.3.1",
 		"react-hook-form": "^7.91.0",
 		"react-icons": "^5.7.0",
-		"swiper": "^12.2.0",
+		"swiper": "^14.3.0",
 		"zod": "^4.6.7",
 		"zustand": "^5.0.16"
 	},
@@ -38,7 +38,7 @@
 		"baseline-browser-mapping": "^2.11.34",
 		"happy-dom": "^21.0.4",
 		"tailwindcss": "^4.3.3",
-		"typescript": "^5.9.3",
+		"typescript": "^6.0.3",
 		"vite": "^8.3.5",
 		"vitest": "^5.0.5"
 	},

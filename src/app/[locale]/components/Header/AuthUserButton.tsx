@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { useClickOutside } from '@/app/[locale]/hooks/useClickOutside';
 import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 import { PiUserCheck } from 'react-icons/pi';
 import { MdLogout } from 'react-icons/md';
 import { IoMdHeartEmpty } from 'react-icons/io';

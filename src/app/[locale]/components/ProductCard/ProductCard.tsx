@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { AddToCartButton, AlreadyInCartButton, FavoriteButton, ProductLabels } from '@/app/[locale]/components';
 import type { IProduct } from '@/app/[locale]/types/product';

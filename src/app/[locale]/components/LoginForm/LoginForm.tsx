@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 import { CloseModalButton, ForgotPasswordForm, FormInput, Loader, Success } from '@/app/[locale]/components';

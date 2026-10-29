@@ -1,6 +1,6 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import type { IProduct } from '@/app/[locale]/types/product';
 import { ProductCard } from '@/app/[locale]/components';

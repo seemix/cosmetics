@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import { useTranslations } from 'next-intl';
 import type { SerializedEditorState } from 'lexical';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 
 import { richTextImagePathConverter } from '@/app/[locale]/services/richTextimagePathConverter';
 import { assets } from '@/app/[locale]/assets/assets';

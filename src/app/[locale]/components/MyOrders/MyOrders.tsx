@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 
 import type { IOrder } from '@/app/[locale]/types/order';
