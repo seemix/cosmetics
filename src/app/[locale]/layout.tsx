@@ -54,18 +54,15 @@ export default async function LocaleLayout({
 	return (
 		<html lang={locale} className={`${roboto.variable} ${montserrat.variable}`}>
 			<body className={`${montserrat.className} antialiased`}>
-				<div
-					className={
-						'grid grid-rows-[auto_1fr_auto] grid-cols-[1fr] h-screen min-w-0'
-					}
-				>
+				{/* min-h-screen (not h-screen) so the column grows with the page and the sticky header stays stuck all the way down. */}
+				<div className={'flex flex-col min-h-screen min-w-0'}>
 					<NextIntlClientProvider>
 						<MenuProvider initialMenu={menu}>
 							<HeaderLogo />
 							<Header />
 							<CheckAuth />
 							<ClearAuthError />
-							<main className={'w-full min-w-0 flex justify-center'}>
+							<main className={'flex-1 w-full min-w-0 flex justify-center'}>
 								{children}
 							</main>
 							<Footer />

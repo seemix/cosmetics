@@ -1,5 +1,7 @@
 'use client';
 
+import AnimatedNumber from '@/components/AnimatedNumber/AnimatedNumber';
+
 interface QuantityProps {
 	value: number;
 	setValue: React.Dispatch<React.SetStateAction<number>>;
@@ -37,15 +39,25 @@ export default function Quantity({ value, setValue }: QuantityProps) {
 				>
 					−
 				</button>
-				<input
-					type={'text'}
-					inputMode={'numeric'}
-					aria-label={'quantity'}
-					value={value}
-					onChange={onChange}
-					onBlur={onBlur}
-					className={`w-11 h-10 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
-				/>
+				<div className={'relative'}>
+					<input
+						type={'text'}
+						inputMode={'numeric'}
+						aria-label={'quantity'}
+						value={value}
+						onChange={onChange}
+						onBlur={onBlur}
+						className={`peer w-11 h-10 text-center text-sm text-transparent caret-black focus:text-black
+                                    border-x border-black focus:outline-none focus:ring-0`}
+					/>
+					{/* Rolling digits over the field; the plain input shows while typing. */}
+					<AnimatedNumber
+						value={value}
+						className={
+							'pointer-events-none absolute inset-0 items-center justify-center text-sm peer-focus:invisible'
+						}
+					/>
+				</div>
 
 				<button
 					onClick={increase}

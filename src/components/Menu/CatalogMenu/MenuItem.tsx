@@ -18,52 +18,68 @@ export default function MenuItem({
 		setOpenItem(isOpen ? null : item.id);
 	};
 	const { hideModal } = useModal();
-	return (
-		<div className={'relative p-2'}>
-			{/* MOBILE */}
-			<div className={'block md:hidden border-b'}>
-				<button
-					type={'button'}
-					aria-label={'open-submenu'}
-					onClick={toggle}
-					className={`flex cursor-pointer items-center justify-between py-3 w-full uppercase text-lg 
-								md:text-base font-semibold`}
-				>
-					<span>{item.title}</span>
+	const hasSub = Boolean(item.sub?.length);
+	const rowClass = `flex w-full items-center justify-between gap-3 py-4 text-left text-sm font-semibold
+                      uppercase tracking-[0.08em] transition-colors duration-300 hover:text-[var(--main)]`;
 
-					<motion.svg
-						animate={{ rotate: isOpen ? 90 : 0 }}
-						transition={{ duration: 0.25 }}
-						className={'w-5 h-5'}
-						fill={'currentColor'}
-						viewBox={'0 0 20 20'}
-						aria-hidden={'true'}
-						focusable={'false'}
+	return (
+		<div className={'relative md:p-2'}>
+			{/* MOBILE: accordion rows; a category without children is a plain link. */}
+			<div className={'block md:hidden border-b border-gray-200'}>
+				{hasSub ? (
+					<button
+						type={'button'}
+						aria-expanded={isOpen}
+						onClick={toggle}
+						className={`${rowClass} cursor-pointer ${isOpen ? 'text-[var(--main)]' : ''}`}
 					>
-						<path
-							d={`M7.21 14.77a.75.75 0 01.02-1.06L10.94 10 7.23 6.35a.75.75 0 111.06-1.06l4.25 
-									4.24a.75.75 0 010 1.06l-4.25 4.24a.75.75 0 01-1.06-.02z`}
-						/>
-					</motion.svg>
-				</button>
+						<span>{item.title}</span>
+						<motion.svg
+							animate={{ rotate: isOpen ? 180 : 0 }}
+							transition={{ duration: 0.25 }}
+							className={'w-4 h-4 shrink-0 text-gray-500'}
+							fill={'currentColor'}
+							viewBox={'0 0 20 20'}
+							aria-hidden={'true'}
+							focusable={'false'}
+						>
+							<path d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.27a.75.75 0 01.02-1.06z" />
+						</motion.svg>
+					</button>
+				) : (
+					<Link
+						href={item.uri || '/catalog'}
+						onClick={hideModal}
+						className={rowClass}
+					>
+						{item.title}
+					</Link>
+				)}
 
 				<AnimatePresence initial={false}>
-					{isOpen && (
+					{hasSub && isOpen && (
 						<motion.div
 							key={'content'}
 							initial={{ opacity: 0, height: 0 }}
 							animate={{ opacity: 1, height: 'auto' }}
 							exit={{ opacity: 0, height: 0 }}
-							transition={{ duration: 0.35 }}
-							className={'pl-4 pb-3 space-y-6 overflow-hidden'}
+							transition={{ duration: 0.3, ease: 'easeInOut' }}
+							className={'overflow-hidden'}
 						>
-							{item.sub?.map((child) => (
-								<div key={child.id}>
-									<Link href={child.uri} onClick={hideModal}>
-										{child.title}
-									</Link>
-								</div>
-							))}
+							<ul className={'pb-3 pl-3 border-l border-gray-200 ml-1 mb-1'}>
+								{item.sub?.map((child) => (
+									<li key={child.id}>
+										<Link
+											href={child.uri}
+											onClick={hideModal}
+											className={`block py-2 text-sm text-gray-700 transition-colors duration-300
+                                                        hover:text-[var(--main)]`}
+										>
+											{child.title}
+										</Link>
+									</li>
+								))}
+							</ul>
 						</motion.div>
 					)}
 				</AnimatePresence>
@@ -89,7 +105,7 @@ export default function MenuItem({
 					if (e.key === 'Escape') setOpenItem(null);
 				}}
 				animate={{
-					color: isOpen ? 'var(--main)' : 'black',
+					color: isOpen ? 'var(--main)' : '#000000',
 				}}
 				whileHover={{
 					color: 'var(--main)',
@@ -122,7 +138,7 @@ export default function MenuItem({
 				</AnimatePresence>
 				<motion.span
 					animate={{
-						color: isOpen ? 'var(--main)' : 'black',
+						color: isOpen ? 'var(--main)' : '#000000',
 					}}
 					whileHover={{
 						color: 'var(--main)',

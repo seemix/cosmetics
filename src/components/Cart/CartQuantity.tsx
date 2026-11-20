@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AnimatedNumber from '@/components/AnimatedNumber/AnimatedNumber';
 
 import { useCartStore } from '@/stores/cart.store';
 
@@ -52,15 +53,25 @@ export default function CartQuantity({
 				>
 					−
 				</button>
-				<input
-					type={'text'}
-					inputMode={'numeric'}
-					aria-label={'quantity'}
-					value={value}
-					onChange={onChange}
-					onBlur={onBlur}
-					className={`w-10 h-9 text-center text-sm border-x border-black focus:outline-none focus:ring-0`}
-				/>
+				<div className={'relative'}>
+					<input
+						type={'text'}
+						inputMode={'numeric'}
+						aria-label={'quantity'}
+						value={value}
+						onChange={onChange}
+						onBlur={onBlur}
+						className={`peer w-10 h-9 text-center text-sm text-transparent caret-black focus:text-black
+                                    border-x border-black focus:outline-none focus:ring-0`}
+					/>
+					{/* Rolling digits over the field; the plain input shows while typing. */}
+					<AnimatedNumber
+						value={value}
+						className={
+							'pointer-events-none absolute inset-0 items-center justify-center text-sm peer-focus:invisible'
+						}
+					/>
+				</div>
 
 				<button
 					onClick={increase}

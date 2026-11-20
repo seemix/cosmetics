@@ -3,7 +3,7 @@ import { assets } from '@/config/assets';
 
 export default function SocialIcons() {
 	return (
-		<div className={'flex gap-8 sm:gap-4'}>
+		<div className={'flex gap-7 sm:gap-4'}>
 			<a
 				aria-label={'Telegram'}
 				href={assets.telegramLink}
@@ -11,7 +11,7 @@ export default function SocialIcons() {
 					'flex transition-colors duration-300 hover:text-[var(--main)] text-dark'
 				}
 			>
-				<FaTelegramPlane className={'w-9 sm:w-5 h-auto lg:w-4 mt-0'} />
+				<FaTelegramPlane className={'w-6 sm:w-5 h-auto lg:w-4 mt-0'} />
 			</a>
 			<a
 				aria-label={'Instagram'}
@@ -20,7 +20,7 @@ export default function SocialIcons() {
 					'flex transition-colors duration-300 hover:text-[var(--main)] text-dark'
 				}
 			>
-				<FaInstagram className={'w-9 sm:w-5 h-auto animate-fade-in'} />
+				<FaInstagram className={'w-6 sm:w-5 h-auto animate-fade-in'} />
 			</a>
 			<a
 				aria-label={'Phone'}
@@ -28,7 +28,7 @@ export default function SocialIcons() {
 				className={`text-dark flex items-center text-sm transition-colors duration-300 
                                             hover:text-[var(--main)]`}
 			>
-				<FaPhoneSquareAlt className={'w-9 sm:w-5 h-auto'} />
+				<FaPhoneSquareAlt className={'w-6 sm:w-5 h-auto'} />
 				<p className={'hidden sm:block'}>{assets.phone}</p>
 			</a>
 		</div>

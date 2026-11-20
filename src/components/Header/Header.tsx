@@ -12,7 +12,9 @@ import HeadMenu from '@/components/Menu/HeadMenu';
 
 export default function Header() {
 	return (
-		<div className={'fixed bottom-0 left-0 sm:relative w-full z-20'}>
+		// On sm+ the wrapper dissolves (display: contents) so the grey <header> is a
+		// direct child of the page column and can stick to the top on scroll.
+		<div className={'fixed bottom-0 left-0 w-full z-20 sm:contents'}>
 			<div className={'hidden sm:flex bg-gray-100 py-2 justify-evenly'}>
 				<div className={'flex px-4 gap-4 w-full lg:w-[1100px] justify-between'}>
 					<SocialIcons />
@@ -22,7 +24,7 @@ export default function Header() {
 			</div>
 			<header
 				className={
-					'relative bg-foreground w-full py-3 px-6 text-black border-t border-gray-300 sm:border-t-0'
+					'relative sm:sticky sm:top-0 sm:z-20 bg-foreground w-full py-3 px-6 text-black border-t border-gray-300 sm:border-t-0'
 				}
 			>
 				<div
