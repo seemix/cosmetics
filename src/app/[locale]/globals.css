@@ -2,7 +2,7 @@
 
 :root {
 	--background: #fcfbfb;
-	--foreground: #ededed;
+	--foreground: #e5e5e5;
 	--main: #fdad00;
 	--dark: #6e6e6e;
 	--black: #151515;
@@ -10,7 +10,7 @@
 
 [data-theme="dark"] {
 	--background: #fcfbfb;
-	--foreground: #ededed;
+	--foreground: #e5e5e5;
 }
 
 @theme inline {

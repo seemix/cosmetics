@@ -9,7 +9,7 @@ export default function BreadCrumbs({
 	return (
 		<nav
 			aria-label={'breadcrumbs'}
-			className={`flex gap-1 md:gap-2 text-[.8em] text-dark font-(family-name:--font-roboto) tracking-normal
+			className={`flex gap-1 md:gap-2 text-[.8em] text-dark font-(family-name:--font-roboto) tracking-wide
                         items-center p-4`}
 		>
 			{breadcrumbs.map((item, index, array) => {

@@ -9,8 +9,8 @@ export default async function Footer() {
 	return (
 		<footer className={'w-full bg-foreground pb-25 sm:pb-0'}>
 			<div
-				className={`p-5 text-sm flex flex-wrap gap-3 max-w-[1100px] text-gray-500 
-                            justify-evenly mx-auto`}
+				className={`p-5 text-sm flex flex-wrap gap-3 max-w-[1100px] text-gray-600
+                            justify-evenly mx-auto tracking-tight font-(family-name:--font-roboto)`}
 			>
 				<div className={'flex flex-col gap-2 p-2'}>
 					<p className={'tracking-normal uppercase mb-3'}>{t('Footer.info')}</p>
@@ -80,7 +80,7 @@ export default async function Footer() {
 			</div>
 			<div
 				className={
-					'p-1 bg-foreground flex justify-center text-gray-400 text-xs'
+					'p-1 bg-foreground flex justify-center text-gray-500 text-xs'
 				}
 			>
 				Next Level Shop © {new Date().getFullYear()}
