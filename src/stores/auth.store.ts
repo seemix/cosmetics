@@ -4,6 +4,8 @@ import type { RegisterFormData } from '@/components/RegisterForm/registerSchema'
 import { apiClient } from '@/lib/api/client';
 import { getErrorMessage } from '@/lib/api/errors';
 import { mergeGuestCart } from '@/lib/cart/mergeGuestCart';
+import { mergeGuestFavorites } from '@/lib/favorites/guestFavorites.api';
+import { guestFavoritesStorage } from '@/lib/favorites/guestFavorites.storage';
 import { useCartStore } from '@/stores/cart.store';
 import { useFavoritesStore } from '@/stores/favorites.store';
 import type { UserResponse } from '@/types/api';
@@ -38,10 +40,10 @@ interface AuthState {
 	clearError: () => void;
 }
 
+/** Loads the account's favourites, first moving in any the user saved as a guest. */
 async function loadFavorites() {
 	try {
-		const { data } = await apiClient.get<string[]>('users/favorites/my');
-		useFavoritesStore.getState().setFavorites(data);
+		useFavoritesStore.getState().setFavorites(await mergeGuestFavorites());
 	} catch (error) {
 		console.error(error);
 	}
@@ -80,10 +82,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 				'users/login',
 				{ email, password },
 			);
+			// Guest favourites are merged before `user` is set: whatever reacts to the
+			// login (e.g. the favourites page) then already reads the merged list.
+			await loadFavorites();
 			set({ user: data.user });
 			useCartStore.setState({ promoCode: '' });
 			useCartStore.getState().setCart(await mergeGuestCart());
-			loadFavorites();
 			return true;
 		} catch (error) {
 			set({ error: getErrorMessage(error) });
@@ -100,6 +104,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 			const { data } = await apiClient.get<UserResponse>('users/me');
 			set({ user: data.user ?? null });
 			if (data.user) await loadFavorites();
+			else
+				useFavoritesStore.getState().setFavorites(guestFavoritesStorage.get());
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -112,7 +118,11 @@ export const useAuthStore = create<AuthState>((set) => ({
 		try {
 			await apiClient.post('users/logout');
 			useCartStore.setState({ promoCode: '' });
-			useFavoritesStore.getState().setFavorites([]);
+			// The guest list was merged into the account on login, so this is usually empty.
+			useFavoritesStore.setState({
+				favorites: guestFavoritesStorage.get(),
+				favoriteProducts: [],
+			});
 			set({ user: null });
 		} catch (error) {
 			set({ error: getErrorMessage(error) });

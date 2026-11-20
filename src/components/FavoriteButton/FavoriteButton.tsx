@@ -10,9 +10,11 @@ export default function FavoriteButton({ productId }: { productId: string }) {
 	const addFavorite = useFavoritesStore((s) => s.addFavorite);
 	const removeFavorite = useFavoritesStore((s) => s.removeFavorite);
 	const userId = useAuthStore((s) => s.user?.id);
+	const authChecked = useAuthStore((s) => s.authChecked);
 
-	// The user is unknown during SSR, so the button only appears on the client.
-	if (!userId) return null;
+	// Until the session check ends it is unknown where favourites live (and the
+	// list isn't loaded yet), so the button appears only after it, on the client.
+	if (!authChecked) return null;
 
 	const handleClick = (e: React.MouseEvent) => {
 		e.preventDefault();

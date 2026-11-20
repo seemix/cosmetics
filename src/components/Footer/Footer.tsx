@@ -47,6 +47,12 @@ export default async function Footer() {
 					>
 						{t('Footer.ordersHistory')}
 					</Link>
+					<Link
+						href={'/favorites'}
+						className={`hover:text-[var(--main)] transition-colors duration-300`}
+					>
+						{t('Account.favorites')}
+					</Link>
 				</div>
 				<div className={'flex flex-col gap-2 p-2'}>
 					<p className={'tracking-normal uppercase mb-3'}>
