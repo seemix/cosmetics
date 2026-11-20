@@ -13,7 +13,7 @@ export default function Cart() {
 	return (
 		<div
 			className={
-				'text-black max-w-[100%] w-110 flex flex-col h-dvh overflow-x-hidden'
+				'text-black max-w-full w-110 flex flex-col h-dvh overflow-x-hidden'
 			}
 		>
 			<CloseModalButton />

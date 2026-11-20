@@ -11,8 +11,7 @@ export default function HeadMenu() {
 
 	return (
 		<nav
-			className={`flex gap-10 w-full max-w-130 pt-1 justify-end text-md text-dark 
-		                font-(family-name:--font-roboto)`}
+			className={`flex gap-10 w-full max-w-130 justify-end items-center self-center text-md text-dark`}
 		>
 			<ul className={'flex flex-wrap w-full justify-evenly gap-x-1 gap-y-4'}>
 				{headMenuData.map((item) => (
