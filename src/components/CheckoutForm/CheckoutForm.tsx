@@ -24,20 +24,44 @@ export default function CheckoutForm() {
 	const t = useTranslations();
 	const t2 = useTranslations('Validation');
 	const user = useAuthStore((s) => s.user);
-	const { success, orderNumber, loading, error, stockIssues, createNewOrder } =
-		useCheckoutStore(
-			useShallow((s) => ({
-				success: s.success,
-				orderNumber: s.orderNumber,
-				loading: s.loading,
-				error: s.error,
-				stockIssues: s.stockIssues,
-				createNewOrder: s.createNewOrder,
-			})),
-		);
-	const { clear, cart } = useCartStore(
-		useShallow((s) => ({ clear: s.clear, cart: s.cart })),
+	const {
+		success,
+		orderNumber,
+		loading,
+		error,
+		stockIssues,
+		createNewOrder,
+		resolveStockIssue,
+	} = useCheckoutStore(
+		useShallow((s) => ({
+			success: s.success,
+			orderNumber: s.orderNumber,
+			loading: s.loading,
+			error: s.error,
+			stockIssues: s.stockIssues,
+			createNewOrder: s.createNewOrder,
+			resolveStockIssue: s.resolveStockIssue,
+		})),
 	);
+	const { clear, cart, updateQty, removeItem, itemLoading } = useCartStore(
+		useShallow((s) => ({
+			clear: s.clear,
+			cart: s.cart,
+			updateQty: s.updateQty,
+			removeItem: s.removeItem,
+			itemLoading: s.itemLoading,
+		})),
+	);
+
+	const reduceTo = async (productId: string, quantity: number) => {
+		await updateQty({ cartId: cart?.id, productId, quantity });
+		if (!useCartStore.getState().error) resolveStockIssue(productId);
+	};
+	const removeFromOrder = async (productId: string) => {
+		await removeItem(cart?.id, productId);
+		if (!useCartStore.getState().cart?.items.some((i) => i.id === productId))
+			resolveStockIssue(productId);
+	};
 	const locale = useLocale();
 
 	const schema = checkoutSchema(t2);
@@ -284,21 +308,53 @@ export default function CheckoutForm() {
 				<div className={'mt-4 text-sm text-red-600'} role={'alert'}>
 					<p>{t('Checkout.insufficientStock')}</p>
 					<ul className={'mt-2 list-disc pl-5'}>
-						{stockIssues.map((issue) => (
-							<li key={issue.product}>
-								{cart.items.find((item) => item.id === issue.product)?.title ??
-									t('Checkout.product')}
-								: {t('Checkout.requested', { count: issue.requested })}
-								{issue.available !== undefined &&
-									`, ${
-										issue.available > 0
-											? t('Checkout.availableApprox', {
-													count: issue.available,
-												})
-											: t('Catalog.notAvailable')
-									}`}
-							</li>
-						))}
+						{stockIssues.map((issue) => {
+							const title =
+								cart.items.find((item) => item.id === issue.product)?.title ??
+								t('Checkout.product');
+							const busy = itemLoading === issue.product;
+							const actionClass =
+								'ml-2 underline cursor-pointer text-black hover:text-[var(--main)] disabled:opacity-50';
+
+							// Guests get no numbers: the backend does not send `available` to them.
+							if (issue.available === undefined)
+								return (
+									<li key={issue.product}>
+										{title}: {t('Checkout.notEnoughStock')}
+									</li>
+								);
+
+							return (
+								<li key={issue.product}>
+									{title}: {t('Checkout.requested', { count: issue.requested })}
+									,{' '}
+									{issue.available > 0
+										? t('Checkout.availableApprox', { count: issue.available })
+										: t('Catalog.notAvailable')}
+									{issue.available > 0 ? (
+										<button
+											type={'button'}
+											disabled={busy}
+											className={actionClass}
+											onClick={() =>
+												reduceTo(issue.product, issue.available ?? 0)
+											}
+										>
+											{t('Checkout.reduceTo', { count: issue.available })}
+										</button>
+									) : (
+										<button
+											type={'button'}
+											disabled={busy}
+											className={actionClass}
+											onClick={() => removeFromOrder(issue.product)}
+										>
+											{t('Checkout.removeItem')}
+										</button>
+									)}
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			)}

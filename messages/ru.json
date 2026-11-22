@@ -131,10 +131,22 @@
     "insufficientStock": "Некоторых товаров нет в нужном количестве. Измените количество в корзине и попробуйте снова.",
     "requested": "заказано {count}",
     "availableApprox": "в наличии около {count}",
+    "notEnoughStock": "нет в нужном количестве",
+    "reduceTo": "уменьшить до {count}",
+    "removeItem": "убрать из заказа",
     "shipping": "Доставка",
     "companyTariff": "согласно тарифам транспортной компании",
     "freeShipping": "БЕСПЛАТНО",
     "freeShippingThreshold": "при заказе на сумму от 2000 леев"
+  },
+  "OrderStatus": {
+    "pending": "Принят",
+    "paid": "Оплачен",
+    "backorder": "Под заказ",
+    "shipped": "Отправлен",
+    "cancelled": "Отменён",
+    "unknown": "В обработке",
+    "backorderHint": "Часть товара ожидается, менеджер свяжется с вами, как только заказ будет готов."
   },
   "Account": {
     "account": "Кабинет пользователя",

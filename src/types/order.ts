@@ -16,11 +16,20 @@ export interface IShippingAddress {
 	city: string;
 }
 
+/** Statuses the site knows; `GET /orders/my` may return others in the future. */
+export type OrderStatus =
+	| 'pending'
+	| 'paid'
+	| 'backorder'
+	| 'shipped'
+	| 'cancelled';
+
 export interface IOrder {
 	id: string;
 	createdAt: string;
 	orderNumber: string;
 	total: number;
+	status?: OrderStatus | (string & {});
 	items: OrderItemType[];
 	shippingAddress: IShippingAddress;
 }

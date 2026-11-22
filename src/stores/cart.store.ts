@@ -18,6 +18,8 @@ interface CartState {
 	/** Switches between the guest and the authenticated cart and loads it. */
 	init(adapter: CartAdapter, locale: string): Promise<void>;
 	setCart(cart: Cart | null): void;
+	/** Reloads the cart from the backend; failures keep the current cart. */
+	reload(): Promise<void>;
 	addItem(item: CartItemId): Promise<void>;
 	updateQty(item: CartItemId): Promise<void>;
 	removeItem(cartId: string | undefined, productId: string): Promise<void>;
@@ -77,6 +79,18 @@ export const useCartStore = create<CartState>((set, get) => {
 		},
 
 		setCart: (cart) => set({ cart }),
+
+		async reload() {
+			const { adapter, locale, promoCode } = get();
+			if (!adapter) return;
+			// `load` ignores the promo code, so a cart with one is re-priced through it.
+			if (promoCode) return get().applyPromoCode(promoCode);
+			try {
+				set({ cart: await adapter.load(locale) });
+			} catch (e) {
+				console.error(e);
+			}
+		},
 
 		addItem: (item) =>
 			withItemLoading(item.productId, (adapter) =>

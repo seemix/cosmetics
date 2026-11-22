@@ -130,10 +130,22 @@
     "insufficientStock": "Unele produse nu sunt disponibile în cantitatea solicitată. Modificați cantitatea în coș și încercați din nou.",
     "requested": "solicitat {count}",
     "availableApprox": "disponibil aproximativ {count}",
+    "notEnoughStock": "nu este disponibil în cantitatea solicitată",
+    "reduceTo": "reduceți la {count}",
+    "removeItem": "eliminați din comandă",
     "shipping": "Livrare",
     "companyTariff": "conform tarifelor companiei de transport",
     "freeShipping": "GRATUIT",
     "freeShippingThreshold": "la comenzi de peste 2000 lei"
+  },
+  "OrderStatus": {
+    "pending": "Acceptată",
+    "paid": "Achitată",
+    "backorder": "La comandă",
+    "shipped": "Expediată",
+    "cancelled": "Anulată",
+    "unknown": "În procesare",
+    "backorderHint": "O parte din produse sunt așteptate, managerul vă va contacta imediat ce comanda va fi gata."
   },
   "Account": {
     "account": "Contul utilizatorului",
