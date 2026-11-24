@@ -4,6 +4,7 @@ import BreadCrumbs from '@/components/BreadCrumbs/BreadCrumbs';
 import CheckoutForm from '@/components/CheckoutForm/CheckoutForm';
 import Invoice from '@/components/Invoice/Invoice';
 import PromoCodeForm from '@/components/PromoCodeForm/PromoCodeForm';
+import { freeShippingThresholds } from '@/config/shipping';
 import { pageMetadata } from '@/lib/seo/metadata';
 import type { PageProps } from '@/types/page-props';
 
@@ -28,7 +29,10 @@ export default async function CheckoutPage() {
 	return (
 		<div className={'max-w-[1100px] w-full mx-auto flex flex-col gap-4 px-4'}>
 			<BreadCrumbs breadcrumbs={breadCrumbs} />
-			<Invoice />
+			<Invoice
+				retailFreeShippingThreshold={freeShippingThresholds.retail}
+				wholesaleFreeShippingThreshold={freeShippingThresholds.wholesale}
+			/>
 			<PromoCodeForm />
 			<CheckoutForm />
 		</div>

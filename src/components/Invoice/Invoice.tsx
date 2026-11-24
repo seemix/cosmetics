@@ -5,13 +5,26 @@ import Cart from '@/components/Cart/Cart';
 import PromoBage from '@/components/PromoBage/PromoBage';
 import { assets } from '@/config/assets';
 import { useModal } from '@/hooks/useModal';
+import { useAuthStore } from '@/stores/auth.store';
 import { useCartStore } from '@/stores/cart.store';
 
-export default function Invoice() {
+type InvoiceProps = {
+	retailFreeShippingThreshold: number;
+	wholesaleFreeShippingThreshold: number;
+};
+
+export default function Invoice({
+	retailFreeShippingThreshold,
+	wholesaleFreeShippingThreshold,
+}: InvoiceProps) {
 	const cart = useCartStore((s) => s.cart);
 	const promoCode = useCartStore((s) => s.promoCode);
+	const user = useAuthStore((s) => s.user);
 	const { showModal } = useModal();
 	const t = useTranslations();
+	const freeShippingThreshold = user?.wholesale
+		? wholesaleFreeShippingThreshold
+		: retailFreeShippingThreshold;
 	if (!cart?.items?.length) return null;
 
 	return (
@@ -136,7 +149,7 @@ export default function Invoice() {
 					<tr>
 						<td colSpan={5} className={'py-3 text-center border-t'}>
 							<b>{t('Checkout.shipping')} : </b>
-							{cart.subtotal < assets.freeShippingThreshold ? (
+							{cart.subtotal < freeShippingThreshold ? (
 								t('Checkout.companyTariff')
 							) : (
 								<>
@@ -144,7 +157,11 @@ export default function Invoice() {
 										{t('Checkout.freeShipping')}
 									</span>
 									<small>
-										<i> ({t('Checkout.freeShippingThreshold')})</i>
+										<i>
+											{` (${t('Checkout.freeShippingThreshold', {
+												amount: freeShippingThreshold,
+											})})`}
+										</i>
 									</small>
 								</>
 							)}

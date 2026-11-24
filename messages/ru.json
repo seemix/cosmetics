@@ -137,7 +137,7 @@
     "shipping": "Доставка",
     "companyTariff": "согласно тарифам транспортной компании",
     "freeShipping": "БЕСПЛАТНО",
-    "freeShippingThreshold": "при заказе на сумму от 2000 леев"
+    "freeShippingThreshold": "при заказе на сумму от {amount} леев"
   },
   "OrderStatus": {
     "pending": "Принят",
