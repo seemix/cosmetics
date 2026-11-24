@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server';
 
 import { BreadCrumbs, CheckoutForm, Invoice, PromoCodeForm } from '@/app/[locale]/components';
+import { freeShippingThresholds } from '@/config/shipping';
 
 export default async function CheckoutPage() {
     const t = await getTranslations();
@@ -12,7 +13,10 @@ export default async function CheckoutPage() {
     return (
         <div className={'max-w-[1100px] w-full mx-auto flex flex-col gap-4 px-4'}>
             <BreadCrumbs breadcrumbs={breadCrumbs}/>
-            <Invoice/>
+            <Invoice
+                retailFreeShippingThreshold={freeShippingThresholds.retail}
+                wholesaleFreeShippingThreshold={freeShippingThresholds.wholesale}
+            />
             <PromoCodeForm/>
             <CheckoutForm/>
         </div>

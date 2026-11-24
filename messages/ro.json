@@ -129,7 +129,7 @@
     "shipping": "Livrare",
     "companyTariff": "conform tarifelor companiei de transport",
     "freeShipping": "GRATUIT",
-    "freeShippingThreshold": "la comenzi de peste 2000 lei"
+    "freeShippingThreshold": "la comenzi de peste {amount} lei"
   },
   "Account": {
     "account": "Contul utilizatorului",

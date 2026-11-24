@@ -3,14 +3,27 @@
 import { useTranslations } from 'next-intl';
 
 import { useCartStore } from '@/app/[locale]/stores/cart.store';
+import { useAuthStore } from '@/app/[locale]/stores/auth.store';
 import { assets } from '@/app/[locale]/assets/assets';
 import { Cart, Loader, PromoBage } from '@/app/[locale]/components';
 import { useModal } from '@/app/[locale]/hooks/useModal';
 
-export default function Invoice() {
+type InvoiceProps = {
+    retailFreeShippingThreshold: number;
+    wholesaleFreeShippingThreshold: number;
+};
+
+export default function Invoice({
+    retailFreeShippingThreshold,
+    wholesaleFreeShippingThreshold,
+}: InvoiceProps) {
     const { cart, loading, promoCode } = useCartStore();
+    const user = useAuthStore((state) => state.user);
     const { showModal } = useModal();
     const t = useTranslations();
+    const freeShippingThreshold = user?.wholesale
+        ? wholesaleFreeShippingThreshold
+        : retailFreeShippingThreshold;
     if (!cart || !cart?.items?.length) return null;
 
     return (
@@ -99,12 +112,16 @@ export default function Invoice() {
                 <tr>
                     <td colSpan={5} className={'py-3 text-center border-t'}>
                         <b>{t('Checkout.shipping')} : </b>
-                        {cart.subtotal < assets.freeShippingThreshold ? (
+                        {cart.subtotal < freeShippingThreshold ? (
                             t('Checkout.companyTariff')
                         ) : (
                             <>
                                 <span className={'font-bold text-green-500'}>{t('Checkout.freeShipping')}</span>
-                                <small><i> ({t('Checkout.freeShippingThreshold')})</i></small>
+                                <small>
+                                    <i>{` (${t('Checkout.freeShippingThreshold', {
+                                        amount: freeShippingThreshold,
+                                    })})`}</i>
+                                </small>
                             </>
                         )}
                     </td>
